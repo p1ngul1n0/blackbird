@@ -66,7 +66,7 @@ def findUsername(username):
 
     print (f"Searching '{username}' accross {len(urls)} social networks")
     for u in urls:
-        response = requests.get(u["url"], proxies=proxy, headers=headers, verify=False)
+        response = requests.get(u["url"], headers=headers, verify=False)
         if 'content-type' in response.headers and response.headers["Content-Type"] == "application/json":
             jsonData = json.loads(response.content)
         else:
