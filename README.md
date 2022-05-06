@@ -1,6 +1,11 @@
 # blackbird
 An OSINT tool to search for accounts by username in 42 social networks.
 
+## Usage
+```python
+python blackbird.py -u username
+```
+
 ## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/42--red)
 <details>
   <summary></summary>
