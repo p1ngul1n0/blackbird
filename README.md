@@ -8,7 +8,7 @@
 python blackbird.py -u username
 ```
 
-## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/42--red)
+## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/63--red)
 <details>
   <summary></summary>
   
