@@ -13,11 +13,11 @@ python blackbird.py -u username
   <summary></summary>
   
 1. Facebook
-2. YouTube
-3. Twitter
-4. Telegram
-5. TikTok
-6. Tinder
+2. YouTube  
+3. Twitter  
+4. Telegram 
+5. TikTok   
+6. Tinder   
 7. Instagram
 8. Pinterest
 9. Snapchat
@@ -38,9 +38,9 @@ python blackbird.py -u username
 24. Pastebin
 25. WordPress
 26. AllMyLinks
-27. Buzzfeed
-28. JsFiddle
-29. Sourceforge
+27. Buzzeed
+28. Jsiddle
+29. Sourceorge
 30. Kickstarter
 31. Smule
 32. Blogspot
@@ -54,4 +54,25 @@ python blackbird.py -u username
 40. Rumble
 41. TripAdvisor
 42. Ebay
+43. RedBubble
+44. Kik
+45. Roblox
+46. Armor Games
+47. ortnite Tracker
+48. Duolingo
+49. Chess
+50. Shopify
+51. Untappd
+52. Last FM
+53. Cash APP
+54. Imgur
+55. Trello
+56. MCUUID Minecraft
+57. Patreon
+58. DockerHub
+59. Kongregate
+60. Vine
+61. Gamespot
+62. Shutterstock
+63. Chaturbate
 </details>
