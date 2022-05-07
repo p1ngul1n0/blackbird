@@ -1,5 +1,7 @@
-# Blackbird
-An OSINT tool to search for accounts by username in 42 social networks.
+<img alt="IDOR logo" align="left" width="300" height="300" src="https://github.com/sampzzz/src/blob/master/blackbird-logo.png">
+<h1>Blackbird</h1>
+
+### An OSINT tool to search for accounts by username across 63 sites.</br></br></br></br></br></br></br></br>
 
 ## Usage
 ```python
