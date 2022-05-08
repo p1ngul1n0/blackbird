@@ -1,7 +1,7 @@
 <img alt="IDOR logo" align="left" width="300" height="300" src="https://github.com/sampzzz/src/blob/master/blackbird-logo.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search for accounts by username across 63 sites.</br></br></br></br></br></br></br></br>
+### An OSINT tool to search for accounts by username across 64 sites.</br></br></br></br></br></br></br></br>
 
 ## Usage
 ```python
@@ -13,11 +13,11 @@ python blackbird.py -u username
   <summary></summary>
   
 1. Facebook
-2. YouTube  
-3. Twitter  
-4. Telegram 
-5. TikTok   
-6. Tinder   
+2. YouTube
+3. Twitter
+4. Telegram
+5. TikTok
+6. Tinder
 7. Instagram
 8. Pinterest
 9. Snapchat
@@ -75,4 +75,5 @@ python blackbird.py -u username
 61. Gamespot
 62. Shutterstock
 63. Chaturbate
+64. ProtonMail
 </details>
