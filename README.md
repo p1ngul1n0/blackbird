@@ -8,7 +8,7 @@
 python blackbird.py -u username
 ```
 
-## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/63--red)
+## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/64--red)
 <details>
   <summary></summary>
   
@@ -38,9 +38,9 @@ python blackbird.py -u username
 24. Pastebin
 25. WordPress
 26. AllMyLinks
-27. Buzzeed
+27. Buzzfeed
 28. Jsiddle
-29. Sourceorge
+29. Sourceforge
 30. Kickstarter
 31. Smule
 32. Blogspot
@@ -52,28 +52,28 @@ python blackbird.py -u username
 38. Disqus
 39. Slideshare
 40. Rumble
-41. TripAdvisor
-42. Ebay
-43. RedBubble
-44. Kik
-45. Roblox
-46. Armor Games
-47. ortnite Tracker
-48. Duolingo
-49. Chess
-50. Shopify
-51. Untappd
-52. Last FM
-53. Cash APP
-54. Imgur
-55. Trello
-56. MCUUID Minecraft
-57. Patreon
-58. DockerHub
-59. Kongregate
-60. Vine
-61. Gamespot
-62. Shutterstock
-63. Chaturbate
-64. ProtonMail
+41. Ebay
+42. RedBubble
+43. Kik
+44. Roblox
+45. Armor Games
+46. Fortnite Tracker
+47. Duolingo
+48. Chess
+49. Shopify
+50. Untappd
+51. Last FM
+52. Cash APP
+53. Imgur
+54. Trello
+55. MCUUID Minecraft
+56. Patreon
+57. DockerHub
+58. Kongregate
+59. Vine
+60. Gamespot
+61. Shutterstock
+62. Chaturbate
+63. ProtonMail
+64. TripAdvisor
 </details>
