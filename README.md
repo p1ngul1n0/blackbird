@@ -1,14 +1,14 @@
 <img alt="IDOR logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/1.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search for accounts by username across 64 sites.</br></br></br></br></br></br></br></br>
+### An OSINT tool to search for accounts by username across 68 sites.</br></br></br></br></br></br></br></br>
 
 ## Usage
 ```python
 python blackbird.py -u username
 ```
 
-## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/64--red)
+## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/68--red)
 <details>
   <summary></summary>
   
@@ -36,44 +36,48 @@ python blackbird.py -u username
 22. Vimeo
 23. Twitch
 24. Pastebin
-25. WordPress
-26. AllMyLinks
-27. Buzzfeed
-28. Jsiddle
-29. Sourceforge
-30. Kickstarter
-31. Smule
-32. Blogspot
-33. Tradingview
-34. Internet Archive
-35. Alura
-36. Behance
-37. MySpace
-38. Disqus
-39. Slideshare
-40. Rumble
-41. Ebay
-42. RedBubble
-43. Kik
-44. Roblox
-45. Armor Games
-46. Fortnite Tracker
-47. Duolingo
-48. Chess
-49. Shopify
-50. Untappd
-51. Last FM
-52. Cash APP
-53. Imgur
-54. Trello
-55. MCUUID Minecraft
-56. Patreon
-57. DockerHub
-58. Kongregate
-59. Vine
-60. Gamespot
-61. Shutterstock
-62. Chaturbate
-63. ProtonMail
-64. TripAdvisor
+25. WordPress Profile
+26. WordPress Site
+27. AllMyLinks
+28. Buzzfeed
+29. Jsiddle
+30. Sourceforge
+31. Kickstarter
+32. Smule
+33. Blogspot
+34. Tradingview
+35. Internet Archive
+36. Alura
+37. Behance
+38. MySpace
+39. Disqus
+40. Slideshare
+41. Rumble
+42. Ebay
+43. RedBubble
+44. Kik
+45. Roblox
+46. Armor Games
+47. Fortnite Tracker
+48. Duolingo
+49. Chess
+50. Shopify
+51. Untappd
+52. Last FM
+53. Cash APP
+54. Imgur
+55. Trello
+56. MCUUID Minecraft
+57. Patreon
+58. DockerHub
+59. Kongregate
+60. Vine
+61. Gamespot
+62. Shutterstock
+63. Chaturbate
+64. ProtonMail
+65. TripAdvisor
+66. RapidAPI
+67. HackTheBox
+68. Wikipedia
 </details>
