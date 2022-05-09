@@ -1,0 +1,389 @@
+{
+  "urls": [
+    {
+      "app": "Facebook",
+      "url": "https://www.facebook.com/{username}",
+      "valid": "response.status == 200",
+      "id": 1
+    },
+    {
+      "app": "YouTube",
+      "url": "https://www.youtube.com/user/{username}/videos",
+      "valid": "response.status == 200",
+      "id": 2
+    },
+    {
+      "app": "Twitter",
+      "url": "https://nitter.net/{username}",
+      "valid": "response.status == 200",
+      "id": 3
+    },
+    {
+      "app": "Telegram",
+      "url": "https://t.me/{username}",
+      "valid": "len(soup.find_all('img', class_='tgme_page_photo_image'))  > 0",
+      "id": 4
+    },
+    {
+      "app": "TikTok",
+      "url": "https://www.tiktok.com/@{username}",
+      "valid": "response.status == 200",
+      "id": 5
+    },
+    {
+      "app": "Tinder",
+      "url": "https://tinder.com/@{username}",
+      "valid": "'@' in soup.find('meta', property='og:title')['content']",
+      "id": 6
+    },
+    {
+      "app": "Instagram",
+      "url": "https://www.picuki.com/proile/{username}",
+      "valid": "response.status == 200",
+      "id": 7
+    },
+    {
+      "app": "Pinterest",
+      "url": "https://pinterest.com/{username}/",
+      "valid": "response.status == 200",
+      "id": 8
+    },
+    {
+      "app": "Snapchat",
+      "url": "https://feelinsonice.appspot.com/web/deeplink/snapcode?username={username}&size=400&type=SVG",
+      "valid": "soup.find('des') != None",
+      "id": 9
+    },
+    {
+      "app": "Reddit",
+      "url": "https://www.reddit.com/user/{username}/about.json",
+      "valid": "response.status == 200",
+      "id": 10
+    },
+    {
+      "app": "Soundcloud",
+      "url": "https://soundcloud.com/{username}",
+      "valid": "response.status == 200",
+      "id": 11
+    },
+    {
+      "app": "Github",
+      "url": "https://github.com/{username}",
+      "valid": "response.status == 200",
+      "id": 12
+    },
+    {
+      "app": "Steam",
+      "url": "https://steamcommunity.com/id/{username}/",
+      "valid": "'Error' not in soup.find('title').string",
+      "id": 13
+    },
+    {
+      "app": "Linktree",
+      "url": "https://linktr.ee/{username}",
+      "valid": "response.status == 200",
+      "id": 14
+    },
+    {
+      "app": "Xbox Gamertag",
+      "url": "https://www.xboxgamertag.com/search/{username}",
+      "valid": "response.status == 200",
+      "id": 15
+    },
+    {
+      "app": "Twitter Archived",
+      "url": "http://archive.org/wayback/available?url=https://twitter.com/{username}",
+      "valid": "'available' in responseContent",
+      "id": 16
+    },
+    {
+      "app": "Xvideos",
+      "url": "https://www.xvideos.com/profiles/{username}",
+      "valid": "response.status == 200",
+      "id": 17
+    },
+    {
+      "app": "PornHub",
+      "url": "https://www.pornhub.com/users/{username}",
+      "valid": "response.status == 200",
+      "id": 18
+    },
+    {
+      "app": "Xhamster",
+      "url": "https://xhamster.com/users/{username}",
+      "valid": "response.status == 200",
+      "id": 19
+    },
+    {
+      "app": "Periscope",
+      "url": "https://www.periscope.tv/{username}",
+      "valid": "response.status == 200",
+      "id": 20
+    },
+    {
+      "app": "Ask FM",
+      "url": "https://ask.fm/{username}",
+      "valid": "response.status == 200",
+      "id": 21
+    },
+    {
+      "app": "Vimeo",
+      "url": "https://vimeo.com/{username}",
+      "valid": "response.status == 200",
+      "id": 22
+    },
+    {
+      "app": "Twitch",
+      "url": "https://www.twitch.tv/{username}",
+      "valid": "' - ' in soup.find('meta', property='og:title')['content']",
+      "id": 23
+    },
+    {
+      "app": "Pastebin",
+      "url": "https://pastebin.com/u/{username}",
+      "valid": "response.status == 200",
+      "id": 24
+    },
+    {
+      "app": "WordPress",
+      "url": "https://profiles.wordpress.org/{username}/",
+      "valid": "response.status == 200",
+      "id": 25
+    },
+    {
+      "app": "AllMyLinks",
+      "url": "https://allmylinks.com/{username}",
+      "valid": "response.status == 200",
+      "id": 26
+    },
+    {
+      "app": "Buzzfeed",
+      "url": "https://www.buzzfeed.com/{username}",
+      "valid": "response.status == 200",
+      "id": 27
+    },
+    {
+      "app": "Jsiddle",
+      "url": "https://jsfiddle.net/user/{username}/",
+      "valid": "response.status == 200",
+      "id": 28
+    },
+    {
+      "app": "Sourceforge",
+      "url": "https://sourceforge.net/u/{username}/profile",
+      "valid": "response.status == 200",
+      "id": 29
+    },
+    {
+      "app": "Kickstarter",
+      "url": "https://www.kickstarter.com/profile/{username}",
+      "valid": "response.status == 200",
+      "id": 30
+    },
+    {
+      "app": "Smule",
+      "url": "https://www.smule.com/{username}",
+      "valid": "'404' not in soup.find('title').string",
+      "id": 31
+    },
+    {
+      "app": "Blogspot",
+      "url": "https://{username}.blogspot.com/",
+      "valid": "response.status == 200",
+      "id": 32
+    },
+    {
+      "app": "Tradingview",
+      "url": "https://www.tradingview.com/u/{username}/",
+      "valid": "response.status == 200",
+      "id": 33
+    },
+    {
+      "app": "Internet Archive",
+      "url": "https://archive.org/details/@{username}",
+      "valid": "'cannot find account' not in soup.find('title').string",
+      "id": 34
+    },
+    {
+      "app": "Alura",
+      "url": "https://cursos.alura.com.br/user/{username}",
+      "valid": "response.status == 200",
+      "id": 35
+    },
+    {
+      "app": "Behance",
+      "url": "https://www.behance.net/{username}/moodboards",
+      "valid": "response.status == 200",
+      "id": 36
+    },
+    {
+      "app": "MySpace",
+      "url": "https://myspace.com/{username}",
+      "valid": "response.status == 200",
+      "id": 37
+    },
+    {
+      "app": "Disqus",
+      "url": "https://disqus.com/by/{username}/",
+      "valid": "response.status == 200",
+      "id": 38
+    },
+    {
+      "app": "Slideshare",
+      "url": "https://www.slideshare.net/{username}",
+      "valid": "response.status == 200",
+      "id": 39
+    },
+    {
+      "app": "Rumble",
+      "url": "https://rumble.com/user/{username}",
+      "valid": "response.status == 200",
+      "id": 40
+    },
+    {
+      "app": "Ebay",
+      "url": "https://www.ebay.com/usr/{username}",
+      "valid": "'error' not in soup.find('title').string",
+      "id": 41
+    },
+    {
+      "app": "RedBubble",
+      "url": "https://www.redbubble.com/people/{username}/shop?asc=u",
+      "valid": "response.status == 200",
+      "id": 42
+    },
+    {
+      "app": "Kik",
+      "url": "https://ws2.kik.com/user/{username}",
+      "valid": "response.status == 200",
+      "id": 43
+    },
+    {
+      "app": "Roblox",
+      "url": "https://auth.roblox.com/v1/usernames/validate?username={username}&birthday=2019-12-31T23:00:00.000Z",
+      "valid": "'Username is already in use' in jsonData['message']",
+      "id": 44
+    },
+    {
+      "app": "Armor Games",
+      "url": "https://armorgames.com/user/{username}",
+      "valid": "response.status == 200",
+      "id": 45
+    },
+    {
+      "app": "Fortnite Tracker",
+      "url": "https://fortnitetracker.com/profile/all/{username}",
+      "valid": "response.status == 200",
+      "id": 46
+    },
+    {
+      "app": "Duolingo",
+      "url": "https://www.duolingo.com/2017-06-30/users?username={username}&_=1628308619574",
+      "valid": "len(jsonData['users']) > 0",
+      "id": 47
+    },
+    {
+      "app": "Chess",
+      "url": "https://www.chess.com/member/{username}",
+      "valid": "response.status == 200",
+      "id": 48
+    },
+    {
+      "app": "Shopify",
+      "url": "https://{username}.myshopify.com/",
+      "valid": "response.status == 200",
+      "id": 49
+    },
+    {
+      "app": "Untappd",
+      "url": "https://untappd.com/user/{username}/",
+      "valid": "response.status == 200",
+      "id": 50
+    },
+    {
+      "app": "Last FM",
+      "url": "https://www.last.fm/user/{username}",
+      "valid": "response.status == 200",
+      "id": 51
+    },
+    {
+      "app": "Cash APP",
+      "url": "https://cash.app/${username}",
+      "valid": "response.status != 404",
+      "id": 52
+    },
+    {
+      "app": "Imgur",
+      "url": "https://api.imgur.com/account/v1/accounts/{username}?client_id=546c25a59c58ad7&include=trophies%2Cmedallions",
+      "valid": "response.status == 200",
+      "id": 53
+    },
+    {
+      "app": "Trello",
+      "url": "https://trello.com/1/Members/{username}?fields=activityBlocked%2CavatarUrl%2Cbio%2CbioData%2Cconfirmed%2CfullName%2CidEnterprise%2CidMemberReferrer%2Cinitials%2CmemberType%2CnonPublic%2Cproducts%2Curl%2Cusername",
+      "valid": "response.status == 200",
+      "id": 54
+    },
+    {
+      "app": "MCUUID Minecraft",
+      "url": "https://playerdb.co/api/player/minecraft/{username}",
+      "valid": "response.status == 200",
+      "id": 55
+    },
+    {
+      "app": "Patreon",
+      "url": "https://www.patreon.com/{username}",
+      "valid": "response.status == 200",
+      "id": 56
+    },
+    {
+      "app": "DockerHub",
+      "url": "https://hub.docker.com/v2/users/{username}/",
+      "valid": "response.status == 200",
+      "id": 57
+    },
+    {
+      "app": "Kongregate",
+      "url": "https://www.kongregate.com/accounts/{username}",
+      "valid": "response.status == 200",
+      "id": 58
+    },
+    {
+      "app": "Vine",
+      "url": "https://vine.co/api/users/profiles/vanity/{username}",
+      "valid": "response.status == 200",
+      "id": 59
+    },
+    {
+      "app": "Gamespot",
+      "url": "https://www.gamespot.com/profile/{username}/",
+      "valid": "response.status == 200",
+      "id": 60
+    },
+    {
+      "app": "Shutterstock",
+      "url": "https://www.shutterstock.com/pt/g/{username}/about",
+      "valid": "response.status == 200",
+      "id": 61
+    },
+    {
+      "app": "Chaturbate",
+      "url": "https://chaturbate.com/{username}/",
+      "valid": "response.status == 200",
+      "id": 62
+    },
+    {
+      "app": "ProtonMail",
+      "url": "https://account.protonmail.com/api/users/available?Name={username}",
+      "valid": "response.status == 409",
+      "headers": "{'X-Pm-Appversion': 'web-account@4.28.2','X-Pm-Appversion': 'web-account@4.28.2'}",
+      "id": 63
+    },
+    {
+      "app": "TripAdvisor",
+      "url": "https://www.tripadvisor.com/Profile/{username}",
+      "valid": "response.status == 200",
+      "id": 64
+    }
+  ]
+}
