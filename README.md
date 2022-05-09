@@ -1,4 +1,4 @@
-<img alt="IDOR logo" align="left" width="300" height="300" src="https://github.com/sampzzz/src/blob/master/blackbird-logo.png">
+<img alt="IDOR logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/1.png">
 <h1>Blackbird</h1>
 
 ### An OSINT tool to search for accounts by username across 64 sites.</br></br></br></br></br></br></br></br>
