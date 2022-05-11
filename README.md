@@ -86,3 +86,6 @@ python blackbird.py -u username
 70. Arduino
 71. League of Legend Tracker
 </details>
+
+## Supersonic speed :fast_forward:
+Blackbird sends async HTTP requests, allowing a lot more speed when discovering user accounts.
