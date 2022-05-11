@@ -1,7 +1,9 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search for accounts by username across 68 sites.</br></br></br></br></br></br></br></br>
+### An OSINT tool to search fast for accounts by username across 71 site.
+> The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation. It was operated by both the United States Air Force (USAF) and NASA.
+</br></br></br></br></br></br></br>
 
 ## Usage
 ```python
