@@ -1,5 +1,5 @@
 {
-  "urls": [
+  "sites": [
     {
       "app": "Facebook",
       "url": "https://www.facebook.com/{username}",
