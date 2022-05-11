@@ -10,7 +10,7 @@
 python blackbird.py -u username
 ```
 
-## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/71--red)
+## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/71--red)
 <details>
   <summary></summary>
   
@@ -87,5 +87,5 @@ python blackbird.py -u username
 71. League of Legend Tracker
 </details>
 
-## Supersonic speed :fast_forward:
+## Supersonic speed :rocket:
 Blackbird sends async HTTP requests, allowing a lot more speed when discovering user accounts.
