@@ -178,7 +178,7 @@
     {
       "app": "WordPress Site",
       "url": "https://{username}.wordpress.com/",
-      "valid": "response.status == 200",
+      "valid": "'Do you want to register' not in responseContent",
       "id": 26,
       "method": "GET"
     },
@@ -476,6 +476,27 @@
       "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&list=users&ususers={username}&usprop=cancreate&formatversion=2&errorformat=html&errorsuselocal=true&uselang=en",
       "valid": "('cancreate' in jsonData['query']['users'][0] and jsonData['query']['users'][0]['cancreate'] != True) or ('userid' in jsonData['query']['users'][0] and jsonData['query']['users'][0]['userid'] != None)",
       "id": 68,
+      "method": "GET"
+    },
+    {
+      "app": "Buymeacoffe",
+      "url": "https://www.buymeacoffee.com/{username}",
+      "valid": "response.status == 200",
+      "id": 69,
+      "method": "GET"
+    },
+    {
+      "app": "Arduino",
+      "url": "https://create.arduino.cc/projecthub/{username}",
+      "valid": "response.status == 200",
+      "id": 70,
+      "method": "GET"
+    },
+    {
+      "app": "League of Legend Tracker",
+      "url": "https://tracker.gg/lol/profile/riot/NA/{username}/overview",
+      "valid": "response.status == 200",
+      "id": 71,
       "method": "GET"
     }
   ]
