@@ -498,6 +498,13 @@
       "valid": "response.status == 200",
       "id": 71,
       "method": "GET"
+    },
+    {
+      "app": "Lego Ideas",
+      "url": "https://ideas.lego.com/profile/{username}/entries?query=&sort=top",
+      "valid": "response.status == 200",
+      "id": 72,
+      "method": "GET"
     }
   ]
 }
