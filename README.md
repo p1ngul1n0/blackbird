@@ -2,7 +2,7 @@
 <h1>Blackbird</h1>
 
 ### An OSINT tool to search fast for accounts by username across 71 site.
-> The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation. It was operated by both the United States Air Force (USAF) and NASA.
+> The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 </br></br></br></br>
 
 ## Usage
