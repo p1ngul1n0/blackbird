@@ -1,4 +1,4 @@
-<img alt="IDOR logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
+<img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
 <h1>Blackbird</h1>
 
 ### An OSINT tool to search for accounts by username across 68 sites.</br></br></br></br></br></br></br></br>
@@ -8,7 +8,7 @@
 python blackbird.py -u username
 ```
 
-## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/68--red)
+## Supported Social Networks <a name="zongo"></a> ![](https://img.shields.io/badge/71--red)
 <details>
   <summary></summary>
   
@@ -80,4 +80,7 @@ python blackbird.py -u username
 66. RapidAPI
 67. HackTheBox
 68. Wikipedia
+69. Buymeacoffe
+70. Arduino
+71. League of Legend Tracker
 </details>
