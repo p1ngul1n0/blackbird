@@ -1,4 +1,3 @@
-from unittest import result
 import time
 from bs4 import BeautifulSoup
 import json
@@ -30,24 +29,28 @@ headers = {
 
 async def findUsername(username):
     start_time = time.time()
+    timeout = aiohttp.ClientTimeout(total=20)
     print (f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' accross {len(searchData['urls'])} social networks\033[0m")
-    async with aiohttp.ClientSession() as session:
-        tasks = []
-        for u in searchData["urls"]:
-            task = asyncio.ensure_future(makeRequest(session,u,username))
-            tasks.append(task)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+            tasks = []
+            for u in searchData["urls"]:
+                task = asyncio.ensure_future(makeRequest(session,u,username))
+                tasks.append(task)
 
-        results = await asyncio.gather(*tasks)
-        for x in results:
-            print (x)
-        print (f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {round(time.time() - start_time,1)} seconds\033[0m")
+            results = await asyncio.gather(*tasks)
+            for x in results:
+                print (x)
+            print (f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {round(time.time() - start_time,1)} seconds\033[0m")
 
 async def makeRequest(session,u,username):
     url = u["url"].format(username=username)
+    jsonBody = None
     if 'headers' in u:
         headers.update(eval(u['headers']))
-
-    async with session.get(url, proxy=proxy,  headers=headers, ssl=False) as response:
+    if 'json' in u:
+        jsonBody = u['json'].format(username=username)
+        jsonBody = json.loads(jsonBody)
+    async with session.request(u["method"],url ,proxy=proxy,json=jsonBody, headers=headers, ssl=False) as response:
         responseContent = await response.text()
         if 'content-type' in response.headers and "application/json" in response.headers["Content-Type"]:
             jsonData = await response.json()
