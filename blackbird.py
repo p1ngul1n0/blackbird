@@ -98,13 +98,13 @@ def read_results(file):
         print ('-------------------------------------------------')
         for u in jsonD['sites']:
             if u['found'] == True:
-                print (f'{Fore.LIGHTGREEN_EX}[+]\033[0m - {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{jsonD["url"]}\033[0m [{jsonD["response-status"]}]\033[0m')
+                print (f'{Fore.LIGHTGREEN_EX}[+]\033[0m - {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{u["url"]}\033[0m [{u["response-status"]}]\033[0m')
             elif u['found'] == False:
-                    print (f'[-]\033[0m - {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{jsonD["url"]}\033[0m [{jsonD["response-status"]}]\033[0m')
+                    print (f'[-]\033[0m - {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{u["url"]}\033[0m [{u["response-status"]}]\033[0m')
             elif u['error'] == True:
-                print (f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request - {Fore.YELLOW}{jsonD["url"]}\033[0m')
-    except:
-        print (f'{Fore.RED}[X] Error reading file!')
+                print (f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request - {Fore.YELLOW}{u["url"]}\033[0m')
+    except Exception as e:
+        print (f'{Fore.RED}[X] Error reading file [{repr(e)}]')
     
          
 
