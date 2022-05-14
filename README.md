@@ -6,8 +6,19 @@
 </br></br></br></br>
 
 ## Usage
+
+#### Search by username
 ```python
 python blackbird.py -u username
+```
+#### Read results file
+```python
+python blackbird.py -f username.json
+```
+
+#### List supportted sites
+```python
+python blackbird.py --list-sites
 ```
 
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/72--red)
