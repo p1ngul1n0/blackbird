@@ -22,7 +22,7 @@ parser.add_argument('-u', action = 'store', dest = 'username',
 parser.add_argument('--list-sites', action = 'store_true', dest = 'list',
                            required = False,
                            help = 'List all sites currently supported.')
-parser.add_argument('-r', action = 'store', dest = 'file',
+parser.add_argument('-f', action = 'store', dest = 'file',
                            required = False,
                            help = 'Read results file.')
 arguments = parser.parse_args()
@@ -64,18 +64,22 @@ async def makeRequest(session,u,username):
     if 'json' in u:
         jsonBody = u['json'].format(username=username)
         jsonBody = json.loads(jsonBody)
-    async with session.request(u["method"],url,json=jsonBody, headers=headers, ssl=False) as response:
-        responseContent = await response.text()
-        if 'content-type' in response.headers and "application/json" in response.headers["Content-Type"]:
-            jsonData = await response.json()
-        else:
-            soup = BeautifulSoup(responseContent, 'html.parser')
-        if eval(u["valid"]):
-            print (f'{Fore.LIGHTGREEN_EX}[+] - {u["app"]} account found - {url}\033[0m')
-            return ({"app": u['app'], "url": url, "found": True})
-        else:
-            print (f'[-] - {u["app"]} account not found - {url}')
-            return ({"app": u['app'], "url": url, "found": False})
+    try:
+        async with session.request(u["method"],url,json=jsonBody,proxy=proxy,headers=headers, ssl=False) as response:
+                responseContent = await response.text()
+                if 'content-type' in response.headers and "application/json" in response.headers["Content-Type"]:
+                    jsonData = await response.json()
+                else:
+                    soup = BeautifulSoup(responseContent, 'html.parser')
+                if eval(u["valid"]):
+                    print (f'{Fore.LIGHTGREEN_EX}[+]\033[0m - {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
+                    return ({"app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "error":False, "found": True})
+                else:
+                    print (f'[-]\033[0m - {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
+                    return ({"app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "error":False, "found": False})
+    except Exception as e:
+            print (f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
+            return ({"app": u['app'], "url": url, "error":True, "found": False})   
 
 def list_sites():
     i = 1
@@ -94,11 +98,13 @@ def read_results(file):
         print ('-------------------------------------------------')
         for u in jsonD['sites']:
             if u['found'] == True:
-                print (f'{Fore.LIGHTGREEN_EX}[+] - {u["app"]} account found - {u["url"]}\033[0m')
-            else:
-                print (f'[-] - {u["app"]} account not found - {u["url"]}')   
+                print (f'{Fore.LIGHTGREEN_EX}[+]\033[0m - {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{jsonD["url"]}\033[0m [{jsonD["response-status"]}]\033[0m')
+            elif u['found'] == False:
+                    print (f'[-]\033[0m - {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{jsonD["url"]}\033[0m [{jsonD["response-status"]}]\033[0m')
+            elif u['error'] == True:
+                print (f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request - {Fore.YELLOW}{jsonD["url"]}\033[0m')
     except:
-        print (f'{Fore.RED}[X] Could not load file!')
+        print (f'{Fore.RED}[X] Error reading file!')
     
          
 
