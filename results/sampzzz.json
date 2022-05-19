@@ -1,0 +1,520 @@
+{
+    "search-params": {
+        "date": "19/05/2022 20:31:12",
+        "sites-number": 73,
+        "username": "sampzzz"
+    },
+    "sites": [
+        {
+            "app": "Facebook",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.facebook.com/sampzzz"
+        },
+        {
+            "app": "YouTube",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.youtube.com/user/sampzzz/videos"
+        },
+        {
+            "app": "Twitter",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://nitter.net/sampzzz"
+        },
+        {
+            "app": "Telegram",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://t.me/sampzzz"
+        },
+        {
+            "app": "TikTok",
+            "error": true,
+            "found": false,
+            "response-status": null,
+            "url": "https://www.tiktok.com/@sampzzz"
+        },
+        {
+            "app": "Tinder",
+            "error": true,
+            "found": false,
+            "response-status": null,
+            "url": "https://tinder.com/@sampzzz"
+        },
+        {
+            "app": "Instagram",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.picuki.com/proile/sampzzz"
+        },
+        {
+            "app": "Pinterest",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://pinterest.com/sampzzz/"
+        },
+        {
+            "app": "Snapchat",
+            "error": false,
+            "found": false,
+            "response-status": "200 OK",
+            "url": "https://feelinsonice.appspot.com/web/deeplink/snapcode?username=sampzzz&size=400&type=SVG"
+        },
+        {
+            "app": "Reddit",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.reddit.com/user/sampzzz/about.json"
+        },
+        {
+            "app": "Soundcloud",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://soundcloud.com/sampzzz"
+        },
+        {
+            "app": "Github",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://github.com/sampzzz"
+        },
+        {
+            "app": "Steam",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://steamcommunity.com/id/sampzzz/"
+        },
+        {
+            "app": "Linktree",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://linktr.ee/sampzzz"
+        },
+        {
+            "app": "Xbox Gamertag",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.xboxgamertag.com/search/sampzzz"
+        },
+        {
+            "app": "Twitter Archived",
+            "error": false,
+            "found": false,
+            "response-status": "200 OK",
+            "url": "http://archive.org/wayback/available?url=https://twitter.com/sampzzz"
+        },
+        {
+            "app": "Xvideos",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.xvideos.com/profiles/sampzzz"
+        },
+        {
+            "app": "PornHub",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.pornhub.com/users/sampzzz"
+        },
+        {
+            "app": "Xhamster",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://xhamster.com/users/sampzzz"
+        },
+        {
+            "app": "Periscope",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.periscope.tv/sampzzz"
+        },
+        {
+            "app": "Ask FM",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://ask.fm/sampzzz"
+        },
+        {
+            "app": "Vimeo",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://vimeo.com/sampzzz"
+        },
+        {
+            "app": "Twitch",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.twitch.tv/sampzzz"
+        },
+        {
+            "app": "Pastebin",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://pastebin.com/u/sampzzz"
+        },
+        {
+            "app": "WordPress Profile",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://profiles.wordpress.org/sampzzz/"
+        },
+        {
+            "app": "WordPress Site",
+            "error": true,
+            "found": false,
+            "response-status": null,
+            "url": "https://sampzzz.wordpress.com/"
+        },
+        {
+            "app": "AllMyLinks",
+            "error": false,
+            "found": false,
+            "response-status": "403 Forbidden",
+            "url": "https://allmylinks.com/sampzzz"
+        },
+        {
+            "app": "Buzzfeed",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.buzzfeed.com/sampzzz"
+        },
+        {
+            "app": "Jsiddle",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://jsfiddle.net/user/sampzzz/"
+        },
+        {
+            "app": "Sourceforge",
+            "error": false,
+            "found": false,
+            "response-status": "429 Too Many Requests",
+            "url": "https://sourceforge.net/u/sampzzz/profile"
+        },
+        {
+            "app": "Kickstarter",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.kickstarter.com/profile/sampzzz"
+        },
+        {
+            "app": "Smule",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.smule.com/sampzzz"
+        },
+        {
+            "app": "Blogspot",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://sampzzz.blogspot.com/"
+        },
+        {
+            "app": "Tradingview",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.tradingview.com/u/sampzzz/"
+        },
+        {
+            "app": "Internet Archive",
+            "error": false,
+            "found": false,
+            "response-status": "503 Service Unavailable",
+            "url": "https://archive.org/details/@sampzzz"
+        },
+        {
+            "app": "Alura",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://cursos.alura.com.br/user/sampzzz"
+        },
+        {
+            "app": "Behance",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.behance.net/sampzzz/moodboards"
+        },
+        {
+            "app": "MySpace",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://myspace.com/sampzzz"
+        },
+        {
+            "app": "Disqus",
+            "error": false,
+            "found": false,
+            "response-status": "404 NOT FOUND",
+            "url": "https://disqus.com/by/sampzzz/"
+        },
+        {
+            "app": "Slideshare",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.slideshare.net/sampzzz"
+        },
+        {
+            "app": "Rumble",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://rumble.com/user/sampzzz"
+        },
+        {
+            "app": "Ebay",
+            "error": true,
+            "found": false,
+            "response-status": null,
+            "url": "https://www.ebay.com/usr/sampzzz"
+        },
+        {
+            "app": "RedBubble",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.redbubble.com/people/sampzzz/shop?asc=u"
+        },
+        {
+            "app": "Kik",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://ws2.kik.com/user/sampzzz"
+        },
+        {
+            "app": "Roblox",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://auth.roblox.com/v1/usernames/validate?username=sampzzz&birthday=2019-12-31T23:00:00.000Z"
+        },
+        {
+            "app": "Armor Games",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://armorgames.com/user/sampzzz"
+        },
+        {
+            "app": "Fortnite Tracker",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://fortnitetracker.com/profile/all/sampzzz"
+        },
+        {
+            "app": "Duolingo",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.duolingo.com/2017-06-30/users?username=sampzzz&_=1628308619574"
+        },
+        {
+            "app": "Chess",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.chess.com/member/sampzzz"
+        },
+        {
+            "app": "Shopify",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://sampzzz.myshopify.com/"
+        },
+        {
+            "app": "Untappd",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://untappd.com/user/sampzzz/"
+        },
+        {
+            "app": "Last FM",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.last.fm/user/sampzzz"
+        },
+        {
+            "app": "Cash APP",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://cash.app/$sampzzz"
+        },
+        {
+            "app": "Imgur",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://api.imgur.com/account/v1/accounts/sampzzz?client_id=546c25a59c58ad7&include=trophies%2Cmedallions"
+        },
+        {
+            "app": "Trello",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://trello.com/1/Members/sampzzz?fields=activityBlocked%2CavatarUrl%2Cbio%2CbioData%2Cconfirmed%2CfullName%2CidEnterprise%2CidMemberReferrer%2Cinitials%2CmemberType%2CnonPublic%2Cproducts%2Curl%2Cusername"
+        },
+        {
+            "app": "MCUUID Minecraft",
+            "error": false,
+            "found": false,
+            "response-status": "500 Internal Server Error",
+            "url": "https://playerdb.co/api/player/minecraft/sampzzz"
+        },
+        {
+            "app": "Patreon",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.patreon.com/sampzzz"
+        },
+        {
+            "app": "DockerHub",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://hub.docker.com/v2/users/sampzzz/"
+        },
+        {
+            "app": "Kongregate",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.kongregate.com/accounts/sampzzz"
+        },
+        {
+            "app": "Vine",
+            "error": false,
+            "found": false,
+            "response-status": "404 NOT FOUND",
+            "url": "https://vine.co/api/users/profiles/vanity/sampzzz"
+        },
+        {
+            "app": "Gamespot",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.gamespot.com/profile/sampzzz/"
+        },
+        {
+            "app": "Shutterstock",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.shutterstock.com/pt/g/sampzzz/about"
+        },
+        {
+            "app": "Chaturbate",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://chaturbate.com/sampzzz/"
+        },
+        {
+            "app": "ProtonMail",
+            "error": false,
+            "found": false,
+            "response-status": "200 OK",
+            "url": "https://account.protonmail.com/api/users/available?Name=sampzzz"
+        },
+        {
+            "app": "TripAdvisor",
+            "error": true,
+            "found": false,
+            "response-status": null,
+            "url": "https://www.tripadvisor.com/Profile/sampzzz"
+        },
+        {
+            "app": "RapidAPI",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://rapidapi.com/user/sampzzz"
+        },
+        {
+            "app": "HackTheBox",
+            "error": false,
+            "found": false,
+            "response-status": "200 OK",
+            "url": "https://www.hackthebox.com/api/v4/register/check"
+        },
+        {
+            "app": "Wikipedia",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&list=users&ususers=sampzzz&usprop=cancreate&formatversion=2&errorformat=html&errorsuselocal=true&uselang=en"
+        },
+        {
+            "app": "Buymeacoffe",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.buymeacoffee.com/sampzzz"
+        },
+        {
+            "app": "Arduino",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://create.arduino.cc/projecthub/sampzzz"
+        },
+        {
+            "app": "League of Legend Tracker",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://tracker.gg/lol/profile/riot/NA/sampzzz/overview"
+        },
+        {
+            "app": "Lego Ideas",
+            "error": false,
+            "found": false,
+            "response-status": "404 NOT FOUND",
+            "url": "https://ideas.lego.com/profile/sampzzz/entries?query=&sort=top"
+        },
+        {
+            "app": "Fiverr",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.fiverr.com/sampzzz"
+        }
+    ]
+}
