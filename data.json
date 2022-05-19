@@ -178,7 +178,7 @@
     {
       "app": "WordPress Site",
       "url": "https://{username}.wordpress.com/",
-      "valid": "'Do you want to register' not in responseContent",
+      "valid": "'Do you want to register' not in responseContent and 'doesn't exist' not in responseContent",
       "id": 26,
       "method": "GET"
     },
@@ -504,6 +504,13 @@
       "url": "https://ideas.lego.com/profile/{username}/entries?query=&sort=top",
       "valid": "response.status == 200",
       "id": 72,
+      "method": "GET"
+    },
+    {
+      "app": "Fiverr",
+      "url": "https://www.fiverr.com/{username}",
+      "valid": "response.status == 200 and 'Member since' in responseContent",
+      "id": 73,
       "method": "GET"
     }
   ]
