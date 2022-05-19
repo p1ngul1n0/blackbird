@@ -7,12 +7,13 @@ import warnings
 import argparse
 from colorama import init, Fore
 from datetime import datetime
+import os
 
 init()
 
 file = open('data.json')
 searchData = json.load(file)
-
+path = os.path.dirname(__file__)
 warnings.filterwarnings('ignore')
 
 parser = argparse.ArgumentParser(description = 'Um programa de exemplo.')
@@ -50,7 +51,7 @@ async def findUsername(username):
             userJson = {"search-params":{"username": username, "sites-number":len(searchData['sites']),"date":now},"sites": []}
             for x in results:
                 userJson["sites"].append(x)
-            userFile = open(f'{username}.json','w')
+            userFile = open(f'{path}\\results\\{username}.json','w')
             json.dump(userJson, userFile,indent=4, sort_keys=True)
 
             print (f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {round(time.time() - start_time,1)} seconds\033[0m")
@@ -79,7 +80,7 @@ async def makeRequest(session,u,username):
                     return ({"app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "error":False, "found": False})
     except Exception as e:
             print (f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
-            return ({"app": u['app'], "url": url, "error":True, "found": False})   
+            return ({"app": u['app'], "url": url, "response-status": None, "error":True, "found": False})   
 
 def list_sites():
     i = 1
