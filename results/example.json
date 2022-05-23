@@ -1,0 +1,520 @@
+{
+    "search-params": {
+        "date": "23/05/2022 11:58:00",
+        "sites-number": 73,
+        "username": "example"
+    },
+    "sites": [
+        {
+            "app": "Facebook",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.facebook.com/example"
+        },
+        {
+            "app": "YouTube",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.youtube.com/user/example/videos"
+        },
+        {
+            "app": "Twitter",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://nitter.net/example"
+        },
+        {
+            "app": "Telegram",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://t.me/example"
+        },
+        {
+            "app": "TikTok",
+            "error": true,
+            "found": false,
+            "response-status": null,
+            "url": "https://www.tiktok.com/@example"
+        },
+        {
+            "app": "Tinder",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://tinder.com/@example"
+        },
+        {
+            "app": "Instagram",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.picuki.com/profile/example"
+        },
+        {
+            "app": "Pinterest",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://pinterest.com/example/"
+        },
+        {
+            "app": "Snapchat",
+            "error": false,
+            "found": false,
+            "response-status": "200 OK",
+            "url": "https://feelinsonice.appspot.com/web/deeplink/snapcode?username=example&size=400&type=SVG"
+        },
+        {
+            "app": "Reddit",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.reddit.com/user/example/about.json"
+        },
+        {
+            "app": "Soundcloud",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://soundcloud.com/example"
+        },
+        {
+            "app": "Github",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://github.com/example"
+        },
+        {
+            "app": "Steam",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://steamcommunity.com/id/example/"
+        },
+        {
+            "app": "Linktree",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://linktr.ee/example"
+        },
+        {
+            "app": "Xbox Gamertag",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.xboxgamertag.com/search/example"
+        },
+        {
+            "app": "Twitter Archived",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "http://archive.org/wayback/available?url=https://twitter.com/example"
+        },
+        {
+            "app": "Xvideos",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.xvideos.com/profiles/example"
+        },
+        {
+            "app": "PornHub",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.pornhub.com/users/example"
+        },
+        {
+            "app": "Xhamster",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://xhamster.com/users/example"
+        },
+        {
+            "app": "Periscope",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.periscope.tv/example"
+        },
+        {
+            "app": "Ask FM",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://ask.fm/example"
+        },
+        {
+            "app": "Vimeo",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://vimeo.com/example"
+        },
+        {
+            "app": "Twitch",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.twitch.tv/example"
+        },
+        {
+            "app": "Pastebin",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://pastebin.com/u/example"
+        },
+        {
+            "app": "WordPress Profile",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://profiles.wordpress.org/example/"
+        },
+        {
+            "app": "WordPress Site",
+            "error": true,
+            "found": false,
+            "response-status": null,
+            "url": "https://example.wordpress.com/"
+        },
+        {
+            "app": "AllMyLinks",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://allmylinks.com/example"
+        },
+        {
+            "app": "Buzzfeed",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.buzzfeed.com/example"
+        },
+        {
+            "app": "Jsiddle",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://jsfiddle.net/user/example/"
+        },
+        {
+            "app": "Sourceforge",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://sourceforge.net/u/example/profile"
+        },
+        {
+            "app": "Kickstarter",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.kickstarter.com/profile/example"
+        },
+        {
+            "app": "Smule",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.smule.com/example"
+        },
+        {
+            "app": "Blogspot",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://example.blogspot.com/"
+        },
+        {
+            "app": "Tradingview",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.tradingview.com/u/example/"
+        },
+        {
+            "app": "Internet Archive",
+            "error": false,
+            "found": true,
+            "response-status": "503 Service Unavailable",
+            "url": "https://archive.org/details/@example"
+        },
+        {
+            "app": "Alura",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://cursos.alura.com.br/user/example"
+        },
+        {
+            "app": "Behance",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.behance.net/example/moodboards"
+        },
+        {
+            "app": "MySpace",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://myspace.com/example"
+        },
+        {
+            "app": "Disqus",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://disqus.com/by/example/"
+        },
+        {
+            "app": "Slideshare",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.slideshare.net/example"
+        },
+        {
+            "app": "Rumble",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://rumble.com/user/example"
+        },
+        {
+            "app": "Ebay",
+            "error": true,
+            "found": false,
+            "response-status": null,
+            "url": "https://www.ebay.com/usr/example"
+        },
+        {
+            "app": "RedBubble",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.redbubble.com/people/example/shop?asc=u"
+        },
+        {
+            "app": "Kik",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://ws2.kik.com/user/example"
+        },
+        {
+            "app": "Roblox",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://auth.roblox.com/v1/usernames/validate?username=example&birthday=2019-12-31T23:00:00.000Z"
+        },
+        {
+            "app": "Armor Games",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://armorgames.com/user/example"
+        },
+        {
+            "app": "Fortnite Tracker",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://fortnitetracker.com/profile/all/example"
+        },
+        {
+            "app": "Duolingo",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.duolingo.com/2017-06-30/users?username=example&_=1628308619574"
+        },
+        {
+            "app": "Chess",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.chess.com/member/example"
+        },
+        {
+            "app": "Shopify",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://example.myshopify.com/"
+        },
+        {
+            "app": "Untappd",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://untappd.com/user/example/"
+        },
+        {
+            "app": "Last FM",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.last.fm/user/example"
+        },
+        {
+            "app": "Cash APP",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://cash.app/$example"
+        },
+        {
+            "app": "Imgur",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://api.imgur.com/account/v1/accounts/example?client_id=546c25a59c58ad7&include=trophies%2Cmedallions"
+        },
+        {
+            "app": "Trello",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://trello.com/1/Members/example?fields=activityBlocked%2CavatarUrl%2Cbio%2CbioData%2Cconfirmed%2CfullName%2CidEnterprise%2CidMemberReferrer%2Cinitials%2CmemberType%2CnonPublic%2Cproducts%2Curl%2Cusername"
+        },
+        {
+            "app": "MCUUID Minecraft",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://playerdb.co/api/player/minecraft/example"
+        },
+        {
+            "app": "Patreon",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.patreon.com/example"
+        },
+        {
+            "app": "DockerHub",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://hub.docker.com/v2/users/example/"
+        },
+        {
+            "app": "Kongregate",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.kongregate.com/accounts/example"
+        },
+        {
+            "app": "Vine",
+            "error": false,
+            "found": false,
+            "response-status": "404 NOT FOUND",
+            "url": "https://vine.co/api/users/profiles/vanity/example"
+        },
+        {
+            "app": "Gamespot",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.gamespot.com/profile/example/"
+        },
+        {
+            "app": "Shutterstock",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.shutterstock.com/pt/g/example/about"
+        },
+        {
+            "app": "Chaturbate",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://chaturbate.com/example/"
+        },
+        {
+            "app": "ProtonMail",
+            "error": false,
+            "found": true,
+            "response-status": "409 Conflict",
+            "url": "https://account.protonmail.com/api/users/available?Name=example"
+        },
+        {
+            "app": "TripAdvisor",
+            "error": true,
+            "found": false,
+            "response-status": null,
+            "url": "https://www.tripadvisor.com/Profile/example"
+        },
+        {
+            "app": "RapidAPI",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://rapidapi.com/user/example"
+        },
+        {
+            "app": "HackTheBox",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.hackthebox.com/api/v4/register/check"
+        },
+        {
+            "app": "Wikipedia",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&list=users&ususers=example&usprop=cancreate&formatversion=2&errorformat=html&errorsuselocal=true&uselang=en"
+        },
+        {
+            "app": "Buymeacoffe",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://www.buymeacoffee.com/example"
+        },
+        {
+            "app": "Arduino",
+            "error": false,
+            "found": false,
+            "response-status": "404 Not Found",
+            "url": "https://create.arduino.cc/projecthub/example"
+        },
+        {
+            "app": "League of Legend Tracker",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://tracker.gg/lol/profile/riot/NA/example/overview"
+        },
+        {
+            "app": "Lego Ideas",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://ideas.lego.com/profile/example/entries?query=&sort=top"
+        },
+        {
+            "app": "Fiverr",
+            "error": false,
+            "found": true,
+            "response-status": "200 OK",
+            "url": "https://www.fiverr.com/example"
+        }
+    ]
+}
