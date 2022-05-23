@@ -5,6 +5,19 @@
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 </br></br></br></br>
 
+## Setup
+
+#### Clone the repository
+```shell
+git clone https://github.com/p1ngul1n0/blackbird
+cd blackbird
+```
+
+#### Install requirements
+```shell
+pip install -r requirements.txt
+```
+
 ## Usage
 
 #### Search by username
