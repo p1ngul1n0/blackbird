@@ -16,7 +16,7 @@ of these programs or any derivatives thereof. By using these programs you accept
 that any damage (dataloss, system crash, system compromise, etc.) caused by the use of these 
 programs is not P1ngul1n0's responsibility.
 ```
-<img alt="blackbird-printscreen" align="left" width="100%" height="300" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
+<img alt="blackbird-printscreen" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
 
 
 ## Setup
