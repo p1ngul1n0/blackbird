@@ -127,3 +127,6 @@ python blackbird.py --list-sites
 
 ## Supersonic speed :rocket:
 Blackbird sends async HTTP requests, allowing a lot more speed when discovering user accounts.
+
+## Suggestions
+If you have any suggestion of a site to be included in the search, feel free to contact me on <a href="https://twitter.com/p1ngul1n0">Twitter</a>
