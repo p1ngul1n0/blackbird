@@ -53,7 +53,8 @@ async def findUsername(username):
             userJson = {"search-params":{"username": username, "sites-number":len(searchData['sites']),"date":now},"sites": []}
             for x in results:
                 userJson["sites"].append(x)
-            userFile = open(f'{path}\\results\\{username}.json','w')
+            pathSave = os.path.join(path,'results',username+'.json')
+            userFile = open(pathSave,'w')
             json.dump(userJson, userFile,indent=4, sort_keys=True)
 
             print (f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {round(time.time() - start_time,1)} seconds\033[0m")
@@ -92,7 +93,8 @@ def list_sites():
 
 def read_results(file):
     try:
-        f = open(file,'r')
+        pathRead = os.path.join(path,'results',file)
+        f = open(pathRead,'r')
         jsonD = json.load(f)
         print (f'Loaded results file: {file}')
         print (f"Username: {jsonD['search-params']['username']}")
