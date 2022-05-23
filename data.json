@@ -44,7 +44,7 @@
     },
     {
       "app": "Instagram",
-      "url": "https://www.picuki.com/proile/{username}",
+      "url": "https://www.picuki.com/profile/{username}",
       "valid": "response.status == 200",
       "id": 7,
       "method": "GET"
@@ -178,7 +178,7 @@
     {
       "app": "WordPress Site",
       "url": "https://{username}.wordpress.com/",
-      "valid": "'Do you want to register' not in responseContent and 'doesn't exist' not in responseContent",
+      "valid": "'Do you want to register' not in responseContent and 'doesn\\'t exist' not in responseContent",
       "id": 26,
       "method": "GET"
     },
