@@ -8,11 +8,13 @@ import argparse
 from colorama import init, Fore
 from datetime import datetime
 import os
+import sys
 
 init()
 
 file = open('data.json')
 searchData = json.load(file)
+currentOs = sys.platform
 path = os.path.dirname(__file__)
 warnings.filterwarnings('ignore')
 
@@ -35,7 +37,7 @@ headers = {
 
 async def findUsername(username):
     start_time = time.time()
-    timeout = aiohttp.ClientTimeout(total=20)
+    timeout = aiohttp.ClientTimeout(total=30)
     
     print (f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' accross {len(searchData['sites'])} social networks\033[0m")
     
@@ -110,7 +112,8 @@ def read_results(file):
          
 
 if arguments.username:
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    if 'win' in currentOs:
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(findUsername(arguments.username))   
 elif arguments.list:
     list_sites()
