@@ -49,7 +49,7 @@ python blackbird.py -f username.json
 python blackbird.py --list-sites
 ```
 
-## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/72--red)
+## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/73--red)
 <details>
   <summary></summary>
   
@@ -124,6 +124,8 @@ python blackbird.py --list-sites
 69. Buymeacoffe
 70. Arduino
 71. League of Legend Tracker
+72. Lego Ideas
+73. Fiverr
 </details>
 
 ## Supersonic speed :rocket:
