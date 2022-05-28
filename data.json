@@ -493,7 +493,7 @@
       "method": "GET"
     },
     {
-      "app": "League of Legend Tracker",
+      "app": "League of Legends Tracker",
       "url": "https://tracker.gg/lol/profile/riot/NA/{username}/overview",
       "valid": "response.status == 200",
       "id": 71,
