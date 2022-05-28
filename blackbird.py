@@ -77,13 +77,13 @@ async def makeRequest(session,u,username):
                     soup = BeautifulSoup(responseContent, 'html.parser')
                 if eval(u["valid"]):
                     print (f'{Fore.LIGHTGREEN_EX}[+]\033[0m - {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
-                    return ({"app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "error":False, "found": True})
+                    return ({"app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "error":False,"error-message":None, "found": True})
                 else:
                     print (f'[-]\033[0m - {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
-                    return ({"app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "error":False, "found": False})
+                    return ({"app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "error":False, "error-message":None,"found": False})
     except Exception as e:
             print (f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
-            return ({"app": u['app'], "url": url, "response-status": None, "error":True, "found": False})   
+            return ({"app": u['app'], "url": url, "response-status": None, "error":True, "error-message":repr(e), "found": False})   
 
 def list_sites():
     i = 1
@@ -104,10 +104,11 @@ def read_results(file):
         for u in jsonD['sites']:
             if u['found'] == True:
                 print (f'{Fore.LIGHTGREEN_EX}[+]\033[0m - {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{u["url"]}\033[0m [{u["response-status"]}]\033[0m')
+            elif u['error'] == True:
+                print (f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request ({u["error-message"]}) - {Fore.YELLOW}{u["url"]}\033[0m')
             elif u['found'] == False:
                     print (f'[-]\033[0m - {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{u["url"]}\033[0m [{u["response-status"]}]\033[0m')
-            elif u['error'] == True:
-                print (f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request - {Fore.YELLOW}{u["url"]}\033[0m')
+           
     except Exception as e:
         print (f'{Fore.RED}[X] Error reading file [{repr(e)}]')
     
