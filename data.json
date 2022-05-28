@@ -197,7 +197,7 @@
       "method": "GET"
     },
     {
-      "app": "Jsiddle",
+      "app": "JsFiddle",
       "url": "https://jsfiddle.net/user/{username}/",
       "valid": "response.status == 200",
       "id": 29,
