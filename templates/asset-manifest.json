@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.369f02f7.css",
-    "main.js": "/static/js/main.5166aea7.js",
+    "main.js": "/static/js/main.73750665.js",
     "static/media/blackbird-logo.png": "/static/media/blackbird-logo.a5dc0cf8ea8ae1d331b8.png",
     "static/media/chaturbate.svg": "/static/media/chaturbate.156993636d04c39b3c39.svg",
     "static/media/chess.svg": "/static/media/chess.76ed6e652ad208282f34.svg",
@@ -80,10 +80,10 @@
     "static/media/trello.svg": "/static/media/trello.3e1bad399470c1c4d518.svg",
     "static/media/ellipse.svg": "/static/media/ellipse.4f2add6ca369dcfa203955d19b81f568.svg",
     "main.369f02f7.css.map": "/static/css/main.369f02f7.css.map",
-    "main.5166aea7.js.map": "/static/js/main.5166aea7.js.map"
+    "main.73750665.js.map": "/static/js/main.73750665.js.map"
   },
   "entrypoints": [
     "static/css/main.369f02f7.css",
-    "static/js/main.5166aea7.js"
+    "static/js/main.73750665.js"
   ]
 }
