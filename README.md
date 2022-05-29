@@ -40,6 +40,12 @@ pip install -r requirements.txt
 ```python
 python blackbird.py -u username
 ```
+#### Run WebServer
+```python
+python blackbird.py --web
+```
+Access [http://127.0.0.1:5000](http://127.0.0.1:5000/) on the browser
+<img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
 #### Read results file
 ```python
 python blackbird.py -f username.json
@@ -48,12 +54,7 @@ python blackbird.py -f username.json
 ```python
 python blackbird.py --list-sites
 ```
-#### Run WebServer
-```python
-python blackbird.py --web
-```
-Access [http://127.0.0.1](http://127.0.0.1:5000/) on the browser
-<img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
+
 
 
 
