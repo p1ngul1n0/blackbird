@@ -9,6 +9,7 @@ from colorama import init, Fore
 from datetime import datetime
 import os
 import sys
+import subprocess
 
 init()
 
@@ -121,9 +122,11 @@ def read_results(file):
 if arguments.web:
     print ('[!] Starting WebServer on http://127.0.0.1:5000/')
     try:
-        os.system('python webserver.py')
-    except:
+        subprocess.run(['python3'], check = True)
         os.system('python3 webserver.py')
+    except subprocess.CalledProcessError:
+        print ('wrongcommand does not exist')
+        os.system('python webserver.py')
 
 if arguments.username:
     if 'win' in currentOs:
