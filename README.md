@@ -17,7 +17,8 @@ of these programs or any derivatives thereof. By using these programs you accept
 that any damage (dataloss, system crash, system compromise, etc.) caused by the use of these 
 programs is not P1ngul1n0's responsibility.
 ```
-<img alt="blackbird-printscreen" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
+<img alt="blackbird-cli" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
+
 
 
 ## Setup
@@ -43,11 +44,18 @@ python blackbird.py -u username
 ```python
 python blackbird.py -f username.json
 ```
-
 #### List supportted sites
 ```python
 python blackbird.py --list-sites
 ```
+#### Run WebServer
+```python
+python blackbird.py --web
+```
+Access [http://127.0.0.1](http://127.0.0.1:5000/) on the browser
+<img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
+
+
 
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/73--red)
 <details>
