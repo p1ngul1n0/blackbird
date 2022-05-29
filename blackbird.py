@@ -28,6 +28,10 @@ parser.add_argument('--list-sites', action = 'store_true', dest = 'list',
 parser.add_argument('-f', action = 'store', dest = 'file',
                            required = False,
                            help = 'Read results file.')
+parser.add_argument('--web', action = 'store_true', dest = 'web',
+                           required = False,
+                           help = 'Run webserver.')
+
 arguments = parser.parse_args()
 
 proxy = "http://127.0.0.1:8080"
@@ -59,6 +63,7 @@ async def findUsername(username):
 
             print (f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {round(time.time() - start_time,1)} seconds\033[0m")
             print (f"{Fore.LIGHTYELLOW_EX}[!] Results saved to {username}.json\033[0m")
+            return userJson
 
 async def makeRequest(session,u,username):
     url = u["url"].format(username=username)
@@ -113,11 +118,17 @@ def read_results(file):
         print (f'{Fore.RED}[X] Error reading file [{repr(e)}]')
     
          
+if arguments.web:
+    print ('[!] Starting WebServer on http://127.0.0.1:5000/')
+    try:
+        os.system('python webserver.py')
+    except:
+        os.system('python3 webserver.py')
 
 if arguments.username:
     if 'win' in currentOs:
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(findUsername(arguments.username))   
+    asyncio.run(findUsername(arguments.username))
 elif arguments.list:
     list_sites()
 elif arguments.file:
