@@ -20,7 +20,6 @@ def home():
 def searchUsername():
     content = request.get_json()
     username = content['username']
-    print (username)
     results = loop.run_until_complete(findUsername(username))
     return jsonify(results)
 
