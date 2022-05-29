@@ -1,6 +1,7 @@
 {
     "search-params": {
-        "date": "29/05/2022 16:21:29",
+        "date": "29/05/2022 17:29:48",
+        "execution-time": 30.9,
         "sites-number": 73,
         "username": "example"
     },
@@ -39,7 +40,7 @@
         },
         {
             "app": "TikTok",
-            "error-message": "ClientOSError(10054, 'Foi for\u00e7ado o cancelamento de uma conex\u00e3o existente pelo host remoto', None, 10054, None)",
+            "error-message": "TimeoutError()",
             "id": 5,
             "response-status": null,
             "status": "ERROR",
@@ -481,7 +482,7 @@
             "app": "Vine",
             "error-message": null,
             "id": 60,
-            "response-status": "404 NOT FOUND",
+            "response-status": "502 BAD GATEWAY",
             "status": "NOT FOUND",
             "url": "https://vine.co/api/users/profiles/vanity/example"
         },
