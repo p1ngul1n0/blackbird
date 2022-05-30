@@ -35,6 +35,13 @@ cd blackbird
 pip install -r requirements.txt
 ```
 
+#### Access Blackbird in a Docker Container
+```shell
+docker build -t blackbird .
+docker run -p 5000:5000 blackbird "--web" #for acessing the web server
+docker run blackbird "-u username"#for searching for a user the normal way
+```
+
 ## Usage
 
 #### Search by username
