@@ -2,8 +2,8 @@
   "sites": [
     {
       "app": "Facebook",
-      "url": "https://www.facebook.com/{username}",
-      "valid": "response.status == 200",
+      "url": "https://m.facebook.com/{username}?_rdr",
+      "valid": "response.status == 200 and 'Content-Security-Policy-Report-Only' in response.history[0].headers",
       "id": 1,
       "method": "GET"
     },
