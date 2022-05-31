@@ -9,7 +9,7 @@
     },
     {
       "app": "YouTube",
-      "url": "https://www.youtube.com/user/{username}/videos",
+      "url": "https://www.youtube.com/c/{username}",
       "valid": "response.status == 200",
       "id": 2,
       "method": "GET"
