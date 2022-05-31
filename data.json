@@ -3,7 +3,7 @@
     {
       "app": "Facebook",
       "url": "https://m.facebook.com/{username}?_rdr",
-      "valid": "response.status == 200 and 'Content-Security-Policy-Report-Only' in response.history[0].headers",
+      "valid": "response.status == 200",
       "id": 1,
       "method": "GET"
     },
@@ -511,6 +511,13 @@
       "url": "https://www.fiverr.com/{username}",
       "valid": "response.status == 200 and 'Member since' in responseContent",
       "id": 73,
+      "method": "GET"
+    },
+    {
+      "app": "Redtube",
+      "url": "https://www.redtube.com.br/users/{username}",
+      "valid": "response.status == 200",
+      "id": 74,
       "method": "GET"
     }
   ]
