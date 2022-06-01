@@ -1,7 +1,7 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search fast for accounts by username across 74 sites.
+### An OSINT tool to search fast for accounts by username across 75 sites.
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 
 </br></br></br></br>
@@ -137,6 +137,7 @@ python blackbird.py --list-sites
 72. Lego Ideas
 73. Fiverr
 74. Redtube
+75. Dribble
 </details>
 
 ## Supersonic speed :rocket:
