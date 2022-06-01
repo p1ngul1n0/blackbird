@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.0d04f6ff.css",
-    "main.js": "/static/js/main.aaa49523.js",
+    "main.js": "/static/js/main.e8458654.js",
     "static/media/blackbird-logo.png": "/static/media/blackbird-logo.a5dc0cf8ea8ae1d331b8.png",
     "static/media/chaturbate.svg": "/static/media/chaturbate.156993636d04c39b3c39.svg",
     "static/media/chess.svg": "/static/media/chess.76ed6e652ad208282f34.svg",
@@ -24,6 +24,7 @@
     "static/media/pornhub.svg": "/static/media/pornhub.046c501cb96636c945c8.svg",
     "static/media/tripadvisor.svg": "/static/media/tripadvisor.3f827443a1d91a4cfe1b.svg",
     "static/media/pastebin.svg": "/static/media/pastebin.80a03446640bf6e4c2b4.svg",
+    "static/media/dribble.svg": "/static/media/dribble.e6f8a5943d6c130cca4f.svg",
     "static/media/league-of-legends-tracker.svg": "/static/media/league-of-legends-tracker.d2165284017a6913023b.svg",
     "static/media/shopify.svg": "/static/media/shopify.1a16a5d85d381efaf12b.svg",
     "static/media/ebay.svg": "/static/media/ebay.0d7a81b83275b2f5db73.svg",
@@ -81,10 +82,10 @@
     "static/media/trello.svg": "/static/media/trello.3e1bad399470c1c4d518.svg",
     "static/media/ellipse.svg": "/static/media/ellipse.4f2add6ca369dcfa203955d19b81f568.svg",
     "main.0d04f6ff.css.map": "/static/css/main.0d04f6ff.css.map",
-    "main.aaa49523.js.map": "/static/js/main.aaa49523.js.map"
+    "main.e8458654.js.map": "/static/js/main.e8458654.js.map"
   },
   "entrypoints": [
     "static/css/main.0d04f6ff.css",
-    "static/js/main.aaa49523.js"
+    "static/js/main.e8458654.js"
   ]
 }
