@@ -9,7 +9,7 @@
     },
     {
       "app": "YouTube",
-      "url": "https://www.youtube.com/c/{username}",
+      "url": "https://www.youtube.com/user/{username}/videos",
       "valid": "response.status == 200",
       "id": 2,
       "method": "GET"
@@ -518,6 +518,13 @@
       "url": "https://www.redtube.com.br/users/{username}",
       "valid": "response.status == 200",
       "id": 74,
+      "method": "GET"
+    },
+    {
+      "app": "Dribble",
+      "url": "https://dribbble.com/{username}",
+      "valid": "response.status == 200",
+      "id": 75,
       "method": "GET"
     }
   ]
