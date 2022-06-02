@@ -44,7 +44,7 @@ async def findUsername(username):
     start_time = time.time()
     timeout = aiohttp.ClientTimeout(total=30)
     
-    print (f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' accross {len(searchData['sites'])} social networks\033[0m")
+    print (f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' across {len(searchData['sites'])} social networks\033[0m")
     
     async with aiohttp.ClientSession(timeout=timeout) as session:
             tasks = []

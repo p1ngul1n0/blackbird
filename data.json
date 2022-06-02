@@ -596,6 +596,13 @@
       "valid": "response.status == 200",
       "id": 85,
       "method": "GET"
+    },
+    {
+      "app": "LinkedIn",
+      "url": "https://www.linkedin.com/in/{username}",
+      "valid": "response.status == 200",
+      "id": 86,
+      "method": "GET"
     }
   ]
 }
