@@ -129,8 +129,10 @@ if arguments.web:
         command.check_returncode()
 
 if arguments.username:
-    if 'win' in currentOs:
+    try:
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    except:
+        pass
     asyncio.run(findUsername(arguments.username))
 elif arguments.list:
     list_sites()
