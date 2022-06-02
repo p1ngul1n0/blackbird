@@ -596,6 +596,20 @@
       "valid": "response.status == 200",
       "id": 85,
       "method": "GET"
+    },
+    {
+      "app": "Lyrics Training",
+      "url": "https://lyricstraining.com/search?user={username}",
+      "valid": "response.status == 200 and 'Sorry, there are no results for your search.' not in responseContent",
+      "id": 86,
+      "method": "GET"
+    },
+    {
+      "app": "Expo",
+      "url": "https://forums.expo.dev/u/{username}",
+      "valid": "response.status == 200",
+      "id": 87,
+      "method": "GET"
     }
   ]
 }
