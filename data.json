@@ -610,6 +610,104 @@
       "valid": "response.status == 200",
       "id": 87,
       "method": "GET"
+    },
+    {
+      "app": "RAWG",
+      "url": "https://rawg.io/@{username}",
+      "valid": "response.status == 200",
+      "id": 88,
+      "method": "GET"
+    },
+    {
+      "app": "Coroflot",
+      "url": "https://www.coroflot.com/{username}",
+      "valid": "response.status == 200",
+      "id": 89,
+      "method": "GET"
+    },
+    {
+      "app": "Cloudflare",
+      "url": "https://community.cloudflare.com/u/{username}",
+      "valid": "response.status == 200",
+      "id": 90,
+      "method": "GET"
+    },
+    {
+      "app": "Wattpad",
+      "url": "https://www.wattpad.com/user/{username}",
+      "valid": "response.status == 200",
+      "id": 91,
+      "method": "GET"
+    },
+    {
+      "app": "Mixlr",
+      "url": "https://mixlr.com/{username}/",
+      "valid": "response.status == 200",
+      "id": 92,
+      "method": "GET"
+    },
+    {
+      "app": "ImageShack",
+      "url": "https://imageshack.com/user/{username}",
+      "valid": "response.status == 200 and 's Images' in responseContent",
+      "id": 93,
+      "method": "GET"
+    },
+    {
+      "app": "Freelancer",
+      "url": "https://www.freelancer.com/u/{username}",
+      "valid": "response.status == 200",
+      "id": 94,
+      "method": "GET"
+    },
+    {
+      "app": "Dev To",
+      "url": "https://dev.to/{username}",
+      "valid": "response.status == 200",
+      "id": 95,
+      "method": "GET"
+    },
+    {
+      "app": "BitBucket",
+      "url": "https://bitbucket.org/{username}/",
+      "valid": "response.status == 200",
+      "id": 96,
+      "method": "GET"
+    },
+    {
+      "app": "Ko Fi",
+      "url": "https://ko-fi.com/{username}",
+      "valid": "response.status == 200 and 'Become a supporter of' in responseContent",
+      "id": 97,
+      "method": "GET"
+    },
+    {
+      "app": "Flickr",
+      "url": "https://www.flickr.com/photos/{username}/",
+      "valid": "response.status == 200",
+      "id": 98,
+      "method": "GET"
+    },
+    {
+      "app": "HackerEarth",
+      "url": "https://www.hackerearth.com/@{username}",
+      "valid": "response.status == 200 and '404 | HackerEarth' not in responseContent",
+      "id": 99,
+      "method": "GET"
+    },
+    {
+      "app": "Spotify",
+      "url": "https://open.spotify.com/user/{username}",
+      "valid": "response.status == 200 and 'on Spotify' in responseContent",
+      "id": 100,
+      "method": "GET"
+    },
+    {
+      "app": "Snapchat Stories",
+      "url": "https://story.snapchat.com/s/{username}",
+      "valid": "response.status == 200",
+      "id": 101,
+      "method": "GET"
     }
   ]
 }
