@@ -526,6 +526,76 @@
       "valid": "response.status == 200",
       "id": 75,
       "method": "GET"
+    },
+    {
+      "app": "Packet Storm Security",
+      "url": "https://packetstormsecurity.com/users/{username}",
+      "valid": "response.status == 200 and 'User Profile for' in responseContent",
+      "id": 76,
+      "method": "GET"
+    },
+    {
+      "app": "Ello",
+      "url": "https://ello.co/{username}",
+      "valid": "response.status == 200",
+      "id": 77,
+      "method": "GET"
+    },
+    {
+      "app": "Medium",
+      "url": "https://medium.com/@{username}",
+      "valid": "response.status == 200",
+      "id": 78,
+      "method": "GET"
+    },
+    {
+      "app": "Hackaday",
+      "url": "https://hackaday.io/{username}",
+      "valid": "response.status == 200",
+      "id": 79,
+      "method": "GET"
+    },
+    {
+      "app": "Keybase",
+      "url": "https://keybase.io/{username}",
+      "valid": "response.status == 200",
+      "id": 80,
+      "method": "GET"
+    },
+    {
+      "app": "HackerOne",
+      "url": "https://hackerone.com/{username}?type=user",
+      "valid": "response.status == 200",
+      "id": 81,
+      "method": "GET"
+    },
+    {
+      "app": "BugCrowd",
+      "url": "https://bugcrowd.com/{username}",
+      "valid": "response.status == 200",
+      "id": 82,
+      "method": "GET"
+    },
+    {
+      "app": "DevPost",
+      "url": "https://onecompiler.com/api/users/{username}",
+      "valid": "response.status == 200",
+      "id": 83,
+      "method": "GET"
+    },
+    {
+      "app": "OneCompiler",
+      "url": "https://onecompiler.com/api/users/{username}",
+      "valid": "response.status == 200 and 'name' in responseContent",
+      "id": 84,
+      "method": "GET"
+    },
+    {
+      "app": "TryHackMe",
+      "url": "https://tryhackme.com/p/{username}",
+      "valid": "response.status == 200",
+      "id": 85,
+      "method": "GET"
     }
   ]
 }
