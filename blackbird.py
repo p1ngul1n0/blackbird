@@ -42,7 +42,7 @@ headers = {
 
 async def findUsername(username):
     start_time = time.time()
-    timeout = aiohttp.ClientTimeout(total=30)
+    timeout = aiohttp.ClientTimeout(total=10)
     
     print (f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' across {len(searchData['sites'])} social networks\033[0m")
     
