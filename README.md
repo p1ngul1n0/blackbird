@@ -167,6 +167,10 @@ The <a href="https://github.com/p1ngul1n0/blackbird/blob/main/data.json">data.js
 - method - HTTP method
 - json - JSON body POST (needs to be escaped, use this :point_right: https://codebeautify.org/json-escape-unescape)
 - {username} - Username place (URL or Body)
+- response.status - HTTP response status
+- responseContent - Raw response body
+- soup - Beautifulsoup parsed response body
+- jsonData - JSON response body
 
 
 #### Examples
