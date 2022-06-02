@@ -153,5 +153,46 @@ python blackbird.py --list-sites
 ## Supersonic speed :rocket:
 Blackbird sends async HTTP requests, allowing a lot more speed when discovering user accounts.
 
-## Suggestions
-If you have any suggestion of a site to be included in the search, feel free to contact me on <a href="https://twitter.com/p1ngul1n0">Twitter</a>
+## JSON Template
+Blackbird uses JSON as a template to store and read data.
+
+The <a href="https://github.com/p1ngul1n0/blackbird/blob/main/data.json">data.json</a> file store all sites that blackbird verify.
+
+
+#### Params
+- app - Site name
+- url
+- valid - Python expression that returns True when user exists
+- id - Unique numeric  ID
+- method - HTTP method
+- json - JSON body POST (needs to be escaped, use this :point_right: https://codebeautify.org/json-escape-unescape)
+- {username} - Username place (URL or Body)
+
+
+#### Examples
+GET
+```JSON
+    {
+      "app": "ExampleAPP1",
+      "url": "https://www.example.com/{username}",
+      "valid": "response.status == 200",
+      "id": 1,
+      "method": "GET"
+    }
+```
+POST JSON
+```JSON
+    {
+      "app": "ExampleAPP2",
+      "url": "https://www.example.com/user",
+      "valid": "jsonData['message']['found'] == True",
+      "json": "{{\"type\": \"username\",\"input\": \"{username}\"}}",
+      "id": 2,
+      "method": "POST"
+    }
+```
+
+If you have any suggestion of a site to be included in the search, make a pull request following the template.
+
+## Contact
+Feel free to contact me on <a href="https://twitter.com/p1ngul1n0">Twitter</a>
