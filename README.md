@@ -1,7 +1,7 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search fast for accounts by username across 115 sites.
+### An OSINT tool to search fast for accounts by username across 114 sites.
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 
 </br></br></br></br>
@@ -56,7 +56,7 @@ python blackbird.py -f username.json
 python blackbird.py --list-sites
 ```
 
-## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/115--red)
+## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/114--red)
 <details>
   <summary></summary>
   
@@ -142,39 +142,38 @@ python blackbird.py --list-sites
 80. Keybase
 81. HackerOne
 82. BugCrowd
-83. DevPost
-84. OneCompiler
-85. TryHackMe
-86. Lyrics Training
-87. Expo
-88. RAWG
-89. Coroflot
-90. Cloudflare
-91. Wattpad
-92. Mixlr
-93. ImageShack
-94. Freelancer
-95. Dev To
-96. BitBucket
-97. Ko Fi
-98. Flickr
-99. HackerEarth
-100. Spotify
-101. Snapchat Stories
-102. Audio Jungle
-103. Avid Community
-104. Bandlab
-105. Carrd
-106. CastingCallClub
-107. Coderwall
-108. Codewars
-109. F3
-110. Gab
-111. Issuu
-112. Steemit
-113. Venmo
-114. MODDB
-115. COLOURlovers
+83. OneCompiler
+84. TryHackMe
+85. Lyrics Training
+86. Expo
+87. RAWG
+88. Coroflot
+89. Cloudflare
+90. Wattpad
+91. Mixlr
+92. ImageShack
+93. Freelancer
+94. Dev To
+95. BitBucket
+96. Ko Fi
+97. Flickr
+98. HackerEarth
+99. Spotify
+100. Snapchat Stories
+101. Audio Jungle
+102. Avid Community
+103. Bandlab
+104. Carrd
+105. CastingCallClub
+106. Coderwall
+107. Codewars
+108. F3
+109. Gab
+110. Issuu
+111. Steemit
+112. Venmo
+113. MODDB
+114. COLOURlovers
 </details>
 
 ## Supersonic speed :rocket:
