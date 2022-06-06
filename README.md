@@ -56,7 +56,7 @@ python blackbird.py -f username.json
 python blackbird.py --list-sites
 ```
 
-## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/85--red)
+## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/101--red)
 <details>
   <summary></summary>
   
