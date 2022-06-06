@@ -224,5 +224,12 @@ POST JSON
 
 If you have any suggestion of a site to be included in the search, make a pull request following the template.
 
+## Planned features
+
+- [X] Implement Flask Web Server to optimize UX
+- [ ] Export results in other formats (Excel/PDF/CSV)
+- [ ] Reach at least 300 sites until August 2022
+- [ ] Implement metadata extraction
+
 ## Contact
 Feel free to contact me on <a href="https://twitter.com/p1ngul1n0">Twitter</a>
