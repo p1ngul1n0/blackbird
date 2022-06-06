@@ -1,7 +1,7 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search fast for accounts by username across 101 sites.
+### An OSINT tool to search fast for accounts by username across 115 sites.
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 
 </br></br></br></br>
@@ -56,7 +56,7 @@ python blackbird.py -f username.json
 python blackbird.py --list-sites
 ```
 
-## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/101--red)
+## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/115--red)
 <details>
   <summary></summary>
   
@@ -161,6 +161,20 @@ python blackbird.py --list-sites
 99. HackerEarth
 100. Spotify
 101. Snapchat Stories
+102. Audio Jungle
+103. Avid Community
+104. Bandlab
+105. Carrd
+106. CastingCallClub
+107. Coderwall
+108. Codewars
+109. F3
+110. Gab
+111. Issuu
+112. Steemit
+113. Venmo
+114. MODDB
+115. COLOURlovers
 </details>
 
 ## Supersonic speed :rocket:
