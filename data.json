@@ -708,6 +708,104 @@
       "valid": "response.status == 200",
       "id": 101,
       "method": "GET"
+    },
+    {
+      "app": "Audio Jungle",
+      "url": "https://audiojungle.net/user/{username}",
+      "valid": "response.status == 200",
+      "id": 102,
+      "method": "GET"
+    },
+    {
+      "app": "Avid Community",
+      "url": "https://community.avid.com/members/{username}/default.aspx",
+      "valid": "response.status == 200 and 'User not found' not in responseContent",
+      "id": 103,
+      "method": "GET"
+    },
+    {
+      "app": "Bandlab",
+      "url": "https://www.bandlab.com/api/v1.3/users/{username}",
+      "valid": "response.status == 200",
+      "id": 104,
+      "method": "GET"
+    },
+    {
+      "app": "Carrd",
+      "url": "https://{username}.carrd.co/",
+      "valid": "response.status == 200",
+      "id": 105,
+      "method": "GET"
+    },
+    {
+      "app": "CastingCallClub",
+      "url": "https://www.castingcall.club/{username}",
+      "valid": "response.status == 200 and '404 not found' not in responseContent",
+      "id": 106,
+      "method": "GET"
+    },
+    {
+      "app": "Coderwall",
+      "url": "https://coderwall.com/{username}/",
+      "valid": "response.status == 200",
+      "id": 107,
+      "method": "GET"
+    },
+    {
+      "app": "Codewars",
+      "url": "https://www.codewars.com/users/{username}",
+      "valid": "response.status == 200",
+      "id": 108,
+      "method": "GET"
+    },
+    {
+      "app": "F3",
+      "url": "https://f3.cool/{username}",
+      "valid": "response.status == 200",
+      "id": 109,
+      "method": "GET"
+    },
+    {
+      "app": "Gab",
+      "url": "https://gab.com/{username}",
+      "valid": "response.status == 200",
+      "id": 110,
+      "method": "GET"
+    },
+    {
+      "app": "Issuu",
+      "url": "https://issuu.com/{username}",
+      "valid": "response.status == 200",
+      "id": 111,
+      "method": "GET"
+    },
+    {
+      "app": "Steemit",
+      "url": "https://steemit.com/@{username}",
+      "valid": "response.status == 200",
+      "id": 112,
+      "method": "GET"
+    },
+    {
+      "app": "Venmo",
+      "url": "https://account.venmo.com/u/{username}",
+      "valid": "response.status == 200",
+      "id": 113,
+      "method": "GET"
+    },
+    {
+      "app": "MODDB",
+      "url": "https://www.moddb.com/members/{username}",
+      "valid": "response.status == 200",
+      "id": 114,
+      "method": "GET"
+    },
+    {
+      "app": "COLOURlovers",
+      "url": "https://www.colourlovers.com/lover/{username}",
+      "valid": "response.status == 200",
+      "id": 115,
+      "method": "GET"
     }
   ]
 }
