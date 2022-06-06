@@ -799,6 +799,13 @@
       "valid": "response.status == 200",
       "id": 115,
       "method": "GET"
+    },
+    {
+      "app": "Scheme Color",
+      "url": "https://www.schemecolor.com/author/{username}",
+      "valid": "response.status == 200",
+      "id": 116,
+      "method": "GET"
     }
   ]
 }
