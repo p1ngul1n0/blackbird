@@ -24,4 +24,4 @@ def searchUsername():
     return jsonify(results)
 
 
-app.run()
+app.run('0.0.0.0')
