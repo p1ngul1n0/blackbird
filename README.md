@@ -230,6 +230,7 @@ If you have any suggestion of a site to be included in the search, make a pull r
 - [ ] Export results in other formats (Excel/PDF/CSV)
 - [ ] Reach at least 300 sites until August 2022
 - [ ] Implement metadata extraction
+- [ ] Deploy on Cloud
 
 ## Contact
 Feel free to contact me on <a href="https://twitter.com/p1ngul1n0">Twitter</a>
