@@ -577,13 +577,6 @@
       "method": "GET"
     },
     {
-      "app": "DevPost",
-      "url": "https://onecompiler.com/api/users/{username}",
-      "valid": "response.status == 200",
-      "id": 83,
-      "method": "GET"
-    },
-    {
       "app": "OneCompiler",
       "url": "https://onecompiler.com/api/users/{username}",
       "valid": "response.status == 200 and 'name' in responseContent",
