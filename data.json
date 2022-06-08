@@ -714,7 +714,7 @@
       "id": 102,
       "method": "GET",
       "url": "https://community.avid.com/members/{username}/default.aspx",
-      "valid": "response.status == 200 and 'User not found' not in responseContent"
+      "valid": "response.status == 200 and 'Member since' in responseContent"
     },
     {
       "app": "Bandlab",
