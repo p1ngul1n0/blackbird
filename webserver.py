@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from blackbird import findUsername
 import logging
+import os
 
 app = Flask(__name__, static_folder='templates/static')
 app.config['CORS_HEADERS'] = 'Content-Type'
