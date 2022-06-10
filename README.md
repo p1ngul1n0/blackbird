@@ -57,7 +57,7 @@ python blackbird.py --list-sites
 ```
 
 ## Metadata Extraction
-When possible blackbird will extract the user's metadata, bringing data such as location, name, bio and profile picture.
+When possible Blackbird will extract the user's metadata, bringing data such as name, bio, location and profile picture.
 
 <img alt="blackbird-metadata" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_metadata.png">
 
