@@ -56,6 +56,10 @@ python blackbird.py -f username.json
 python blackbird.py --list-sites
 ```
 
+## Metadata Extraction
+When possible blackbird will extract the user's metadata, bringing data such as location, name, bio and profile picture.
+<img alt="blackbird-metadata" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_metadata.png">
+
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/115--red)
 <details>
   <summary></summary>
@@ -230,7 +234,7 @@ If you have any suggestion of a site to be included in the search, make a pull r
 - [X] Implement Flask Web Server to optimize UX
 - [ ] Export results in other formats (Excel/PDF/CSV)
 - [ ] Reach at least 300 sites until August 2022
-- [ ] Implement metadata extraction
+- [X] Implement metadata extraction
 - [ ] Deploy on Cloud
 
 ## Contact
