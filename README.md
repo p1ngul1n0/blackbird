@@ -1,7 +1,7 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search fast for accounts by username across 115 sites.
+### An OSINT tool to search fast for accounts by username across 116 sites.
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 
 </br></br></br>
@@ -65,11 +65,11 @@ When possible blackbird will extract the user's metadata, bringing data such as 
   <summary></summary>
   
 1. Facebook
-2. YouTube  
-3. Twitter  
-4. Telegram 
-5. TikTok   
-6. Tinder   
+2. YouTube
+3. Twitter
+4. Telegram
+5. TikTok
+6. Tinder
 7. Instagram
 8. Pinterest
 9. Snapchat
@@ -119,7 +119,7 @@ When possible blackbird will extract the user's metadata, bringing data such as 
 53. Cash APP
 54. Imgur
 55. Trello
-56. MCUUID Minecraft
+56. Minecraft
 57. Patreon
 58. DockerHub
 59. Kongregate
@@ -179,6 +179,7 @@ When possible blackbird will extract the user's metadata, bringing data such as 
 113. MODDB
 114. COLOURlovers
 115. Scheme Color
+116. Roblox Trade
 </details>
 
 ## Supersonic speed :rocket:
