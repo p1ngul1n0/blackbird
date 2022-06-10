@@ -1,16 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.0d04f6ff.css",
-    "main.js": "/static/js/main.a83ef674.js",
+    "main.css": "/static/css/main.080b0764.css",
+    "main.js": "/static/js/main.df1a3162.js",
     "static/media/blackbird-logo.png": "/static/media/blackbird-logo.a5dc0cf8ea8ae1d331b8.png",
     "static/media/link.svg": "/static/media/link.d4ffd4b94f52f6ab2aefaad905eb5515.svg",
+    "static/media/view.svg": "/static/media/view.6ff4c358b8b20c364a1cfd908e91e2ce.svg",
     "index.html": "/index.html",
+    "static/media/pin.svg": "/static/media/pin.94c6a40d70da7b868b3ef5f3020a41d5.svg",
     "static/media/ellipse.svg": "/static/media/ellipse.4f2add6ca369dcfa203955d19b81f568.svg",
-    "main.0d04f6ff.css.map": "/static/css/main.0d04f6ff.css.map",
-    "main.a83ef674.js.map": "/static/js/main.a83ef674.js.map"
+    "main.080b0764.css.map": "/static/css/main.080b0764.css.map",
+    "main.df1a3162.js.map": "/static/js/main.df1a3162.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d04f6ff.css",
-    "static/js/main.a83ef674.js"
+    "static/css/main.080b0764.css",
+    "static/js/main.df1a3162.js"
   ]
 }
