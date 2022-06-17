@@ -33,6 +33,11 @@
         },
         {
           "type": "generic-data",
+          "key": "Site",
+          "value": "soup.find('div',class_='profile-website').text.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "generic-data",
           "key": "Member since",
           "value": "soup.find('div',class_='profile-joindate').find('span')['title']"
         },
@@ -1395,6 +1400,46 @@
       "method": "GET",
       "url": "https://rblx.trade/p/{username}",
       "valid": "response.status == 200 and 'Currently Wearing' in responseContent"
+    },
+    {
+      "app": "Aetherhub",
+      "id": 117,
+      "method": "GET",
+      "url": "https://aetherhub.com/User/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('img', class_='ae-profile-image-card')['src']"
+        }
+      ]
+    },
+    {
+      "app": "BugBounty",
+      "id": 118,
+      "method": "GET",
+      "url": "https://bugbounty.gg/members/{username}/",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('img', class_='avatar user-319-avatar avatar-450 photo')['src']"
+        }
+      ]
+    },
+    {
+      "app": "Huntr",
+      "id": 119,
+      "method": "GET",
+      "url": "https://huntr.dev/users/{username}/",
+      "valid": "response.status == 200"
     }
   ]
 }
