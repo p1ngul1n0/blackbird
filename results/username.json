@@ -1,0 +1,1339 @@
+{
+    "search-params": {
+        "date": "21/06/2022 09:11:47",
+        "execution-time": 10.5,
+        "sites-number": 119,
+        "username": "username"
+    },
+    "sites": [
+        {
+            "app": "Facebook",
+            "error-message": null,
+            "id": 1,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://m.facebook.com/username?_rdr"
+        },
+        {
+            "app": "YouTube",
+            "error-message": null,
+            "id": 2,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://www.youtube.com/user/username"
+        },
+        {
+            "app": "Twitter",
+            "error-message": null,
+            "id": 3,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://nitter.net/username"
+        },
+        {
+            "app": "Telegram",
+            "error-message": null,
+            "id": 4,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "Telegram Usernames"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://t.me/username"
+        },
+        {
+            "app": "TikTok",
+            "error-message": "TimeoutError()",
+            "id": 5,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.tiktok.com/@username"
+        },
+        {
+            "app": "Tinder",
+            "error-message": null,
+            "id": 6,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "Jordan"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://images-ssl.gotinder.com/5f4468b1b1b83801002af9d0/640x800_b4c7e8fe-b2f8-401e-bad6-28f9113e8ad5.jpg"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://tinder.com/@username"
+        },
+        {
+            "app": "Instagram",
+            "error-message": null,
+            "id": 7,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://www.picuki.com/profile/username"
+        },
+        {
+            "app": "Pinterest",
+            "error-message": "TimeoutError()",
+            "id": 8,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://pinterest.com/username/"
+        },
+        {
+            "app": "Snapchat",
+            "error-message": null,
+            "id": 9,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "NOT FOUND",
+            "url": "https://feelinsonice.appspot.com/web/deeplink/snapcode?username=username&size=400&type=SVG"
+        },
+        {
+            "app": "Reddit",
+            "error-message": null,
+            "id": 10,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": ""
+                },
+                {
+                    "key": "Bio",
+                    "type": "generic-data",
+                    "value": ""
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": ""
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.reddit.com/user/username/about.json"
+        },
+        {
+            "app": "Soundcloud",
+            "error-message": null,
+            "id": 11,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": null
+                },
+                {
+                    "key": "location",
+                    "type": "location",
+                    "value": ", undefined"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://i1.sndcdn.com/avatars-xbg5CtyP3RycrAD4-WkbWFg-t500x500.jpg"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://soundcloud.com/username"
+        },
+        {
+            "app": "Github",
+            "error-message": null,
+            "id": 12,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://github.com/username"
+        },
+        {
+            "app": "Steam",
+            "error-message": null,
+            "id": 13,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "Garrett"
+                },
+                {
+                    "key": "Nickname",
+                    "type": "generic-data",
+                    "value": "Garrett"
+                },
+                {
+                    "key": "Bio",
+                    "type": "generic-data",
+                    "value": "No information given."
+                },
+                {
+                    "key": "location",
+                    "type": "location",
+                    "value": "Madison, Wisconsin, United States"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://avatars.cloudflare.steamstatic.com/434201e87a516457d2c32e5b6fa74c0f60420857_full.jpg"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://steamcommunity.com/id/username/"
+        },
+        {
+            "app": "Linktree",
+            "error-message": null,
+            "id": 14,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://linktr.ee/username"
+        },
+        {
+            "app": "Xbox Gamertag",
+            "error-message": null,
+            "id": 15,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "Username"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "//images.weserv.nl/?url=https://images-eds-ssl.xboxlive.com/image?url=wHwbXKif8cus8csoZ03RWwcxuUQ9WVT6xh5XaeeZD02wEfGZeuD.XMoGFVYkwHDqQmVEVrRB9aeu4Z9XEj1NmatqT.Dj3ZGWyD05Z085UwQSbGT4fH8tqd_q41Np7LJ.htNik427gixw99FSyrVzJ915BxWD9WBx2F_rmJuBZ.E-&maxage=1d&output=webp&w=90&h=90"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.xboxgamertag.com/search/username"
+        },
+        {
+            "app": "Twitter Archived",
+            "error-message": null,
+            "id": 16,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "http://archive.org/wayback/available?url=https://twitter.com/username"
+        },
+        {
+            "app": "Xvideos",
+            "error-message": null,
+            "id": 17,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "Username"
+                },
+                {
+                    "key": "Gender",
+                    "type": "generic-data",
+                    "value": "Man"
+                },
+                {
+                    "key": "Member since",
+                    "type": "generic-data",
+                    "value": "August 24, 2012 (3,588 days ago)"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://static-l3.xvideos-cdn.com/img/profile_default_big.jpg"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.xvideos.com/profiles/username"
+        },
+        {
+            "app": "PornHub",
+            "error-message": null,
+            "id": 18,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "username"
+                },
+                {
+                    "key": "Gender",
+                    "type": "generic-data",
+                    "value": "None"
+                },
+                {
+                    "key": "Last login",
+                    "type": "generic-data",
+                    "value": "2 months ago"
+                },
+                {
+                    "key": "Relationship Status",
+                    "type": "generic-data",
+                    "value": "465"
+                },
+                {
+                    "key": "Interested In",
+                    "type": "generic-data",
+                    "value": "194"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://di.phncdn.com/pics/users/default/pornhub/(m=bJazqgKlbyaT)(mh=edkXMLCC_MjmYEiZ)male.jpg"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.pornhub.com/users/username"
+        },
+        {
+            "app": "Xhamster",
+            "error-message": null,
+            "id": 19,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://xhamster.com/users/username"
+        },
+        {
+            "app": "Periscope",
+            "error-message": null,
+            "id": 20,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://www.periscope.tv/username"
+        },
+        {
+            "app": "Ask FM",
+            "error-message": null,
+            "id": 21,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "Basim"
+                },
+                {
+                    "key": "Bio",
+                    "type": "generic-data",
+                    "value": "Selling this account for $200"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://cuad.ask.fm/assets2/056/837/057/280/normal/avatar.jpg"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://ask.fm/username"
+        },
+        {
+            "app": "Vimeo",
+            "error-message": null,
+            "id": 22,
+            "metadata": null,
+            "response-status": "200 IE11 Deprecated",
+            "status": "FOUND",
+            "url": "https://vimeo.com/username"
+        },
+        {
+            "app": "Twitch",
+            "error-message": null,
+            "id": 23,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "NOT FOUND",
+            "url": "https://www.twitch.tv/username"
+        },
+        {
+            "app": "Pastebin",
+            "error-message": null,
+            "id": 24,
+            "metadata": [
+                {
+                    "key": "Member since",
+                    "type": "generic-data",
+                    "value": "Monday 28th of March 2011 06:17:30 AM CDT"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://pastebin.com/themes/pastebin/img/guest.png"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://pastebin.com/u/username"
+        },
+        {
+            "app": "WordPress Profile",
+            "error-message": null,
+            "id": 25,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://profiles.wordpress.org/username/"
+        },
+        {
+            "app": "WordPress Site",
+            "error-message": null,
+            "id": 26,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://username.wordpress.com/"
+        },
+        {
+            "app": "AllMyLinks",
+            "error-message": null,
+            "id": 27,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "kyle                                                                    "
+                },
+                {
+                    "key": "Bio",
+                    "type": "generic-data",
+                    "value": ""
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://allmylinks.com/img/avatar-default.png"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://allmylinks.com/username"
+        },
+        {
+            "app": "Buzzfeed",
+            "error-message": null,
+            "id": 28,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "\u30d5\u30fc\u30c9\u30fb\u30c9\u30ea\u30f3\u30af"
+                },
+                {
+                    "key": "Member since",
+                    "type": "generic-data",
+                    "value": "May 2009"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://img.buzzfeed.com/buzzfeed-static/static/2022-05/26/10/user_images/4441bd4b5fcd/junkoshirotori-v2-3514-1653560278-15.png"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.buzzfeed.com/username"
+        },
+        {
+            "app": "JsFiddle",
+            "error-message": null,
+            "id": 29,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "        username\n      "
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://www.gravatar.com/avatar/6d41365f87e3253ead122c575e16bc6f?s=80"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://jsfiddle.net/user/username/"
+        },
+        {
+            "app": "Sourceforge",
+            "error-message": null,
+            "id": 30,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "SF.net Documentation User"
+                },
+                {
+                    "key": "Member since",
+                    "type": "generic-data",
+                    "value": "2000-06-09 10:07:19"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://a.fsdn.com/allura/u/username/user_icon?1447114573"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://sourceforge.net/u/username/profile"
+        },
+        {
+            "app": "Kickstarter",
+            "error-message": null,
+            "id": 31,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://www.kickstarter.com/profile/username"
+        },
+        {
+            "app": "Smule",
+            "error-message": null,
+            "id": 32,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.smule.com/username"
+        },
+        {
+            "app": "Blogspot",
+            "error-message": null,
+            "id": 33,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://username.blogspot.com/"
+        },
+        {
+            "app": "Tradingview",
+            "error-message": null,
+            "id": 34,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.tradingview.com/u/username/"
+        },
+        {
+            "app": "Internet Archive",
+            "error-message": null,
+            "id": 35,
+            "metadata": null,
+            "response-status": "503 Service Unavailable",
+            "status": "FOUND",
+            "url": "https://archive.org/details/@username"
+        },
+        {
+            "app": "Alura",
+            "error-message": null,
+            "id": 36,
+            "metadata": null,
+            "response-status": "404 ",
+            "status": "NOT FOUND",
+            "url": "https://cursos.alura.com.br/user/username"
+        },
+        {
+            "app": "Behance",
+            "error-message": null,
+            "id": 37,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://www.behance.net/username/"
+        },
+        {
+            "app": "MySpace",
+            "error-message": null,
+            "id": 38,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://myspace.com/username"
+        },
+        {
+            "app": "Disqus",
+            "error-message": null,
+            "id": 39,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://disqus.com/by/username/"
+        },
+        {
+            "app": "Slideshare",
+            "error-message": null,
+            "id": 40,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "      username\n    "
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://public.slidesharecdn.com/v2/images/profile-picture.png"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.slideshare.net/username"
+        },
+        {
+            "app": "Rumble",
+            "error-message": null,
+            "id": 41,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "username"
+                },
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "/img/rumble-full-logo.svg"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://rumble.com/user/username"
+        },
+        {
+            "app": "Ebay",
+            "error-message": "TimeoutError()",
+            "id": 42,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.ebay.com/usr/username"
+        },
+        {
+            "app": "RedBubble",
+            "error-message": null,
+            "id": 43,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.redbubble.com/people/username/shop?asc=u"
+        },
+        {
+            "app": "Kik",
+            "error-message": null,
+            "id": 44,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://ws2.kik.com/user/username"
+        },
+        {
+            "app": "Roblox",
+            "error-message": null,
+            "id": 45,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "NOT FOUND",
+            "url": "https://auth.roblox.com/v1/usernames/validate?username=username&birthday=2019-12-31T23:00:00.000Z"
+        },
+        {
+            "app": "Armor Games",
+            "error-message": null,
+            "id": 46,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://armorgames.com/user/username"
+        },
+        {
+            "app": "Fortnite Tracker",
+            "error-message": null,
+            "id": 47,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://fortnitetracker.com/profile/all/username"
+        },
+        {
+            "app": "Duolingo",
+            "error-message": null,
+            "id": 48,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.duolingo.com/2017-06-30/users?username=username&_=1628308619574"
+        },
+        {
+            "app": "Chess",
+            "error-message": null,
+            "id": 49,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.chess.com/member/username"
+        },
+        {
+            "app": "Shopify",
+            "error-message": null,
+            "id": 50,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://username.myshopify.com/"
+        },
+        {
+            "app": "Untappd",
+            "error-message": null,
+            "id": 51,
+            "metadata": [
+                {
+                    "key": "Name",
+                    "type": "generic-data",
+                    "value": "\nPam "
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://untappd.com/user/username/"
+        },
+        {
+            "app": "Last FM",
+            "error-message": null,
+            "id": 52,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.last.fm/user/username"
+        },
+        {
+            "app": "Cash APP",
+            "error-message": null,
+            "id": 53,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://cash.app/$username"
+        },
+        {
+            "app": "Imgur",
+            "error-message": null,
+            "id": 54,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://api.imgur.com/account/v1/accounts/username?client_id=546c25a59c58ad7&include=trophies%2Cmedallions"
+        },
+        {
+            "app": "Trello",
+            "error-message": null,
+            "id": 55,
+            "metadata": null,
+            "response-status": "400 Bad Request",
+            "status": "NOT FOUND",
+            "url": "https://trello.com/1/Members/username?fields=activityBlocked%2CavatarUrl%2Cbio%2CbioData%2Cconfirmed%2CfullName%2CidEnterprise%2CidMemberReferrer%2Cinitials%2CmemberType%2CnonPublic%2Cproducts%2Curl%2Cusername"
+        },
+        {
+            "app": "Minecraft",
+            "error-message": null,
+            "id": 56,
+            "metadata": [
+                {
+                    "key": "picture",
+                    "type": "image",
+                    "value": "https://crafthead.net/avatar/a77d4ff63979402ca1ede922b8d83483"
+                }
+            ],
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://playerdb.co/api/player/minecraft/username"
+        },
+        {
+            "app": "Patreon",
+            "error-message": "TimeoutError()",
+            "id": 57,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.patreon.com/username"
+        },
+        {
+            "app": "DockerHub",
+            "error-message": null,
+            "id": 58,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://hub.docker.com/v2/users/username/"
+        },
+        {
+            "app": "Kongregate",
+            "error-message": "TimeoutError()",
+            "id": 59,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.kongregate.com/accounts/username"
+        },
+        {
+            "app": "Vine",
+            "error-message": null,
+            "id": 60,
+            "metadata": null,
+            "response-status": "404 NOT FOUND",
+            "status": "NOT FOUND",
+            "url": "https://vine.co/api/users/profiles/vanity/username"
+        },
+        {
+            "app": "Gamespot",
+            "error-message": null,
+            "id": 61,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.gamespot.com/profile/username/"
+        },
+        {
+            "app": "Shutterstock",
+            "error-message": null,
+            "id": 62,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.shutterstock.com/pt/g/username/about"
+        },
+        {
+            "app": "Chaturbate",
+            "error-message": null,
+            "id": 63,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://chaturbate.com/username/"
+        },
+        {
+            "app": "ProtonMail",
+            "error-message": null,
+            "id": 64,
+            "metadata": null,
+            "response-status": "409 Conflict",
+            "status": "FOUND",
+            "url": "https://account.protonmail.com/api/users/available?Name=username"
+        },
+        {
+            "app": "TripAdvisor",
+            "error-message": "TimeoutError()",
+            "id": 65,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.tripadvisor.com/Profile/username"
+        },
+        {
+            "app": "RapidAPI",
+            "error-message": null,
+            "id": 66,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://rapidapi.com/user/username"
+        },
+        {
+            "app": "HackTheBox",
+            "error-message": null,
+            "id": 67,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.hackthebox.com/api/v4/register/check"
+        },
+        {
+            "app": "Wikipedia",
+            "error-message": null,
+            "id": 68,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&list=users&ususers=username&usprop=cancreate&formatversion=2&errorformat=html&errorsuselocal=true&uselang=en"
+        },
+        {
+            "app": "Buymeacoffe",
+            "error-message": null,
+            "id": 69,
+            "metadata": null,
+            "response-status": "502 Bad Gateway",
+            "status": "NOT FOUND",
+            "url": "https://www.buymeacoffee.com/username"
+        },
+        {
+            "app": "Arduino",
+            "error-message": null,
+            "id": 70,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://create.arduino.cc/projecthub/username"
+        },
+        {
+            "app": "League of Legends Tracker",
+            "error-message": null,
+            "id": 71,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://tracker.gg/lol/profile/riot/NA/username/overview"
+        },
+        {
+            "app": "Lego Ideas",
+            "error-message": null,
+            "id": 72,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://ideas.lego.com/profile/username/entries?query=&sort=top"
+        },
+        {
+            "app": "Fiverr",
+            "error-message": null,
+            "id": 73,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "NOT FOUND",
+            "url": "https://www.fiverr.com/username"
+        },
+        {
+            "app": "Redtube",
+            "error-message": null,
+            "id": 74,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.redtube.com.br/users/username"
+        },
+        {
+            "app": "Dribble",
+            "error-message": null,
+            "id": 75,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://dribbble.com/username"
+        },
+        {
+            "app": "Packet Storm Security",
+            "error-message": null,
+            "id": 76,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "NOT FOUND",
+            "url": "https://packetstormsecurity.com/users/username"
+        },
+        {
+            "app": "Ello",
+            "error-message": null,
+            "id": 77,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://ello.co/username"
+        },
+        {
+            "app": "Medium",
+            "error-message": null,
+            "id": 78,
+            "metadata": null,
+            "response-status": "410 Gone",
+            "status": "NOT FOUND",
+            "url": "https://medium.com/@username"
+        },
+        {
+            "app": "Hackaday",
+            "error-message": null,
+            "id": 79,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://hackaday.io/username"
+        },
+        {
+            "app": "Keybase",
+            "error-message": null,
+            "id": 80,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://keybase.io/username"
+        },
+        {
+            "app": "HackerOne",
+            "error-message": null,
+            "id": 81,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://hackerone.com/username?type=user"
+        },
+        {
+            "app": "BugCrowd",
+            "error-message": null,
+            "id": 82,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://bugcrowd.com/username"
+        },
+        {
+            "app": "OneCompiler",
+            "error-message": null,
+            "id": 83,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "NOT FOUND",
+            "url": "https://onecompiler.com/api/users/username"
+        },
+        {
+            "app": "TryHackMe",
+            "error-message": null,
+            "id": 84,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://tryhackme.com/p/username"
+        },
+        {
+            "app": "Lyrics Training",
+            "error-message": null,
+            "id": 85,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "NOT FOUND",
+            "url": "https://lyricstraining.com/search?user=username"
+        },
+        {
+            "app": "Expo",
+            "error-message": null,
+            "id": 86,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://forums.expo.dev/u/username"
+        },
+        {
+            "app": "RAWG",
+            "error-message": null,
+            "id": 87,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://rawg.io/@username"
+        },
+        {
+            "app": "Coroflot",
+            "error-message": null,
+            "id": 88,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.coroflot.com/username"
+        },
+        {
+            "app": "Cloudflare",
+            "error-message": null,
+            "id": 89,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://community.cloudflare.com/u/username"
+        },
+        {
+            "app": "Wattpad",
+            "error-message": null,
+            "id": 90,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.wattpad.com/user/username"
+        },
+        {
+            "app": "Mixlr",
+            "error-message": null,
+            "id": 91,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://mixlr.com/username/"
+        },
+        {
+            "app": "ImageShack",
+            "error-message": null,
+            "id": 92,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://imageshack.com/user/username"
+        },
+        {
+            "app": "Freelancer",
+            "error-message": null,
+            "id": 93,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://www.freelancer.com/u/username"
+        },
+        {
+            "app": "Dev To",
+            "error-message": null,
+            "id": 94,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://dev.to/username"
+        },
+        {
+            "app": "BitBucket",
+            "error-message": null,
+            "id": 95,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://bitbucket.org/username/"
+        },
+        {
+            "app": "Ko Fi",
+            "error-message": null,
+            "id": 96,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://ko-fi.com/username"
+        },
+        {
+            "app": "Flickr",
+            "error-message": null,
+            "id": 97,
+            "metadata": null,
+            "response-status": "410 Gone",
+            "status": "NOT FOUND",
+            "url": "https://www.flickr.com/photos/username/"
+        },
+        {
+            "app": "HackerEarth",
+            "error-message": "TimeoutError()",
+            "id": 98,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.hackerearth.com/@username"
+        },
+        {
+            "app": "Spotify",
+            "error-message": null,
+            "id": 99,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "NOT FOUND",
+            "url": "https://open.spotify.com/user/username"
+        },
+        {
+            "app": "Snapchat Stories",
+            "error-message": null,
+            "id": 100,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://story.snapchat.com/s/username"
+        },
+        {
+            "app": "Audio Jungle",
+            "error-message": "TimeoutError()",
+            "id": 101,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://audiojungle.net/user/username"
+        },
+        {
+            "app": "Avid Community",
+            "error-message": "TimeoutError()",
+            "id": 102,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://community.avid.com/members/username/default.aspx"
+        },
+        {
+            "app": "Bandlab",
+            "error-message": null,
+            "id": 103,
+            "metadata": null,
+            "response-status": "200 OK",
+            "status": "FOUND",
+            "url": "https://www.bandlab.com/api/v1.3/users/username"
+        },
+        {
+            "app": "Carrd",
+            "error-message": "TimeoutError()",
+            "id": 104,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://username.carrd.co/"
+        },
+        {
+            "app": "CastingCallClub",
+            "error-message": "TimeoutError()",
+            "id": 105,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.castingcall.club/username"
+        },
+        {
+            "app": "Coderwall",
+            "error-message": "TimeoutError()",
+            "id": 106,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://coderwall.com/username/"
+        },
+        {
+            "app": "Codewars",
+            "error-message": "TimeoutError()",
+            "id": 107,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.codewars.com/users/username"
+        },
+        {
+            "app": "F3",
+            "error-message": "TimeoutError()",
+            "id": 108,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://f3.cool/username"
+        },
+        {
+            "app": "Gab",
+            "error-message": "TimeoutError()",
+            "id": 109,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://gab.com/username"
+        },
+        {
+            "app": "Issuu",
+            "error-message": "TimeoutError()",
+            "id": 110,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://issuu.com/username"
+        },
+        {
+            "app": "Steemit",
+            "error-message": "TimeoutError()",
+            "id": 111,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://steemit.com/@username"
+        },
+        {
+            "app": "Venmo",
+            "error-message": null,
+            "id": 112,
+            "metadata": null,
+            "response-status": "404 Not Found",
+            "status": "NOT FOUND",
+            "url": "https://account.venmo.com/u/username"
+        },
+        {
+            "app": "MODDB",
+            "error-message": "TimeoutError()",
+            "id": 113,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.moddb.com/members/username"
+        },
+        {
+            "app": "COLOURlovers",
+            "error-message": "TimeoutError()",
+            "id": 114,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.colourlovers.com/lover/username"
+        },
+        {
+            "app": "Scheme Color",
+            "error-message": "TimeoutError()",
+            "id": 115,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://www.schemecolor.com/author/username"
+        },
+        {
+            "app": "Roblox Trade",
+            "error-message": "TimeoutError()",
+            "id": 116,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://rblx.trade/p/username"
+        },
+        {
+            "app": "Aetherhub",
+            "error-message": "TimeoutError()",
+            "id": 117,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://aetherhub.com/User/username"
+        },
+        {
+            "app": "BugBounty",
+            "error-message": "TimeoutError()",
+            "id": 118,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://bugbounty.gg/members/username/"
+        },
+        {
+            "app": "Huntr",
+            "error-message": "TimeoutError()",
+            "id": 119,
+            "metadata": null,
+            "response-status": null,
+            "status": "ERROR",
+            "url": "https://huntr.dev/users/username/"
+        }
+    ]
+}

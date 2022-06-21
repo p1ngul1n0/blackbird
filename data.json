@@ -1440,6 +1440,13 @@
       "method": "GET",
       "url": "https://huntr.dev/users/{username}/",
       "valid": "response.status == 200"
+    },
+    {
+      "app": "Universocraft",
+      "id": 120,
+      "method": "GET",
+      "url": "https://stats.universocraft.com/stats.php?player={username}",
+      "valid": "response.status == 200"
     }
   ]
 }
