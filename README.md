@@ -184,6 +184,7 @@ When possible Blackbird will extract the user's metadata, bringing data such as 
 117. Aetherhub
 118. BugBounty
 119. Huntr
+120. Universocraft
 </details>
 
 ## Supersonic speed :rocket:
