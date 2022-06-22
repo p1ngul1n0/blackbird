@@ -1447,6 +1447,241 @@
       "method": "GET",
       "url": "https://stats.universocraft.com/stats.php?player={username}",
       "valid": "response.status == 200"
+    },
+    {
+      "app": "Wireclub",
+      "id": 121,
+      "method": "GET",
+      "url": "https://www.wireclub.com/users/{username}",
+      "valid": "response.status == 200 and 'profile-info' in responseContent",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('meta', property='og:title')['content']"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('meta', property='og:image')['content']"
+        }
+      ]
+    },
+    {
+      "app": "AminoApps",
+      "id": 122,
+      "method": "GET",
+      "url": "https://aminoapps.com/u/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('span', class_='NvNickname').text"
+        },
+        {
+          "type": "generic-data",
+          "key": "Bio",
+          "value": "soup.find('div', class_='bio').string.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "'https:' + soup.find('img', alt='Avatar')['src']"
+        }
+      ]
+    },
+    {
+      "app": "Trakt",
+      "id": 123,
+      "method": "GET",
+      "url": "https://trakt.tv/users/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1').find('a').text"
+        },
+        {
+          "type": "generic-data",
+          "key": "Bio",
+          "value": "soup.find('h4').text"
+        },
+        {
+          "type": "generic-data",
+          "key": "Age",
+          "value": "soup.find('span',title='Age').text"
+        },
+        {
+          "type": "generic-data",
+          "key": "Gender",
+          "value": "soup.find('h3',class_='emojis-supported').contents[2]['title']"
+        },
+        {
+          "type": "location",
+          "key": "location",
+          "value": "soup.find('h3',class_='emojis-supported').contents[1]"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('img', class_='avatar')['src']"
+        }
+      ]
+    },
+    {
+      "app": "Giphy",
+      "id": 124,
+      "method": "GET",
+      "url": "https://giphy.com/channel/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Minecraft List",
+      "id": 125,
+      "method": "GET",
+      "url": "https://minecraftlist.com/players/{username}",
+      "valid": "response.status == 200 and '0 Minecraft servers recently.' not in responseContent",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Servers",
+          "value": "soup.find('div',class_='flex items-center bg-white p-2 mb-3').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "'https://minecraftlist.com' + soup.find('img')['src']"
+        }
+      ]
+    },
+    {
+      "app": "SEOClerks",
+      "id": 126,
+      "method": "GET",
+      "url": "https://www.seoclerks.com/user/{username}",
+      "valid": "response.status == 200 and 'user-data' in responseContent",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('div',class_='profile-link').text.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "generic-data",
+          "key": "Member since",
+          "value": "soup.find('div',class_='user-data').find('span').text"
+        },
+        {
+          "type": "location",
+          "key": "location",
+          "value": "soup.find('div',class_='flag-pill')['data-content']"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('div',class_='user-avatar').find('img')['src']"
+        }
+      ]
+    },
+    {
+      "app": "Mix",
+      "id": 127,
+      "method": "GET",
+      "url": "https://mix.com/{username}/",
+      "valid": "response.status == 200 and 'user-data' in responseContent",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('div',class_='IntoUserProfileLayout__name').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('meta',property='og:image')['content']"
+        }
+      ]
+    },
+    {
+      "app": "Codecademy",
+      "id": 128,
+      "method": "GET",
+      "url": "https://discuss.codecademy.com/u/{username}/summary",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Bandcamp",
+      "id": 129,
+      "method": "GET",
+      "url": "https://bandcamp.com/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1').text"
+        },
+        {
+          "type": "generic-data",
+          "key": "Bio",
+          "value": "soup.find(class_='blurb-text').text.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "generic-data",
+          "key": "Site",
+          "value": "soup.find(class_='website').text.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('meta',property='og:image')['content']"
+        }
+      ]
+    },
+    {
+      "app": "Poshmark",
+      "id": 130,
+      "method": "GET",
+      "url": "https://poshmark.com/closet/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1').text"
+        },
+        {
+          "type": "location",
+          "key": "location",
+          "value": "soup.find('div',class_='d--fl ai--c').find('span').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('div',class_='closet__header__info').find('img')['src']"
+        }
+      ]
+    },
+    {
+      "app": "hackster",
+      "id": 131,
+      "method": "GET",
+      "url": "https://www.hackster.io/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find_all('img')[2]['src']"
+        }
+      ]
     }
   ]
 }
