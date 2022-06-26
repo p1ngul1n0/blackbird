@@ -202,6 +202,8 @@ When possible Blackbird will extract the user's metadata, bringing data such as 
 Blackbird sends async HTTP requests, allowing a lot more speed when discovering user accounts.
 
 ## JSON Template
+<details>
+  <summary></summary>
 Blackbird uses JSON as a template to store and read data.
 
 The <a href="https://github.com/p1ngul1n0/blackbird/blob/main/data.json">data.json</a> file store all sites that blackbird verify.
@@ -243,8 +245,9 @@ POST JSON
       "method": "POST"
     }
 ```
-
 If you have any suggestion of a site to be included in the search, make a pull request following the template.
+</details>
+
 
 ## Planned features
 
