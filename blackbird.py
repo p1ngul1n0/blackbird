@@ -1,10 +1,10 @@
 import time
 from bs4 import BeautifulSoup
 import json
-import html
 import aiohttp
 import asyncio
 import warnings
+import random
 import argparse
 from colorama import init, Fore
 from datetime import datetime
@@ -51,8 +51,10 @@ parser.add_argument('--web', action = 'store_true', dest = 'web',
 arguments = parser.parse_args()
 
 proxy = "http://127.0.0.1:8080"
+useragents = open('useragents.txt').read().splitlines()
+useragent =random.choice(useragents)
 headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko"
+    "User-Agent": useragent
 }
 
 async def findUsername(username):
@@ -68,7 +70,7 @@ async def findUsername(username):
                 tasks.append(task)
 
             results = await asyncio.gather(*tasks)
-            now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            now = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
             executionTime = round(time.time() - start_time,1)
             userJson = {"search-params":{"username": username, "sites-number":len(searchData['sites']),"date":now, "execution-time":executionTime},"sites": []}
             for x in results:
@@ -84,14 +86,14 @@ async def findUsername(username):
 async def makeRequest(session,u,username):
     url = u["url"].format(username=username)
     jsonBody = None
-    metadata = None
+    metadata = []
     if 'headers' in u:
         headers.update(eval(u['headers']))
     if 'json' in u:
         jsonBody = u['json'].format(username=username)
         jsonBody = json.loads(jsonBody)
     try:
-        async with session.request(u["method"],url,json=jsonBody,headers=headers, ssl=False) as response:
+        async with session.request(u["method"],url,json=jsonBody,headers=headers,ssl=False) as response:
                 responseContent = await response.text()
                 if 'content-type' in response.headers and "application/json" in response.headers["Content-Type"]:
                     jsonData = await response.json()
@@ -104,7 +106,7 @@ async def makeRequest(session,u,username):
                         metadata = []
                         for d in u["metadata"]:
                             try:
-                                value = eval(d['value'])
+                                value = eval(d['value']).strip('\t\r\n')
                                 print (f"   |--{d['key']}: {value}")
                                 metadata.append({"type":d["type"],"key": d['key'], "value": value})
                             except Exception as e:
