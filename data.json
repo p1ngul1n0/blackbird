@@ -58,7 +58,7 @@
       "id": 4,
       "method": "GET",
       "url": "https://t.me/{username}",
-      "valid": "soup.find('a', class_='tgme_action_button_new') != None",
+      "valid": "'You can contact' in soup.find('meta', property='og:description')['content']",
       "metadata": [
         {
           "type": "generic-data",
@@ -77,7 +77,24 @@
       "id": 5,
       "method": "GET",
       "url": "https://www.tiktok.com/@{username}",
-      "valid": "response.status == 200"
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1').text"
+        },
+        {
+          "type": "generic-data",
+          "key": "Bio",
+          "value": "soup.find('h2', attrs={'data-e2e':'user-bio'}).text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('img')['src']"
+        }
+      ]
     },
     {
       "app": "Tinder",
@@ -335,7 +352,7 @@
         {
           "type": "image",
           "key": "picture",
-          "value": "soup.find('img',class_='rounded img-thumbnail')['src']"
+          "value": "'https:' + soup.find('img',class_='rounded img-thumbnail')['src']"
         }
       ]
     },
@@ -485,7 +502,7 @@
         {
           "type": "generic-data",
           "key": "Bio",
-          "value": "soup.find('div',class_='icon-bio').text "
+          "value": "soup.find('div',class_='icon-bio').text"
         },
         {
           "type": "location",
@@ -504,7 +521,24 @@
       "id": 22,
       "method": "GET",
       "url": "https://vimeo.com/{username}",
-      "valid": "response.status == 200"
+      "valid": "response.status == 200 and soup.find('title').text  != 'VimeOhOh'",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('meta', property='og:title')['content']"
+        },
+        {
+          "type": "generic-data",
+          "key": "Bio",
+          "value": "soup.find('meta', property='og:description')['content']"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('meta', property='og:image')['content']"
+        }
+      ]
     },
     {
       "app": "Twitch",
@@ -866,7 +900,14 @@
       "id": 48,
       "method": "GET",
       "url": "https://www.duolingo.com/2017-06-30/users?username={username}&_=1628308619574",
-      "valid": "len(jsonData['users']) > 0"
+      "valid": "len(jsonData['users']) > 0",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "json['users'][0]['name']"
+        }
+      ]
     },
     {
       "app": "Chess",
@@ -918,7 +959,7 @@
       "id": 53,
       "method": "GET",
       "url": "https://cash.app/${username}",
-      "valid": "response.status != 404"
+      "valid": "response.status == 200"
     },
     {
       "app": "Imgur",
@@ -1039,7 +1080,7 @@
       "id": 68,
       "method": "GET",
       "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&list=users&ususers={username}&usprop=cancreate&formatversion=2&errorformat=html&errorsuselocal=true&uselang=en",
-      "valid": "('cancreate' in jsonData['query']['users'][0] and jsonData['query']['users'][0]['cancreate'] != True) or ('userid' in jsonData['query']['users'][0] and jsonData['query']['users'][0]['userid'] != None)"
+      "valid": "'userexists' in responseContent"
     },
     {
       "app": "Buymeacoffe",
@@ -1542,7 +1583,7 @@
       "id": 125,
       "method": "GET",
       "url": "https://minecraftlist.com/players/{username}",
-      "valid": "response.status == 200 and '0 Minecraft servers recently.' not in responseContent",
+      "valid": "response.status == 200 and '0 Minecraft servers' not in responseContent",
       "metadata": [
         {
           "type": "generic-data",
