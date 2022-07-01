@@ -61,6 +61,9 @@ When possible Blackbird will extract the user's metadata, bringing data such as 
 
 <img alt="blackbird-metadata" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_metadata.png">
 
+## Random UserAgent
+Each time Blackbird does a username search it will use a random UserAgent from a <a href="https://gist.github.com/pzb/b4b6f57144aea7827ae4">list of 1000 UserAgents</a> to prevent blocking.
+
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/131--red)
 <details>
   <summary></summary>
