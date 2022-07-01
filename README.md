@@ -262,7 +262,7 @@ If you have any suggestion of a site to be included in the search, make a pull r
 ## Planned features
 
 - [X] Implement Flask Web Server to optimize UX
-- [ ] Export results in other formats (Excel/PDF/CSV)
+- [X] Export results in other formats (Excel/PDF/CSV)
 - [ ] Reach at least 300 sites until August 2022
 - [X] Implement metadata extraction
 - [ ] Deploy on Cloud
