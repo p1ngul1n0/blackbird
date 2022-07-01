@@ -56,14 +56,6 @@ python blackbird.py -f username.json
 python blackbird.py --list-sites
 ```
 
-## Metadata Extraction
-When possible Blackbird will extract the user's metadata, bringing data such as name, bio, location and profile picture.
-
-<img alt="blackbird-metadata" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_metadata.png">
-
-## Random UserAgent
-Each time Blackbird does a username search it will use a random UserAgent from a <a href="https://gist.github.com/pzb/b4b6f57144aea7827ae4">list of 1000 UserAgents</a> to prevent blocking.
-
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/131--red)
 <details>
   <summary></summary>
@@ -200,6 +192,21 @@ Each time Blackbird does a username search it will use a random UserAgent from a
 130. Poshmark
 131. hackster
 </details>
+
+## Export Report
+The results can be exported as a PDF Report.
+<p float="left" align="center">
+  <img alt="blackbird-pdf-cover" width="300" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_report_pdf_cover.png">
+  <img alt="blackbird-pdf-cover" width="300" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_report_pdf_results.png">
+</p>
+
+## Metadata Extraction
+When possible Blackbird will extract the user's metadata, bringing data such as name, bio, location and profile picture.
+
+<img alt="blackbird-metadata" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_metadata.png">
+
+## Random UserAgent
+Each time Blackbird does a username search it will use a random UserAgent from a <a href="https://gist.github.com/pzb/b4b6f57144aea7827ae4">list of 1000 UserAgents</a> to prevent blocking.
 
 ## Supersonic speed :rocket:
 Blackbird sends async HTTP requests, allowing a lot more speed when discovering user accounts.
