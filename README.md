@@ -231,7 +231,7 @@ The <a href="https://github.com/p1ngul1n0/blackbird/blob/main/data.json">data.js
 - responseContent - Raw response body
 - soup - Beautifulsoup parsed response body
 - jsonData - JSON response body
-
+- metadada - a list of objects to be scraped
 
 #### Examples
 GET
@@ -253,6 +253,48 @@ POST JSON
       "json": "{{\"type\": \"username\",\"input\": \"{username}\"}}",
       "id": 2,
       "method": "POST"
+    }
+```
+GET with Metadata extraction
+```JSON
+    {
+      "app": "Twitter",
+      "id": 3,
+      "method": "GET",
+      "url": "https://nitter.net/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('a', class_='profile-card-fullname')['title']"
+        },
+        {
+          "type": "generic-data",
+          "key": "Bio",
+          "value": "soup.find('div',class_='profile-bio').string"
+        },
+        {
+          "type": "generic-data",
+          "key": "Site",
+          "value": "soup.find('div',class_='profile-website').text.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "generic-data",
+          "key": "Member since",
+          "value": "soup.find('div',class_='profile-joindate').find('span')['title']"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "'https://nitter.net'+soup.find('a', class_='profile-card-avatar')['href']"
+        },
+        {
+          "type": "location",
+          "key": "location",
+          "value": "soup.select_one('.profile-location:nth-of-type(2)').text.strip('\\t\\r\\n')"
+        }
+      ]
     }
 ```
 If you have any suggestion of a site to be included in the search, make a pull request following the template.
