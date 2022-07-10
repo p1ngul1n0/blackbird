@@ -1723,6 +1723,64 @@
           "value": "soup.find_all('img')[2]['src']"
         }
       ]
+    },
+    {
+      "app": "BodyBuilding",
+      "id": 132,
+      "method": "GET",
+      "url": "https://bodyspace.bodybuilding.com/{username}/",
+      "valid": "response.status == 200 and 'infoSummary' in responseContent",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('div',class_='infoSummary').find('ul').find_all('li')[0].text.replace('REAL NAME', '')"
+        },
+        {
+          "type": "generic-data",
+          "key": "Age",
+          "value": "soup.find('div',class_='infoSummary').find('ul').find_all('li')[1].text.replace('AGE', '')"
+        },
+        {
+          "type": "generic-data",
+          "key": "Gender",
+          "value": "soup.find('div',class_='infoSummary').find('ul').find_all('li')[2].text.replace('GENDER', '') "
+        },
+        {
+          "type": "location",
+          "key": "location",
+          "value": "soup.find('div',class_='infoSummary').find('ul').find_all('li')[3].text.replace('LOCATION', '')"
+        },
+        {
+          "type": "generic-data",
+          "key": "Member since",
+          "value": "soup.find('div',class_='infoSummary').find('ul').find_all('li')[4].text.replace('member since', '')"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "'https:' + soup.find_all('img',class_='BodyBanner-profile-pic__img')['src']"
+        }
+      ]
+    },
+    {
+      "app": "Mastodon",
+      "id": 133,
+      "method": "GET",
+      "url": "https://mastodon.social/@{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('strong',class_='display-name__html').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('img',id='profile_page_avatar')['src']"
+        }
+      ]
     }
   ]
 }
