@@ -1890,6 +1890,20 @@
       "method": "GET",
       "url": "https://www.thetattooforum.com/members/{username}/",
       "valid": "response.status == 200"
+    },
+    {
+      "app": "NPM",
+      "id": 141,
+      "method": "GET",
+      "url": "https://www.npmjs.com/~{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "PyPI",
+      "id": 142,
+      "method": "GET",
+      "url": "https://pypi.org/user/{username}/",
+      "valid": "response.status == 200"
     }
   ]
 }
