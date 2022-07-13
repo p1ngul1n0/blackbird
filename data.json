@@ -1890,6 +1890,25 @@
       "method": "GET",
       "url": "https://www.thetattooforum.com/members/{username}/",
       "valid": "response.status == 200"
-    }
+    },
+    {
+      "app": "VKontakte",
+      "id": 141,
+      "method": "GET",
+      "url": "https://vk.com/{username}/",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1',class_='page_name').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('img',class_='page_avatar_img')['src']"
+        }
+      ]      
+    }    
   ]
 }
