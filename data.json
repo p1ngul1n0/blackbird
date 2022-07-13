@@ -1781,6 +1781,115 @@
           "value": "soup.find('img',id='profile_page_avatar')['src']"
         }
       ]
+    },
+    {
+      "app": "IFTTT",
+      "id": 134,
+      "method": "GET",
+      "url": "https://ifttt.com/p/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Anime Planet",
+      "id": 135,
+      "method": "GET",
+      "url": "https://www.anime-planet.com/users/{username}",
+      "valid": "'Profile' in soup.find('title').text and response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1').text.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "generic-data",
+          "key": "Bio",
+          "value": "soup.find('section',class_='profBio userContent').find('p').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "'https://www.anime-planet.com' + soup.find('img',id='user-avatar')['src']"
+        }
+      ]
+    },
+    {
+      "app": "Destructoid",
+      "id": 136,
+      "method": "GET",
+      "url": "https://www.destructoid.com/?name={username}",
+      "valid": "'userinfo_photo' in responseContent and response.status == 200",
+      "metadata": [
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "'https://www.destructoid.com/'+soup.find('div',id='userinfo_photo').find('img')['src']"
+        }
+      ]
+    },
+    {
+      "app": "Gitee",
+      "id": 137,
+      "method": "GET",
+      "url": "https://gitee.com/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h2').text.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "generic-data",
+          "key": "Bio",
+          "value": "soup.find('p',class_='bio').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('img',class_='ui image avatar')['src']"
+        }
+      ]
+    },
+    {
+      "app": "Teknik",
+      "id": 138,
+      "method": "GET",
+      "url": "https://user.teknik.io/{username}",
+      "valid": "response.status == 200 and 'Profile' in soup.find('title').text",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1').text.strip('\\t\\r\\n')"
+        }
+      ]
+    },
+    {
+      "app": "BitChute",
+      "id": 139,
+      "method": "GET",
+      "url": "https://www.bitchute.com/channel/{username}/",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('p',class_='name').text.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('img',class_='image lazyloaded')['src']"
+        }
+      ]
+    },
+    {
+      "app": "The Tatto Forum",
+      "id": 140,
+      "method": "GET",
+      "url": "https://www.thetattooforum.com/members/{username}/",
+      "valid": "response.status == 200"
     }
   ]
 }
