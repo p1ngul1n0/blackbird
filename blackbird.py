@@ -94,7 +94,7 @@ async def makeRequest(session,u,username):
         jsonBody = json.loads(jsonBody)
     try:
         headers_ = randomHeader()
-        async with session.request(u["method"],url,json=jsonBody,headers=headers_,ssl=False, proxy=proxy) as response:
+        async with session.request(u["method"],url,json=jsonBody,headers=headers_,ssl=False) as response:
                 responseContent = await response.text()
                 if 'content-type' in response.headers and "application/json" in response.headers["Content-Type"]:
                     jsonData = await response.json()
