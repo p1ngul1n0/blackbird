@@ -51,7 +51,7 @@ Access [http://127.0.0.1:5000](http://127.0.0.1:5000/) on the browser
 ```python
 python blackbird.py -f username.json
 ```
-#### List supportted sites
+#### List supported sites
 ```python
 python blackbird.py --list-sites
 ```
