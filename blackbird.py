@@ -93,7 +93,8 @@ async def makeRequest(session,u,username):
         jsonBody = u['json'].format(username=username)
         jsonBody = json.loads(jsonBody)
     try:
-        async with session.request(u["method"],url,json=jsonBody,headers=headers,ssl=False) as response:
+        headers_ = randomHeader()
+        async with session.request(u["method"],url,json=jsonBody,headers=headers_,ssl=False, proxy=proxy) as response:
                 responseContent = await response.text()
                 if 'content-type' in response.headers and "application/json" in response.headers["Content-Type"]:
                     jsonData = await response.json()
@@ -124,6 +125,13 @@ def list_sites():
     for u in searchData["sites"]:
         print (f'{i}. {u["app"]}')
         i += 1
+
+def randomHeader():
+    useragent = random.choice(useragents)
+    headers = {
+        "User-Agent": useragent
+    }
+    return headers
 
 def read_results(file):
     try:
