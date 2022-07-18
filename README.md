@@ -311,6 +311,18 @@ GET with Metadata extraction
 If you have any suggestion of a site to be included in the search, make a pull request following the template.
 </details>
 
+## Contributors 🏅
+I'm grateful to all contributors who improved and bugfixed the project.
+
+- <a href="https://github.com/RelatedTitle">@RelatedTitle</a> - Fixed the Youtube user search URL.
+- <a href="https://github.com/prisar">@prisar</a> - Fixed the OS check for AsyncIO policy.
+- <a href="https://github.com/itmaru">@itmaru</a> - Fixed 'across' typo.
+- <a href="https://github.com/Bryan-Herrera-DEV">@Bryan-Herrera-DEV</a> - Added Universocraft site.
+- <a href="https://github.com/devXprite">@devXprite</a> - Added NPM and PyPI sites.
+- <a href="https://github.com/ChrisCarini">@ChrisCarini</a> - Fixed 'supported' typo.
+
+
+
 
 ## Planned features
 
