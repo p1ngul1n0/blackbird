@@ -152,12 +152,8 @@ def read_results(file):
          
 if arguments.web:
     print ('[!] Started WebServer on http://127.0.0.1:5000/')
-    try:
-        command = subprocess.run( ("python", "webserver.py"))
-        command.check_returncode()
-    except subprocess.CalledProcessError as e:
-        command = subprocess.run( ("python3", "webserver.py"))
-        command.check_returncode()
+    command = subprocess.run( (sys.executable, "webserver.py"))
+    command.check_returncode()
 
 if arguments.username:
     try:
