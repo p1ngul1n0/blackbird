@@ -122,10 +122,8 @@ if __name__ == '__main__':
             return ({"id": u["id"], "app": u['app'], "url": url, "response-status": None, "status": "ERROR", "error-message": repr(e), "metadata": metadata})
 
     def list_sites():
-        i = 1
-        for u in searchData["sites"]:
+        for i, u in enumerate(searchData["sites"], 1):
             print(f'{i}. {u["app"]}')
-            i += 1
 
     def read_results(file):
         try:
