@@ -322,9 +322,7 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/Bryan-Herrera-DEV">@Bryan-Herrera-DEV</a> - Added Universocraft site.
 - <a href="https://github.com/devXprite">@devXprite</a> - Added NPM and PyPI sites.
 - <a href="https://github.com/ChrisCarini">@ChrisCarini</a> - Fixed 'supported' typo.
-
-
-
+- <a href="https://github.com/Pandede">@Pandede</a> - Fixed <a href="https://github.com/p1ngul1n0/blackbird/issues/24">No such file or directory: 'python' #24 </a> issue, reformatted with autopep8, implemented `enumerate` and code splitting for functions.
 
 ## Planned features
 
