@@ -154,15 +154,17 @@ if __name__ == '__main__':
     parser.add_argument('--proxy', action='store', dest='proxy',
                         required=False,
                         help='Proxy to send requests through.E.g: --proxy http://127.0.0.1:8080 ')                  
-
+    parser.add_argument('--port', action='store', dest='port',
+                        required=False,
+                        default=5000,
+                        help='Specifiy port to use.')
     arguments = parser.parse_args()
-
     if arguments.proxy:
         proxy = arguments.proxy
 
     if arguments.web:
-        print('[!] Started WebServer on http://127.0.0.1:5000/')
-        command = subprocess.run((sys.executable, "webserver.py"))
+        print('[!] Started WebServer on http://127.0.0.1:' + arguments.port + '/')
+        command = subprocess.run([sys.executable, "webserver.py", arguments.port])
         command.check_returncode()
 
     if arguments.username:
