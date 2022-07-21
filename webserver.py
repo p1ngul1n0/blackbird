@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from blackbird import findUsername
 import logging
+import sys
 import os
 
 app = Flask(__name__, static_folder='templates/static')
@@ -11,7 +12,6 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 CORS(app, resources={r"/*": {"origins": "*"}})
 loop = asyncio.get_event_loop()
 logging.getLogger('werkzeug').disabled = True
-
 
 @app.route('/')
 def home():
@@ -25,4 +25,4 @@ def searchUsername():
     return jsonify(results)
 
 
-app.run('0.0.0.0')
+app.run(host='0.0.0.0', port=sys.argv[1])
