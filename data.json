@@ -1904,6 +1904,13 @@
       "method": "GET",
       "url": "https://pypi.org/user/{username}/",
       "valid": "response.status == 200"
+    },
+    {
+      "app": "HackenProof",
+      "id": 143,
+      "method": "GET",
+      "url": "https://hackenproof.com/{username}",
+      "valid": "response.status == 200"
     }
   ]
 }

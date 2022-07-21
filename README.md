@@ -6,6 +6,10 @@
 
 </br></br></br>
 
+<img alt="blackbird-cli" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
+<img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
+
+
 ## Disclaimer
 ```
 This or previous program is for Educational purpose ONLY. Do not use it without permission. 
@@ -16,8 +20,6 @@ of these programs or any derivatives thereof. By using these programs you accept
 that any damage (dataloss, system crash, system compromise, etc.) caused by the use of these 
 programs is not P1ngul1n0's responsibility.
 ```
-<img alt="blackbird-cli" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
-<img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
 
 
 
@@ -311,6 +313,16 @@ GET with Metadata extraction
 If you have any suggestion of a site to be included in the search, make a pull request following the template.
 </details>
 
+## Contributors 🏅
+I'm grateful to all contributors who improved and bugfixed the project.
+
+- <a href="https://github.com/RelatedTitle">@RelatedTitle</a> - Fixed the Youtube user search URL.
+- <a href="https://github.com/prisar">@prisar</a> - Fixed the OS check for AsyncIO policy.
+- <a href="https://github.com/itmaru">@itmaru</a> - Fixed 'across' typo.
+- <a href="https://github.com/Bryan-Herrera-DEV">@Bryan-Herrera-DEV</a> - Added Universocraft site.
+- <a href="https://github.com/devXprite">@devXprite</a> - Added NPM and PyPI sites.
+- <a href="https://github.com/ChrisCarini">@ChrisCarini</a> - Fixed 'supported' typo.
+- <a href="https://github.com/Pandede">@Pandede</a> - Fixed <a href="https://github.com/p1ngul1n0/blackbird/issues/24">No such file or directory: 'python' #24 </a> issue, reformatted with autopep8, implemented `enumerate` and code splitting for functions.
 
 ## Planned features
 
