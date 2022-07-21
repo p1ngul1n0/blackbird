@@ -1930,6 +1930,62 @@
           "value": "'https://vk.com/' + soup.find('img',class_='page_avatar_img')['src']"
         }
       ]
+    },
+    {
+      "app": "about me",
+      "id": 145,
+      "method": "GET",
+      "url": "https://about.me/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Dissenter",
+      "id": 146,
+      "method": "GET",
+      "url": "https://dissenter.com/user/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Designspiration",
+      "id": 147,
+      "method": "GET",
+      "url": "https://www.designspiration.com/{username}/",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Fark",
+      "id": 148,
+      "method": "GET",
+      "url": "https://www.fark.com/users/{username}",
+      "valid": "response.status == 200 and 'No such user' not in responseContent"
+    },
+    {
+      "app": "mmorpg",
+      "id": 149,
+      "method": "GET",
+      "url": "https://forums.mmorpg.com/profile/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Pikabu",
+      "id": 150,
+      "method": "GET",
+      "url": "https://pikabu.ru/@{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Playstation Network",
+      "id": 151,
+      "method": "GET",
+      "url": "https://psnprofiles.com/{username}",
+      "valid": "response.status == 200 and 'username' in responseContent"
+    },
+    {
+      "app": "Warrior Forum",
+      "id": 152,
+      "method": "GET",
+      "url": "https://www.warriorforum.com/members/{username}.html",
+      "valid": "response.status == 200"
     }
   ]
 }
