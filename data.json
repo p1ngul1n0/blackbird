@@ -1911,6 +1911,25 @@
       "method": "GET",
       "url": "https://hackenproof.com/{username}",
       "valid": "response.status == 200"
+    },
+    {
+      "app": "VKontakte",
+      "id": 144,
+      "method": "GET",
+      "url": "https://vk.com/{username}/",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1',class_='page_name').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "'https://vk.com/' + soup.find('img',class_='page_avatar_img')['src']"
+        }
+      ]
     }
   ]
 }
