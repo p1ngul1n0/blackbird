@@ -1892,8 +1892,29 @@
       "valid": "response.status == 200"
     },
     {
-      "app": "VKontakte",
+      "app": "NPM",
       "id": 141,
+      "method": "GET",
+      "url": "https://www.npmjs.com/~{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "PyPI",
+      "id": 142,
+      "method": "GET",
+      "url": "https://pypi.org/user/{username}/",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "HackenProof",
+      "id": 143,
+      "method": "GET",
+      "url": "https://hackenproof.com/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "VKontakte",
+      "id": 144,
       "method": "GET",
       "url": "https://vk.com/{username}/",
       "valid": "response.status == 200",
@@ -1906,9 +1927,9 @@
         {
           "type": "image",
           "key": "picture",
-          "value": "soup.find('img',class_='page_avatar_img')['src']"
+          "value": "'https://vk.com/' + soup.find('img',class_='page_avatar_img')['src']"
         }
-      ]      
-    }    
+      ]
+    }
   ]
 }

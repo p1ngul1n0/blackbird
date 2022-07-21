@@ -1,10 +1,14 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search fast for accounts by username across 140 sites.
+### An OSINT tool to search fast for accounts by username across 142 sites.
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 
 </br></br></br>
+
+<img alt="blackbird-cli" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
+<img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
+
 
 ## Disclaimer
 ```
@@ -16,8 +20,6 @@ of these programs or any derivatives thereof. By using these programs you accept
 that any damage (dataloss, system crash, system compromise, etc.) caused by the use of these 
 programs is not P1ngul1n0's responsibility.
 ```
-<img alt="blackbird-cli" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
-<img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
 
 
 
@@ -51,12 +53,12 @@ Access [http://127.0.0.1:5000](http://127.0.0.1:5000/) on the browser
 ```python
 python blackbird.py -f username.json
 ```
-#### List supportted sites
+#### List supported sites
 ```python
 python blackbird.py --list-sites
 ```
 
-## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/140--red)
+## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/142--red)
 <details>
   <summary></summary>
   
@@ -200,6 +202,8 @@ python blackbird.py --list-sites
 138. Teknik
 139. BitChute
 140. The Tatto Forum
+141. NPM
+142. PyPI  
 </details>
 
 ## Export Report
@@ -215,7 +219,7 @@ When possible Blackbird will extract the user's metadata, bringing data such as 
 <img alt="blackbird-metadata" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_metadata.png">
 
 ## Random UserAgent
-Each time Blackbird does a username search it will use a random UserAgent from a <a href="https://gist.github.com/pzb/b4b6f57144aea7827ae4">list of 1000 UserAgents</a> to prevent blocking.
+Blackbird uses a random UserAgent from a <a href="https://gist.github.com/pzb/b4b6f57144aea7827ae4">list of 1000 UserAgents</a> in each request to prevent blocking.
 
 ## Supersonic speed :rocket:
 Blackbird sends async HTTP requests, allowing a lot more speed when discovering user accounts.
@@ -309,13 +313,23 @@ GET with Metadata extraction
 If you have any suggestion of a site to be included in the search, make a pull request following the template.
 </details>
 
+## Contributors 🏅
+I'm grateful to all contributors who improved and bugfixed the project.
+
+- <a href="https://github.com/RelatedTitle">@RelatedTitle</a> - Fixed the Youtube user search URL.
+- <a href="https://github.com/prisar">@prisar</a> - Fixed the OS check for AsyncIO policy.
+- <a href="https://github.com/itmaru">@itmaru</a> - Fixed 'across' typo.
+- <a href="https://github.com/Bryan-Herrera-DEV">@Bryan-Herrera-DEV</a> - Added Universocraft site.
+- <a href="https://github.com/devXprite">@devXprite</a> - Added NPM and PyPI sites.
+- <a href="https://github.com/ChrisCarini">@ChrisCarini</a> - Fixed 'supported' typo.
+- <a href="https://github.com/Pandede">@Pandede</a> - Fixed <a href="https://github.com/p1ngul1n0/blackbird/issues/24">No such file or directory: 'python' #24 </a> issue, reformatted with autopep8, implemented `enumerate` and code splitting for functions.
+- <a href="https://github.com/tr33n">@tr33n</a> - Implemented random UserAgent for each request.
 
 ## Planned features
 
 - [X] Implement Flask Web Server to optimize UX
 - [X] Export results in PDF
 - [ ] Export results in CSV
-- [ ] Reach at least 300 sites until August 2022
 - [X] Implement metadata extraction
 - [ ] Deploy on Cloud
 
