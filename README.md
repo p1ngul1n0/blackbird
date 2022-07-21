@@ -326,6 +326,7 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/ChrisCarini">@ChrisCarini</a> - Fixed 'supported' typo.
 - <a href="https://github.com/Pandede">@Pandede</a> - Fixed <a href="https://github.com/p1ngul1n0/blackbird/issues/24">No such file or directory: 'python' #24 </a> issue, reformatted with autopep8, implemented `enumerate` and code splitting for functions.
 - <a href="https://github.com/tr33n">@tr33n</a> - Implemented random UserAgent for each request.
+- <a href="https://github.com/Sebsebzen">@Sebsebzen</a> - Added VKontakte (with metadata).
 
 ## Planned features
 
