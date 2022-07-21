@@ -3,3 +3,4 @@ beautifulsoup4==4.11.1
 colorama==0.4.4
 Flask==2.1.1
 Flask_Cors==3.0.10
+pydantic==1.9.1
