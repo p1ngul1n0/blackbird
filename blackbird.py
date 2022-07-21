@@ -19,9 +19,8 @@ currentOs = sys.platform
 path = os.path.dirname(__file__)
 warnings.filterwarnings('ignore')
 
-proxy = "http://127.0.0.1:8080"
 useragents = open('useragents.txt').read().splitlines()
-
+proxy = None
 
 
 async def findUsername(username):
@@ -65,7 +64,7 @@ async def makeRequest(session, u, username):
         jsonBody = u['json'].format(username=username)
         jsonBody = json.loads(jsonBody)
     try:
-        async with session.request(u["method"], url, json=jsonBody,headers=headers, ssl=False) as response:
+        async with session.request(u["method"], url, json=jsonBody,proxy=proxy, headers=headers, ssl=False) as response:
             responseContent = await response.text()
             if 'content-type' in response.headers and "application/json" in response.headers["Content-Type"]:
                 jsonData = await response.json()
@@ -152,8 +151,14 @@ if __name__ == '__main__':
     parser.add_argument('--web', action='store_true', dest='web',
                         required=False,
                         help='Run webserver.')
+    parser.add_argument('--proxy', action='store', dest='proxy',
+                        required=False,
+                        help='Proxy to send requests through.E.g: --proxy http://127.0.0.1:8080 ')                  
 
     arguments = parser.parse_args()
+
+    if arguments.proxy:
+        proxy = arguments.proxy
 
     if arguments.web:
         print('[!] Started WebServer on http://127.0.0.1:5000/')
