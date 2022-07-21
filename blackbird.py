@@ -1,13 +1,12 @@
 import argparse
 import asyncio
 import json
-import subprocess
-import sys
 
 from colorama import Fore, init
 
 from src.core import BlackBird
 from src.scheme import Site
+from src.service import Webserver
 
 if __name__ == '__main__':
     init()
@@ -33,6 +32,7 @@ if __name__ == '__main__':
     parser.add_argument('--web', action='store_true', help='Run webserver.')
     parser.add_argument('--proxy', help='Proxy to send requests through. E.g: --proxy http://127.0.0.1:8080 ')
     parser.add_argument('--data', default='data.json', help='Location of data.json')
+    parser.add_argument('-p', '--port', type=int, default=5000, help='Port for webserver')
     parser.add_argument('-o', '--output', default='results', help='Save location for user.json')
     arguments = parser.parse_args()
 
@@ -50,11 +50,10 @@ if __name__ == '__main__':
     blackbird = BlackBird(sites, agents, arguments.proxy, arguments.output)
 
     if arguments.web:
-        print('[!] Started WebServer on http://127.0.0.1:5000/')
-        command = subprocess.run((sys.executable, "webserver.py"))
-        command.check_returncode()
-
-    if arguments.username:
+        print(f'[!] Started WebServer on http://127.0.0.1:{arguments.port}/')
+        server = Webserver(blackbird)
+        server.run(port=arguments.port)
+    elif arguments.username:
         try:
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         except Exception:
