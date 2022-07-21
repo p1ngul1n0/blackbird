@@ -323,13 +323,13 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/devXprite">@devXprite</a> - Added NPM and PyPI sites.
 - <a href="https://github.com/ChrisCarini">@ChrisCarini</a> - Fixed 'supported' typo.
 - <a href="https://github.com/Pandede">@Pandede</a> - Fixed <a href="https://github.com/p1ngul1n0/blackbird/issues/24">No such file or directory: 'python' #24 </a> issue, reformatted with autopep8, implemented `enumerate` and code splitting for functions.
+- <a href="https://github.com/tr33n">@tr33n</a> - Implemented random UserAgent for each request.
 
 ## Planned features
 
 - [X] Implement Flask Web Server to optimize UX
 - [X] Export results in PDF
 - [ ] Export results in CSV
-- [ ] Reach at least 300 sites until August 2022
 - [X] Implement metadata extraction
 - [ ] Deploy on Cloud
 
