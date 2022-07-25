@@ -1,9 +1,9 @@
 import asyncio
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, Response, render_template, request, jsonify, send_file
 from flask_cors import CORS
 from blackbird import findUsername
 import logging
-import os
+import requests
 
 app = Flask(__name__, static_folder='templates/static')
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -25,4 +25,14 @@ def searchUsername():
     return jsonify(results)
 
 
-app.run('0.0.0.0')
+@app.route('/image' ,methods=["GET"])
+def getImage():
+    url = request.args.get('url')
+    try:
+        imageBinary = requests.get(url).content
+        return Response(imageBinary, mimetype='image/gif')
+    except: 
+        return Response(status=500)
+
+
+app.run(host='0.0.0.0', port=9797)
