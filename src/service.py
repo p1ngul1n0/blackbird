@@ -1,8 +1,9 @@
 import asyncio
 import logging
 
-from flask import (Blueprint, Flask, current_app, jsonify, render_template,
-                   request)
+import requests
+from flask import (Blueprint, Flask, Response, current_app, jsonify,
+                   render_template, request)
 from flask_cors import CORS
 
 from src.core import BlackBird
@@ -24,6 +25,13 @@ def find_user_name():
     return jsonify(results)
 
 
+@blueprint.route('/image', methods=['GET'])
+def get_image():
+    url = request.args.get('url')
+    bin_image = requests.get(url).content
+    return Response(bin_image, mimetype='image/gif')
+
+
 class Webserver:
     def __init__(self, blackbird: BlackBird):
         self.app = Flask(__name__, static_folder='../templates/static')
@@ -40,5 +48,5 @@ class Webserver:
         # Disable `werkzeug` logging
         logging.getLogger('werkzeug').disabled = True
 
-    def run(self, ip: str = '0.0.0.0', port: int = 5000):
+    def run(self, ip: str = '0.0.0.0', port: int = 9797):
         self.app.run(ip, port)
