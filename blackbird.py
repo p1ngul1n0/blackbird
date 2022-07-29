@@ -32,7 +32,6 @@ if __name__ == '__main__':
     parser.add_argument('--web', action='store_true', help='Run webserver.')
     parser.add_argument('--proxy', help='Proxy to send requests through. E.g: --proxy http://127.0.0.1:8080 ')
     parser.add_argument('--data', default='data.json', help='Location of data.json')
-    parser.add_argument('-p', '--port', type=int, default=9797, help='Port for webserver')
     parser.add_argument('-o', '--output', default='results', help='Save location for user.json')
     arguments = parser.parse_args()
 
@@ -50,9 +49,9 @@ if __name__ == '__main__':
     blackbird = BlackBird(sites, agents, arguments.proxy, arguments.output)
 
     if arguments.web:
-        print(f'[!] Started WebServer on http://127.0.0.1:{arguments.port}/')
+        print(f'[!] Started WebServer on http://127.0.0.1:9797/')
         server = Webserver(blackbird)
-        server.run(port=arguments.port)
+        server.run()
     elif arguments.username:
         try:
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())

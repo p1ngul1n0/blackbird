@@ -48,5 +48,5 @@ class Webserver:
         # Disable `werkzeug` logging
         logging.getLogger('werkzeug').disabled = True
 
-    def run(self, ip: str = '0.0.0.0', port: int = 9797):
-        self.app.run(ip, port)
+    def run(self):
+        self.app.run('0.0.0.0', 9797)
