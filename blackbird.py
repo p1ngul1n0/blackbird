@@ -161,7 +161,7 @@ if __name__ == '__main__':
         proxy = arguments.proxy
 
     if arguments.web:
-        print('[!] Started WebServer on http://127.0.0.1:5000/')
+        print('[!] Started WebServer on http://127.0.0.1:9797/')
         command = subprocess.run((sys.executable, "webserver.py"))
         command.check_returncode()
 
