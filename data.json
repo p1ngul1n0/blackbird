@@ -1986,6 +1986,25 @@
       "method": "GET",
       "url": "https://www.warriorforum.com/members/{username}.html",
       "valid": "response.status == 200"
+    },
+    {
+      "app": "Pxilart",
+      "id": 153,
+      "method": "GET",
+      "url": "https://www.pixilart.com/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('h1').text"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "soup.find('div', class_='user-profile-image mb-0 mb-md-0').find('a').find('img')['src']"
+        }
+      ]
     }
   ]
 }
