@@ -84,10 +84,12 @@ async def makeRequest(session, u, username):
                             pass
                 return ({"id": u["id"], "app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "status": "FOUND", "error-message": None, "metadata": metadata})
             else:
-                print(f'[-]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
+                if showAll:
+                    print(f'[-]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
                 return ({"id": u["id"], "app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "status": "NOT FOUND", "error-message": None, "metadata": metadata})
     except Exception as e:
-        print(f'{Fore.RED}[X]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
+        if showAll:
+            print(f'{Fore.RED}[X]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
         return ({"id": u["id"], "app": u['app'], "url": url, "response-status": None, "status": "ERROR", "error-message": repr(e), "metadata": metadata})
 
 
@@ -138,7 +140,7 @@ if __name__ == '__main__':
 
                                         Made with ❤️️ by """ + Fore.BLUE + "p1ngul1n0\n")
 
-    parser = argparse.ArgumentParser(description='Um programa de exemplo.')
+    parser = argparse.ArgumentParser(description='An OSINT tool to search for accounts by username in social networks.')
     parser.add_argument('-u', action='store', dest='username',
                         required=False,
                         help='The target username.')
@@ -154,11 +156,16 @@ if __name__ == '__main__':
     parser.add_argument('--proxy', action='store', dest='proxy',
                         required=False,
                         help='Proxy to send requests through.E.g: --proxy http://127.0.0.1:8080 ')                  
-
+    parser.add_argument('--show-all', action='store_true', dest='showAll',
+                        required=False,
+                        help='Show all results.')                  
     arguments = parser.parse_args()
 
     if arguments.proxy:
         proxy = arguments.proxy
+    showAll = False
+    if arguments.showAll:
+        showAll = arguments.showAll
 
     if arguments.web:
         print('[!] Started WebServer on http://127.0.0.1:9797/')
