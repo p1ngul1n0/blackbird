@@ -351,6 +351,7 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/tr33n">@tr33n</a> - Implemented random UserAgent for each request.
 - <a href="https://github.com/Sebsebzen">@Sebsebzen</a> - Added VKontakte (with metadata).
 - <a href="https://github.com/LsvanDarko">@LsvanDarko</a> - Added requests package to requirements.txt.
+- <a href="https://github.com/wymiotkloaki">@wymiotkloaki</a> - Added basic .gitignore file.
 
 ## Planned features
 
