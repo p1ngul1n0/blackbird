@@ -21,7 +21,8 @@ def home():
 def searchUsername():
     content = request.get_json()
     username = content['username']
-    results = loop.run_until_complete(findUsername(username))
+    interfaceType = 'web'
+    results = loop.run_until_complete(findUsername(username, interfaceType))
     return jsonify(results)
 
 

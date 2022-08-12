@@ -23,7 +23,7 @@ useragents = open('useragents.txt').read().splitlines()
 proxy = None
 
 
-async def findUsername(username):
+async def findUsername(username, interfaceType):
     start_time = time.time()
     timeout = aiohttp.ClientTimeout(total=10)
 
@@ -32,7 +32,7 @@ async def findUsername(username):
     async with aiohttp.ClientSession(timeout=timeout) as session:
         tasks = []
         for u in searchData["sites"]:
-            task = asyncio.ensure_future(makeRequest(session, u, username))
+            task = asyncio.ensure_future(makeRequest(session, u, username, interfaceType))
             tasks.append(task)
 
         results = await asyncio.gather(*tasks)
@@ -50,7 +50,7 @@ async def findUsername(username):
         return userJson
 
 
-async def makeRequest(session, u, username):
+async def makeRequest(session, u, username, interfaceType):
     url = u["url"].format(username=username)
     jsonBody = None
     useragent = random.choice(useragents)
@@ -84,12 +84,14 @@ async def makeRequest(session, u, username):
                             pass
                 return ({"id": u["id"], "app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "status": "FOUND", "error-message": None, "metadata": metadata})
             else:
-                if showAll:
-                    print(f'[-]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
+                if interfaceType == 'CLI':
+                    if showAll:
+                        print(f'[-]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
                 return ({"id": u["id"], "app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "status": "NOT FOUND", "error-message": None, "metadata": metadata})
     except Exception as e:
-        if showAll:
-            print(f'{Fore.RED}[X]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
+        if interfaceType == 'CLI':
+            if showAll:
+                print(f'{Fore.RED}[X]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
         return ({"id": u["id"], "app": u['app'], "url": url, "response-status": None, "status": "ERROR", "error-message": repr(e), "metadata": metadata})
 
 
@@ -177,7 +179,8 @@ if __name__ == '__main__':
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         except:
             pass
-        asyncio.run(findUsername(arguments.username))
+        interfaceType = 'CLI'
+        asyncio.run(findUsername(arguments.username, interfaceType))
     elif arguments.list:
         list_sites()
     elif arguments.file:
