@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
                                         Made with ❤️️ by """ + Fore.BLUE + "p1ngul1n0\n")
 
-    parser = argparse.ArgumentParser(description='Um programa de exemplo.')
+    parser = argparse.ArgumentParser(description='An OSINT tool to search for accounts by username in social networks.')
     parser.add_argument('-u', '--username', help='The target username.')
     parser.add_argument('-l', '--list-sites', action='store_true', dest='list', help='List all sites currently supported.')
     parser.add_argument('-f', '--file', help='Read results file.')
