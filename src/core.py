@@ -14,11 +14,12 @@ from .scheme import Report, ReportStatus, Site
 
 
 class BlackBird:
-    def __init__(self, sites: List[Site], agents: List[str], proxy: Optional[str], output_dir: str):
+    def __init__(self, sites: List[Site], agents: List[str], proxy: Optional[str], output_dir: str, show_all: bool = False):
         self.sites = sites
         self.agents = agents
         self.proxy = proxy
         self.output_dir = output_dir
+        self.show_all = show_all
 
     async def find_user_name(self, username: str):
         start_time = time.time()
@@ -102,7 +103,8 @@ class BlackBird:
                         metadata=metadata
                     )
                 else:
-                    print(f'[-]\033[0m - #{site.id} {Fore.BLUE}{site.app}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
+                    if self.show_all:
+                        print(f'[-]\033[0m - #{site.id} {Fore.BLUE}{site.app}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
                     return Report(
                         id=site.id, app=site.app, url=url,
                         response_status=f'{response.status} {response.reason}',
@@ -110,7 +112,8 @@ class BlackBird:
                         metadata=[]
                     )
         except Exception as e:
-            print(f'{Fore.RED}[X]\033[0m - #{site.id} {Fore.BLUE}{site.app}\033[0m error on request ({str(e)})- {Fore.YELLOW}{url}\033[0m')
+            if self.show_all:
+                print(f'{Fore.RED}[X]\033[0m - #{site.id} {Fore.BLUE}{site.app}\033[0m error on request ({str(e)})- {Fore.YELLOW}{url}\033[0m')
             return Report(
                 id=site.id, app=site.app, url=url,
                 status=ReportStatus.ERROR,

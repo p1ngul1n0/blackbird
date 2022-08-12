@@ -33,6 +33,7 @@ if __name__ == '__main__':
     parser.add_argument('--proxy', help='Proxy to send requests through. E.g: --proxy http://127.0.0.1:8080 ')
     parser.add_argument('--data', default='data.json', help='Location of data.json')
     parser.add_argument('-o', '--output', default='results', help='Save location for user.json')
+    parser.add_argument('--show-all', action='store_true', help='Show all results.')
     arguments = parser.parse_args()
 
     # Parsing data.json to list of sites
