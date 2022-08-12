@@ -8,8 +8,12 @@ from flask_cors import CORS
 
 from src.core import BlackBird
 
+# Blueprints can simplify how large applications work
+# See more on Flask: https://flask.palletsprojects.com/en/2.2.x/blueprints/
 blueprint = Blueprint('base', __name__, template_folder='../templates')
 loop = asyncio.get_event_loop()
+
+# The usage of blueprint is same as Flask.app
 
 
 @blueprint.route('/')
@@ -41,7 +45,9 @@ class Webserver:
         self.app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
         self.app.config['CORE'] = blackbird
 
+        # Add blueprint in the app
         self.app.register_blueprint(blueprint)
+
         # Add CORS middleware
         CORS(self.app, resources={r'/*': {'origins': '*'}})
 
