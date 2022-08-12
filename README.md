@@ -57,6 +57,16 @@ python blackbird.py -f username.json
 ```python
 python blackbird.py --list-sites
 ```
+#### Use proxy
+```python
+python blackbird.py -u crash --proxy http://127.0.0.1:8080
+```
+#### Show all results
+By default only found accounts will be shown, however you can use the argument below to see them.
+```python
+python blackbird.py -u crash --show-all
+```
+
 
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/153--red)
 <details>
@@ -340,6 +350,8 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/Pandede">@Pandede</a> - Fixed <a href="https://github.com/p1ngul1n0/blackbird/issues/24">No such file or directory: 'python' #24 </a> issue, reformatted with autopep8, implemented `enumerate` and code splitting for functions.
 - <a href="https://github.com/tr33n">@tr33n</a> - Implemented random UserAgent for each request.
 - <a href="https://github.com/Sebsebzen">@Sebsebzen</a> - Added VKontakte (with metadata).
+- <a href="https://github.com/LsvanDarko">@LsvanDarko</a> - Added requests package to requirements.txt.
+- <a href="https://github.com/wymiotkloaki">@wymiotkloaki</a> - Added basic .gitignore file.
 
 ## Planned features
 
