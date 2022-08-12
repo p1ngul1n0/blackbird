@@ -1,3 +1,4 @@
 results/*.json
 !results/example.json
 __pycache__
+venv
