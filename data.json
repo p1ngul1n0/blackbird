@@ -488,7 +488,7 @@
       "valid": "response.status == 200"
     },
     {
-      "app": "Ask FM",
+      "app": "AskFM",
       "id": 21,
       "method": "GET",
       "url": "https://ask.fm/{username}",
@@ -1487,7 +1487,7 @@
       "id": 120,
       "method": "GET",
       "url": "https://stats.universocraft.com/stats.php?player={username}",
-      "valid": "response.status == 200"
+      "valid": "response.status == 200 and 'No se ha encontrad' not in responseContent"
     },
     {
       "app": "Wireclub",
@@ -1932,7 +1932,7 @@
       ]
     },
     {
-      "app": "about me",
+      "app": "About.me",
       "id": 145,
       "method": "GET",
       "url": "https://about.me/{username}",
@@ -2005,6 +2005,153 @@
           "value": "soup.find('div', class_='user-profile-image mb-0 mb-md-0').find('a').find('img')['src']"
         }
       ]
+    },
+    {
+      "app": "2Dimensions",
+      "id": 154,
+      "method": "GET",
+      "url": "https://2Dimensions.com/a/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "3dnews",
+      "id": 155,
+      "method": "GET",
+      "url": "http://forum.3dnews.ru/member.php?username={username}",
+      "valid": "response.status == 200 and '\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043d\u0435 \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u043d \u0438 \u043d\u0435 \u0438\u043c\u0435\u0435\u0442 \u043f\u0440\u043e\u0444\u0438\u043b\u044f \u0434\u043b\u044f \u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0430.' not in responseContent"
+    },
+    {
+      "app": "7Cups",
+      "id": 156,
+      "method": "GET",
+      "url": "https://www.7cups.com/@{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "9GAG",
+      "id": 157,
+      "method": "GET",
+      "url": "https://www.9gag.com/u/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Academia.edu",
+      "id": 158,
+      "method": "GET",
+      "url": "https://independent.academia.edu/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Airbit",
+      "id": 159,
+      "method": "GET",
+      "url": "https://airbit.com/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Airliners",
+      "id": 160,
+      "method": "GET",
+      "url": "https://www.airliners.net/user/{username}/profile/photos",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Alik.cz",
+      "id": 161,
+      "method": "GET",
+      "url": "https://www.alik.cz/u/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Apple Developer",
+      "id": 162,
+      "method": "GET",
+      "url": "https://developer.apple.com/forums/profile/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Apple Discussions",
+      "id": 163,
+      "method": "GET",
+      "url": "https://discussions.apple.com/profile/{username}",
+      "valid": "response.status == 200 and 'The page you tried was not found. You may have used an outdated link or may have typed the address (URL) incorrectly.' not in responseContent"
+    },
+    {
+      "app": "Asciinema",
+      "id": 164,
+      "method": "GET",
+      "url": "https://asciinema.org/~{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Ask Fedora",
+      "id": 165,
+      "method": "GET",
+      "url": "https://ask.fedoraproject.org/u/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Audiojungle",
+      "id": 166,
+      "method": "GET",
+      "url": "https://audiojungle.net/user/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Autofrage",
+      "id": 167,
+      "method": "GET",
+      "url": "https://www.autofrage.net/nutzer/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "BLIP.fm",
+      "id": 168,
+      "method": "GET",
+      "url": "https://blip.fm/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Bazar.cz",
+      "id": 169,
+      "method": "GET",
+      "url": "https://www.bazar.cz/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Bezuzyteczna",
+      "id": 170,
+      "method": "GET",
+      "url": "https://bezuzyteczna.pl/uzytkownicy/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Bikemap",
+      "id": 171,
+      "method": "GET",
+      "url": "https://www.bikemap.net/en/u/{username}/routes/created/",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "BioHacking",
+      "id": 172,
+      "method": "GET",
+      "url": "https://forum.dangerousthings.com/u/{username}",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Bitwarden Forum",
+      "id": 173,
+      "method": "GET",
+      "url": "https://community.bitwarden.com/u/{username}/summary",
+      "valid": "response.status == 200"
+    },
+    {
+      "app": "Blogger",
+      "id": 174,
+      "method": "GET",
+      "url": "https://{username}.blogspot.com",
+      "valid": "response.status == 200"
     }
   ]
 }
