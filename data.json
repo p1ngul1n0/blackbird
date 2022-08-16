@@ -1932,7 +1932,7 @@
       ]
     },
     {
-      "app": "About.me",
+      "app": "About me",
       "id": 145,
       "method": "GET",
       "url": "https://about.me/{username}",
