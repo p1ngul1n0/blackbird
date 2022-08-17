@@ -1,7 +1,6 @@
 import asyncio
 import json
 import os
-from pathlib import Path
 import random
 import time
 from datetime import datetime
@@ -19,7 +18,7 @@ class BlackBird:
         self,
         sites: List[Site],
         agents: List[str],
-        output_dir: Path,
+        output_dir: str,
         proxy: Optional[str] = None,
         show_all: bool = False
     ):
@@ -59,7 +58,7 @@ class BlackBird:
             }
 
             # Save JSON file to target directory
-            path_save = self.output_dir / f'{username}.json'
+            path_save = os.path.join(self.output_dir, f'{username}.json')
             with open(path_save, 'w') as streamer:
                 json.dump(user_json, streamer, indent=4, sort_keys=True)
 
