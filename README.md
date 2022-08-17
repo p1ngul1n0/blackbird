@@ -70,7 +70,7 @@ python blackbird.py -u crash --show-all
 
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/153--red)
 <details>
-  <summary></summary>
+<summary></summary>
   
 1. Facebook
 2. YouTube
@@ -225,6 +225,28 @@ python blackbird.py -u crash --show-all
 151. Playstation Network
 152. Warrior Forum
 153. Pixilart
+154. 2Dimensions
+155. 3dnews
+156. 7Cups
+157. 9GAG
+158. Academia.edu
+159. Airbit
+160. Airliners
+161. Alik.cz
+162. Apple Developer
+163. Apple Discussions
+164. Asciinema
+165. Ask Fedora
+166. Audiojungle
+167. Autofrage
+168. BLIP.fm
+169. Bazar.cz
+170. Bezuzyteczna
+171. Bikemap
+172. BioHacking
+173. Bitwarden Forum
+174. Blogger
+
 </details>
 
 ## Export Report
