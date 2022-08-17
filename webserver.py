@@ -1,28 +1,39 @@
-import argparse
-import json
+import asyncio
+from flask import Flask, Response, render_template, request, jsonify, send_file
+from flask_cors import CORS
+from blackbird import findUsername
+import logging
+import requests
 
-from src.core import BlackBird
-from src.scheme import Site
-from src.service import Webserver
+app = Flask(__name__, static_folder='templates/static')
+app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+CORS(app, resources={r"/*": {"origins": "*"}})
+loop = asyncio.get_event_loop()
+logging.getLogger('werkzeug').disabled = True
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Um programa de exemplo.')
-    parser.add_argument('--proxy', help='Proxy to send requests through. E.g: --proxy http://127.0.0.1:8080 ')
-    parser.add_argument('--data', default='data.json', help='Location of data.json')
-    parser.add_argument('-o', '--output', default='results', help='Save location for user.json')
-    arguments = parser.parse_args()
 
-    # Parsing data.json to list of sites
-    with open(arguments.data, 'r') as streamer:
-        sites = [
-            Site.parse_obj(s)
-            for s in json.load(streamer)['sites']
-        ]
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-    # Loading useragent.txt
-    with open('useragents.txt', 'r') as streamer:
-        agents = streamer.read().splitlines()
+@app.route('/search/username' ,methods=["POST"])
+def searchUsername():
+    content = request.get_json()
+    username = content['username']
+    interfaceType = 'web'
+    results = loop.run_until_complete(findUsername(username, interfaceType))
+    return jsonify(results)
 
-    blackbird = BlackBird(sites, agents, arguments.proxy, arguments.output)
-    webserver = Webserver(blackbird)
-    webserver.run()
+
+@app.route('/image' ,methods=["GET"])
+def getImage():
+    url = request.args.get('url')
+    try:
+        imageBinary = requests.get(url).content
+        return Response(imageBinary, mimetype='image/gif')
+    except: 
+        return Response(status=500)
+
+
+app.run(host='0.0.0.0', port=9797)
