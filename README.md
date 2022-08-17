@@ -1,7 +1,7 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search fast for accounts by username across 153 sites.
+### An OSINT tool to search fast for accounts by username across 174 sites.
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 
 </br></br></br>
@@ -68,7 +68,7 @@ python blackbird.py -u crash --show-all
 ```
 
 
-## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/153--red)
+## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/174--red)
 <details>
 <summary></summary>
   
@@ -373,7 +373,7 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/tr33n">@tr33n</a> - Implemented random UserAgent for each request.
 - <a href="https://github.com/Sebsebzen">@Sebsebzen</a> - Added VKontakte (with metadata).
 - <a href="https://github.com/LsvanDarko">@LsvanDarko</a> - Added requests package to requirements.txt.
-- <a href="https://github.com/wymiotkloaki">@wymiotkloaki</a> - Added basic .gitignore file.
+- <a href="https://github.com/wymiotkloaki">@wymiotkloaki</a> - Added basic .gitignore file and 21 sites.
 
 ## Planned features
 
