@@ -67,6 +67,20 @@ By default only found accounts will be shown, however you can use the argument b
 python blackbird.py -u crash --show-all
 ```
 
+## Docker
+Blackbird can also be used with Docker.
+#### Pull Image
+```
+docker pull p1ngul1n0/blackbird:v1
+```
+#### Run Webserver
+```
+docker run -p 9797:9797 p1ngul1n0/blackbird:v1 "--web"
+```
+#### Run on CLI
+```
+docker run -p 9797:9797 p1ngul1n0/blackbird:v1 "-u 'crash123'" 
+```
 
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/174--red)
 <details>
