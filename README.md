@@ -1,4 +1,4 @@
-<img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
+<img alt="blackbird-logo" align="left" width="300" height="300" src="https://raw.githubusercontent.com/p1ngul1n0/badges/main/badges/20.png">
 <h1>Blackbird</h1>
 
 ### An OSINT tool to search fast for accounts by username across 174 sites.
@@ -388,6 +388,7 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/Sebsebzen">@Sebsebzen</a> - Added VKontakte (with metadata).
 - <a href="https://github.com/LsvanDarko">@LsvanDarko</a> - Added requests package to requirements.txt.
 - <a href="https://github.com/wymiotkloaki">@wymiotkloaki</a> - Added basic .gitignore file and 21 sites.
+- <a href="https://github.com/dwaltsch">@dwaltsch</a> - Added Dockerfile.
 
 ## Planned features
 
