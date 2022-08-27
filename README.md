@@ -1,10 +1,13 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://github.com/p1ngul1n0/badges/blob/main/badges/20.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search fast for accounts by username across 73 sites.
+### An OSINT tool to search fast for accounts by username across 174 sites.
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 
-</br></br></br></br>
+</br></br></br>
+
+<img alt="blackbird-cli" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
+<img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
 
 
 ## Disclaimer
@@ -17,8 +20,7 @@ of these programs or any derivatives thereof. By using these programs you accept
 that any damage (dataloss, system crash, system compromise, etc.) caused by the use of these 
 programs is not P1ngul1n0's responsibility.
 ```
-<img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
-<img alt="blackbird-cli" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
+
 
 
 
@@ -35,13 +37,6 @@ cd blackbird
 pip install -r requirements.txt
 ```
 
-#### Access Blackbird in a Docker Container
-```shell
-docker build -t blackbird .
-docker run -p 5000:5000 blackbird "--web" #for acessing the web server
-docker run blackbird "-u username"#for searching for a user the normal way
-```
-
 ## Usage
 
 #### Search by username
@@ -52,23 +47,44 @@ python blackbird.py -u username
 ```python
 python blackbird.py --web
 ```
-Access [http://127.0.0.1:5000](http://127.0.0.1:5000/) on the browser
+Access [http://127.0.0.1:9797](http://127.0.0.1:9797/) on the browser
 
 #### Read results file
 ```python
 python blackbird.py -f username.json
 ```
-#### List supportted sites
+#### List supported sites
 ```python
 python blackbird.py --list-sites
 ```
+#### Use proxy
+```python
+python blackbird.py -u crash --proxy http://127.0.0.1:8080
+```
+#### Show all results
+By default only found accounts will be shown, however you can use the argument below to see them.
+```python
+python blackbird.py -u crash --show-all
+```
 
+## Docker
+Blackbird can also be used with Docker.
+#### Pull Image
+```
+docker pull p1ngul1n0/blackbird:v1
+```
+#### Run Webserver
+```
+docker run -p 9797:9797 p1ngul1n0/blackbird:v1 "--web"
+```
+#### Run on CLI
+```
+docker run -p 9797:9797 p1ngul1n0/blackbird:v1 "-u 'crash123'" 
+```
 
-
-
-## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/73--red)
+## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/174--red)
 <details>
-  <summary></summary>
+<summary></summary>
   
 1. Facebook
 2. YouTube
@@ -98,7 +114,7 @@ python blackbird.py --list-sites
 26. WordPress Site
 27. AllMyLinks
 28. Buzzfeed
-29. Jsiddle
+29. JsFiddle
 30. Sourceforge
 31. Kickstarter
 32. Smule
@@ -125,7 +141,7 @@ python blackbird.py --list-sites
 53. Cash APP
 54. Imgur
 55. Trello
-56. MCUUID Minecraft
+56. Minecraft
 57. Patreon
 58. DockerHub
 59. Kongregate
@@ -140,13 +156,246 @@ python blackbird.py --list-sites
 68. Wikipedia
 69. Buymeacoffe
 70. Arduino
-71. League of Legend Tracker
+71. League of Legends Tracker
 72. Lego Ideas
 73. Fiverr
+74. Redtube
+75. Dribble
+76. Packet Storm Security
+77. Ello
+78. Medium
+79. Hackaday
+80. Keybase
+81. HackerOne
+82. BugCrowd
+83. OneCompiler
+84. TryHackMe
+85. Lyrics Training
+86. Expo
+87. RAWG
+88. Coroflot
+89. Cloudflare
+90. Wattpad
+91. Mixlr
+92. ImageShack
+93. Freelancer
+94. Dev To
+95. BitBucket
+96. Ko Fi
+97. Flickr
+98. HackerEarth
+99. Spotify
+100. Snapchat Stories
+101. Audio Jungle
+102. Avid Community
+103. Bandlab
+104. Carrd
+105. CastingCallClub
+106. Coderwall
+107. Codewars
+108. F3
+109. Gab
+110. Issuu
+111. Steemit
+112. Venmo
+113. MODDB
+114. COLOURlovers
+115. Scheme Color
+116. Roblox Trade
+117. Aetherhub
+118. BugBounty
+119. Huntr
+120. Universocraft
+121. Wireclub
+122. AminoApps
+123. Trakt
+124. Giphy
+125. Minecraft List
+126. SEOClerks
+127. Mix
+128. Codecademy
+129. Bandcamp
+130. Poshmark
+131. hackster
+132. BodyBuilding
+133. Mastodon
+134. IFTTT
+135. Anime Planet
+136. Destructoid
+137. Gitee
+138. Teknik
+139. BitChute
+140. The Tatto Forum
+141. NPM
+142. PyPI
+143. HackenProof
+144. VKontakte
+145. about me
+146. Dissenter
+147. Designspiration
+148. Fark
+149. mmorpg
+150. Pikabu
+151. Playstation Network
+152. Warrior Forum
+153. Pixilart
+154. 2Dimensions
+155. 3dnews
+156. 7Cups
+157. 9GAG
+158. Academia.edu
+159. Airbit
+160. Airliners
+161. Alik.cz
+162. Apple Developer
+163. Apple Discussions
+164. Asciinema
+165. Ask Fedora
+166. Audiojungle
+167. Autofrage
+168. BLIP.fm
+169. Bazar.cz
+170. Bezuzyteczna
+171. Bikemap
+172. BioHacking
+173. Bitwarden Forum
+174. Blogger
+
 </details>
+
+## Export Report
+The results can be exported as a PDF Report.
+<p float="left" align="center">
+  <img alt="blackbird-pdf-cover" width="300" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_report_pdf_cover.png">
+  <img alt="blackbird-pdf-cover" width="300" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_report_pdf_results.png">
+</p>
+
+## Metadata Extraction
+When possible Blackbird will extract the user's metadata, bringing data such as name, bio, location and profile picture.
+
+<img alt="blackbird-metadata" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_metadata.png">
+
+## Random UserAgent
+Blackbird uses a random UserAgent from a <a href="https://gist.github.com/pzb/b4b6f57144aea7827ae4">list of 1000 UserAgents</a> in each request to prevent blocking.
 
 ## Supersonic speed :rocket:
 Blackbird sends async HTTP requests, allowing a lot more speed when discovering user accounts.
 
-## Suggestions
-If you have any suggestion of a site to be included in the search, feel free to contact me on <a href="https://twitter.com/p1ngul1n0">Twitter</a>
+## JSON Template
+<details>
+  <summary></summary>
+Blackbird uses JSON as a template to store and read data.
+
+The <a href="https://github.com/p1ngul1n0/blackbird/blob/main/data.json">data.json</a> file store all sites that blackbird verify.
+
+
+#### Params
+- app - Site name
+- url
+- valid - Python expression that returns True when user exists
+- id - Unique numeric  ID
+- method - HTTP method
+- json - JSON body POST (needs to be escaped, use this :point_right: https://codebeautify.org/json-escape-unescape)
+- {username} - Username place (URL or Body)
+- response.status - HTTP response status
+- responseContent - Raw response body
+- soup - Beautifulsoup parsed response body
+- jsonData - JSON response body
+- metadada - a list of objects to be scraped
+
+#### Examples
+GET
+```JSON
+    {
+      "app": "ExampleAPP1",
+      "url": "https://www.example.com/{username}",
+      "valid": "response.status == 200",
+      "id": 1,
+      "method": "GET"
+    }
+```
+POST JSON
+```JSON
+    {
+      "app": "ExampleAPP2",
+      "url": "https://www.example.com/user",
+      "valid": "jsonData['message']['found'] == True",
+      "json": "{{\"type\": \"username\",\"input\": \"{username}\"}}",
+      "id": 2,
+      "method": "POST"
+    }
+```
+GET with Metadata extraction
+```JSON
+    {
+      "app": "Twitter",
+      "id": 3,
+      "method": "GET",
+      "url": "https://nitter.net/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "type": "generic-data",
+          "key": "Name",
+          "value": "soup.find('a', class_='profile-card-fullname')['title']"
+        },
+        {
+          "type": "generic-data",
+          "key": "Bio",
+          "value": "soup.find('div',class_='profile-bio').string"
+        },
+        {
+          "type": "generic-data",
+          "key": "Site",
+          "value": "soup.find('div',class_='profile-website').text.strip('\\t\\r\\n')"
+        },
+        {
+          "type": "generic-data",
+          "key": "Member since",
+          "value": "soup.find('div',class_='profile-joindate').find('span')['title']"
+        },
+        {
+          "type": "image",
+          "key": "picture",
+          "value": "'https://nitter.net'+soup.find('a', class_='profile-card-avatar')['href']"
+        },
+        {
+          "type": "location",
+          "key": "location",
+          "value": "soup.select_one('.profile-location:nth-of-type(2)').text.strip('\\t\\r\\n')"
+        }
+      ]
+    }
+```
+If you have any suggestion of a site to be included in the search, make a pull request following the template.
+</details>
+
+## Contributors 🏅
+<a href="https://github.com/p1ngul1n0/blackbird/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=p1ngul1n0/blackbird" />
+</a>
+
+I'm grateful to all contributors who improved and bugfixed the project.
+
+- <a href="https://github.com/RelatedTitle">@RelatedTitle</a> - Fixed the Youtube user search URL.
+- <a href="https://github.com/prisar">@prisar</a> - Fixed the OS check for AsyncIO policy.
+- <a href="https://github.com/itmaru">@itmaru</a> - Fixed 'across' typo.
+- <a href="https://github.com/Bryan-Herrera-DEV">@Bryan-Herrera-DEV</a> - Added Universocraft site.
+- <a href="https://github.com/devXprite">@devXprite</a> - Added NPM and PyPI sites.
+- <a href="https://github.com/ChrisCarini">@ChrisCarini</a> - Fixed 'supported' typo.
+- <a href="https://github.com/Pandede">@Pandede</a> - Fixed <a href="https://github.com/p1ngul1n0/blackbird/issues/24">No such file or directory: 'python' #24 </a> issue, reformatted with autopep8, implemented `enumerate` and code splitting for functions.
+- <a href="https://github.com/tr33n">@tr33n</a> - Implemented random UserAgent for each request.
+- <a href="https://github.com/Sebsebzen">@Sebsebzen</a> - Added VKontakte (with metadata).
+- <a href="https://github.com/LsvanDarko">@LsvanDarko</a> - Added requests package to requirements.txt.
+- <a href="https://github.com/wymiotkloaki">@wymiotkloaki</a> - Added basic .gitignore file and 21 sites.
+
+## Planned features
+
+- [X] Implement Flask Web Server to optimize UX
+- [X] Export results in PDF
+- [ ] Export results in CSV
+- [X] Implement metadata extraction
+- [ ] Deploy on Cloud
+
+## Contact
+Feel free to contact me on <a href="https://twitter.com/p1ngul1n0">Twitter</a>
