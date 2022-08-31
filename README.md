@@ -1,7 +1,7 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://raw.githubusercontent.com/p1ngul1n0/badges/main/badges/20.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search fast for accounts by username across 174 sites.
+### An OSINT tool to search fast for accounts by username across 574 sites.
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 
 </br></br></br>
@@ -82,7 +82,7 @@ docker run -p 9797:9797 p1ngul1n0/blackbird:v1 "--web"
 docker run -p 9797:9797 p1ngul1n0/blackbird:v1 "-u 'crash123'" 
 ```
 
-## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/174--red)
+## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/574--red)
 <details>
 <summary></summary>
   
