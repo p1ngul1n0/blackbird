@@ -71,15 +71,11 @@ python blackbird.py -u crash --show-all
 Blackbird can also be used with Docker.
 #### Pull Image
 ```
-docker pull p1ngul1n0/blackbird:v1
+docker pull p1ngul1n0/blackbird:v2
 ```
 #### Run Webserver
 ```
-docker run -p 9797:9797 p1ngul1n0/blackbird:v1 "--web"
-```
-#### Run on CLI
-```
-docker run -p 9797:9797 p1ngul1n0/blackbird:v1 "-u 'crash123'" 
+docker run -p 9797:9797 p1ngul1n0/blackbird:v2 "--web"
 ```
 
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/574--red)
