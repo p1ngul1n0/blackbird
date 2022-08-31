@@ -791,9 +791,12 @@ I'm grateful to all contributors who improved and bugfixed the project.
 
 - [X] Implement Flask Web Server to optimize UX
 - [X] Export results in PDF
-- [ ] Export results in CSV
 - [X] Implement metadata extraction
+- [X] Publish a docker image
+- [ ] Add unit test (Change ID to Appname, add "invalid-user" and "valid-user" params in JSON.)
+- [ ] Export results in CSV
 - [ ] Deploy on Cloud
+
 
 ## Contact
 Feel free to contact me on <a href="https://twitter.com/p1ngul1n0">Twitter</a>
