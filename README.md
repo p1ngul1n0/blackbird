@@ -79,6 +79,7 @@ docker run -p 9797:9797 p1ngul1n0/blackbird:v2 "--web"
 ```
 
 ## Supported Social Networks <a name="social-networks"></a> ![](https://img.shields.io/badge/574--red)
+#### Most of the sites on this list were obtained through the incredible <a href="https://twitter.com/whatsmynameproj">@whatsmynameproj</a> site/project, don't forget to visit them. 🤟
 <details>
 <summary></summary>
   
