@@ -2620,7 +2620,7 @@
           "id": 253,
           "method": "GET",
           "url": "https://codeforces.com/profile/{username}",
-          "valid": "response.status == 200 and '- Codeforces' in responseContent"
+          "valid": "response.status == 200 and '- Codeforces' in soup.find('meta', property='og:title')['content']"
       },
       {
           "app": "codementor",
@@ -2711,7 +2711,7 @@
           "id": 269,
           "method": "GET",
           "url": "https://www.datezone.com/users/{username}/",
-          "valid": "response.status == 200 and 'Profile' in responseContent"
+          "valid": "response.status == 200 and ' - Users - Datezone' in responseContent"
       },
       {
           "app": "Dating ru",
@@ -4174,7 +4174,7 @@
           "id": 514,
           "method": "GET",
           "url": "https://saraacarter.com/author/{username}/",
-          "valid": "response.status == 200 and '| Sara A. Carter' in responseContent"
+          "valid": "response.status == 200 and 'Home | Sara A. Carter' not in responseContent"
       },
       {
           "app": "ScoutWiki",
@@ -4265,7 +4265,7 @@
           "id": 528,
           "method": "GET",
           "url": "https://{username}.skyrock.com/",
-          "valid": "response.status == 200 and 's blog' in responseContent"
+          "valid": "response.status == 200 and '\\'s blog' in responseContent"
       },
       {
           "app": "slant",
