@@ -62,7 +62,7 @@ python blackbird.py --list-sites
 python blackbird.py -u crash --proxy http://127.0.0.1:8080
 ```
 #### Show all results
-By default only found accounts will be shown, however you can use the argument below to see them.
+By default only found accounts will be shown, however you can use the argument below to see all of them.
 ```python
 python blackbird.py -u crash --show-all
 ```
