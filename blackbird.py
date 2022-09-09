@@ -146,8 +146,32 @@ def read_results(file):
 if __name__ == '__main__':
     init()
 
-    print(Fore.RED + """
-    ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ▄▄▄▄    ██▓ ██▀███  ▓█████▄ 
+    print(Fore.RED + '''
+                                      ,
+                                    dMb,
+                                  ,dMMMMb,          ,,
+                               ,dMMMMMMMMMb, eeee8888"
+                            ,mMMm!!!!XXXXMMMMM"""
+                          ,d!!XXMMXX88888888W"
+                         `MX88dMM8888WWWMMMMMMb,
+                             '""MMMMMMMMMMMMMMMMb
+                               MMMMMMMMMMMMMMMMMMb,
+                              dMMMMMMMMMMMMMMMMMMMMb,,
+                  _,dMMMMMMMMMMXXXX!!!!!!!!!!!!!!XXXXXMP
+             _,dMMXX!!!!!!!!!!!!!!!!!!XXXXX888888888WWC
+         _,dMMX!!!MMMM!!!!!!!!XXXXXX888888888888WWMMMMMb,
+        dMMX!!!!!MMM!XXXXXX88888888888888888WWMMMMMMMMMMMb
+       dMMXXXXXX8MMMM88888888888888888WWWMMMMMMMMMMMMMMMMMb    ,d8
+       MMMMWW888888MMMMM8888888WWMMMMMMMMMMMMMMMMMMMMMMMMMMM,d88P'
+        YMMMMMWW888888WWMMMMMMMMMMP"""'    `"YMMMMMMMMMMMXMMMMMP
+           `""YMMMMMMMMMMMMMP""'            mMMMm!XXXXX8888888e,
+                                          ,d!!XXMM888888888888WW
+                                         "MX88dMM888888WWWMMMMMMb
+                                              """```"YMMMMMMMYMMM
+                                                         `"YMMMMM
+                                                            `"YMP
+                                              
+    ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ▄▄▄▄    ██▓ ██▀███  ▓█████▄    
     ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█████▄ ▓██▒▓██ ▒ ██▒▒██▀ ██▌
     ▒██▒ ▄██▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒██▒ ▄██▒██▒▓██ ░▄█ ▒░██   █▌
     ▒██░█▀  ▒██░   ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ ▒██░█▀  ░██░▒██▀▀█▄  ░▓█▄   ▌
@@ -158,7 +182,7 @@ if __name__ == '__main__':
     ░          ░  ░     ░  ░░ ░      ░  ░    ░       ░     ░        ░    
         ░                  ░                     ░               ░      
 
-                                        Made with ❤️️ by """ + Fore.BLUE + "p1ngul1n0\n")
+                                        Made with ❤️️ by ''' + Fore.BLUE + "p1ngul1n0\n")
 
     parser = argparse.ArgumentParser(
         description='An OSINT tool to search for accounts by username in social networks.')
