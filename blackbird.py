@@ -146,9 +146,9 @@ def read_results(file):
 if __name__ == '__main__':
     init()
 
-    print(Fore.RED + '''
+    print(f'''{Fore.WHITE}
                                       ,
-                                    dMb,
+                                     dMb,
                                   ,dMMMMb,          ,,
                                ,dMMMMMMMMMb, eeee8888"
                             ,mMMm!!!!XXXXMMMMM"""
@@ -169,7 +169,7 @@ if __name__ == '__main__':
                                          "MX88dMM888888WWWMMMMMMb
                                               """```"YMMMMMMMYMMM
                                                          `"YMMMMM
-                                                            `"YMP
+                                                            `"YMP{Fore.RED}
                                               
     ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ▄▄▄▄    ██▓ ██▀███  ▓█████▄    
     ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█████▄ ▓██▒▓██ ▒ ██▒▒██▀ ██▌
@@ -182,7 +182,7 @@ if __name__ == '__main__':
     ░          ░  ░     ░  ░░ ░      ░  ░    ░       ░     ░        ░    
         ░                  ░                     ░               ░      
 
-                                        Made with ❤️️ by ''' + Fore.BLUE + "p1ngul1n0\n")
+                                        Made with ❤️️ by {Fore.BLUE} p1ngul1n0\n''' )
 
     parser = argparse.ArgumentParser(
         description='An OSINT tool to search for accounts by username in social networks.')
