@@ -1,4 +1,4 @@
-<img alt="blackbird-logo" align="left" width="300" height="300" src="https://raw.githubusercontent.com/p1ngul1n0/badges/main/badges/20.png">
+<img alt="blackbird-logo" align="left" width="300" height="300" src="https://raw.githubusercontent.com/p1ngul1n0/badges/main/badges/22.png">
 <h1>Blackbird</h1>
 
 ### An OSINT tool to search fast for accounts by username across 574 sites.
