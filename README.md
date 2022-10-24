@@ -767,6 +767,9 @@ GET with Metadata extraction
 If you have any suggestion of a site to be included in the search, make a pull request following the template.
 </details>
 
+## FrontEnd
+Blackbird FrontEnd is made with React JS, you can see the source code [here](https://github.com/p1ngul1n0/blackbird-react).
+
 ## Contributors 🏅
 <a href="https://github.com/p1ngul1n0/blackbird/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=p1ngul1n0/blackbird" />
