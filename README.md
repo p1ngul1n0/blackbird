@@ -670,8 +670,6 @@ The results can be exported as a PDF Report.
 ## Metadata Extraction
 When possible Blackbird will extract the user's metadata, bringing data such as name, bio, location and profile picture.
 
-<img alt="blackbird-metadata" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_metadata.png">
-
 ## Random UserAgent
 Blackbird uses a random UserAgent from a <a href="https://gist.github.com/pzb/b4b6f57144aea7827ae4">list of 1000 UserAgents</a> in each request to prevent blocking.
 
