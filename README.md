@@ -21,8 +21,8 @@ that any damage (dataloss, system crash, system compromise, etc.) caused by the 
 programs is not P1ngul1n0's responsibility.
 ```
 
-
-
+## NEWS❗
+Blackbird is now available to use online https://blackbird-osint.herokuapp.com/
 
 ## Setup
 
