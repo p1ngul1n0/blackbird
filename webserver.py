@@ -25,15 +25,5 @@ def searchUsername():
     results = loop.run_until_complete(findUsername(username, interfaceType))
     return jsonify(results)
 
-
-@app.route('/image' ,methods=["GET"])
-def getImage():
-    url = request.args.get('url')
-    try:
-        imageBinary = requests.get(url).content
-        return Response(imageBinary, mimetype='image/gif')
-    except: 
-        return Response(status=500)
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=9797)
