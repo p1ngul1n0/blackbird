@@ -796,7 +796,7 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - [X] Publish a docker image
 - [ ] Add unit test (Change ID to Appname, add "invalid-user" and "valid-user" params in JSON.)
 - [ ] Export results in CSV
-- [ ] Deploy on Cloud
+- [X] Deploy on Cloud
 
 
 ## Contact
