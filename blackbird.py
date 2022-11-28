@@ -41,12 +41,12 @@ async def findUsername(username, interfaceType):
         userJson = {"search-params": {"username": username, "sites-number": len(searchData['sites']), "date": now, "execution-time": executionTime}, "sites": []}
         for x in results:
             userJson["sites"].append(x)
-        pathSave = os.path.join(path, 'results', username + '.json')
-        userFile = open(pathSave, 'w')
-        json.dump(userJson, userFile, indent=4, sort_keys=True)
+        # pathSave = os.path.join(path, 'results', username + '.json')
+        # userFile = open(pathSave, 'w')
+        # json.dump(userJson, userFile, indent=4, sort_keys=True)
 
         print(f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {executionTime} seconds\033[0m")
-        print(f"{Fore.LIGHTYELLOW_EX}[!] Results saved to {username}.json\033[0m")
+        # print(f"{Fore.LIGHTYELLOW_EX}[!] Results saved to {username}.json\033[0m")
         return userJson
 
 
