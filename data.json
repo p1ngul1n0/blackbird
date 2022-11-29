@@ -4957,8 +4957,8 @@
       "app": "Zepeto",
       "id": 645,
       "method": "GET",
-      "url": "https://mini.zbiornik.com/{username}",
+      "url": "https://user.zepeto.me/{username}",
       "valid": "response.status == 200 and '@' in responseContent"
-    },
+    }
   ]
 }
