@@ -4958,7 +4958,7 @@
       "id": 645,
       "method": "GET",
       "url": "https://user.zepeto.me/{username}",
-      "valid": "response.status == 200 and '@' in responseContent"
+      "valid": "response.status == 200 and 'https://static-zepeto.pstatic.net/users/' in responseContent"
     }
   ]
 }
