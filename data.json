@@ -851,7 +851,7 @@
       "id": 42,
       "method": "GET",
       "url": "https://www.ebay.com/usr/{username}",
-      "valid": "'error' not in soup.find('title').string"
+      "valid": "'error' not in soup.find('title').string and response.status == 200"
     },
     {
       "app": "RedBubble",
