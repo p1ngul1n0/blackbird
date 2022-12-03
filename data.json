@@ -1950,7 +1950,7 @@
       "id": 148,
       "method": "GET",
       "url": "https://www.fark.com/users/{username}",
-      "valid": "response.status == 200 and 'bio' in responseContent"
+      "valid": "response.status == 200 and 'bio' in responseContent and 'No such user' not in responseContent"
     },
     {
       "app": "mmorpg",
