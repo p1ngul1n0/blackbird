@@ -5,7 +5,7 @@
       "id": 1,
       "method": "GET",
       "url": "https://m.facebook.com/{username}?_rdr",
-      "valid": "response.status == 200"
+      "valid": "response.status == 200 and 'The link you followed may be broken, or the page may have been removed.' not in responseContent"
     },
     {
       "app": "YouTube",
@@ -3789,7 +3789,7 @@
       "id": 451,
       "method": "GET",
       "url": "https://ok.ru/{username}",
-      "valid": "response.status == 200 and '| OK' in responseContent"
+      "valid": "response.status == 200 and 'This page does not exist on OK' not in responseContent"
     },
     {
       "app": "okidoki",
