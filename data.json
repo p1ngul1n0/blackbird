@@ -724,7 +724,7 @@
       "id": 35,
       "method": "GET",
       "url": "https://archive.org/details/@{username}",
-      "valid": "'cannot find account' not in soup.find('title').string"
+      "valid": "'cannot find account' not in soup.find('title').string and 'This item is no longer available.' not in soup.find('title').string"
     },
     {
       "app": "Alura",
