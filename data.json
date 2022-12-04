@@ -5,7 +5,7 @@
       "id": 1,
       "method": "GET",
       "url": "https://m.facebook.com/{username}?_rdr",
-      "valid": "response.status == 200"
+      "valid": "response.status == 200 and '<title>Content not found</title>' not in responseContent"
     },
     {
       "app": "YouTube",
@@ -724,7 +724,7 @@
       "id": 35,
       "method": "GET",
       "url": "https://archive.org/details/@{username}",
-      "valid": "'cannot find account' not in soup.find('title').string"
+      "valid": "'cannot find account' not in soup.find('title').string and response.status == 200"
     },
     {
       "app": "Alura",
@@ -851,7 +851,7 @@
       "id": 42,
       "method": "GET",
       "url": "https://www.ebay.com/usr/{username}",
-      "valid": "'error' not in soup.find('title').string and response.status == 200"
+      "valid": "response.status == 200 and '<title>ebay.com/usr/' not in responseContent"
     },
     {
       "app": "RedBubble",
@@ -2263,7 +2263,7 @@
       "id": 192,
       "method": "GET",
       "url": "https://www.anime-planet.com/users/{username}",
-      "valid": "response.status == 200 and 'Joined' in responseContent"
+      "valid": "response.status == 200 and 'Joined' in responseContent and '<title>Anime-Planet Community | Anime-Planet</title>' not in responseContent"
     },
     {
       "app": "aNobii",
@@ -3789,7 +3789,7 @@
       "id": 451,
       "method": "GET",
       "url": "https://ok.ru/{username}",
-      "valid": "response.status == 200 and '| OK' in responseContent"
+      "valid": "response.status == 200 and '<title>OK</title>' not in responseContent"
     },
     {
       "app": "okidoki",
@@ -3803,7 +3803,7 @@
       "id": 453,
       "method": "GET",
       "url": "https://www.olx.pl/oferty/uzytkownik/{username}/",
-      "valid": "response.status == 200 and 'Obserwuj wyszukiwanie' in responseContent"
+      "valid": "response.status == 200 and 'Obserwuj wyszukiwanie' in responseContent and 'Przepraszamy, ale nie możemy znaleźć takiej strony... Co powiesz na krótką grę w ramach rekompensaty?' not in responseContent"
     },
     {
       "app": "Opencollective",
@@ -4579,8 +4579,8 @@
       "app": "Twitch",
       "id": 583,
       "method": "GET",
-      "url": "https://twitchtracker.com/search?q={username}",
-      "valid": "response.status == 200 and 'Found Exact Match' in responseContent"
+      "url": "https://twitchtracker.com/{username}",
+      "valid": "response.status == 200 and '<title>404 Page Not Found · TwitchTracker</title>' not in responseContent"
     },
     {
       "app": "Twitter archived profile",
@@ -4788,6 +4788,48 @@
     {
       "app": "Wikidot",
       "id": 617,
+      "metadata": [
+        {
+          "key": "User ID",
+          "type": "generic-data",
+          "value": "soup.find('img', alt_='')['src'].split('userid=')[1].split('&')[0]"
+        },
+        {
+          "key": "Real name",
+          "type": "generic-data",
+          "value": "soup.find('dt', text='Real name:').next_element.next_element.next_element.text"
+        },
+        {
+          "key": "Gender",
+          "type": "generic-data",
+          "value": "soup.find('dt', text='Gender:').next_element.next_element.next_element.text"
+        },
+        {
+          "key": "From",
+          "type": "generic-data",
+          "value": "soup.find('dt', text='From:').next_element.next_element.next_element.text"
+        },
+        {
+          "key": "Account type",
+          "type": "generic-data",
+          "value": "soup.find('dt', text='Account type:').next_element.next_element.next_element.text.replace(' ','')"
+        },
+        {
+          "key": "Karma level",
+          "type": "generic-data",
+          "value": "soup.find('dt', text='Karma level:').next_element.next_element.next_element.text.replace('(what is this?)','').replace(' ','').replace('veryhigh','very high')"
+        },
+        {
+          "key": "Registration date",
+          "type": "generic-data",
+          "value": "soup.find('dt', text='Wikidot user since:').next_element.next_element.next_element.text"
+        },
+        {
+          "key": "picture",
+          "type": "image",
+          "value": "soup.find('img', alt_='')['src']"
+        }
+      ],
       "method": "GET",
       "url": "http://www.wikidot.com/user:info/{username}",
       "valid": "response.status == 200 and 'Wikidot.com:' in responseContent"
@@ -4952,6 +4994,48 @@
       "method": "GET",
       "url": "https://www.zoomit.ir/user/{username}/",
       "valid": "response.status == 200 and '\u067e\u0631\u0648\u0641\u0627\u06cc\u0644 - \u0632\u0648\u0645\u06cc\u062a' in responseContent"
+    },
+    {
+      "app": "Laby net",
+      "id": 645,
+      "method": "GET",
+      "url": "https://laby.net/@{username}/",
+      "valid": "response.status == 200 and 'is currently not registered.' not in responseContent"
+    },
+    {
+      "app": "MCSkripts",
+      "id": 646,
+      "method": "GET",
+      "url": "https://mcskripts.net/member/{username}/",
+      "valid": "response.status == 200 and '<title>Members | McSkripts</title>' not in responseContent"
+    },
+    {
+      "app": "Modpack Index",
+      "id": 647,
+      "method": "GET",
+      "url": "https://letterboxd.com/{username}/",
+      "valid": "response.status == 200 and '<title>Letterboxd - Not Found</title>' not in responseContent"
+    },
+    {
+      "app": "Minecraft@Home",
+      "id": 648,
+      "method": "GET",
+      "url": "https://minecraftathome.com/minecrafthome/user_search.php?action=search&search_string={username}&country=any&profile=either&team=either&search_type=date&action=Search",
+      "valid": "response.status == 200 and 'No users match your search criteria' not in responseContent"
+    },
+    {
+      "app": "Mod Workshop",
+      "id": 649,
+      "method": "GET",
+      "url": "https://modworkshop.net/find/user?q={username}",
+      "valid": "response.status == 200 and 'No users found' not in responseContent"
+    },
+    {
+      "app": "Glitch",
+      "id": 650,
+      "method": "GET",
+      "url": "https://api.glitch.com/v1/users/by/login?login={username}",
+      "valid": "response.status == 200 and 'id' in responseContent"
     }
   ]
 }
