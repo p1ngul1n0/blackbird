@@ -25,7 +25,7 @@ proxy = None
 
 async def findUsername(username, interfaceType):
     start_time = time.time()
-    timeout = aiohttp.ClientTimeout(total=100)
+    timeout = aiohttp.ClientTimeout(total=20)
 
     print(f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' across {len(searchData['sites'])} social networks\033[0m")
 
