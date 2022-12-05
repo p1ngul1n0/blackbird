@@ -657,6 +657,7 @@ docker run -p 9797:9797 p1ngul1n0/blackbird:v2 "--web"
 572. zmarsa com
 573. Zomato
 574. zoomitir
+575. Zepeto
 
 </details>
 
@@ -787,6 +788,7 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/LsvanDarko">@LsvanDarko</a> - Added requests package to requirements.txt.
 - <a href="https://github.com/wymiotkloaki">@wymiotkloaki</a> - Added basic .gitignore file and 21 sites.
 - <a href="https://github.com/dwaltsch">@dwaltsch</a> - Added Dockerfile.
+- <a href="https://github.com/yutodadil">@yutodadil</a> - Added Zepeto and increased timeout to 10 seconds.
 
 ## Planned features
 
