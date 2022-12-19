@@ -9,6 +9,10 @@
 <img alt="blackbird-cli" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
 <img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
 
+## Sponsors
+This project is proudly sponsored by:
+
+[<img alt="Cyber Hunter Lab Logo" align="center" width="20%" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/logo_chl.jpg" />](https://site.cyberhunteracademy.com/)
 
 ## Disclaimer
 ```
