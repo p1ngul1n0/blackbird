@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.cdf9b795.chunk.css",
-    "main.js": "/static/js/main.41ada258.chunk.js",
-    "main.js.map": "/static/js/main.41ada258.chunk.js.map",
+    "main.css": "/static/css/main.aa9d1193.chunk.css",
+    "main.js": "/static/js/main.afa666f9.chunk.js",
+    "main.js.map": "/static/js/main.afa666f9.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.222955b7.js",
     "runtime-main.js.map": "/static/js/runtime-main.222955b7.js.map",
     "static/js/2.4e435aa4.chunk.js": "/static/js/2.4e435aa4.chunk.js",
     "static/js/2.4e435aa4.chunk.js.map": "/static/js/2.4e435aa4.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.cdf9b795.chunk.css.map": "/static/css/main.cdf9b795.chunk.css.map",
+    "static/css/main.aa9d1193.chunk.css.map": "/static/css/main.aa9d1193.chunk.css.map",
     "static/js/2.4e435aa4.chunk.js.LICENSE.txt": "/static/js/2.4e435aa4.chunk.js.LICENSE.txt",
     "static/media/blackbird-logo.b59f98ef.png": "/static/media/blackbird-logo.b59f98ef.png",
     "static/media/ellipse.a78fb650.svg": "/static/media/ellipse.a78fb650.svg",
@@ -21,7 +21,7 @@
   "entrypoints": [
     "static/js/runtime-main.222955b7.js",
     "static/js/2.4e435aa4.chunk.js",
-    "static/css/main.cdf9b795.chunk.css",
-    "static/js/main.41ada258.chunk.js"
+    "static/css/main.aa9d1193.chunk.css",
+    "static/js/main.afa666f9.chunk.js"
   ]
 }
