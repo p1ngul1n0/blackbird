@@ -3789,7 +3789,7 @@
       "id": 408,
       "method": "GET",
       "url": "https://ok.ru/{username}",
-      "valid": "response.status == 200 and '| OK' in responseContent"
+      "valid": "response.status == 200 and '| OK' in responseContent and 'This page does not exist on OK' not in responseContent"
     },
     {
       "app": "okidoki",
