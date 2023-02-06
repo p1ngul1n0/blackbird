@@ -8,7 +8,6 @@
 
 <img alt="blackbird-cli" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_printscreen.png">
 <img alt="blackbird-web" align="center" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_web.png">
-
 ## Sponsors
 This project is proudly sponsored by:
 
@@ -793,6 +792,7 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/wymiotkloaki">@wymiotkloaki</a> - Added basic .gitignore file and 21 sites.
 - <a href="https://github.com/dwaltsch">@dwaltsch</a> - Added Dockerfile.
 - <a href="https://github.com/yutodadil">@yutodadil</a> - Added Zepeto and increased timeout to 10 seconds.
+- <a href="https://github.com/Pitastic">@pitastic</a> - Fixed <a href="https://github.com/p1ngul1n0/blackbird/issues/42">Access to 127.0.0.1 was denied #42 </a> issue.
 
 ## Planned features
 
