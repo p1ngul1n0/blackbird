@@ -2382,7 +2382,7 @@
       "id": 207,
       "method": "GET",
       "url": "https://bentbox.co/{username}",
-      "valid": "response.status == 200 and 'BentBox photos and videos' in responseContent"
+      "valid": "response.status == 200 and 'BentBox photos and videos' in responseContent and 'This user is currently not available' not in responseContent"
     },
     {
       "app": "BiggerPockets",
