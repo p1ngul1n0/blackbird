@@ -21,13 +21,14 @@ warnings.filterwarnings('ignore')
 
 useragents = open('useragents.txt').read().splitlines()
 proxy = None
+quiet = False
 
 
 async def findUsername(username, interfaceType):
     start_time = time.time()
     timeout = aiohttp.ClientTimeout(total=20)
 
-    print(f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' across {len(searchData['sites'])} social networks\033[0m")
+    custom_print(f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' across {len(searchData['sites'])} social networks\033[0m")
 
     async with aiohttp.ClientSession(timeout=timeout) as session:
         tasks = []
@@ -45,8 +46,8 @@ async def findUsername(username, interfaceType):
         userFile = open(pathSave, 'w')
         json.dump(userJson, userFile, indent=4, sort_keys=True)
 
-        print(f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {executionTime} seconds\033[0m")
-        print(f"{Fore.LIGHTYELLOW_EX}[!] Results saved to {username}.json\033[0m")
+        custom_print(f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {executionTime} seconds\033[0m")
+        custom_print(f"{Fore.LIGHTYELLOW_EX}[!] Results saved to {username}.json\033[0m")
         return userJson
 
 
@@ -72,13 +73,13 @@ async def makeRequest(session, u, username, interfaceType):
                 soup = BeautifulSoup(responseContent, 'html.parser')
 
             if eval(u["valid"]):
-                print(f'{Fore.LIGHTGREEN_EX}[+]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
+                custom_print(f'{Fore.LIGHTGREEN_EX}[+]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
                 if 'metadata' in u:
                     metadata = []
                     for d in u["metadata"]:
                         try:
                             value = eval(d['value']).strip('\t\r\n')
-                            print(f"   |--{d['key']}: {value}")
+                            custom_print(f"   |--{d['key']}: {value}")
                             metadata.append({"type": d["type"], "key": d['key'], "value": value})
                         except Exception as e:
                             pass
@@ -86,18 +87,27 @@ async def makeRequest(session, u, username, interfaceType):
             else:
                 if interfaceType == 'CLI':
                     if showAll:
-                        print(f'[-]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
+                        custom_print(f'[-]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
                 return ({"id": u["id"], "app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "status": "NOT FOUND", "error-message": None, "metadata": metadata})
     except Exception as e:
         if interfaceType == 'CLI':
             if showAll:
-                print(f'{Fore.RED}[X]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
+                custom_print(f'{Fore.RED}[X]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
         return ({"id": u["id"], "app": u['app'], "url": url, "response-status": None, "status": "ERROR", "error-message": repr(e), "metadata": metadata})
 
 
 def list_sites():
     for i, u in enumerate(searchData["sites"], 1):
-        print(f'{i}. {u["app"]}')
+        custom_print(f'{i}. {u["app"]}')
+
+
+def custom_print(text):
+    global quiet
+    if quiet:
+        pass
+    else:
+        print(text)
+
 
 
 def read_results(file):
@@ -105,30 +115,57 @@ def read_results(file):
         pathRead = os.path.join(path, 'results', file)
         f = open(pathRead, 'r')
         jsonD = json.load(f)
-        print(f'Loaded results file: {file}')
-        print(f"Username: {jsonD['search-params']['username']}")
-        print(f"Number of sites: {jsonD['search-params']['sites-number']}")
-        print(f"Date: {jsonD['search-params']['date']}")
-        print('-------------------------------------------------')
+        custom_print(f'Loaded results file: {file}')
+        custom_print(f"Username: {jsonD['search-params']['username']}")
+        custom_print(f"Number of sites: {jsonD['search-params']['sites-number']}")
+        custom_print(f"Date: {jsonD['search-params']['date']}")
+        custom_print('-------------------------------------------------')
         for u in jsonD['sites']:
             if u['status'] == "FOUND":
-                print(f'{Fore.LIGHTGREEN_EX}[+]\033[0m - {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{u["url"]}\033[0m [{u["response-status"]}]\033[0m')
+                custom_print(f'{Fore.LIGHTGREEN_EX}[+]\033[0m - {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{u["url"]}\033[0m [{u["response-status"]}]\033[0m')
                 if u["metadata"]:
                     for d in u["metadata"]:
-                        print(f"   |--{d['key']}: {d['value']}")
+                        custom_print(f"   |--{d['key']}: {d['value']}")
             elif u['status'] == "ERROR":
-                print(f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request ({u["error-message"]}) - {Fore.YELLOW}{u["url"]}\033[0m')
+                custom_print(f'{Fore.RED}[X]\033[0m - {Fore.BLUE}{u["app"]}\033[0m error on request ({u["error-message"]}) - {Fore.YELLOW}{u["url"]}\033[0m')
             elif u['status'] == "NOT FOUND":
-                print(f'{Fore.WHITE}[-]\033[0m - {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{u["url"]}\033[0m [{u["response-status"]}]\033[0m')
+                custom_print(f'{Fore.WHITE}[-]\033[0m - {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{u["url"]}\033[0m [{u["response-status"]}]\033[0m')
 
     except Exception as e:
-        print(f'{Fore.RED}[X] Error reading file [{repr(e)}]')
+        custom_print(f'{Fore.RED}[X] Error reading file [{repr(e)}]')
 
 
 if __name__ == '__main__':
     init()
 
-    print(Fore.RED + """
+    
+
+    parser = argparse.ArgumentParser(description='An OSINT tool to search for accounts by username in social networks.')
+    parser.add_argument('-u', action='store', dest='username',
+                        required=False,
+                        help='The target username.')
+    parser.add_argument('--list-sites', action='store_true', dest='list',
+                        required=False,
+                        help='List all sites currently supported.')
+    parser.add_argument('-f', action='store', dest='file',                        
+                        required=False,
+                        help='Read results file.')
+    parser.add_argument('--web', action='store_true', dest='web',
+                        required=False,
+                        help='Run webserver.')
+    parser.add_argument('--proxy', action='store', dest='proxy',
+                        required=False,
+                        help='Proxy to send requests through.E.g: --proxy http://127.0.0.1:8080 ')                  
+    parser.add_argument('--show-all', action='store_true', dest='showAll',
+                        required=False,
+                        help='Show all results.')         
+    parser.add_argument('-q','--quiet', action='store_true', dest='quiet',required=False,help='Quiet mode.(Default: False)')
+    arguments = parser.parse_args()
+
+    if arguments.quiet:
+        quiet = True
+        
+    custom_print(Fore.RED + """
     ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ▄▄▄▄    ██▓ ██▀███  ▓█████▄ 
     ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█████▄ ▓██▒▓██ ▒ ██▒▒██▀ ██▌
     ▒██▒ ▄██▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒██▒ ▄██▒██▒▓██ ░▄█ ▒░██   █▌
@@ -141,28 +178,7 @@ if __name__ == '__main__':
         ░                  ░                     ░               ░      
 
                                         Made with ❤️️ by """ + Fore.BLUE + "p1ngul1n0\n")
-
-    parser = argparse.ArgumentParser(description='An OSINT tool to search for accounts by username in social networks.')
-    parser.add_argument('-u', action='store', dest='username',
-                        required=False,
-                        help='The target username.')
-    parser.add_argument('--list-sites', action='store_true', dest='list',
-                        required=False,
-                        help='List all sites currently supported.')
-    parser.add_argument('-f', action='store', dest='file',
-                        required=False,
-                        help='Read results file.')
-    parser.add_argument('--web', action='store_true', dest='web',
-                        required=False,
-                        help='Run webserver.')
-    parser.add_argument('--proxy', action='store', dest='proxy',
-                        required=False,
-                        help='Proxy to send requests through.E.g: --proxy http://127.0.0.1:8080 ')                  
-    parser.add_argument('--show-all', action='store_true', dest='showAll',
-                        required=False,
-                        help='Show all results.')                  
-    arguments = parser.parse_args()
-
+    
     if arguments.proxy:
         proxy = arguments.proxy
     showAll = False
@@ -170,7 +186,7 @@ if __name__ == '__main__':
         showAll = arguments.showAll
 
     if arguments.web:
-        print('[!] Started WebServer on http://127.0.0.1:9797/')
+        custom_print('[!] Started WebServer on http://127.0.0.1:9797/')
         command = subprocess.run((sys.executable, "webserver.py"))
         command.check_returncode()
 
@@ -185,3 +201,4 @@ if __name__ == '__main__':
         list_sites()
     elif arguments.file:
         read_results(arguments.file)
+    
