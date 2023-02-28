@@ -26,8 +26,8 @@ quiet = False
 
 async def findUsername(username, interfaceType):
     start_time = time.time()
-    timeout = aiohttp.ClientTimeout(total=20)
-
+    timeout = aiohttp.ClientTimeout(total=10)
+    
     custom_print(f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' across {len(searchData['sites'])} social networks\033[0m")
 
     async with aiohttp.ClientSession(timeout=timeout) as session:
