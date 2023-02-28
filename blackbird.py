@@ -26,11 +26,12 @@ quiet = False
 
 async def findUsername(username, interfaceType):
     start_time = time.time()
+    connector = aiohttp.TCPConnector(limit=50)
     timeout = aiohttp.ClientTimeout(total=10)
     
     custom_print(f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' across {len(searchData['sites'])} social networks\033[0m")
 
-    async with aiohttp.ClientSession(timeout=timeout) as session:
+    async with aiohttp.ClientSession(timeout=timeout,connector=connector) as session:
         tasks = []
         for u in searchData["sites"]:
             task = asyncio.ensure_future(makeRequest(session, u, username, interfaceType))
