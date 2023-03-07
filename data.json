@@ -338,25 +338,6 @@
       "valid": "response.status == 200"
     },
     {
-      "app": "Xbox Gamertag",
-      "id": 15,
-      "metadata": [
-        {
-          "key": "Name",
-          "type": "generic-data",
-          "value": "soup.find('h1').string"
-        },
-        {
-          "key": "picture",
-          "type": "image",
-          "value": "'https:' + soup.find('img',class_='rounded img-thumbnail')['src']"
-        }
-      ],
-      "method": "GET",
-      "url": "https://www.xboxgamertag.com/search/{username}",
-      "valid": "response.status == 200 and 'Games Played' in responseContent"
-    },
-    {
       "app": "Twitter Archived",
       "id": 16,
       "method": "GET",
@@ -560,71 +541,11 @@
       "valid": "response.status == 200"
     },
     {
-      "app": "Kickstarter",
-      "id": 30,
-      "metadata": [
-        {
-          "key": "Name",
-          "type": "generic-data",
-          "value": "soup.find('h2').text.strip('\\n')"
-        },
-        {
-          "key": "picture",
-          "type": "image",
-          "value": "html.unescape(soup.find('div',id='profile_avatar').find('img')['src'])"
-        }
-      ],
-      "method": "GET",
-      "url": "https://www.kickstarter.com/profile/{username}",
-      "valid": "response.status == 200 and 'projects' in responseContent"
-    },
-    {
       "app": "Blogspot",
       "id": 32,
       "method": "GET",
       "url": "https://{username}.blogspot.com/",
       "valid": "response.status == 200 and 'Blogger Template Style' in responseContent"
-    },
-    {
-      "app": "Internet Archive",
-      "id": 34,
-      "method": "GET",
-      "url": "https://archive.org/details/@{username}",
-      "valid": "'cannot find account' not in soup.find('title').string"
-    },
-    {
-      "app": "MySpace",
-      "id": 37,
-      "metadata": [
-        {
-          "key": "Name",
-          "type": "generic-data",
-          "value": "soup.find('h1').text.strip('\\t\\r\\n')"
-        },
-        {
-          "key": "Bio",
-          "type": "generic-data",
-          "value": "soup.find('div',id='aboutMe').text.strip('\\t\\r\\n')"
-        },
-        {
-          "key": "Site",
-          "type": "generic-data",
-          "value": "soup.find('div',class_='website').string.strip('\\t\\r\\n')"
-        },
-        {
-          "key": "location",
-          "type": "location",
-          "value": "soup.find('div',class_='location').string.strip('\\t\\r\\n')"
-        },
-        {
-          "key": "picture",
-          "type": "image",
-          "value": "soup.find('a',id='profileImage').find('img')['src']"
-        }
-      ],
-      "method": "GET",
-      "url": "https://myspace.com/{username}",
-      "valid": "response.status == 200 and '<!-- Profile -->' in responseContent"
     },
     {
       "app": "Disqus",
@@ -670,13 +591,6 @@
       "valid": "'error' not in soup.find('title').string and response.status == 200"
     },
     {
-      "app": "Kik",
-      "id": 43,
-      "method": "GET",
-      "url": "https://ws2.kik.com/user/{username}",
-      "valid": "response.status == 200"
-    },
-    {
       "app": "Roblox",
       "id": 44,
       "method": "GET",
@@ -703,13 +617,6 @@
       "method": "GET",
       "url": "https://www.duolingo.com/2017-06-30/users?username={username}&_=1628308619574",
       "valid": "len(jsonData['users']) > 0"
-    },
-    {
-      "app": "Chess",
-      "id": 48,
-      "method": "GET",
-      "url": "https://www.chess.com/member/{username}",
-      "valid": "response.status == 200"
     },
     {
       "app": "Shopify",
@@ -902,13 +809,6 @@
       "valid": "response.status == 200 and 'is on Snapchat!' in responseContent"
     },
     {
-      "app": "Venmo",
-      "id": 111,
-      "method": "GET",
-      "url": "https://account.venmo.com/u/{username}",
-      "valid": "response.status == 200 and '\"profileInfo_username__' in responseContent"
-    },
-    {
       "app": "Giphy",
       "id": 123,
       "method": "GET",
@@ -921,25 +821,6 @@
       "method": "GET",
       "url": "https://discuss.codecademy.com/u/{username}/summary",
       "valid": "response.status == 200 and '<title>  Profile - ' in responseContent"
-    },
-    {
-      "app": "Mastodon",
-      "id": 132,
-      "metadata": [
-        {
-          "key": "Name",
-          "type": "generic-data",
-          "value": "soup.find('strong',class_='display-name__html').text"
-        },
-        {
-          "key": "picture",
-          "type": "image",
-          "value": "soup.find('img',id='profile_page_avatar')['src']"
-        }
-      ],
-      "method": "GET",
-      "url": "https://mastodon.social/@{username}",
-      "valid": "response.status == 200"
     },
     {
       "app": "NPM",
@@ -960,20 +841,6 @@
       "id": 144,
       "method": "GET",
       "url": "https://about.me/{username}",
-      "valid": "response.status == 200"
-    },
-    {
-      "app": "Pikabu",
-      "id": 149,
-      "method": "GET",
-      "url": "https://pikabu.ru/@{username}",
-      "valid": "response.status == 200"
-    },
-    {
-      "app": "Academia.edu",
-      "id": 157,
-      "method": "GET",
-      "url": "https://independent.academia.edu/{username}",
       "valid": "response.status == 200"
     },
     {
@@ -1005,20 +872,6 @@
       "valid": "response.status == 200 and 'Overview' in responseContent"
     },
     {
-      "app": "cash app",
-      "id": 229,
-      "method": "GET",
-      "url": "https://cash.app/${username}",
-      "valid": "response.status == 200 and ' on Cash App</title>' in responseContent"
-    },
-    {
-      "app": "Dribbble",
-      "id": 269,
-      "method": "GET",
-      "url": "https://dribbble.com/{username}",
-      "valid": "response.status == 200 and ' | Dribbble' in responseContent"
-    },
-    {
       "app": "Fandom",
       "id": 285,
       "method": "GET",
@@ -1033,25 +886,11 @@
       "valid": "response.status == 200 and 'username' in responseContent"
     },
     {
-      "app": "Flipboard",
-      "id": 292,
-      "method": "GET",
-      "url": "https://flipboard.com/@{username}",
-      "valid": "response.status == 200 and ') on Flipboard' in responseContent"
-    },
-    {
       "app": "GitLab",
       "id": 313,
       "method": "GET",
       "url": "https://gitlab.com/{username}",
       "valid": "response.status == 200 and 'Member since' in responseContent"
-    },
-    {
-      "app": "Gravatar",
-      "id": 319,
-      "method": "GET",
-      "url": "http://en.gravatar.com/profiles/{username}.json",
-      "valid": "response.status == 200 and 'entry' in responseContent"
     },
     {
       "app": "Hacker News",
@@ -1115,13 +954,6 @@
       "method": "GET",
       "url": "https://www.researchgate.net/profile/{username}",
       "valid": "response.status == 200 and ' | ' in responseContent"
-    },
-    {
-      "app": "themeforest",
-      "id": 511,
-      "method": "GET",
-      "url": "https://themeforest.net/user/{username}",
-      "valid": "response.status == 200 and 's profile on ThemeForest' in responseContent"
     },
     {
       "app": "tumblr",
