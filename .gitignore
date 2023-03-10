@@ -258,3 +258,4 @@ envs.sh
 .trunk
 results/
 !results/example.json
+removeResults.ps1

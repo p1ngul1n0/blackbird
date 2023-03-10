@@ -13,30 +13,35 @@ import aiohttp
 from bs4 import BeautifulSoup
 from colorama import Fore, init
 
-file = open('data.json')
-searchData = json.load(file)
+
+searchData = []
+with open('data.json') as file:
+    searchData = json.load(file)
 currentOs = sys.platform
 path = os.path.dirname(__file__)
 warnings.filterwarnings('ignore')
 
-useragents = open('useragents.txt').read().splitlines()
+useragents = []
+with open('useragents.txt') as file:
+    useragents = file.read().splitlines()
 proxy = None
 quiet = False
 
 
 async def findUsername(username, interfaceType):
     start_time = time.time()
-    connector = aiohttp.TCPConnector(limit=50)
-    timeout = aiohttp.ClientTimeout(total=10)
+    # connector = aiohttp.TCPConnector(limit=50)
+    timeout = aiohttp.ClientTimeout(total=5)
     
     custom_print(f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' across {len(searchData['sites'])} social networks\033[0m")
 
-    async with aiohttp.ClientSession(timeout=timeout,connector=connector) as session:
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+        semaphore = asyncio.Semaphore(10)
         tasks = []
         for u in searchData["sites"]:
-            task = asyncio.ensure_future(makeRequest(session, u, username, interfaceType))
+            task = asyncio.ensure_future(makeRequest(semaphore, session,u, username, interfaceType))
             tasks.append(task)
-
+        
         results = await asyncio.gather(*tasks)
         now = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         executionTime = round(time.time() - start_time, 1)
@@ -52,49 +57,50 @@ async def findUsername(username, interfaceType):
         return userJson
 
 
-async def makeRequest(session, u, username, interfaceType):
-    url = u["url"].format(username=username)
-    jsonBody = None
-    useragent = random.choice(useragents)
-    headers = {
-        "User-Agent": useragent
-    }
-    metadata = []
-    if 'headers' in u:
-        headers.update(eval(u['headers']))
-    if 'json' in u:
-        jsonBody = u['json'].format(username=username)
-        jsonBody = json.loads(jsonBody)
-    try:
-        async with session.request(u["method"], url, json=jsonBody,proxy=proxy, headers=headers, ssl=False) as response:
-            responseContent = await response.text()
-            if 'content-type' in response.headers and "application/json" in response.headers["Content-Type"]:
-                jsonData = await response.json()
-            else:
-                soup = BeautifulSoup(responseContent, 'html.parser')
+async def makeRequest(semaphore, session, u, username, interfaceType):
+    async with semaphore:
+        url = u["url"].format(username=username)
+        jsonBody = None
+        useragent = random.choice(useragents)
+        headers = {
+            "User-Agent": useragent
+        }
+        metadata = []
+        if 'headers' in u:
+            headers.update(eval(u['headers']))
+        if 'json' in u:
+            jsonBody = u['json'].format(username=username)
+            jsonBody = json.loads(jsonBody)
+        try:
+            async with session.request(u["method"], url, json=jsonBody,proxy=proxy, headers=headers, ssl=False) as response:
+                responseContent = await response.text()
+                if 'content-type' in response.headers and "application/json" in response.headers["Content-Type"]:
+                    jsonData = await response.json()
+                else:
+                    soup = BeautifulSoup(responseContent, 'html.parser')
 
-            if eval(u["valid"]):
-                custom_print(f'{Fore.LIGHTGREEN_EX}[+]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
-                if 'metadata' in u:
-                    metadata = []
-                    for d in u["metadata"]:
-                        try:
-                            value = eval(d['value']).strip('\t\r\n')
-                            custom_print(f"   |--{d['key']}: {value}")
-                            metadata.append({"type": d["type"], "key": d['key'], "value": value})
-                        except Exception as e:
-                            pass
-                return ({"id": u["id"], "app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "status": "FOUND", "error-message": None, "metadata": metadata})
-            else:
-                if interfaceType == 'CLI':
-                    if showAll:
-                        custom_print(f'[-]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
-                return ({"id": u["id"], "app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "status": "NOT FOUND", "error-message": None, "metadata": metadata})
-    except Exception as e:
-        if interfaceType == 'CLI':
-            if showAll:
-                custom_print(f'{Fore.RED}[X]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
-        return ({"id": u["id"], "app": u['app'], "url": url, "response-status": None, "status": "ERROR", "error-message": repr(e), "metadata": metadata})
+                if eval(u["valid"]):
+                    custom_print(f'{Fore.LIGHTGREEN_EX}[+]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m {Fore.LIGHTGREEN_EX}account found\033[0m - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
+                    if 'metadata' in u:
+                        metadata = []
+                        for d in u["metadata"]:
+                            try:
+                                value = eval(d['value']).strip('\t\r\n')
+                                custom_print(f"   |--{d['key']}: {value}")
+                                metadata.append({"type": d["type"], "key": d['key'], "value": value})
+                            except Exception as e:
+                                pass
+                    return ({"id": u["id"], "app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "status": "FOUND", "error-message": None, "metadata": metadata})
+                else:
+                    if interfaceType == 'CLI':
+                        if showAll:
+                            custom_print(f'[-]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m account not found - {Fore.YELLOW}{url}\033[0m [{response.status} {response.reason}]\033[0m')
+                    return ({"id": u["id"], "app": u['app'], "url": url, "response-status": f"{response.status} {response.reason}", "status": "NOT FOUND", "error-message": None, "metadata": metadata})
+        except Exception as e:
+            if interfaceType == 'CLI':
+                if showAll:
+                    custom_print(f'{Fore.RED}[X]\033[0m - #{u["id"]} {Fore.BLUE}{u["app"]}\033[0m error on request ({repr(e)})- {Fore.YELLOW}{url}\033[0m')
+            return ({"id": u["id"], "app": u['app'], "url": url, "response-status": None, "status": "ERROR", "error-message": repr(e), "metadata": metadata})
 
 
 def list_sites():
