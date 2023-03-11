@@ -15,14 +15,14 @@ from colorama import Fore, init
 
 
 searchData = []
-with open('data.json') as file:
+with open('data.json','r') as file:
     searchData = json.load(file)
 currentOs = sys.platform
 path = os.path.dirname(__file__)
 warnings.filterwarnings('ignore')
 
 useragents = []
-with open('useragents.txt') as file:
+with open('useragents.txt','r') as file:
     useragents = file.read().splitlines()
 proxy = None
 quiet = False
@@ -45,7 +45,7 @@ async def findUsername(username, interfaceType):
         now = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         executionTime = round(time.time() - start_time, 1)
         userJson = {"search-params": {"username": username, "sites-number": len(searchData['sites']), "date": now, "execution-time": executionTime}, "sites": []}
-        for x in results:"""  """
+        for x in results:
             userJson["sites"].append(x)
         pathSave = os.path.join(path, 'results', username + '.json')
         userFile = open(pathSave, 'w')
