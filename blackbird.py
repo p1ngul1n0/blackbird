@@ -30,13 +30,12 @@ quiet = False
 
 async def findUsername(username, interfaceType):
     start_time = time.time()
-    # connector = aiohttp.TCPConnector(limit=50)
-    timeout = aiohttp.ClientTimeout(total=5)
+    timeout = aiohttp.ClientTimeout(total=7)
     
     custom_print(f"{Fore.LIGHTYELLOW_EX}[!] Searching '{username}' across {len(searchData['sites'])} social networks\033[0m")
 
     async with aiohttp.ClientSession(timeout=timeout) as session:
-        semaphore = asyncio.Semaphore(10)
+        semaphore = asyncio.Semaphore(7)
         tasks = []
         for u in searchData["sites"]:
             task = asyncio.ensure_future(makeRequest(semaphore, session,u, username, interfaceType))
@@ -46,7 +45,7 @@ async def findUsername(username, interfaceType):
         now = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         executionTime = round(time.time() - start_time, 1)
         userJson = {"search-params": {"username": username, "sites-number": len(searchData['sites']), "date": now, "execution-time": executionTime}, "sites": []}
-        for x in results:
+        for x in results:"""  """
             userJson["sites"].append(x)
         pathSave = os.path.join(path, 'results', username + '.json')
         userFile = open(pathSave, 'w')
