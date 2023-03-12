@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["blackbird"]
+include-package-data = true
+
+[project]
+name = "blackbird"
+authors = [
+    {name = 'p1ngul1n0'}
+]
+version = "0.0.1"
+description = 'An OSINT tool to search fast for accounts by username.'
+readme = 'README.md'
+requires-python = ">=3.10.9"
+dependencies = [
+    'aiohttp >= 3.8.3',
+    'beautifulsoup4 >= 4.11.1',
+    'colorama >= 0.4.4',
+    'Flask >= 2.1.1',
+    'Flask_Cors >= 3.0.10',
+    'requests >= 2.28.1',
+    'gunicorn'
+]
+
+[project.scripts]
+blackbird = "blackbird.blackbird:main"
