@@ -1,0 +1,2 @@
+include blackbird/data.json
+include blackbird/useragents.txt
