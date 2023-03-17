@@ -4961,42 +4961,42 @@
       "valid": "response.status == 200 and 'https://static-zepeto.pstatic.net/users/' in responseContent"
     },
     {
-      "app": "YouPic":
+      "app": "YouPic",
       "id": 576,
       "method": "GET",
       "url": "https://youpic.com/{username}/",
       "valid": "response.status == 200 and 'PORTFOLIO' in responseContent"
     },
     {
-      "app": "VIEWBUG":
+      "app": "VIEWBUG",
       "id": 577,
       "method": "GET",
       "url": "https://www.viewbug.com/member/{username}",
       "valid": "response.status == 200 and 'Member since ' in responseContent"
     },
     {
-      "app": "Art Limited":
+      "app": "Art Limited",
       "id": 578,
       "method": "GET",
       "url": "https://www.artlimited.net/{username}",
       "valid": "response.status == 200 and ' image view' in responseContent"
     },
     {
-      "app": "35photo.pro":
+      "app": "35photo.pro",
       "id": 579,
       "method": "GET",
       "url": "https://35photo.pro/{username}/",
       "valid": "response.status == 200 and 'view photo' in responseContent"
     },
     {
-      "app": "Purple Port":
+      "app": "Purple Port",
       "id": 580,
       "method": "GET",
       "url": "https://purpleport.com/portfolio/{username}/",
       "valid": "response.status == 200 and 'Joined ' in responseContent"
     },
     {
-      "app": "Pixieset":
+      "app": "Pixieset",
       "id": 581,
       "method": "GET",
       "url": "https://{username}.mypixieset.com/",
