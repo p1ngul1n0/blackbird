@@ -70,6 +70,10 @@ By default only found accounts will be shown, however you can use the argument b
 ```python
 python blackbird.py -u crash --show-all
 ```
+#### Export results to CSV file
+```python
+python blackbird.py -u crash --csv
+```
 
 ## Docker
 Blackbird can also be used with Docker.
