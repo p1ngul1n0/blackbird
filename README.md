@@ -1,7 +1,7 @@
 <img alt="blackbird-logo" align="left" width="300" height="300" src="https://raw.githubusercontent.com/p1ngul1n0/badges/main/badges/22.png">
 <h1>Blackbird</h1>
 
-### An OSINT tool to search fast for accounts by username across 574 sites.
+### An OSINT tool to search fast for accounts by username across 581 sites.
 > The Lockheed SR-71 "Blackbird" is a long-range, high-altitude, Mach 3+ strategic reconnaissance aircraft developed and manufactured by the American aerospace company Lockheed Corporation.
 
 </br>
@@ -666,6 +666,12 @@ docker run -p 9797:9797 p1ngul1n0/blackbird "--web"
 573. Zomato
 574. zoomitir
 575. Zepeto
+576. YouPic
+577. VIEWBUG
+578. Art Limited
+579. 35photo.pro
+580. Purple Port
+581. Pixieset
 
 </details>
 
@@ -798,6 +804,7 @@ I'm grateful to all contributors who improved and bugfixed the project.
 - <a href="https://github.com/dwaltsch">@dwaltsch</a> - Added Dockerfile.
 - <a href="https://github.com/yutodadil">@yutodadil</a> - Added Zepeto and increased timeout to 10 seconds.
 - <a href="https://github.com/Pitastic">@pitastic</a> - Fixed <a href="https://github.com/p1ngul1n0/blackbird/issues/42">Access to 127.0.0.1 was denied #42 </a> issue.
+- <a href="https://github.com/qqux">@qqux</a> - Added 6 sites (YouPic, VIEWBUG, Art Limited, 35photo.pro, Purple Port, Pixieset).
 
 ## Planned features
 
