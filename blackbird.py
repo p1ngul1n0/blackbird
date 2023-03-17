@@ -7,6 +7,7 @@ import subprocess
 import sys
 import time
 import warnings
+import csv
 from datetime import datetime
 
 import aiohttp
@@ -47,6 +48,10 @@ async def findUsername(username, interfaceType):
 
         print(f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {executionTime} seconds\033[0m")
         print(f"{Fore.LIGHTYELLOW_EX}[!] Results saved to {username}.json\033[0m")
+
+        if arguments.csv:
+            exportCsv(userJson)
+
         return userJson
 
 
@@ -124,6 +129,18 @@ def read_results(file):
     except Exception as e:
         print(f'{Fore.RED}[X] Error reading file [{repr(e)}]')
 
+def exportCsv(userJson):
+    pathSave = os.path.join(path, 'results', userJson["search-params"]["username"] + '.csv')
+    with open(pathSave, 'w', newline='', encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow(["ID", "App", "URL", "response-status", "metadata", "result"])
+
+        for u in userJson['sites']:
+            writer.writerow([u["id"], u["app"], u["url"], u["response-status"], json.dumps(u["metadata"]), u["status"]])
+    print(f"{Fore.LIGHTYELLOW_EX}[!] Results saved to {userJson['search-params']['username']}.csv\033[0m")
+    return True
+
+
 
 if __name__ == '__main__':
     init()
@@ -160,7 +177,10 @@ if __name__ == '__main__':
                         help='Proxy to send requests through.E.g: --proxy http://127.0.0.1:8080 ')                  
     parser.add_argument('--show-all', action='store_true', dest='showAll',
                         required=False,
-                        help='Show all results.')                  
+                        help='Show all results.')   
+    parser.add_argument('--csv', action='store_true', dest='csv',
+                        required=False,
+                        help='Export results to CSV file.')                  
     arguments = parser.parse_args()
 
     if arguments.proxy:
