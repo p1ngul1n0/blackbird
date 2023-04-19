@@ -5001,6 +5001,30 @@
       "method": "GET",
       "url": "https://{username}.mypixieset.com/",
       "valid": "response.status == 200 and 'cannot be found' not in responseContent"
+    },
+    {
+      "app": "Volo",
+      "id": 582,
+      "method": "GET",
+      "url": "https://volo.host/{username}",
+      "valid": "response.status == 200",
+      "metadata": [
+        {
+          "key": "Name",
+          "type": "generic-data",
+          "value": "soup.find('meta', property='og:title')['content']"
+        },
+        {
+          "key": "Bio",
+          "type": "generic-data",
+          "value": "soup.find('meta', property='og:description')['content']"
+        },
+        {
+          "key": "picture",
+          "type": "image",
+          "value": "soup.find('meta', property='og:image')['content']"
+        }
+      ]
     }
   ]
 }
