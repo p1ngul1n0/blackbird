@@ -24,7 +24,7 @@ useragents = open('useragents.txt').read().splitlines()
 proxy = None
 
 
-async def findUsername(username, interfaceType):
+async def findUsername(username, interfaceType, flag_csv=False):
     start_time = time.time()
     timeout = aiohttp.ClientTimeout(total=20)
 
@@ -49,7 +49,7 @@ async def findUsername(username, interfaceType):
         print(f"{Fore.LIGHTYELLOW_EX}[!] Search complete in {executionTime} seconds\033[0m")
         print(f"{Fore.LIGHTYELLOW_EX}[!] Results saved to {username}.json\033[0m")
 
-        if arguments.csv:
+        if flag_csv:
             exportCsv(userJson)
 
         return userJson
@@ -174,13 +174,13 @@ if __name__ == '__main__':
                         help='Run webserver.')
     parser.add_argument('--proxy', action='store', dest='proxy',
                         required=False,
-                        help='Proxy to send requests through.E.g: --proxy http://127.0.0.1:8080 ')                  
+                        help='Proxy to send requests through.E.g: --proxy http://127.0.0.1:8080 ')
     parser.add_argument('--show-all', action='store_true', dest='showAll',
                         required=False,
                         help='Show all results.')   
     parser.add_argument('--csv', action='store_true', dest='csv',
                         required=False,
-                        help='Export results to CSV file.')                  
+                        help='Export results to CSV file.')
     arguments = parser.parse_args()
 
     if arguments.proxy:
@@ -200,7 +200,7 @@ if __name__ == '__main__':
         except:
             pass
         interfaceType = 'CLI'
-        asyncio.run(findUsername(arguments.username, interfaceType))
+        asyncio.run(findUsername(arguments.username, interfaceType, arguments.csv))
     elif arguments.list:
         list_sites()
     elif arguments.file:
