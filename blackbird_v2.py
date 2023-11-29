@@ -62,4 +62,5 @@ if __name__ == "__main__":
     if checkList():
         checkUpdates()
     else:
+        print("[+] No list found downloading it")
         downloadList()
