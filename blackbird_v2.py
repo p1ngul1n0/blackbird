@@ -2,7 +2,8 @@ import requests
 import hashlib
 import json
 import os.path
-
+from colorama import Fore, init
+import emoji
 
 listRoute = (
     "https://raw.githubusercontent.com/WebBreacher/WhatsMyName/main/wmn-data.json"
@@ -59,8 +60,36 @@ def handleErr(err):
 
 
 if __name__ == "__main__":
+    init()
+
+    print(
+        Fore.RED
+        + """
+    ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ▄▄▄▄    ██▓ ██▀███  ▓█████▄ 
+    ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█████▄ ▓██▒▓██ ▒ ██▒▒██▀ ██▌
+    ▒██▒ ▄██▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒██▒ ▄██▒██▒▓██ ░▄█ ▒░██   █▌
+    ▒██░█▀  ▒██░   ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ ▒██░█▀  ░██░▒██▀▀█▄  ░▓█▄   ▌
+    ░▓█  ▀█▓░██████▒▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄░▓█  ▀█▓░██░░██▓ ▒██▒░▒████▓ 
+    ░▒▓███▀▒░ ▒░▓  ░▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒░▒▓███▀▒░▓  ░ ▒▓ ░▒▓░ ▒▒▓  ▒ 
+    ▒░▒   ░ ░ ░ ▒  ░ ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░▒░▒   ░  ▒ ░  ░▒ ░ ▒░ ░ ▒  ▒ 
+    ░    ░   ░ ░    ░   ▒   ░        ░ ░░ ░  ░    ░  ▒ ░  ░░   ░  ░ ░  ░ 
+    ░          ░  ░     ░  ░░ ░      ░  ░    ░       ░     ░        ░    
+        ░                  ░                     ░               ░      
+        """
+    )
+    print(
+        (
+            emoji.emojize(
+                "                              Made with :red_heart:",
+                variant="emoji_type",
+            )
+            + Fore.BLUE
+            + "  by Lucas Antoniaci (p1ngul1n0)"
+            + Fore.RESET
+        )
+    )
     if checkList():
         checkUpdates()
     else:
-        print("[+] No list found downloading it")
+        print("[+] Downloading sites lists...")
         downloadList()
