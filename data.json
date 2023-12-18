@@ -1040,7 +1040,7 @@
     },
     {
       "app": "ProtonMail",
-      "headers": "{'X-Pm-Appversion': 'web-account@4.28.2','X-Pm-Appversion': 'web-account@4.28.2'}",
+      "headers": "{\"X-Pm-Appversion\": \"web-account@4.28.2\"}",
       "id": 63,
       "method": "GET",
       "url": "https://account.protonmail.com/api/users/available?Name={username}",
