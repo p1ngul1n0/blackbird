@@ -258,3 +258,5 @@ envs.sh
 .trunk
 results/
 !results/example.json
+/Scripts
+pyvenv.cfg
