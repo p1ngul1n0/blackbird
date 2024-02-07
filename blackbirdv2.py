@@ -10,6 +10,7 @@ load_dotenv()
 listURL = os.getenv("LIST_URL")
 listFileName = os.getenv("LIST_FILENAME")
 proxy = os.getenv("PROXY") if os.getenv("USE_PROXY") == "TRUE" else None
+requests.packages.urllib3.disable_warnings()
 
 
 def doSyncRequest(method, url):
