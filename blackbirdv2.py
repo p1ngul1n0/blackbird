@@ -9,10 +9,11 @@ import json
 load_dotenv()
 listURL = os.getenv("LIST_URL")
 listFileName = os.getenv("LIST_FILENAME")
+proxy = os.getenv("PROXY") if os.getenv("USE_PROXY") == "TRUE" else None
 
 
 def doSyncRequest(method, url):
-    response = requests.request(method=method, url=url)
+    response = requests.request(method=method, url=url, proxies=proxy, verify=False)
     parsedData = None
 
     try:
@@ -24,14 +25,19 @@ def doSyncRequest(method, url):
 
 async def doAsyncRequest(method, url, session):
     print("Sending request...")
-    response = await session.request(method, url)
-    parsedData = await response.json()
+    response = await session.request(method, url, proxy=proxy, verify_ssl=False)
+    parsedData = None
+
+    try:
+        parsedData = await response.json()
+    except:
+        pass
     return response, parsedData
 
 
 def readList():
-    f = open(listFileName, encoding="UTF-8")
-    data = json.load(f)
+    with open(listFileName, "r", encoding="UTF-8") as f:
+        data = json.load(f)
     return data
 
 
@@ -47,20 +53,24 @@ def hashJSON(jsonData):
     return jsonHash
 
 
-async def fetchResults():
+async def fetchResults(username):
     data = readList()
     async with aiohttp.ClientSession() as session:
         tasks = []
         for site in data["sites"]:
             tasks.append(
-                doAsyncRequest(method="GET", url=site["uri_check"], session=session)
+                doAsyncRequest(
+                    method="GET",
+                    url=site["uri_check"].replace("{account}", username),
+                    session=session,
+                )
             )
         results = await asyncio.gather(*tasks, return_exceptions=True)
     return results
 
 
-def verifyUsername():
-    data = asyncio.run(fetchResults())
+def verifyUsername(username):
+    data = asyncio.run(fetchResults(username))
     for item in data:
         print(item)
 
@@ -84,4 +94,4 @@ def checkUpdates():
 
 if __name__ == "__main__":
     checkUpdates()
-    verifyUsername()
+    # verifyUsername("p1ngul1n0")
