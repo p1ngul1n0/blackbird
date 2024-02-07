@@ -22,11 +22,23 @@ def doSyncRequest(method, url):
     return response, parsedData
 
 
+async def doAsyncRequest(method, url, session):
+    print("Sending request...")
+    response = await session.request(method, url)
+    parsedData = await response.json()
+    return response, parsedData
+
+
+def readList():
+    f = open(listFileName, encoding="UTF-8")
+    data = json.load(f)
+    return data
+
+
 def downloadList():
-    print("[!] Downloading WhatsMyName list")
     response, parsedData = doSyncRequest("GET", listURL)
-    with open(listFileName, "w", encoding="utf-8") as f:
-        json.dump(parsedData, f, indent=4)
+    with open(listFileName, "w", encoding="UTF-8") as f:
+        json.dump(parsedData, f, indent=4, ensure_ascii=False)
 
 
 def hashJSON(jsonData):
@@ -35,10 +47,22 @@ def hashJSON(jsonData):
     return jsonHash
 
 
-def readList():
-    f = open(listFileName)
-    data = json.load(f)
-    return data
+async def fetchResults():
+    data = readList()
+    async with aiohttp.ClientSession() as session:
+        tasks = []
+        for site in data["sites"]:
+            tasks.append(
+                doAsyncRequest(method="GET", url=site["uri_check"], session=session)
+            )
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+    return results
+
+
+def verifyUsername():
+    data = asyncio.run(fetchResults())
+    for item in data:
+        print(item)
 
 
 def checkUpdates():
@@ -54,8 +78,10 @@ def checkUpdates():
         else:
             print("[+] List is up to date")
     else:
+        print("[!] Downloading WhatsMyName list")
         downloadList()
 
 
 if __name__ == "__main__":
     checkUpdates()
+    verifyUsername()
