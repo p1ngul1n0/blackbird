@@ -62,19 +62,6 @@
             "cat": "social"
         },
         {
-            "name": "1001mem",
-            "uri_check": "http://1001mem.ru/{account}",
-            "e_code": 200,
-            "e_string": "| \u041d\u043e\u0432\u043e\u0441\u0442\u0438 - \u041f\u0440\u0438\u043a\u043e\u043b\u044b - \u041a\u043e\u043c\u0438\u043a\u0441\u044b - \u041c\u0435\u043c\u044b",
-            "m_string": "\u042d\u0442\u043e\u0442 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442, \u0438\u043b\u0438 \u0437\u0430\u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u0430\u043d.",
-            "m_code": 200,
-            "known": [
-                "ruslan",
-                "dima"
-            ],
-            "cat": "social"
-        },
-        {
             "name": "3DNews",
             "uri_check": "https://forum.3dnews.tech/member.php?username={account}",
             "e_code": 200,
@@ -359,19 +346,6 @@
             "known": [
                 "blue",
                 "goddessbecca"
-            ],
-            "cat": "social"
-        },
-        {
-            "name": "Alloannonces",
-            "uri_check": "https://www.alloannonces.ma/{account}/",
-            "e_code": 200,
-            "e_string": "Vendeurs/Agents",
-            "m_string": "Page non defini",
-            "m_code": 404,
-            "known": [
-                "Rachid13",
-                "Ayoub"
             ],
             "cat": "social"
         },
@@ -2256,19 +2230,6 @@
                 "miaaamador"
             ],
             "cat": "xx NSFW xx"
-        },
-        {
-            "name": "fandalism",
-            "uri_check": "https://fandalism.com/{account}",
-            "e_code": 200,
-            "e_string": "fandalism_:user",
-            "m_string": "404 - File or directory not found",
-            "m_code": 404,
-            "known": [
-                "mike",
-                "ted"
-            ],
-            "cat": "hobby"
         },
         {
             "name": "Fandom",
@@ -5250,20 +5211,6 @@
             "cat": "video"
         },
         {
-            "name": "Pettingzoo.co (Mastodon Instance)",
-            "uri_check": "https://pettingzoo.co/api/v1/accounts/lookup?acct={account}",
-            "uri_pretty": "https://pettingzoo.co/@{account}",
-            "e_code": 200,
-            "e_string": "display_name",
-            "m_code": 404,
-            "m_string": "Record not found",
-            "known": [
-                "tyr",
-                "Disbear"
-            ],
-            "cat": "social"
-        },
-        {
             "name": "Pewex",
             "uri_check": "https://retro.pewex.pl/user/{account}",
             "e_code": 200,
@@ -5681,19 +5628,6 @@
                 "test2"
             ],
             "cat": "tech"
-        },
-        {
-            "name": "Psstaudio",
-            "uri_check": "https://psstaudio.com/u/{account}",
-            "e_code": 200,
-            "e_string": "id=\"profile_picture\"",
-            "m_code": 404,
-            "m_string": "We know you were looking for something, but it is not here",
-            "known": [
-                "JayeWilde",
-                "baxter"
-            ],
-            "cat": "xx NSFW xx"
         },
         {
             "name": "public",
@@ -7758,19 +7692,6 @@
             "cat": "business"
         },
         {
-            "name": "Wanelo",
-            "uri_check": "https://wanelo.co/{account}",
-            "e_code": 200,
-            "e_string": "on Wanelo</title>",
-            "m_string": "Hmm, that's embarrassing",
-            "m_code": 404,
-            "known": [
-                "lisandrareyes"
-            ],
-            "cat": "shopping",
-            "strip_bad_char": "."
-        },
-        {
             "name": "watchmemore.com",
             "uri_check": "https://api.watchmemore.com/api3/profile/{account}/",
             "uri_pretty": "https://watchmemore.com/{account}/",
@@ -8330,6 +8251,20 @@
             "known": [
                 "rezaghezi",
                 "hosssssein"
+            ],
+            "cat": "tech"
+        },
+        {
+            "name": "Cloudflare",
+            "uri_check": "https://community.cloudflare.com/u/{account}/card.json",
+            "uri_pretty": "https://community.cloudflare.com/u/{account}",
+            "e_code": 200,
+            "e_string": "user_avatar",
+            "m_string": "The requested URL or resource could not be found",
+            "m_code": 404,
+            "known": [
+                "carl",
+                "morten"
             ],
             "cat": "tech"
         }
