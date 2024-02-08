@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import hashlib
 import os
 import json
+import argparse
 
 load_dotenv()
 listURL = os.getenv("LIST_URL")
@@ -25,8 +26,9 @@ def doSyncRequest(method, url):
 
 
 async def doAsyncRequest(method, url, session):
-    print("Sending request...")
-    response = await session.request(method, url, proxy=proxy, verify_ssl=False)
+    response = await session.request(
+        method, url, proxy=proxy, verify_ssl=False, timeout=1
+    )
     parsedData = None
 
     try:
@@ -72,8 +74,8 @@ async def fetchResults(username):
 
 def verifyUsername(username):
     data = asyncio.run(fetchResults(username))
-    for item in data:
-        print(item)
+    for response in data:
+        print(response)
 
 
 def checkUpdates():
@@ -95,4 +97,11 @@ def checkUpdates():
 
 if __name__ == "__main__":
     checkUpdates()
-    # verifyUsername("p1ngul1n0")
+    parser = argparse.ArgumentParser(
+        prog="Blackbird",
+        description="An OSINT tool to search for accounts by username in social networks.",
+    )
+    parser.add_argument("-u", "--username")
+    args = parser.parse_args()
+    if args.username:
+        verifyUsername(args.username)
