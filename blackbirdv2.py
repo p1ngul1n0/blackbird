@@ -6,6 +6,8 @@ import hashlib
 import os
 import json
 import argparse
+import time
+
 
 load_dotenv()
 listURL = os.getenv("LIST_URL")
@@ -14,6 +16,7 @@ proxy = os.getenv("PROXY") if os.getenv("USE_PROXY") == "TRUE" else None
 requests.packages.urllib3.disable_warnings()
 
 
+# Perform a Sync Request and return response details
 def doSyncRequest(method, url):
     response = requests.request(method=method, url=url, proxies=proxy, verify=False)
     parsedData = None
@@ -25,44 +28,64 @@ def doSyncRequest(method, url):
     return response, parsedData
 
 
+# Perform an Async Request and return response details
 async def doAsyncRequest(method, url, session):
-    response = await session.request(
-        method, url, proxy=proxy, verify_ssl=False, timeout=1
-    )
-    parsedData = None
-
     try:
-        parsedData = await response.json()
-    except:
-        pass
-    return response, parsedData
+        response = await session.request(method, url, proxy=proxy, ssl=False, timeout=5)
+
+        content = await response.text()
+        responseData = {
+            "url": url,
+            "status_code": str(response.status) + " " + response.reason,
+            "headers": response.headers,
+            "content": content,
+        }
+        return responseData
+    except Exception as e:
+        # print(e)
+        return None
 
 
+# Read list file and return content
 def readList():
     with open(listFileName, "r", encoding="UTF-8") as f:
         data = json.load(f)
     return data
 
 
+# Download .JSON file list from defined URL
 def downloadList():
     response, parsedData = doSyncRequest("GET", listURL)
     with open(listFileName, "w", encoding="UTF-8") as f:
         json.dump(parsedData, f, indent=4, ensure_ascii=False)
 
 
+# Return MD5 HASH for given JSON
 def hashJSON(jsonData):
     dumpJson = json.dumps(jsonData, sort_keys=True)
     jsonHash = hashlib.md5(dumpJson.encode("utf-8")).hexdigest()
     return jsonHash
 
 
+# Verify account existence based on list args
+async def checkSite(site, method, url, session):
+    response = await doAsyncRequest(method, url, session)
+    print(f"[+] [{site['name']}] {response['url']} [{response['status_code']}]")
+    return {
+        "site": site,
+        "response": response,
+    }
+
+
+# Control survey on list sites
 async def fetchResults(username):
     data = readList()
     async with aiohttp.ClientSession() as session:
         tasks = []
         for site in data["sites"]:
             tasks.append(
-                doAsyncRequest(
+                checkSite(
+                    site=site,
                     method="GET",
                     url=site["uri_check"].replace("{account}", username),
                     session=session,
@@ -72,10 +95,14 @@ async def fetchResults(username):
     return results
 
 
+# Start username check and presents results to user
 def verifyUsername(username):
-    data = asyncio.run(fetchResults(username))
-    for response in data:
-        print(response)
+    start_time = time.time()
+    results = asyncio.run(fetchResults(username))
+    end_time = time.time()
+    print(
+        f"[!] Check completed in {int(end_time - start_time)} seconds ({len(results)} sites)"
+    )
 
 
 def checkUpdates():
