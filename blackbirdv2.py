@@ -7,6 +7,7 @@ import os
 import json
 import argparse
 import time
+from types import SimpleNamespace
 
 
 load_dotenv()
@@ -17,7 +18,7 @@ requests.packages.urllib3.disable_warnings()
 
 
 # Perform a Sync Request and return response details
-def doSyncRequest(method, url):
+def do_sync_request(method, url):
     response = requests.request(method=method, url=url, proxies=proxy, verify=False)
     parsedData = None
 
@@ -29,14 +30,14 @@ def doSyncRequest(method, url):
 
 
 # Perform an Async Request and return response details
-async def doAsyncRequest(method, url, session):
+async def do_async_request(method, url, session):
     try:
         response = await session.request(method, url, proxy=proxy, ssl=False, timeout=5)
 
         content = await response.text()
         responseData = {
             "url": url,
-            "status_code": str(response.status) + " " + response.reason,
+            "status_code": response.status,
             "headers": response.headers,
             "content": content,
         }
@@ -55,7 +56,7 @@ def readList():
 
 # Download .JSON file list from defined URL
 def downloadList():
-    response, parsedData = doSyncRequest("GET", listURL)
+    response, parsedData = do_sync_request("GET", listURL)
     with open(listFileName, "w", encoding="UTF-8") as f:
         json.dump(parsedData, f, indent=4, ensure_ascii=False)
 
@@ -69,8 +70,18 @@ def hashJSON(jsonData):
 
 # Verify account existence based on list args
 async def checkSite(site, method, url, session):
-    response = await doAsyncRequest(method, url, session)
-    print(f"[+] [{site['name']}] {response['url']} [{response['status_code']}]")
+    response = await do_async_request(method, url, session)
+    returnData = {
+        "site": site,
+        "response": response,
+    }
+    if ((site["e_string"] in response["content"]) and (site["e_code"] == response["status_code"])):
+        if ((site["m_string"] not in response["content"]) and (site["m_code"] != response["status_code"])):
+            returnData["status"] = "FOUND"
+    else:
+        returnData["status"] = "NOT-FOUND"
+    print(f"[+] [{site['name']}] {response['url']} [{returnData['status']}] ")
+            
     return {
         "site": site,
         "response": response,
@@ -111,7 +122,7 @@ def checkUpdates():
         print("[-] Checking for updates...")
         data = readList()
         currentListHash = hashJSON(data)
-        response, data = doSyncRequest("GET", listURL)
+        response, data = do_sync_request("GET", listURL)
         remoteListHash = hashJSON(data)
         if currentListHash != remoteListHash:
             print("[!] Updating...")
@@ -131,5 +142,6 @@ if __name__ == "__main__":
     )
     parser.add_argument("-u", "--username")
     args = parser.parse_args()
+
     if args.username:
         verifyUsername(args.username)
