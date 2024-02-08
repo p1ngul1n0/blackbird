@@ -105,6 +105,7 @@ def verifyUsername(username):
     )
 
 
+# Check for changes in remote list
 def checkUpdates():
     if os.path.isfile(listFileName):
         print("[-] Checking for updates...")
