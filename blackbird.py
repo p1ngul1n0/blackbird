@@ -78,10 +78,9 @@ async def checkSite(site, method, url, session):
     if ((site["e_string"] in response["content"]) and (site["e_code"] == response["status_code"])):
         if ((site["m_string"] not in response["content"]) and (site["m_code"] != response["status_code"])):
             returnData["status"] = "FOUND"
+            print(f"[+] [{site['name']}] {response['url']}")
     else:
         returnData["status"] = "NOT-FOUND"
-    print(f"[+] [{site['name']}] {response['url']} [{returnData['status']}] ")
-            
     return {
         "site": site,
         "response": response,
@@ -108,6 +107,9 @@ async def fetchResults(username):
 
 # Start username check and presents results to user
 def verifyUsername(username):
+    print(
+        f"[!] Enumerating accounts with username \"{username}\""
+    )
     start_time = time.time()
     results = asyncio.run(fetchResults(username))
     end_time = time.time()
@@ -137,10 +139,10 @@ def checkUpdates():
 if __name__ == "__main__":
     checkUpdates()
     parser = argparse.ArgumentParser(
-        prog="Blackbird",
+        prog="blackbird",
         description="An OSINT tool to search for accounts by username in social networks.",
     )
-    parser.add_argument("-u", "--username")
+    parser.add_argument("-u", "--username", required=True)
     args = parser.parse_args()
 
     if args.username:
