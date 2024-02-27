@@ -8,6 +8,7 @@ import json
 import argparse
 import time
 import emoji
+from colorama import Fore, init
 
 
 load_dotenv()
@@ -160,7 +161,7 @@ def checkUpdates():
 
 
 if __name__ == "__main__":
-    print("""
+    print(Fore.RED + """
     ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ▄▄▄▄    ██▓ ██▀███  ▓█████▄ 
     ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█████▄ ▓██▒▓██ ▒ ██▒▒██▀ ██▌
     ▒██▒ ▄██▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒██▒ ▄██▒██▒▓██ ░▄█ ▒░██   █▌
@@ -172,7 +173,7 @@ if __name__ == "__main__":
     ░          ░  ░     ░  ░░ ░      ░  ░    ░       ░     ░        ░    
         ░                  ░                     ░               ░      
 
-    """)
+    """ + Fore.RESET)
     print (f"Made with {emoji.emojize(':beating_heart:')} by Lucas Antoniaci (p1ngul1n0)")
     checkUpdates()
     parser = argparse.ArgumentParser(
