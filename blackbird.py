@@ -81,6 +81,8 @@ async def checkSite(site, method, url, session):
             print(f"{emoji.emojize(':check_mark:')} [{site['name']}] {response['url']}")
     else:
         returnData["status"] = "NOT-FOUND"
+        if args.show_all:
+            print(f"{emoji.emojize(':cross_mark:')} [{site['name']}] {response['url']}")
     return {
         "site": site,
         "response": response,
@@ -108,13 +110,13 @@ async def fetchResults(username):
 # Start username check and presents results to user
 def verifyUsername(username):
     print(
-        f"[!] Enumerating accounts with username \"{username}\""
+        f"{emoji.emojize(':play_button:')} Enumerating accounts with username \"{username}\""
     )
     start_time = time.time()
     results = asyncio.run(fetchResults(username))
     end_time = time.time()
     print(
-        f"[!] Check completed in {int(end_time - start_time)} seconds ({len(results)} sites)"
+        f"{emoji.emojize(':chequered_flag:')}  Check completed in {int(end_time - start_time)} seconds ({len(results)} sites)"
     )
 
 
@@ -150,13 +152,15 @@ if __name__ == "__main__":
         ░                  ░                     ░               ░      
 
     """)
-    print ("Made with " + emoji.emojize(":beating_heart:") + " by Lucas Antoniaci (p1ngul1n0)")
+    print (f"Made with {emoji.emojize(':beating_heart:')} by Lucas Antoniaci (p1ngul1n0)")
     checkUpdates()
     parser = argparse.ArgumentParser(
         prog="blackbird",
         description="An OSINT tool to search for accounts by username in social networks.",
     )
     parser.add_argument("-u", "--username", required=True)
+    parser.add_argument('--show-all', default=False, action=argparse.BooleanOptionalAction)
+
     args = parser.parse_args()
 
     if args.username:
