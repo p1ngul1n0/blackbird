@@ -137,6 +137,27 @@ def checkUpdates():
         print("[!] Downloading WhatsMyName list")
         downloadList()
 
+def checkUpdates():
+    if os.path.isfile(listFileName):
+        print("[-] Checking for updates...")
+        try:
+            data = readList()
+            currentListHash = hashJSON(data)
+            response, data = do_sync_request("GET", listURL)
+            remoteListHash = hashJSON(data)
+            if currentListHash != remoteListHash:
+                print("[!] Updating...")
+                downloadList()
+            else:
+                print("[+] List is up to date")
+        except Exception as e:
+            print(f"{emoji.emojize(':police_car_light:')} Coudn't read local list")
+            print(f"{emoji.emojize(':globe_with_meridians:')} Downloading WhatsMyName list")
+            downloadList()
+    else:
+        print(f"{emoji.emojize(':globe_with_meridians:')} Downloading WhatsMyName list")
+        downloadList()
+
 
 if __name__ == "__main__":
     print("""
