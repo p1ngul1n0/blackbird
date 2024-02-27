@@ -7,7 +7,7 @@ import os
 import json
 import argparse
 import time
-from types import SimpleNamespace
+import emoji
 
 
 load_dotenv()
@@ -78,7 +78,7 @@ async def checkSite(site, method, url, session):
     if ((site["e_string"] in response["content"]) and (site["e_code"] == response["status_code"])):
         if ((site["m_string"] not in response["content"]) and (site["m_code"] != response["status_code"])):
             returnData["status"] = "FOUND"
-            print(f"[+] [{site['name']}] {response['url']}")
+            print(f"{emoji.emojize(':check_mark:')} [{site['name']}] {response['url']}")
     else:
         returnData["status"] = "NOT-FOUND"
     return {
@@ -137,6 +137,20 @@ def checkUpdates():
 
 
 if __name__ == "__main__":
+    print("""
+    ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ▄▄▄▄    ██▓ ██▀███  ▓█████▄ 
+    ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█████▄ ▓██▒▓██ ▒ ██▒▒██▀ ██▌
+    ▒██▒ ▄██▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒██▒ ▄██▒██▒▓██ ░▄█ ▒░██   █▌
+    ▒██░█▀  ▒██░   ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ ▒██░█▀  ░██░▒██▀▀█▄  ░▓█▄   ▌
+    ░▓█  ▀█▓░██████▒▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄░▓█  ▀█▓░██░░██▓ ▒██▒░▒████▓ 
+    ░▒▓███▀▒░ ▒░▓  ░▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒░▒▓███▀▒░▓  ░ ▒▓ ░▒▓░ ▒▒▓  ▒ 
+    ▒░▒   ░ ░ ░ ▒  ░ ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░▒░▒   ░  ▒ ░  ░▒ ░ ▒░ ░ ▒  ▒ 
+    ░    ░   ░ ░    ░   ▒   ░        ░ ░░ ░  ░    ░  ▒ ░  ░░   ░  ░ ░  ░ 
+    ░          ░  ░     ░  ░░ ░      ░  ░    ░       ░     ░        ░    
+        ░                  ░                     ░               ░      
+
+    """)
+    print ("Made with " + emoji.emojize(":beating_heart:") + " by Lucas Antoniaci (p1ngul1n0)")
     checkUpdates()
     parser = argparse.ArgumentParser(
         prog="blackbird",
