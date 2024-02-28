@@ -7,9 +7,9 @@ import os
 import json
 import argparse
 import time
-import emoji
-from colorama import Fore, init
+from rich.console import Console
 
+console = Console()
 
 load_dotenv()
 listURL = os.getenv("LIST_URL")
@@ -44,7 +44,7 @@ async def do_async_request(method, url, session):
         }
         return responseData
     except Exception as e:
-        # print(e)
+        # console.print(e)
         return None
 
 
@@ -79,11 +79,11 @@ async def checkSite(site, method, url, session):
     if ((site["e_string"] in response["content"]) and (site["e_code"] == response["status_code"])):
         if ((site["m_string"] not in response["content"]) and (site["m_code"] != response["status_code"])):
             returnData["status"] = "FOUND"
-            print(f"{emoji.emojize(':check_mark:')} [{site['name']}] {response['url']}")
+            console.print(f"✔️ \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]")
     else:
         returnData["status"] = "NOT-FOUND"
         if args.show_all:
-            print(f"{emoji.emojize(':cross_mark:')} [{site['name']}] {response['url']}")
+            console.print(f"❌ [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]")
     return {
         "site": site,
         "response": response,
@@ -110,58 +110,58 @@ async def fetchResults(username):
 
 # Start username check and presents results to user
 def verifyUsername(username):
-    print(
-        f"{emoji.emojize(':play_button:')} Enumerating accounts with username \"{username}\""
+    console.print(
+        f":play_button: Enumerating accounts with username \"[cyan1]{username}[/cyan1]\""
     )
     start_time = time.time()
     results = asyncio.run(fetchResults(username))
     end_time = time.time()
-    print(
-        f"{emoji.emojize(':chequered_flag:')}  Check completed in {int(end_time - start_time)} seconds ({len(results)} sites)"
+    console.print(
+        f":chequered_flag: Check completed in {int(end_time - start_time)} seconds ({len(results)} sites)"
     )
 
 
 # Check for changes in remote list
 def checkUpdates():
     if os.path.isfile(listFileName):
-        print("[-] Checking for updates...")
+        console.print(":counterclockwise_arrows_button: Checking for updates...")
         data = readList()
         currentListHash = hashJSON(data)
         response, data = do_sync_request("GET", listURL)
         remoteListHash = hashJSON(data)
         if currentListHash != remoteListHash:
-            print("[!] Updating...")
+            console.print(":counterclockwise_arrows_button: Updating...")
             downloadList()
         else:
-            print("[+] List is up to date")
+            console.print("✔️ List is up to date")
     else:
-        print("[!] Downloading WhatsMyName list")
+        console.print("[!] Downloading WhatsMyName list")
         downloadList()
 
 def checkUpdates():
     if os.path.isfile(listFileName):
-        print("[-] Checking for updates...")
+        console.print(":counterclockwise_arrows_button: Checking for updates...")
         try:
             data = readList()
             currentListHash = hashJSON(data)
             response, data = do_sync_request("GET", listURL)
             remoteListHash = hashJSON(data)
             if currentListHash != remoteListHash:
-                print("[!] Updating...")
+                console.print(":counterclockwise_arrows_button: Updating...")
                 downloadList()
             else:
-                print("[+] List is up to date")
+                console.print("✔️ List is up to date")
         except Exception as e:
-            print(f"{emoji.emojize(':police_car_light:')} Coudn't read local list")
-            print(f"{emoji.emojize(':globe_with_meridians:')} Downloading WhatsMyName list")
+            console.print(":police_car_light: Coudn't read local list")
+            console.print(":down_arrow: Downloading WhatsMyName list")
             downloadList()
     else:
-        print(f"{emoji.emojize(':globe_with_meridians:')} Downloading WhatsMyName list")
+        console.print(":globe_with_meridians: Downloading WhatsMyName list")
         downloadList()
 
 
 if __name__ == "__main__":
-    print(Fore.RED + """
+    console.print("""[red]
     ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ▄▄▄▄    ██▓ ██▀███  ▓█████▄ 
     ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█████▄ ▓██▒▓██ ▒ ██▒▒██▀ ██▌
     ▒██▒ ▄██▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒██▒ ▄██▒██▒▓██ ░▄█ ▒░██   █▌
@@ -173,8 +173,8 @@ if __name__ == "__main__":
     ░          ░  ░     ░  ░░ ░      ░  ░    ░       ░     ░        ░    
         ░                  ░                     ░               ░      
 
-    """ + Fore.RESET)
-    print (f"Made with {emoji.emojize(':beating_heart:')} by Lucas Antoniaci (p1ngul1n0)")
+    [/red]""")
+    console.print("Made with :beating_heart: by Lucas Antoniaci (p1ngul1n0)")
     checkUpdates()
     parser = argparse.ArgumentParser(
         prog="blackbird",
