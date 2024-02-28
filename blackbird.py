@@ -125,22 +125,6 @@ def verifyUsername(username):
 def checkUpdates():
     if os.path.isfile(listFileName):
         console.print(":counterclockwise_arrows_button: Checking for updates...")
-        data = readList()
-        currentListHash = hashJSON(data)
-        response, data = do_sync_request("GET", listURL)
-        remoteListHash = hashJSON(data)
-        if currentListHash != remoteListHash:
-            console.print(":counterclockwise_arrows_button: Updating...")
-            downloadList()
-        else:
-            console.print("✔️ List is up to date")
-    else:
-        console.print("[!] Downloading WhatsMyName list")
-        downloadList()
-
-def checkUpdates():
-    if os.path.isfile(listFileName):
-        console.print(":counterclockwise_arrows_button: Checking for updates...")
         try:
             data = readList()
             currentListHash = hashJSON(data)
