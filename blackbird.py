@@ -100,13 +100,13 @@ async def checkSite(site, method, url, session):
             ):
                 returnData["status"] = "FOUND"
                 console.print(
-                    f"✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
+                    f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                 )
         else:
             returnData["status"] = "NOT-FOUND"
             if args.show_all:
                 console.print(
-                    f"❌  [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]"
+                    f"  ❌  [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]"
                 )
         return returnData
     except:
@@ -165,7 +165,7 @@ def checkUpdates():
                 console.print(":counterclockwise_arrows_button: Updating...")
                 downloadList()
             else:
-                console.print("✔️ List is up to date")
+                console.print("✔️  List is up to date")
         except Exception as e:
             console.print(":police_car_light: Coudn't read local list")
             console.print(":down_arrow: Downloading WhatsMyName list")
