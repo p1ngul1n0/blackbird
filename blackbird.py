@@ -73,8 +73,9 @@ def hashJSON(jsonData):
 async def checkSite(site, method, url, session):
     response = await do_async_request(method, url, session)
     returnData = {
-        "site": site,
-        "response": response,
+        "name": site["name"],
+        "url": url,
+        "status": "NONE"
     }
     if ((site["e_string"] in response["content"]) and (site["e_code"] == response["status_code"])):
         if ((site["m_string"] not in response["content"]) and (site["m_code"] != response["status_code"])):
@@ -84,10 +85,7 @@ async def checkSite(site, method, url, session):
         returnData["status"] = "NOT-FOUND"
         if args.show_all:
             console.print(f"❌  [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]")
-    return {
-        "site": site,
-        "response": response,
-    }
+    return returnData
 
 
 # Control survey on list sites
