@@ -8,6 +8,9 @@ import json
 import argparse
 import time
 from rich.console import Console
+import csv
+from datetime import datetime
+
 
 console = Console()
 
@@ -69,23 +72,45 @@ def hashJSON(jsonData):
     return jsonHash
 
 
+# Save results to CSV file
+def saveToCsv(results):
+    fileName = results["username"] + "_" + results["date"] + ".csv"
+    console.print(f"💾  Saving results to '[cyan1]{fileName}[/cyan1]'")
+    with open(
+        fileName,
+        "w",
+        newline="",
+    ) as file:
+        writer = csv.writer(file)
+        writer.writerow(["name", "url", "status"])
+        for result in results["results"]:
+            writer.writerow([result["name"], result["url"], result["status"]])
+
+
 # Verify account existence based on list args
 async def checkSite(site, method, url, session):
     response = await do_async_request(method, url, session)
-    returnData = {
-        "name": site["name"],
-        "url": url,
-        "status": "NONE"
-    }
-    if ((site["e_string"] in response["content"]) and (site["e_code"] == response["status_code"])):
-        if ((site["m_string"] not in response["content"]) and (site["m_code"] != response["status_code"])):
-            returnData["status"] = "FOUND"
-            console.print(f"✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]")
-    else:
-        returnData["status"] = "NOT-FOUND"
-        if args.show_all:
-            console.print(f"❌  [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]")
-    return returnData
+    returnData = {"name": site["name"], "url": url, "status": "NONE"}
+    try:
+        if (site["e_string"] in response["content"]) and (
+            site["e_code"] == response["status_code"]
+        ):
+            if (site["m_string"] not in response["content"]) and (
+                site["m_code"] != response["status_code"]
+            ):
+                returnData["status"] = "FOUND"
+                console.print(
+                    f"✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
+                )
+        else:
+            returnData["status"] = "NOT-FOUND"
+            if args.show_all:
+                console.print(
+                    f"❌  [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]"
+                )
+        return returnData
+    except:
+        return returnData
 
 
 # Control survey on list sites
@@ -102,14 +127,20 @@ async def fetchResults(username):
                     session=session,
                 )
             )
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+        tasksResults = await asyncio.gather(*tasks, return_exceptions=True)
+        dateNow = datetime.now().strftime("%m-%d-%Y")
+        results = {
+            "results": tasksResults,
+            "username": username,
+            "date": dateNow,
+        }
     return results
 
 
 # Start username check and presents results to user
 def verifyUsername(username):
     console.print(
-        f":play_button: Enumerating accounts with username \"[cyan1]{username}[/cyan1]\""
+        f':play_button: Enumerating accounts with username "[cyan1]{username}[/cyan1]"'
     )
     start_time = time.time()
     results = asyncio.run(fetchResults(username))
@@ -117,6 +148,8 @@ def verifyUsername(username):
     console.print(
         f":chequered_flag: Check completed in {int(end_time - start_time)} seconds ({len(results)} sites)"
     )
+    if args.csv:
+        saveToCsv(results)
 
 
 # Check for changes in remote list
@@ -143,7 +176,8 @@ def checkUpdates():
 
 
 if __name__ == "__main__":
-    console.print("""[red]
+    console.print(
+        """[red]
     ▄▄▄▄    ██▓    ▄▄▄       ▄████▄   ██ ▄█▀ ▄▄▄▄    ██▓ ██▀███  ▓█████▄ 
     ▓█████▄ ▓██▒   ▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█████▄ ▓██▒▓██ ▒ ██▒▒██▀ ██▌
     ▒██▒ ▄██▒██░   ▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒██▒ ▄██▒██▒▓██ ░▄█ ▒░██   █▌
@@ -155,7 +189,8 @@ if __name__ == "__main__":
     ░          ░  ░     ░  ░░ ░      ░  ░    ░       ░     ░        ░    
         ░                  ░                     ░               ░      
 
-    [/red]""")
+    [/red]"""
+    )
     console.print("Made with :beating_heart: by Lucas Antoniaci (p1ngul1n0)")
     checkUpdates()
     parser = argparse.ArgumentParser(
@@ -163,7 +198,10 @@ if __name__ == "__main__":
         description="An OSINT tool to search for accounts by username in social networks.",
     )
     parser.add_argument("-u", "--username", required=True)
-    parser.add_argument('--show-all', default=False, action=argparse.BooleanOptionalAction)
+    parser.add_argument(
+        "--show-all", default=False, action=argparse.BooleanOptionalAction
+    )
+    parser.add_argument("--csv", default=False, action=argparse.BooleanOptionalAction)
 
     args = parser.parse_args()
 
