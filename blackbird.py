@@ -18,25 +18,38 @@ load_dotenv()
 listURL = os.getenv("LIST_URL")
 listFileName = os.getenv("LIST_FILENAME")
 proxy = os.getenv("PROXY") if os.getenv("USE_PROXY") == "TRUE" else None
+proxies = {"http": proxy, "https": proxy} if os.getenv("USE_PROXY") == "TRUE" else None
 requests.packages.urllib3.disable_warnings()
 
 
 # Perform a Sync Request and return response details
 def do_sync_request(method, url):
-    response = requests.request(method=method, url=url, proxies=proxy, verify=False)
+    response = requests.request(
+        method=method,
+        url=url,
+        proxies=proxies,
+        timeout=args.timeout,
+        verify=False,
+    )
     parsedData = None
-
     try:
         parsedData = response.json()
-    except:
-        pass
+    except Exception as e:
+        logError(e, f"Error in Sync HTTP Request [{method}] {url}")
     return response, parsedData
 
 
 # Perform an Async Request and return response details
 async def do_async_request(method, url, session):
     try:
-        response = await session.request(method, url, proxy=proxy, ssl=False, timeout=5)
+        response = await session.request(
+            method,
+            url,
+            proxy=proxy,
+            timeout=args.timeout,
+            allow_redirects=True,
+            ssl=False,
+        )
 
         content = await response.text()
         responseData = {
@@ -47,7 +60,7 @@ async def do_async_request(method, url, session):
         }
         return responseData
     except Exception as e:
-        # console.print(e)
+        logError(e, f"Error in Async HTTP Request [{method}] {url}")
         return None
 
 
@@ -72,44 +85,56 @@ def hashJSON(jsonData):
     return jsonHash
 
 
+def logError(e, message):
+    if args.verbose:
+        console.print(f"❌  {message}")
+        console.print("     | An error occurred:")
+        console.print(f"     | {e}")
+
+
 # Save results to CSV file
 def saveToCsv(results):
-    fileName = results["username"] + "_" + results["date"] + ".csv"
-    console.print(f"💾  Saving results to '[cyan1]{fileName}[/cyan1]'")
-    with open(
-        fileName,
-        "w",
-        newline="",
-    ) as file:
-        writer = csv.writer(file)
-        writer.writerow(["name", "url", "status"])
-        for result in results["results"]:
-            writer.writerow([result["name"], result["url"], result["status"]])
+    try:
+        fileName = results["username"] + "_" + results["date"] + ".csv"
+        with open(
+            fileName,
+            "w",
+            newline="",
+        ) as file:
+            writer = csv.writer(file)
+            writer.writerow(["name", "url", "status"])
+            for result in results["results"]:
+                writer.writerow([result["name"], result["url"], result["status"]])
+        console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
+    except Exception as e:
+        logError(e, "Coudn't saved results to CSV file!")
 
 
 # Verify account existence based on list args
 async def checkSite(site, method, url, session):
-    response = await do_async_request(method, url, session)
     returnData = {"name": site["name"], "url": url, "status": "NONE"}
+    response = await do_async_request(method, url, session)
     try:
-        if (site["e_string"] in response["content"]) and (
-            site["e_code"] == response["status_code"]
-        ):
-            if (site["m_string"] not in response["content"]) and (
-                site["m_code"] != response["status_code"]
+        if response:
+            if (site["e_string"] in response["content"]) and (
+                site["e_code"] == response["status_code"]
             ):
-                returnData["status"] = "FOUND"
-                console.print(
-                    f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
-                )
-        else:
-            returnData["status"] = "NOT-FOUND"
-            if args.show_all:
-                console.print(
-                    f"  ❌  [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]"
-                )
-        return returnData
-    except:
+                if (site["m_string"] not in response["content"]) and (
+                    site["m_code"] != response["status_code"]
+                ):
+                    returnData["status"] = "FOUND"
+                    console.print(
+                        f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
+                    )
+            else:
+                returnData["status"] = "NOT-FOUND"
+                if args.verbose:
+                    console.print(
+                        f"  ❌ [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]"
+                    )
+            return returnData
+    except Exception as e:
+        logError(e, f"Coudn't check {site['name']} [{url}]!")
         return returnData
 
 
@@ -146,7 +171,7 @@ def verifyUsername(username):
     results = asyncio.run(fetchResults(username))
     end_time = time.time()
     console.print(
-        f":chequered_flag: Check completed in {int(end_time - start_time)} seconds ({len(results)} sites)"
+        f":chequered_flag: Check completed in {int(end_time - start_time)} seconds ({len(results['results'])} sites)"
     )
     if args.csv:
         saveToCsv(results)
@@ -191,19 +216,24 @@ if __name__ == "__main__":
 
     [/red]"""
     )
-    console.print("Made with :beating_heart: by Lucas Antoniaci (p1ngul1n0)")
-    checkUpdates()
+    console.print(
+        "[white]Made with :beating_heart: by Lucas Antoniaci ([red]p1ngul1n0[/red])[/white]"
+    )
+
     parser = argparse.ArgumentParser(
         prog="blackbird",
         description="An OSINT tool to search for accounts by username in social networks.",
     )
     parser.add_argument("-u", "--username", required=True)
-    parser.add_argument(
-        "--show-all", default=False, action=argparse.BooleanOptionalAction
-    )
     parser.add_argument("--csv", default=False, action=argparse.BooleanOptionalAction)
+    parser.add_argument(
+        "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction
+    )
+    parser.add_argument("-t", "--timeout", type=int, default=30)
 
     args = parser.parse_args()
+
+    checkUpdates()
 
     if args.username:
         verifyUsername(args.username)
