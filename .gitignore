@@ -254,11 +254,11 @@ $RECYCLE.BIN/
 
 envs.sh
 .env-*
-.vscode/settings.json
+.vscode
 .trunk
 results/
 !results/example.json
 /Scripts
 pyvenv.cfg
 wmn-data.json
-wmn-data.json
+*.csv

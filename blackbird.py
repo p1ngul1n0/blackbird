@@ -95,7 +95,7 @@ def logError(e, message):
 # Save results to CSV file
 def saveToCsv(results):
     try:
-        fileName = results["username"] + "_" + results["date"] + ".csv"
+        fileName = results["username"] + "_" + results["date"] + "_blackbird.csv"
         with open(
             fileName,
             "w",
