@@ -115,6 +115,7 @@ async def checkSite(site, method, url, session):
     returnData = {"name": site["name"], "url": url, "status": "NONE"}
     response = await do_async_request(method, url, session)
     if response == None:
+        returnData["status"] = "ERROR"
         return returnData
     try:
         if response:
