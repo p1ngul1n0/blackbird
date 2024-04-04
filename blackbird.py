@@ -114,6 +114,8 @@ def saveToCsv(results):
 async def checkSite(site, method, url, session):
     returnData = {"name": site["name"], "url": url, "status": "NONE"}
     response = await do_async_request(method, url, session)
+    if response == None:
+        return returnData
     try:
         if response:
             if (site["e_string"] in response["content"]) and (
