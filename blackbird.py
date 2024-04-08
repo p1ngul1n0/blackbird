@@ -10,6 +10,7 @@ import time
 from rich.console import Console
 import csv
 from datetime import datetime
+import logging
 
 
 console = Console()
@@ -19,6 +20,11 @@ listURL = os.getenv("LIST_URL")
 listFileName = os.getenv("LIST_FILENAME")
 proxy = os.getenv("PROXY") if os.getenv("USE_PROXY") == "TRUE" else None
 proxies = {"http": proxy, "https": proxy} if os.getenv("USE_PROXY") == "TRUE" else None
+logging.basicConfig(
+    filename=os.getenv("LOG_FILENAME"),
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
 requests.packages.urllib3.disable_warnings()
 
 
@@ -86,10 +92,14 @@ def hashJSON(jsonData):
 
 
 def logError(e, message):
+    logging.error(f"{message} | {repr(e)}")
     if args.verbose:
-        console.print(f"❌  {message}")
+        console.print(f"⛔  {message}")
         console.print("     | An error occurred:")
-        console.print(f"     | {e}")
+        if str(e) != "":
+            console.print(f"     | {str(e)}")
+        else:
+            console.print(f"     | {repr(e)}")
 
 
 # Save results to CSV file
@@ -137,7 +147,7 @@ async def checkSite(site, method, url, session):
                     )
             return returnData
     except Exception as e:
-        logError(e, f"Coudn't check {site['name']} [{url}]!")
+        logError(e, f"Coudn't check {site['name']} {url}")
         return returnData
 
 
