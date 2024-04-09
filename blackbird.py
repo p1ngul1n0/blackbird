@@ -11,6 +11,8 @@ from rich.console import Console
 import csv
 from datetime import datetime
 import logging
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 
 console = Console()
@@ -105,21 +107,39 @@ def logError(e, message):
 
 
 # Save results to CSV file
-def saveToCsv(results):
+def saveToCsv(username, date, results):
     try:
-        fileName = results["username"] + "_" + results["date"] + "_blackbird.csv"
+        fileName = username + "_" + date + "_blackbird.csv"
         with open(
             fileName,
             "w",
             newline="",
         ) as file:
             writer = csv.writer(file)
-            writer.writerow(["name", "url", "status"])
-            for result in results["results"]:
-                writer.writerow([result["name"], result["url"], result["status"]])
+            writer.writerow(["name", "url"])
+            for result in results:
+                writer.writerow([result["name"], result["url"]])
         console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
     except Exception as e:
         logError(e, "Coudn't saved results to CSV file!")
+
+
+def saveToPdf(username, date, results):
+    fileName = username + "_" + date + "_blackbird.pdf"
+    canva = canvas.Canvas(fileName, pagesize=letter)
+    canva.setFont("Helvetica", 12)
+    canva.drawString(100, 750, "Hello, World!")
+    for site in results:
+        canva.drawString(100, 750, site["name"] + ":" + site["url"])
+    canva.save()
+    console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
+
+
+def filterFoundAccounts(site):
+    if site["status"] == "FOUND":
+        return True
+    else:
+        return False
 
 
 # Verify account existence based on list args
@@ -189,7 +209,12 @@ def verifyUsername(username):
         f":chequered_flag: Check completed in {int(end_time - start_time)} seconds ({len(results['results'])} sites)"
     )
     if args.csv:
-        saveToCsv(results)
+        foundAccounts = filter(filterFoundAccounts, results["results"])
+        saveToCsv(results["username"], results["date"], foundAccounts)
+
+    if args.pdf:
+        foundAccounts = filter(filterFoundAccounts, results["results"])
+        saveToPdf(results["username"], results["date"], foundAccounts)
 
 
 # Check for changes in remote list
@@ -241,6 +266,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("-u", "--username", required=True)
     parser.add_argument("--csv", default=False, action=argparse.BooleanOptionalAction)
+    parser.add_argument("--pdf", default=False, action=argparse.BooleanOptionalAction)
     parser.add_argument(
         "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction
     )
