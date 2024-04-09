@@ -91,6 +91,7 @@ def hashJSON(jsonData):
     return jsonHash
 
 
+# Log error in CLI and log file
 def logError(e, message):
     if str(e) != "":
         error = str(e)
