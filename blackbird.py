@@ -92,15 +92,15 @@ def hashJSON(jsonData):
 
 
 def logError(e, message):
+    if str(e) != "":
+        error = str(e)
+    else:
+        error = repr(e)
+    logging.error(f"{message} | {error}")
     if args.verbose:
         console.print(f"⛔  {message}")
         console.print("     | An error occurred:")
-        if str(e) != "":
-            console.print(f"     | {str(e)}")
-            logging.error(f"{message} | {str(e)}")
-        else:
-            console.print(f"     | {repr(e)}")
-            logging.error(f"{message} | {repr(e)}")
+        console.print(f"     | {error}")
 
 
 # Save results to CSV file
