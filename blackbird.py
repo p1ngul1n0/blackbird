@@ -13,6 +13,7 @@ from datetime import datetime
 import logging
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import Paragraph, Frame
 from reportlab.lib.styles import getSampleStyleSheet
 
@@ -132,15 +133,13 @@ def saveToPdf(username, date, results):
     canva = canvas.Canvas(fileName, pagesize=letter)
     styles = getSampleStyleSheet()
 
-    canva.setFont("Helvetica-Bold", 24)
-    canva.drawCentredString(width / 2, height - 50, "BLACKBIRD")
-    canva.setFont("Helvetica", 12)
-    canva.drawCentredString(width / 2, height - 80, "Made with ❤ by @p1ngul1n0")
-    canva.setFont("Helvetica", 10)
-    canva.drawString(50, height - 120, "Date: April 9, 2024 1:2:39")
-    canva.linkURL("https://p1ngul1n0.com", (50, height - 180, 200, height - 170), relative=1)
-    canva.setFont("Helvetica-Bold", 18)
-    canva.drawString(50, height - 200, "Results")
+    canva.drawImage("assets\\blackbird-logo.png", 30, height - 100, width=80, height=80)
+    canva.setFont("Helvetica-Bold", 15)
+    canva.drawString(35, height - 110, "Blackbird Report")
+    canva.setFont("Helvetica-Bold", 10)
+    canva.drawCentredString(width / 2, height - 130, username)    
+    canva.setFont("Helvetica-Bold", 13)
+    canva.drawString(50, height - 150, f"> Found {len(results)} accounts")
 
     frame = Frame(50, 50, width - 100, height - 250)
     story = []
@@ -230,11 +229,11 @@ def verifyUsername(username):
         f":chequered_flag: Check completed in {int(end_time - start_time)} seconds ({len(results['results'])} sites)"
     )
     if args.csv:
-        foundAccounts = filter(filterFoundAccounts, results["results"])
+        foundAccounts = list(filter(filterFoundAccounts, results["results"]))
         saveToCsv(results["username"], results["date"], foundAccounts)
 
     if args.pdf:
-        foundAccounts = filter(filterFoundAccounts, results["results"])
+        foundAccounts = list(filter(filterFoundAccounts, results["results"]))
         saveToPdf(results["username"], results["date"], foundAccounts)
 
 
