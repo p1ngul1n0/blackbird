@@ -262,3 +262,4 @@ results/
 pyvenv.cfg
 wmn-data.json
 *.csv
+*.pdf

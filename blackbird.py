@@ -13,6 +13,8 @@ from datetime import datetime
 import logging
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from reportlab.platypus import Paragraph, Frame
+from reportlab.lib.styles import getSampleStyleSheet
 
 
 console = Console()
@@ -123,14 +125,33 @@ def saveToCsv(username, date, results):
     except Exception as e:
         logError(e, "Coudn't saved results to CSV file!")
 
-
+# Save results to PDF file
 def saveToPdf(username, date, results):
     fileName = username + "_" + date + "_blackbird.pdf"
+    width, height = letter
     canva = canvas.Canvas(fileName, pagesize=letter)
+    styles = getSampleStyleSheet()
+
+    canva.setFont("Helvetica-Bold", 24)
+    canva.drawCentredString(width / 2, height - 50, "BLACKBIRD")
     canva.setFont("Helvetica", 12)
-    canva.drawString(100, 750, "Hello, World!")
-    for site in results:
-        canva.drawString(100, 750, site["name"] + ":" + site["url"])
+    canva.drawCentredString(width / 2, height - 80, "Made with ❤ by @p1ngul1n0")
+    canva.setFont("Helvetica", 10)
+    canva.drawString(50, height - 120, "Date: April 9, 2024 1:2:39")
+    canva.linkURL("https://p1ngul1n0.com", (50, height - 180, 200, height - 170), relative=1)
+    canva.setFont("Helvetica-Bold", 18)
+    canva.drawString(50, height - 200, "Results")
+
+    frame = Frame(50, 50, width - 100, height - 250)
+    story = []
+    p_style = styles["Normal"]
+    p_style.fontSize = 10
+
+    for result in results:
+        story.append(Paragraph(result["name"] + ":" + result["url"], p_style))
+
+    frame.addFromList(story, canva)
+    
     canva.save()
     console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
 
