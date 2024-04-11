@@ -11,10 +11,10 @@ from rich.console import Console
 import csv
 from datetime import datetime
 import logging
+from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from reportlab.pdfbase import pdfmetrics
-from reportlab.platypus import Paragraph, Frame
+from reportlab.platypus import Paragraph, Frame, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet
 
 
@@ -132,22 +132,42 @@ def saveToPdf(username, date, results):
     width, height = letter
     canva = canvas.Canvas(fileName, pagesize=letter)
     styles = getSampleStyleSheet()
+    accountsCount = len(results)
 
     canva.drawImage("assets\\blackbird-logo.png", 30, height - 100, width=80, height=80)
-    canva.setFont("Helvetica-Bold", 15)
-    canva.drawString(35, height - 110, "Blackbird Report")
-    canva.setFont("Helvetica-Bold", 10)
-    canva.drawCentredString(width / 2, height - 130, username)    
+    canva.setFont("Helvetica-Bold", 20)
+    canva.drawString(40, height - 110, "Blackbird Report")
+    
+    canva.setFillColor("#EDEBED");
+    canva.setStrokeColor("#BAB8BA");
+    canva.rect(40, height - 160, 530, 35, stroke=1, fill=1);
+    canva.setFillColor("#000000");
     canva.setFont("Helvetica-Bold", 13)
-    canva.drawString(50, height - 150, f"> Found {len(results)} accounts")
+    canva.drawCentredString(width / 2, height - 145, username)    
 
-    frame = Frame(50, 50, width - 100, height - 250)
+    canva.setFillColor("#fceca9");
+    canva.setStrokeColor("#D9C884");
+    canva.rect(40, height - 210, 530, 35, stroke=1, fill=1);
+    canva.setFillColor("#57523f")
+    canva.setFont("Helvetica-Bold", 8)
+    canva.drawImage("assets\\warning.png", 50, height - 197, width=10, height=10, mask='auto')
+    canva.drawString(70, height - 195, "Blackbird can make mistakes. Consider checking the information.")
+
+    canva.setFillColor("#000000");
+    canva.setFont("Helvetica-Bold", 15)
+    canva.drawImage("assets\\arrow.png", 40, height - 240, width=10, height=10, mask='auto')
+    canva.drawString(55, height - 240, f"Found {accountsCount} account{'s' if accountsCount > 1 else ''}")
+
     story = []
-    p_style = styles["Normal"]
-    p_style.fontSize = 10
+    frame = Frame(50, 5, width - 100, height - 250)
+    
+
 
     for result in results:
-        story.append(Paragraph(result["name"] + ":" + result["url"], p_style))
+        p_style = styles["Normal"]
+        p_style.fontSize = 13
+        p_style.fontName = "Helvetica-Bold"
+        story.append(Paragraph(result["name"], p_style))
 
     frame.addFromList(story, canva)
     
@@ -294,7 +314,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    checkUpdates()
+    #checkUpdates()
 
     if args.username:
         verifyUsername(args.username)
