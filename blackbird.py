@@ -142,14 +142,14 @@ def saveToPdf(username, date, results):
     canva.setStrokeColor("#BAB8BA");
     canva.rect(40, height - 160, 530, 35, stroke=1, fill=1);
     canva.setFillColor("#000000");
-    canva.setFont("Helvetica-Bold", 13)
+    canva.setFont("Helvetica-Bold", 11)
     canva.drawCentredString(width / 2, height - 145, username)    
 
     canva.setFillColor("#fceca9");
     canva.setStrokeColor("#D9C884");
     canva.rect(40, height - 210, 530, 35, stroke=1, fill=1);
     canva.setFillColor("#57523f")
-    canva.setFont("Helvetica-Bold", 8)
+    canva.setFont("Helvetica", 8)
     canva.drawImage("assets\\warning.png", 50, height - 197, width=10, height=10, mask='auto')
     canva.drawString(70, height - 195, "Blackbird can make mistakes. Consider checking the information.")
 
