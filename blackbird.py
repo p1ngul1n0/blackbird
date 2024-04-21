@@ -314,7 +314,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    #checkUpdates()
+    checkUpdates()
 
     if args.username:
         verifyUsername(args.username)
