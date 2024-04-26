@@ -149,7 +149,7 @@ def saveToPdf(username, date, results):
     canva.setFont("Helvetica-Bold", 11)
     canva.drawCentredString(width / 2, height - 145, username)    
 
-    canva.setFillColor("#fceca9");
+    canva.setFillColor("#FFF8C5");
     canva.setStrokeColor("#D9C884");
     canva.rect(40, height - 210, 530, 35, stroke=1, fill=1);
     canva.setFillColor("#57523f")
