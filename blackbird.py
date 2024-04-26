@@ -16,6 +16,8 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph, Frame, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.pdfbase.pdfmetrics import stringWidth
+
 
 
 console = Console()
@@ -135,13 +137,15 @@ def saveToPdf(username, date, results):
     accountsCount = len(results)
 
     canva.drawImage("assets\\blackbird-logo.png", 30, height - 100, width=80, height=80)
-    canva.setFont("Helvetica-Bold", 20)
-    canva.drawString(40, height - 110, "Blackbird Report")
+    canva.setFont("Helvetica-Bold", 15)
+    canva.drawString(110, height - 70, "Account Enumeration Report")
     
     canva.setFillColor("#EDEBED");
     canva.setStrokeColor("#BAB8BA");
     canva.rect(40, height - 160, 530, 35, stroke=1, fill=1);
     canva.setFillColor("#000000");
+    usernameWidth = stringWidth(username, "Helvetica-Bold", 11)
+    canva.drawImage("assets\\correct.png", (width / 2) - ((usernameWidth / 2) + 15)  , height - 147, width=10, height=10, mask='auto')
     canva.setFont("Helvetica-Bold", 11)
     canva.drawCentredString(width / 2, height - 145, username)    
 
@@ -150,26 +154,24 @@ def saveToPdf(username, date, results):
     canva.rect(40, height - 210, 530, 35, stroke=1, fill=1);
     canva.setFillColor("#57523f")
     canva.setFont("Helvetica", 8)
-    canva.drawImage("assets\\warning.png", 50, height - 197, width=10, height=10, mask='auto')
+    canva.drawImage("assets\\warning.png", 55, height - 197, width=10, height=10, mask='auto')
     canva.drawString(70, height - 195, "Blackbird can make mistakes. Consider checking the information.")
 
-    canva.setFillColor("#000000");
-    canva.setFont("Helvetica-Bold", 15)
-    canva.drawImage("assets\\arrow.png", 40, height - 240, width=10, height=10, mask='auto')
-    canva.drawString(55, height - 240, f"Found {accountsCount} account{'s' if accountsCount > 1 else ''}")
+    if (accountsCount >= 1):
+        canva.setFillColor("#000000");
+        canva.setFont("Helvetica-Bold", 15)
+        canva.drawImage("assets\\arrow.png", 40, height - 240, width=10, height=10, mask='auto')
+        canva.drawString(55, height - 240, f"Found {accountsCount} account{'s' if accountsCount > 1  else ''}")
+        story = []
+        frame = Frame(50, 5, width - 100, height - 250)
 
-    story = []
-    frame = Frame(50, 5, width - 100, height - 250)
-    
+        for result in results:
+            p_style = styles["Normal"]
+            p_style.fontSize = 13
+            p_style.fontName = "Helvetica-Bold"
+            story.append(Paragraph(result["name"], p_style))
 
-
-    for result in results:
-        p_style = styles["Normal"]
-        p_style.fontSize = 13
-        p_style.fontName = "Helvetica-Bold"
-        story.append(Paragraph(result["name"], p_style))
-
-    frame.addFromList(story, canva)
+        frame.addFromList(story, canva)
     
     canva.save()
     console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
@@ -304,17 +306,21 @@ if __name__ == "__main__":
         prog="blackbird",
         description="An OSINT tool to search for accounts by username in social networks.",
     )
-    parser.add_argument("-u", "--username", required=True)
-    parser.add_argument("--csv", default=False, action=argparse.BooleanOptionalAction)
-    parser.add_argument("--pdf", default=False, action=argparse.BooleanOptionalAction)
+    parser.add_argument("-u", "--username", required=True, help="The given username to search.")
+    parser.add_argument("--csv", default=False, action=argparse.BooleanOptionalAction, help="Generate a CSV with the results.")
+    parser.add_argument("--pdf", default=False, action=argparse.BooleanOptionalAction, help="Generate a PDF with the results.")
     parser.add_argument(
-        "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction
+        "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction, help="Show errors and not found sites."
     )
     parser.add_argument("-t", "--timeout", type=int, default=30)
+    parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
 
     args = parser.parse_args()
 
-    checkUpdates()
+    if args.no_update:
+        console.print(":next_track_button: Skipping update...")
+    else:
+        checkUpdates()
 
     if args.username:
         verifyUsername(args.username)
