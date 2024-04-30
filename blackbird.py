@@ -312,7 +312,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction, help="Show errors and not found sites."
     )
-    parser.add_argument("-t", "--timeout", type=int, default=30)
+    parser.add_argument("-t", "--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
     parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
 
     args = parser.parse_args()
