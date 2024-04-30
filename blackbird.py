@@ -8,15 +8,16 @@ import json
 import argparse
 import time
 from rich.console import Console
+from rich.progress import Progress
 import csv
 from datetime import datetime
 import logging
-from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from reportlab.platypus import Paragraph, Frame, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import stringWidth
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
 
 
@@ -129,50 +130,54 @@ def saveToCsv(username, date, results):
         logError(e, "Coudn't saved results to CSV file!")
 
 # Save results to PDF file
-def saveToPdf(username, date, results):
+def saveToPdf(username, prettyDate, date, results):
+    pdfmetrics.registerFont(TTFont('Montserrat', 'assets\\Montserrat-Regular.ttf'))
+    pdfmetrics.registerFont(TTFont('Montserrat-Bold', 'assets\\Montserrat-Bold.ttf'))
+
     fileName = username + "_" + date + "_blackbird.pdf"
     width, height = letter
     canva = canvas.Canvas(fileName, pagesize=letter)
     styles = getSampleStyleSheet()
     accountsCount = len(results)
 
-    canva.drawImage("assets\\blackbird-logo.png", 30, height - 100, width=80, height=80)
-    canva.setFont("Helvetica-Bold", 15)
-    canva.drawString(110, height - 70, "Account Enumeration Report")
+    canva.drawImage("assets\\blackbird-logo.png", 30, height - 90, width=60, height=60)
+    canva.setFont("Montserrat-Bold", 15)
+    canva.drawCentredString((width / 2) - 10, height - 70, "Report")
+    canva.setFont("Montserrat", 7)
+    canva.drawString(width - 90, height - 70, prettyDate)
     
     canva.setFillColor("#EDEBED");
     canva.setStrokeColor("#BAB8BA");
     canva.rect(40, height - 160, 530, 35, stroke=1, fill=1);
     canva.setFillColor("#000000");
-    usernameWidth = stringWidth(username, "Helvetica-Bold", 11)
+    usernameWidth = stringWidth(username, "Montserrat-Bold", 11)
     canva.drawImage("assets\\correct.png", (width / 2) - ((usernameWidth / 2) + 15)  , height - 147, width=10, height=10, mask='auto')
-    canva.setFont("Helvetica-Bold", 11)
+    canva.setFont("Montserrat-Bold", 11)
     canva.drawCentredString(width / 2, height - 145, username)    
 
     canva.setFillColor("#FFF8C5");
     canva.setStrokeColor("#D9C884");
     canva.rect(40, height - 210, 530, 35, stroke=1, fill=1);
     canva.setFillColor("#57523f")
-    canva.setFont("Helvetica", 8)
+    canva.setFont("Montserrat", 8)
     canva.drawImage("assets\\warning.png", 55, height - 197, width=10, height=10, mask='auto')
     canva.drawString(70, height - 195, "Blackbird can make mistakes. Consider checking the information.")
 
     if (accountsCount >= 1):
         canva.setFillColor("#000000");
-        canva.setFont("Helvetica-Bold", 15)
-        canva.drawImage("assets\\arrow.png", 40, height - 240, width=10, height=10, mask='auto')
-        canva.drawString(55, height - 240, f"Found {accountsCount} account{'s' if accountsCount > 1  else ''}")
-        story = []
-        frame = Frame(50, 5, width - 100, height - 250)
-
+        canva.setFont("Montserrat", 15)
+        canva.drawImage("assets\\arrow.png", 40, height - 240, width=12, height=12, mask='auto')
+        canva.drawString(55, height - 240, f"Results ({accountsCount})")
+        
+        y_position = height - 270
         for result in results:
-            p_style = styles["Normal"]
-            p_style.fontSize = 13
-            p_style.fontName = "Helvetica-Bold"
-            story.append(Paragraph(result["name"], p_style))
+            if y_position < 72:
+                canva.showPage()
+                y_position = height - 130
+            canva.setFont("Montserrat", 12)
+            canva.drawString(72, y_position, f"• {result['name']}")
+            y_position -= 25 
 
-        frame.addFromList(story, canva)
-    
     canva.save()
     console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
 
@@ -230,11 +235,13 @@ async def fetchResults(username):
                 )
             )
         tasksResults = await asyncio.gather(*tasks, return_exceptions=True)
-        dateNow = datetime.now().strftime("%m-%d-%Y")
+        dateRaw = datetime.now().strftime("%m_%d_%Y")
+        datePretty = datetime.now().strftime("%B %d, %Y")
         results = {
             "results": tasksResults,
             "username": username,
-            "date": dateNow,
+            "date": dateRaw,
+            "pretty-date": datePretty
         }
     return results
 
@@ -250,13 +257,15 @@ def verifyUsername(username):
     console.print(
         f":chequered_flag: Check completed in {int(end_time - start_time)} seconds ({len(results['results'])} sites)"
     )
-    if args.csv:
-        foundAccounts = list(filter(filterFoundAccounts, results["results"]))
-        saveToCsv(results["username"], results["date"], foundAccounts)
+    foundAccounts = list(filter(filterFoundAccounts, results["results"]))
+    if (len(foundAccounts) > 0):
+        if args.csv:
+            saveToCsv(results["username"], results["date"], foundAccounts)
 
-    if args.pdf:
-        foundAccounts = list(filter(filterFoundAccounts, results["results"]))
-        saveToPdf(results["username"], results["date"], foundAccounts)
+        if args.pdf:
+            saveToPdf(results["username"], results["pretty-date"], results["date"], foundAccounts)
+    else:
+        console.print("⭕ No accounts were found for the given username")
 
 
 # Check for changes in remote list
@@ -318,7 +327,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.no_update:
-        console.print(":next_track_button: Skipping update...")
+        console.print(":next_track_button:  Skipping update...")
     else:
         checkUpdates()
 
