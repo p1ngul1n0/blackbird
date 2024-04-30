@@ -255,7 +255,7 @@ def verifyUsername(username):
     results = asyncio.run(fetchResults(username))
     end_time = time.time()
     console.print(
-        f":chequered_flag: Check completed in {int(end_time - start_time)} seconds ({len(results['results'])} sites)"
+        f":chequered_flag: Check completed in {round(end_time - start_time, 1)} seconds ({len(results['results'])} sites)"
     )
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))
     if (len(foundAccounts) > 0):
@@ -319,7 +319,7 @@ if __name__ == "__main__":
     parser.add_argument("--csv", default=False, action=argparse.BooleanOptionalAction, help="Generate a CSV with the results.")
     parser.add_argument("--pdf", default=False, action=argparse.BooleanOptionalAction, help="Generate a PDF with the results.")
     parser.add_argument(
-        "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction, help="Show errors and not found sites."
+        "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction, help="Show verbose output."
     )
     parser.add_argument("-t", "--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
     parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
