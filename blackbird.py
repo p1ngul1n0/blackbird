@@ -14,10 +14,10 @@ from datetime import datetime
 import logging
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+import sys
 
 
 
@@ -319,7 +319,7 @@ if __name__ == "__main__":
         prog="blackbird",
         description="An OSINT tool to search for accounts by username in social networks.",
     )
-    parser.add_argument("-u", "--username", required=True, help="The given username to search.")
+    parser.add_argument("-u", "--username", help="The given username to search.")
     parser.add_argument("--csv", default=False, action=argparse.BooleanOptionalAction, help="Generate a CSV with the results.")
     parser.add_argument("--pdf", default=False, action=argparse.BooleanOptionalAction, help="Generate a PDF with the results.")
     parser.add_argument(
@@ -327,8 +327,22 @@ if __name__ == "__main__":
     )
     parser.add_argument("-t", "--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
     parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
+    parser.add_argument('-a', '--about', action='store_true', help='Show about information and exit.')
 
     args = parser.parse_args()
+
+    if args.about:
+        console.print("""
+        Author: Lucas Antoniaci (p1ngul1n0)
+        Description: This tool search for accounts using data from the WhatsMyName project, which is an open-source tool developed by WebBreacher.
+        WhatsMyName License: The WhatsMyName project is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0).
+        WhatsMyName Project: https://github.com/WebBreacher/WhatsMyName
+        """)
+        sys.exit()
+
+
+    if not args.username:
+        parser.error("--username is required.")
 
     if args.no_update:
         console.print(":next_track_button:  Skipping update...")
