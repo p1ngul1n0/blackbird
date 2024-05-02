@@ -131,13 +131,13 @@ def saveToCsv(username, date, results):
 
 # Save results to PDF file
 def saveToPdf(username, prettyDate, date, results):
+    console.print(" ")
     pdfmetrics.registerFont(TTFont('Montserrat', 'assets\\Montserrat-Regular.ttf'))
     pdfmetrics.registerFont(TTFont('Montserrat-Bold', 'assets\\Montserrat-Bold.ttf'))
 
     fileName = username + "_" + date + "_blackbird.pdf"
     width, height = letter
     canva = canvas.Canvas(fileName, pagesize=letter)
-    styles = getSampleStyleSheet()
     accountsCount = len(results)
 
     canva.drawImage("assets\\blackbird-logo.png", 30, height - 90, width=60, height=60)
@@ -176,6 +176,9 @@ def saveToPdf(username, prettyDate, date, results):
                 y_position = height - 130
             canva.setFont("Montserrat", 12)
             canva.drawString(72, y_position, f"• {result['name']}")
+            siteWidth = stringWidth(f"• {result['name']}", "Montserrat", 12)
+            canva.drawImage("assets\\link.png", 77 + siteWidth, y_position, width=10, height=10, mask='auto')
+            canva.linkURL(result['url'], (77 + siteWidth, y_position, 77 + siteWidth + 10, y_position + 10), relative=1)
             y_position -= 25 
 
     canva.save()
