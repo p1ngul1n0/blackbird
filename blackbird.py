@@ -131,7 +131,6 @@ def saveToCsv(username, date, results):
 
 # Save results to PDF file
 def saveToPdf(username, prettyDate, date, results):
-    console.print(" ")
     pdfmetrics.registerFont(TTFont('Montserrat', 'assets\\Montserrat-Regular.ttf'))
     pdfmetrics.registerFont(TTFont('Montserrat-Bold', 'assets\\Montserrat-Bold.ttf'))
 
@@ -140,11 +139,13 @@ def saveToPdf(username, prettyDate, date, results):
     canva = canvas.Canvas(fileName, pagesize=letter)
     accountsCount = len(results)
 
-    canva.drawImage("assets\\blackbird-logo.png", 30, height - 90, width=60, height=60)
+    canva.drawImage("assets\\blackbird-logo.png", 35, height - 90, width=60, height=60)
     canva.setFont("Montserrat-Bold", 15)
-    canva.drawCentredString((width / 2) - 10, height - 70, "Report")
+    canva.drawCentredString((width / 2) - 5, height - 70, "Report")
     canva.setFont("Montserrat", 7)
     canva.drawString(width - 90, height - 70, prettyDate)
+    canva.setFont("Montserrat", 5)
+    canva.drawString(width - 185, height - 25, "This report was generated using the Blackbird OSINT Tool.")
     
     canva.setFillColor("#EDEBED");
     canva.setStrokeColor("#BAB8BA");
