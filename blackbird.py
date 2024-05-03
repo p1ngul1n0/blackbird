@@ -8,7 +8,6 @@ import json
 import argparse
 import time
 from rich.console import Console
-from rich.progress import Progress
 import csv
 from datetime import datetime
 import logging
@@ -19,17 +18,20 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import sys
 
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+
+import config
 
 
 console = Console()
 
 load_dotenv()
-listURL = os.getenv("LIST_URL")
-listFileName = os.getenv("LIST_FILENAME")
-proxy = os.getenv("PROXY") if os.getenv("USE_PROXY") == "TRUE" else None
-proxies = {"http": proxy, "https": proxy} if os.getenv("USE_PROXY") == "TRUE" else None
+listURL = config.LIST_URL
+listFileName = config.LIST_FILENAME
+proxy = config.PROXY if config.USE_PROXY == "TRUE" else None
+proxies = {"http": proxy, "https": proxy} if config.USE_PROXY == "TRUE" else None
 logging.basicConfig(
-    filename=os.getenv("LOG_FILENAME"),
+    filename=config.LOG_PATH,
     level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
