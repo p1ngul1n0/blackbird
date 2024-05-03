@@ -15,3 +15,15 @@ USE_PROXY="FALSE"
 LOG_DIRECTORY="logs"
 LOG_FILENAME="blackbird.log"
 LOG_PATH = os.path.join(os.getcwd(), LOG_DIRECTORY, LOG_FILENAME)
+
+# Assets
+ASSETS_DIRECTORY="assets"
+FONTS_DIRECTORY="fonts"
+IMAGES_DIRECTORY="img"
+
+
+# PDF
+FONT_REGULAR_FILE = "MontSerrat-Regular.ttf"
+FONT_BOLD_FILE = "MontSerrat-Bold.ttf"
+FONT_NAME_REGULAR = "Montserrat"
+FONT_NAME_BOLD = "Montserrat-Bold"
