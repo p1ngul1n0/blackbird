@@ -40,11 +40,11 @@ def checkUpdates():
                 console.print(":counterclockwise_arrows_button: Updating...")
                 downloadList()
             else:
-                console.print("✔️  List is up to date")
+                console.print("✔️  Sites List is up to date")
         except Exception as e:
             console.print(":police_car_light: Coudn't read local list")
-            console.print(":down_arrow: Downloading WhatsMyName list")
+            console.print(":down_arrow: Downloading site list")
             downloadList()
     else:
-        console.print(":globe_with_meridians: Downloading WhatsMyName list")
+        console.print(":globe_with_meridians: Downloading site list")
         downloadList()
