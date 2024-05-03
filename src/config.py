@@ -23,7 +23,7 @@ IMAGES_DIRECTORY="img"
 
 
 # PDF
-FONT_REGULAR_FILE = "MontSerrat-Regular.ttf"
-FONT_BOLD_FILE = "MontSerrat-Bold.ttf"
+FONT_REGULAR_FILE = "Montserrat-Regular.ttf"
+FONT_BOLD_FILE = "Montserrat-Bold.ttf"
 FONT_NAME_REGULAR = "Montserrat"
 FONT_NAME_BOLD = "Montserrat-Bold"
