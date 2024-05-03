@@ -12,6 +12,10 @@ from modules.core.main import verifyUsername
 
 
 def initiate():
+    if (not os.path.isfile(config.LOG_PATH)):
+        file = open(config.LOG_PATH, 'w')
+        file.close()
+    
     logging.basicConfig(
     filename=config.LOG_PATH,
     level=logging.DEBUG,
