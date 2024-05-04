@@ -33,7 +33,7 @@ def initiate():
     parser.add_argument('-a', '--about', action='store_true', help='Show about information and exit.')
     args = parser.parse_args()
 
-    # Armazenar o valor parseado globalmente no módulo config
+    # Store the necessary arguments to config Object
     config.username = args.username
     config.csv = args.csv
     config.pdf = args.pdf
