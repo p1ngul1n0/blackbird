@@ -4,7 +4,7 @@ import time
 import aiohttp
 import asyncio
 from modules.whatsmyname.list_operations import readList
-from modules.utils.filter import filterFoundAccounts
+from modules.utils.filter import filterFoundAccounts, filterAccounts
 from modules.utils.http_client import do_async_request
 from modules.utils.log import logError
 from modules.export.csv import saveToCsv
@@ -48,9 +48,21 @@ async def checkSite(site, method, url, session):
 # Control survey on list sites
 async def fetchResults(username):
     data = readList()
+
     async with aiohttp.ClientSession() as session:
         tasks = []
-        for site in data["sites"]:
+
+        if config.filter:
+            sitesToSearch = list(filter(lambda x: filterAccounts(config.filter, x), data["sites"]))
+            if (len(sitesToSearch)) <= 0:
+                config.console.print(f"⭕ No sites found for the given filter {config.filter}")
+                sys.exit()
+            else:
+                config.console.print(f":page_with_curl: {len(sitesToSearch)} sites found for the given filter {config.filter}")
+        else:
+            sitesToSearch = data["sites"]
+
+        for site in sitesToSearch:
             tasks.append(
                 checkSite(
                     site=site,
