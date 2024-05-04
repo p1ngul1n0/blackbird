@@ -263,3 +263,4 @@ pyvenv.cfg
 wmn-data.json
 *.csv
 *.pdf
+logs/*.log
