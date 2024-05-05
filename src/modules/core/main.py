@@ -5,6 +5,7 @@ import aiohttp
 import asyncio
 import config
 from pathlib import Path
+from rich.markup import escape
 
 from modules.whatsmyname.list_operations import readList
 from modules.utils.filter import filterFoundAccounts, filterAccounts
@@ -106,7 +107,7 @@ def verifyUsername(username):
         if not path.exists():
             if config.verbose:
                 config.console.print(
-        f"🆕 Creating directory to save search data [{config.saveDirectory}]"
+        f"🆕 Creating directory to save search data [{escape(path)}]"
     )
             path.mkdir(parents=True, exist_ok=True)
 
@@ -116,7 +117,7 @@ def verifyUsername(username):
             if not path.exists():
                 if config.verbose:
                     config.console.print(
-                        f"🆕 Creating directory to save dump data [{config.saveDirectory}/dump]"
+                        f"🆕 Creating directory to save dump data [{escape(path)}]"
                     )
                 path.mkdir(parents=True, exist_ok=True)
 
