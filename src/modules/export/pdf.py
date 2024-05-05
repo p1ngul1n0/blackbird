@@ -16,8 +16,9 @@ def saveToPdf(username, prettyDate, date, results):
     pdfmetrics.registerFont(TTFont(config.FONT_NAME_BOLD, boldFontFile))
 
     fileName = username + "_" + date + "_blackbird.pdf"
+    path = os.path.join(config.saveDirectory, fileName)
     width, height = letter
-    canva = canvas.Canvas(fileName, pagesize=letter)
+    canva = canvas.Canvas(path, pagesize=letter)
     accountsCount = len(results)
 
     canva.drawImage(os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.IMAGES_DIRECTORY, "blackbird-logo.png"), 35, height - 90, width=60, height=60)

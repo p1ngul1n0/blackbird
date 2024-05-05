@@ -265,3 +265,4 @@ wmn-data.json
 *.pdf
 logs/*.log
 logs/blackbird.log
+*_blackbird/*

@@ -3,6 +3,7 @@ import argparse
 from rich.console import Console
 import logging
 import sys
+from datetime import datetime
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
@@ -29,6 +30,7 @@ def initiate():
         "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction, help="Show verbose output."
     )
     parser.add_argument("-f", "--filter", help="Filter sites to be searched by list property value.E.g --filter \"cat=social\"")
+    parser.add_argument("-d", "--dump", default=False, action=argparse.BooleanOptionalAction, help="Dump HTML content for found accounts.")
     parser.add_argument("-t", "--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
     parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
     parser.add_argument('-a', '--about', action='store_true', help='Show about information and exit.')
@@ -39,12 +41,17 @@ def initiate():
     config.csv = args.csv
     config.pdf = args.pdf
     config.filter = args.filter
+    config.dump = args.dump
     config.verbose = args.verbose
     config.timeout = args.timeout
     config.no_update = args.no_update
     config.about = args.about
 
     config.console = Console()
+
+    config.dateRaw = datetime.now().strftime("%m_%d_%Y")
+    config.datePretty = datetime.now().strftime("%B %d, %Y")
+
     
 
 if __name__ == "__main__":

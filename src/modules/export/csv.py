@@ -3,7 +3,7 @@ import config
 import sys
 import os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', ''))
 
 from utils.log import logError
 
@@ -11,8 +11,9 @@ from utils.log import logError
 def saveToCsv(username, date, results):
     try:
         fileName = username + "_" + date + "_blackbird.csv"
+        path = os.path.join(config.saveDirectory, fileName)
         with open(
-            fileName,
+            path,
             "w",
             newline="",
         ) as file:

@@ -3,14 +3,16 @@ import os
 import time
 import aiohttp
 import asyncio
+import config
+from pathlib import Path
+
 from modules.whatsmyname.list_operations import readList
 from modules.utils.filter import filterFoundAccounts, filterAccounts
 from modules.utils.http_client import do_async_request
 from modules.utils.log import logError
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
-import config
-from datetime import datetime
+from modules.export.html import dumpHTML
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
@@ -33,6 +35,11 @@ async def checkSite(site, method, url, session):
                     config.console.print(
                         f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                     )
+                    
+                    # Save response content to a .HTML file
+                    if config.dump:
+                        path = os.path.join(config.saveDirectory, 'dump', f'{site["name"]}.html')
+                        dumpHTML(path, response["content"])
             else:
                 returnData["status"] = "NOT-FOUND"
                 if config.verbose:
@@ -72,13 +79,9 @@ async def fetchResults(username):
                 )
             )
         tasksResults = await asyncio.gather(*tasks, return_exceptions=True)
-        dateRaw = datetime.now().strftime("%m_%d_%Y")
-        datePretty = datetime.now().strftime("%B %d, %Y")
         results = {
             "results": tasksResults,
-            "username": username,
-            "date": dateRaw,
-            "pretty-date": datePretty
+            "username": username
         }
     return results
 
@@ -89,17 +92,36 @@ def verifyUsername(username):
         f':play_button: Enumerating accounts with username "[cyan1]{username}[/cyan1]"'
     )
     start_time = time.time()
+
+    # Creates directory to save PDF, CSV and HTML content
+    if config.dump or config.csv or config.pdf:
+        strPath = os.path.join(os.path.dirname(__file__), '..', '..', '..', Path(f"{username}_{config.dateRaw}_blackbird"))
+        config.saveDirectory = strPath
+        path = Path(strPath)
+        if not path.exists():
+            path.mkdir(parents=True, exist_ok=True)
+
+        if config.dump:
+            strPath = os.path.join(config.saveDirectory, "dump")
+            path = Path(strPath)
+            if not path.exists():
+                path.mkdir(parents=True, exist_ok=True)
+
     results = asyncio.run(fetchResults(username))
     end_time = time.time()
     config.console.print(
         f":chequered_flag: Check completed in {round(end_time - start_time, 1)} seconds ({len(results['results'])} sites)"
     )
+    
+    # Filter results to only found accounts
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))
+    
     if (len(foundAccounts) > 0):
+
         if config.csv:
-            saveToCsv(results["username"], results["date"], foundAccounts)
+            saveToCsv(results["username"], config.dateRaw, foundAccounts)
 
         if config.pdf:
-            saveToPdf(results["username"], results["pretty-date"], results["date"], foundAccounts)
+            saveToPdf(results["username"], config.datePretty, config.dateRaw, foundAccounts)
     else:
         config.console.print("⭕ No accounts were found for the given username")
