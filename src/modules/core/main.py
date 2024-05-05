@@ -39,7 +39,7 @@ async def checkSite(site, method, url, session):
                     
                     # Save response content to a .HTML file
                     if config.dump:
-                        path = os.path.join(config.saveDirectory, 'dump', f'{site["name"]}.html')
+                        path = os.path.join(config.saveDirectory, 'dump', f'{site["name"].replace(" ", "_")}.html')
 
                         result = dumpHTML(path, response["content"])
                         if result == True and config.verbose:
