@@ -266,3 +266,4 @@ wmn-data.json
 logs/*.log
 logs/blackbird.log
 *_blackbird/*
+*.log
