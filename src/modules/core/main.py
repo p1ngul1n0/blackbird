@@ -106,8 +106,8 @@ def verifyUsername(username):
         path = Path(strPath)
         if not path.exists():
             if config.verbose:
-                config.console.print(
-        f"🆕 Creating directory to save search data [{escape(strPath)}]"
+                config.console.print(escape(
+        f"🆕 Creating directory to save search data [{strPath}]")
     )
             path.mkdir(parents=True, exist_ok=True)
 
@@ -116,8 +116,8 @@ def verifyUsername(username):
             path = Path(strPath)
             if not path.exists():
                 if config.verbose:
-                    config.console.print(
-                        f"🆕 Creating directory to save dump data [{escape(strPath)}]"
+                    config.console.print(escape(
+                        f"🆕 Creating directory to save dump data [{escape(strPath)}]")
                     )
                 path.mkdir(parents=True, exist_ok=True)
 
