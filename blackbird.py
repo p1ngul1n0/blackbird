@@ -32,6 +32,7 @@ def initiate():
     )
     parser.add_argument("-f", "--filter", help="Filter sites to be searched by list property value.E.g --filter \"cat=social\"")
     parser.add_argument("-d", "--dump", default=False, action=argparse.BooleanOptionalAction, help="Dump HTML content for found accounts.")
+    parser.add_argument("-p", "--proxy", help="Proxy to send HTTP requests though.")
     parser.add_argument("-t", "--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
     parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
     parser.add_argument('-a', '--about', action='store_true', help='Show about information and exit.')
@@ -43,6 +44,7 @@ def initiate():
     config.pdf = args.pdf
     config.filter = args.filter
     config.dump = args.dump
+    config.proxy = args.proxy
     config.verbose = args.verbose
     config.timeout = args.timeout
     config.no_update = args.no_update

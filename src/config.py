@@ -6,11 +6,6 @@ LIST_DIRECTORY="data"
 LIST_FILENAME="wmn-data.json"
 LIST_PATH = os.path.join(os.getcwd(), LIST_DIRECTORY, LIST_FILENAME)
 
-
-# Proxy
-PROXY="http://127.0.0.1:8080"
-USE_PROXY="FALSE"
-
 # Logs
 LOG_DIRECTORY="logs"
 LOG_FILENAME="blackbird.log"

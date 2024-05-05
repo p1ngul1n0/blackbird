@@ -8,12 +8,11 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '.'))
 from log import logError
 
 requests.packages.urllib3.disable_warnings()
-proxy = config.PROXY if config.USE_PROXY == "TRUE" else None
-proxies = {"http": proxy, "https": proxy} if config.USE_PROXY == "TRUE" else None
 
 # Perform a Sync Request and return response details
 def do_sync_request(method, url):
     headers = {"User-Agent": config.userAgent}
+    proxies = {"http": config.proxy, "https": config.proxy} if config.proxy else None
     response = requests.request(
         method=method,
         url=url,
@@ -37,6 +36,7 @@ def do_sync_request(method, url):
 # Perform an Async Request and return response details
 async def do_async_request(method, url, session):
     headers = {"User-Agent": config.userAgent}
+    proxy = config.proxy if config.proxy else None
     try:
         response = await session.request(
             method,
