@@ -1,6 +1,5 @@
 import requests
 import config
-import logging
 import sys
 import os
 
@@ -14,12 +13,14 @@ proxies = {"http": proxy, "https": proxy} if config.USE_PROXY == "TRUE" else Non
 
 # Perform a Sync Request and return response details
 def do_sync_request(method, url):
+    headers = {"User-Agent": config.userAgent}
     response = requests.request(
         method=method,
         url=url,
         proxies=proxies,
         timeout=config.timeout,
         verify=False,
+        headers=headers
     )
     parsedData = None
     try:
@@ -35,6 +36,7 @@ def do_sync_request(method, url):
 
 # Perform an Async Request and return response details
 async def do_async_request(method, url, session):
+    headers = {"User-Agent": config.userAgent}
     try:
         response = await session.request(
             method,
@@ -43,6 +45,7 @@ async def do_async_request(method, url, session):
             timeout=config.timeout,
             allow_redirects=True,
             ssl=False,
+            headers=headers
         )
 
         content = await response.text()

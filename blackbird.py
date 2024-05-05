@@ -10,6 +10,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 import config
 from modules.whatsmyname.list_operations import checkUpdates
 from modules.core.main import verifyUsername
+from modules.utils.userAgent import getRandomUserAgent
 
 
 def initiate():
@@ -52,6 +53,7 @@ def initiate():
     config.dateRaw = datetime.now().strftime("%m_%d_%Y")
     config.datePretty = datetime.now().strftime("%B %d, %Y")
 
+    config.userAgent = getRandomUserAgent()
     
 
 if __name__ == "__main__":
