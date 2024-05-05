@@ -19,5 +19,5 @@ def filterAccounts(filter, site):
         else:
             return False
     else:
-        config.console.print("⭕ Filter is not in correct format")
+        config.console.print("⭕ Filter is not in correct format. Format should be --filter \"property=value\"")
         sys.exit()

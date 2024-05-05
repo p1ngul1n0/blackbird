@@ -58,7 +58,7 @@ async def fetchResults(username):
                 config.console.print(f"⭕ No sites found for the given filter {config.filter}")
                 sys.exit()
             else:
-                config.console.print(f":page_with_curl: {len(sitesToSearch)} sites found for the given filter {config.filter}")
+                config.console.print(f":page_with_curl: {len(sitesToSearch)} sites found for the given filter \"{config.filter}\"")
         else:
             sitesToSearch = data["sites"]
 

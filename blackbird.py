@@ -28,7 +28,7 @@ def initiate():
     parser.add_argument(
         "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction, help="Show verbose output."
     )
-    parser.add_argument("-f", "--filter", help="Filter sites to be searched.E.g --filter \"cat=social\"")
+    parser.add_argument("-f", "--filter", help="Filter sites to be searched by list property value.E.g --filter \"cat=social\"")
     parser.add_argument("-t", "--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
     parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
     parser.add_argument('-a', '--about', action='store_true', help='Show about information and exit.')
