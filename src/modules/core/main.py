@@ -39,7 +39,12 @@ async def checkSite(site, method, url, session):
                     # Save response content to a .HTML file
                     if config.dump:
                         path = os.path.join(config.saveDirectory, 'dump', f'{site["name"]}.html')
-                        dumpHTML(path, response["content"])
+
+                        result = dumpHTML(path, response["content"])
+                        if result == True and config.verbose:
+                            config.console.print(
+                                f"      💾  Saved HTML data from found account"
+                            )
             else:
                 returnData["status"] = "NOT-FOUND"
                 if config.verbose:
@@ -99,19 +104,31 @@ def verifyUsername(username):
         config.saveDirectory = strPath
         path = Path(strPath)
         if not path.exists():
+            if config.verbose:
+                config.console.print(
+        f"🆕 Creating directory to save search data [{path}]"
+    )
             path.mkdir(parents=True, exist_ok=True)
 
         if config.dump:
             strPath = os.path.join(config.saveDirectory, "dump")
             path = Path(strPath)
             if not path.exists():
+                if config.verbose:
+                    config.console.print(
+                        f"🆕 Creating directory to save dump data [{path}]"
+                    )
                 path.mkdir(parents=True, exist_ok=True)
 
     results = asyncio.run(fetchResults(username))
     end_time = time.time()
+    
     config.console.print(
         f":chequered_flag: Check completed in {round(end_time - start_time, 1)} seconds ({len(results['results'])} sites)"
     )
+
+    if config.dump:
+        config.console.print(f"💾  Dump content saved to '[cyan1]{config.username}_{config.dateRaw}_blackbird/dump[/cyan1]'")
     
     # Filter results to only found accounts
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))

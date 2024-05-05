@@ -25,7 +25,11 @@ def do_sync_request(method, url):
     try:
         parsedData = response.json()
     except Exception as e:
+        if config.verbose:
+            config.console.print(f"  ❌ Error in Sync HTTP Request [{method}] {url}")
         logError(e, f"Error in Sync HTTP Request [{method}] {url}")
+    if config.verbose:
+        config.console.print(f"  🆗 Sync HTTP Request completed [{method} - {response.status_code}] {url}")
     return response, parsedData
 
 
@@ -48,7 +52,11 @@ async def do_async_request(method, url, session):
             "headers": response.headers,
             "content": content,
         }
+        if config.verbose:
+            config.console.print(f"  🆗 Async HTTP Request completed [{method} - {response.status}] {url}")
         return responseData
     except Exception as e:
+        if config.verbose:
+            config.console.print(f"  ❌ Error in Async HTTP Request [{method}] {url}")
         logError(e, f"Error in Async HTTP Request [{method}] {url}")
         return None
