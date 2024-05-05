@@ -267,3 +267,5 @@ logs/*.log
 logs/blackbird.log
 *_blackbird/*
 *.log
+logs/blackbird.log
+/logs
