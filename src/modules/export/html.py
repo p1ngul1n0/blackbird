@@ -8,7 +8,7 @@ from utils.log import logError
 # Dump HTML data to a .html file
 def dumpHTML(path, content):
     try:
-        with open(path, "w") as htmlFile:
+        with open(path, "w", encoding="utf-8") as htmlFile:
             htmlFile.write(content)
         return True
     except Exception as e:

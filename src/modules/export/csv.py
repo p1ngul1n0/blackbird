@@ -15,7 +15,7 @@ def saveToCsv(username, date, results):
         with open(
             path,
             "w",
-            newline="",
+            newline="", encoding="utf-8"
         ) as file:
             writer = csv.writer(file)
             writer.writerow(["name", "url"])
