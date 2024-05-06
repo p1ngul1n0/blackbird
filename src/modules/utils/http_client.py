@@ -10,8 +10,10 @@ from log import logError
 requests.packages.urllib3.disable_warnings()
 
 # Perform a Sync Request and return response details
-def do_sync_request(method, url):
+def do_sync_request(method, url, data=None, customHeaders=None):
     headers = {"User-Agent": config.userAgent}
+    if (customHeaders):
+        headers.update(customHeaders)
     proxies = {"http": config.proxy, "https": config.proxy} if config.proxy else None
     response = requests.request(
         method=method,
@@ -19,7 +21,8 @@ def do_sync_request(method, url):
         proxies=proxies,
         timeout=config.timeout,
         verify=False,
-        headers=headers
+        headers=headers,
+        data=data
     )
     parsedData = None
     try:

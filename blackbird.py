@@ -9,7 +9,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 import config
 from modules.whatsmyname.list_operations import checkUpdates
-from modules.core.main import verifyUsername
+from modules.core.main import verifyUsername, verifyEmail
 from modules.utils.userAgent import getRandomUserAgent
 
 
@@ -34,6 +34,7 @@ def initiate():
     parser.add_argument("-d", "--dump", default=False, action=argparse.BooleanOptionalAction, help="Dump HTML content for found accounts.")
     parser.add_argument("-p", "--proxy", help="Proxy to send HTTP requests though.")
     parser.add_argument("-t", "--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
+    parser.add_argument('-e', '--email', help='The given e-mail to search.')
     parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
     parser.add_argument('-a', '--about', action='store_true', help='Show about information and exit.')
     args = parser.parse_args()
@@ -47,6 +48,7 @@ def initiate():
     config.proxy = args.proxy
     config.verbose = args.verbose
     config.timeout = args.timeout
+    config.email = args.email
     config.no_update = args.no_update
     config.about = args.about
 
@@ -89,8 +91,8 @@ if __name__ == "__main__":
         sys.exit()
 
 
-    if not config.username:
-        config.console.print("--username is required.")
+    if not config.username and not config.email:
+        config.console.print("Either --username or --email is required")
         sys.exit()
 
     if config.no_update:
@@ -100,3 +102,6 @@ if __name__ == "__main__":
 
     if config.username:
         verifyUsername(config.username)
+    
+    if config.email:
+        verifyEmail(config.email)

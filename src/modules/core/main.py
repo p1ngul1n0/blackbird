@@ -6,10 +6,13 @@ import asyncio
 import config
 from pathlib import Path
 from rich.markup import escape
+import re
+import hashlib
+
 
 from modules.whatsmyname.list_operations import readList
 from modules.utils.filter import filterFoundAccounts, filterAccounts
-from modules.utils.http_client import do_async_request
+from modules.utils.http_client import do_async_request, do_sync_request
 from modules.utils.log import logError
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
@@ -143,3 +146,47 @@ def verifyUsername(username):
             saveToPdf(results["username"], config.datePretty, config.dateRaw, foundAccounts)
     else:
         config.console.print("⭕ No accounts were found for the given username")
+
+
+def verifyEmail(email):
+    config.console.print(
+        f':play_button: Searching e-mail "[cyan1]{email}[/cyan1]"'
+    )
+    # Verify e-mail in Gravatar
+    email_bytes = email.encode('utf-8')
+    sha256_hash = hashlib.sha256(email_bytes).hexdigest()
+    response, parsedData = do_sync_request("GET", f"https://gravatar.com/{sha256_hash}.json")
+    if (response.status_code == 200):
+        config.console.print("✔️  E-mail found on gravatar.com")
+        config.console.print(f"      Name: {parsedData['entry'][0]['displayName']}")
+        config.console.print(f"      Preferred Username: {parsedData['entry'][0]['preferredUsername']}")
+        config.console.print(f"      Avatar: {parsedData['entry'][0]['thumbnailUrl']}")
+        config.console.print(f"      About Me: {parsedData['entry'][0]['aboutMe']}")
+        config.console.print(f"      Location: {parsedData['entry'][0]['currentLocation']}")
+        config.console.print(f"      Job Title: {parsedData['entry'][0]['job_title']}")
+        config.console.print(f"      Company: {parsedData['entry'][0]['company']}")
+        if (len(parsedData['entry'][0]['contactInfo']) > 0):
+            config.console.print(f"      Contact Info:")
+            for contact in parsedData['entry'][0]['contactInfo']:
+                config.console.print(f"         https://{contact['value']}")
+        if (len(parsedData['entry'][0]['emails']) > 0):
+            config.console.print(f"      Emails:")
+            for email in parsedData['entry'][0]['emails']:
+                config.console.print(f"         {email['value']}")
+        if (len(parsedData['entry'][0]['accounts']) > 0):
+            config.console.print(f"      Accounts:")
+            for account in parsedData['entry'][0]['accounts']:
+                config.console.print(f"         {account['url']} [{account['name']}]")
+        if (len(parsedData['entry'][0]['urls']) > 0):
+            config.console.print(f"      URLs:")
+            for url in parsedData['entry'][0]['urls']:
+                config.console.print(f"         {url['value']}")
+    else:
+        config.console.print("❌  E-mail not found on gravatar.com")
+    
+    # Verify E-mail on Adobe.com
+        headers = {"X-Ims-Clientid": "homepage_milo", "Content-Type": "application/json"}
+        response, parsedData = do_sync_request("POST", f"https://auth.services.adobe.com/signin/v2/users/accounts", f"{{\"username\":\"{email}\",\"usernameType\":\"EMAIL\"}}", headers)
+        if ("type" in parsedData[0]):
+            config.console.print("✔️  E-mail found on adobe.com")
+            config.console.print(f"      Avatar: {parsedData[0]['images']['230']}")
