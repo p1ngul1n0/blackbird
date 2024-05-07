@@ -1,10 +1,16 @@
 import os
 
-# WhatsMyName List
-LIST_URL="https://raw.githubusercontent.com/WebBreacher/WhatsMyName/main/wmn-data.json"
+# List directory
 LIST_DIRECTORY="data"
-LIST_FILENAME="wmn-data.json"
-LIST_PATH = os.path.join(os.getcwd(), LIST_DIRECTORY, LIST_FILENAME)
+
+# Username List
+USERNAME_LIST_URL="https://raw.githubusercontent.com/WebBreacher/WhatsMyName/main/wmn-data.json"
+USERNAME_LIST_FILENAME="wmn-data.json"
+USERNAME_LIST_PATH = os.path.join(os.getcwd(), LIST_DIRECTORY, USERNAME_LIST_FILENAME)
+
+# Email List
+EMAIL_LIST_FILENAME="email-data.json"
+EMAIL_LIST_PATH = os.path.join(os.getcwd(), LIST_DIRECTORY, EMAIL_LIST_FILENAME)
 
 # Logs
 LOG_DIRECTORY="logs"

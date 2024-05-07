@@ -9,7 +9,8 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 import config
 from modules.whatsmyname.list_operations import checkUpdates
-from modules.core.main import verifyUsername, verifyEmail
+from modules.core.username import verifyUsername
+from modules.core.email import verifyEmail
 from modules.utils.userAgent import getRandomUserAgent
 
 
