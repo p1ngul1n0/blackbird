@@ -9,7 +9,7 @@ from rich.markup import escape
 
 
 from modules.whatsmyname.list_operations import readList
-from modules.utils.filter import filterFoundAccounts, filterAccounts
+from modules.utils.filter import filterFoundAccounts, applyFilters
 from modules.utils.http_client import do_async_request
 from modules.utils.log import logError
 from modules.export.csv import saveToCsv
@@ -61,22 +61,9 @@ async def checkSite(site, method, url, session):
 
 # Control survey on list sites
 async def fetchResults(username):
-    data = readList("username")
-
     async with aiohttp.ClientSession() as session:
         tasks = []
-
-        if config.filter:
-            sitesToSearch = list(filter(lambda x: filterAccounts(config.filter, x), data["sites"]))
-            if (len(sitesToSearch)) <= 0:
-                config.console.print(f"⭕ No sites found for the given filter {config.filter}")
-                sys.exit()
-            else:
-                config.console.print(f":page_with_curl: {len(sitesToSearch)} sites found for the given filter \"{config.filter}\"")
-        else:
-            sitesToSearch = data["sites"]
-
-        for site in sitesToSearch:
+        for site in config.username_sites:
             tasks.append(
                 checkSite(
                     site=site,
@@ -95,10 +82,10 @@ async def fetchResults(username):
 
 # Start username check and presents results to user
 def verifyUsername(username):
-    config.console.print(
-        f':play_button: Enumerating accounts with username "[cyan1]{username}[/cyan1]"'
-    )
-    start_time = time.time()
+    
+    data = readList("username")
+    sitesToSearch = data["sites"]
+    config.username_sites = applyFilters(sitesToSearch)
 
     # Creates directory to save PDF, CSV and HTML content
     if config.dump or config.csv or config.pdf:
@@ -122,6 +109,10 @@ def verifyUsername(username):
                     )
                 path.mkdir(parents=True, exist_ok=True)
 
+    config.console.print(
+        f':play_button: Enumerating accounts with username "[cyan1]{username}[/cyan1]"'
+    )
+    start_time = time.time()
     results = asyncio.run(fetchResults(username))
     end_time = time.time()
     

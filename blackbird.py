@@ -26,18 +26,19 @@ def initiate():
         description="An OSINT tool to search for accounts by username in social networks.",
     )
     parser.add_argument("-u", "--username", help="The given username to search.")
+    parser.add_argument('-e', '--email', help='The given e-mail to search.')
     parser.add_argument("--csv", default=False, action=argparse.BooleanOptionalAction, help="Generate a CSV with the results.")
     parser.add_argument("--pdf", default=False, action=argparse.BooleanOptionalAction, help="Generate a PDF with the results.")
     parser.add_argument(
         "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction, help="Show verbose output."
     )
-    parser.add_argument("-f", "--filter", help="Filter sites to be searched by list property value.E.g --filter \"cat=social\"")
-    parser.add_argument("-d", "--dump", default=False, action=argparse.BooleanOptionalAction, help="Dump HTML content for found accounts.")
-    parser.add_argument("-p", "--proxy", help="Proxy to send HTTP requests though.")
-    parser.add_argument("-t", "--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
-    parser.add_argument('-e', '--email', help='The given e-mail to search.')
+    parser.add_argument("--filter", help="Filter sites to be searched by list property value.E.g --filter \"cat=social\"")
+    parser.add_argument("--no-nsfw", action="store_true", help="Removes NSFW sites from the search.")
+    parser.add_argument("--dump", action="store_true", help="Dump HTML content for found accounts.")
+    parser.add_argument("--proxy", help="Proxy to send HTTP requests though.")
+    parser.add_argument("--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
     parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
-    parser.add_argument('-a', '--about', action='store_true', help='Show about information and exit.')
+    parser.add_argument("--about", action="store_true", help="Show about information and exit.")
     args = parser.parse_args()
 
     # Store the necessary arguments to config Object
@@ -45,6 +46,7 @@ def initiate():
     config.csv = args.csv
     config.pdf = args.pdf
     config.filter = args.filter
+    config.no_nsfw = args.no_nsfw
     config.dump = args.dump
     config.proxy = args.proxy
     config.verbose = args.verbose

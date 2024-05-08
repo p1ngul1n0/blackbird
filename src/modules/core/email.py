@@ -7,7 +7,7 @@ import aiohttp
 import asyncio
 import sys
 
-from modules.utils.filter import filterFoundAccounts, filterAccounts
+from modules.utils.filter import filterFoundAccounts, applyFilters
 from modules.utils.http_client import do_async_request, do_sync_request
 from modules.whatsmyname.list_operations import readList
 from src.modules.utils.input import processInput, access_json_property
@@ -113,17 +113,7 @@ async def fetchResults(email):
     async with aiohttp.ClientSession() as session:
         tasks = []
 
-        if config.filter:
-            sitesToSearch = list(filter(lambda x: filterAccounts(config.filter, x), data["sites"]))
-            if (len(sitesToSearch)) <= 0:
-                config.console.print(f"⭕ No sites found for the given filter {config.filter}")
-                sys.exit()
-            else:
-                config.console.print(f":page_with_curl: {len(sitesToSearch)} sites found for the given filter \"{config.filter}\"")
-        else:
-            sitesToSearch = data["sites"]
-
-        for site in sitesToSearch:
+        for site in config.email_sites:
             if site["input_operation"]:
                 email = processInput(config.email, site["input_operation"])
             else:
@@ -149,10 +139,10 @@ async def fetchResults(email):
 
 # Start email check and presents results to user
 def verifyEmail(email):
-    config.console.print(
-        f':play_button: Enumerating accounts with email "[cyan1]{email}[/cyan1]"'
-    )
-    start_time = time.time()
+    
+    data = readList("email")
+    sitesToSearch = data["sites"]
+    config.email_sites = applyFilters(sitesToSearch)
 
     # Creates directory to save PDF, CSV and HTML content
     if config.dump or config.csv or config.pdf:
@@ -176,6 +166,10 @@ def verifyEmail(email):
                     )
                 path.mkdir(parents=True, exist_ok=True)
 
+    config.console.print(
+        f':play_button: Enumerating accounts with email "[cyan1]{email}[/cyan1]"'
+    )
+    start_time = time.time()
     results = asyncio.run(fetchResults(email))
     end_time = time.time()
     
