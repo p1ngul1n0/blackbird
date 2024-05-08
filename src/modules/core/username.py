@@ -14,7 +14,7 @@ from modules.utils.http_client import do_async_request
 from modules.utils.log import logError
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
-from modules.export.html import dumpHTML
+from src.modules.export.dump import dumpContent
 from modules.export.file_operations import createSaveDirectory
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -41,9 +41,9 @@ async def checkSite(site, method, url, session):
                     
                     # Save response content to a .HTML file
                     if config.dump:
-                        path = os.path.join(config.saveDirectory, 'dump', f'{site["name"].replace(" ", "_")}.html')
+                        path = os.path.join(config.saveDirectory, f"dump_{config.username}")
 
-                        result = dumpHTML(path, response["content"])
+                        result = dumpContent(path, site, response)
                         if result == True and config.verbose:
                             config.console.print(
                                 f"      💾  Saved HTML data from found account"
@@ -103,7 +103,7 @@ def verifyUsername(username):
     )
 
     if config.dump:
-        config.console.print(f"💾  Dump content saved to '[cyan1]{config.username}_{config.dateRaw}_blackbird/dump[/cyan1]'")
+        config.console.print(f"💾  Dump content saved to '[cyan1]{config.username}_{config.dateRaw}_blackbird/dump_{config.username}[/cyan1]'")
     
     # Filter results to only found accounts
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))

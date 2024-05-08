@@ -14,7 +14,7 @@ from src.modules.utils.input import processInput, access_json_property
 from modules.utils.log import logError
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
-from modules.export.html import dumpHTML
+from src.modules.export.dump import dumpContent
 from modules.export.file_operations import createSaveDirectory
 
 def verifyEmail1(email):
@@ -89,9 +89,9 @@ async def checkSite(site, method, url, session, headers=None):
                     
                     # Save response content to a .HTML file
                     if config.dump:
-                        path = os.path.join(config.saveDirectory, 'dump', f'{site["name"].replace(" ", "_")}.html')
+                        path = os.path.join(config.saveDirectory, f"dump_{config.email}")
 
-                        result = dumpHTML(path, response["content"])
+                        result = dumpContent(path, site, response)
                         if result == True and config.verbose:
                             config.console.print(
                                 f"      💾  Saved HTML data from found account"
@@ -160,7 +160,7 @@ def verifyEmail(email):
     )
 
     if config.dump:
-        config.console.print(f"💾  Dump content saved to '[cyan1]{config.username}_{config.dateRaw}_blackbird/dump[/cyan1]'")
+        config.console.print(f"💾  Dump content saved to '[cyan1]{config.email}_{config.dateRaw}_blackbird/dump_{config.email}[/cyan1]'")
     
     # Filter results to only found accounts
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))

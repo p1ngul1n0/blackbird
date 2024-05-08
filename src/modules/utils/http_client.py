@@ -52,15 +52,12 @@ async def do_async_request(method, url, session, customHeaders=None):
             ssl=False,
             headers=headers
         )
-        try:
+
+        json = None
+        content = await response.text()
+
+        if "application/json" in response.headers["Content-Type"]:
             json = await response.json()
-        except:
-            json = None
-        
-        try:
-            content = await response.text()
-        except:
-            content = None
 
         responseData = {
             "url": url,
@@ -69,6 +66,7 @@ async def do_async_request(method, url, session, customHeaders=None):
             "content": content,
             "json": json
         }
+
         if config.verbose:
             config.console.print(f"  🆗 Async HTTP Request completed [{method} - {response.status}] {url}")
         return responseData
