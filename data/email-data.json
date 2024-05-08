@@ -36,10 +36,7 @@
             "e_string": "displayName",
             "m_string": "User not found",
             "m_code": 404,
-            "known": [
-                "crash@gmail.com",
-                "john@gmail.com"
-            ],
+            "known": [],
             "cat": "images",
             "input_operation": "hash-sha256",
             "metadata": {
@@ -172,10 +169,7 @@
             "e_string": "authenticationMethods",
             "m_string": "[]",
             "m_code": 404,
-            "known": [
-                "crash@gmail.com",
-                "john@gmail.com"
-            ],
+            "known": [],
             "cat": "misc",
             "input_operation": null,
             "metadata": {
@@ -192,6 +186,98 @@
                     }
                 ]
             }
+        },
+        {
+            "name": "Duolingo",
+            "uri_check": "https://www.duolingo.com/2017-06-30/users?email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "username",
+            "m_string": "{\"users\":[]}",
+            "m_code": 404,
+            "known": [],
+            "cat": "hobby",
+            "input_operation": null,
+            "metadata": null
+        },
+        {
+            "name": "Chess.com",
+            "uri_check": "https://www.chess.com/callback/email/available?email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 226,
+            "e_string": "Email In Use",
+            "m_string": "Email Available",
+            "m_code": 404,
+            "known": [],
+            "cat": "gaming",
+            "input_operation": null,
+            "metadata": null
+        },
+        {
+            "name": "Notion",
+            "uri_check": "https://www.notion.so/api/v3/getLoginOptions",
+            "data": "{\"email\":\"{account}\"}",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "e_code": 200,
+            "e_string": "\"hasAccount\":true",
+            "m_string": "\"hasAccount\":false",
+            "m_code": 404,
+            "known": [],
+            "cat": "misc",
+            "input_operation": null,
+            "metadata": null
+        },
+        {
+            "name": "Spotify",
+            "uri_check": "https://spclient.wg.spotify.com/signup/public/v1/account?validate=1&email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "\"status\":20",
+            "m_string": "\"status\":1",
+            "m_code": 404,
+            "known": [],
+            "cat": "music",
+            "input_operation": null,
+            "metadata": null
+        },
+        {
+            "name": "Strava",
+            "uri_check": "https://www.strava.com/athletes/email_unique?email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "false",
+            "m_string": "true",
+            "m_code": 404,
+            "known": [],
+            "cat": "music",
+            "input_operation": null,
+            "metadata": null
+        },
+        {
+            "name": "Twitter",
+            "uri_check": "https://api.twitter.com/i/users/email_available.json?email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "\"taken\":true",
+            "m_string": "\"taken\":false",
+            "m_code": 404,
+            "known": [],
+            "cat": "music",
+            "input_operation": null,
+            "metadata": null
         }
     ]
 }

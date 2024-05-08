@@ -16,7 +16,8 @@ def verifyEmail(email):
             email = config.email
         url = site["uri_check"].replace("{account}", email)
         data = site["data"].replace("{account}", email) if site["data"] else None
-        response, parsedData = do_sync_request(site["method"], url, data=data, customHeaders=site["headers"])
+        headers = site["headers"] if site["headers"] else None
+        response, parsedData = do_sync_request(site["method"], url, data=data, customHeaders=headers)
         if (site["e_string"] in response.text) and (
             site["e_code"] == response.status_code
         ):
