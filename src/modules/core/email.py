@@ -15,6 +15,7 @@ from modules.utils.log import logError
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from modules.export.html import dumpHTML
+from modules.export.file_operations import createSaveDirectory
 
 def verifyEmail1(email):
     config.console.print(
@@ -144,27 +145,8 @@ def verifyEmail(email):
     sitesToSearch = data["sites"]
     config.email_sites = applyFilters(sitesToSearch)
 
-    # Creates directory to save PDF, CSV and HTML content
     if config.dump or config.csv or config.pdf:
-        strPath = os.path.join(os.path.dirname(__file__), '..', '..', '..', Path(f"{email}_{config.dateRaw}_blackbird"))
-        config.saveDirectory = strPath
-        path = Path(strPath)
-        if not path.exists():
-            if config.verbose:
-                config.console.print(escape(
-        f"🆕 Creating directory to save search data [{strPath}]")
-    )
-            path.mkdir(parents=True, exist_ok=True)
-
-        if config.dump:
-            strPath = os.path.join(config.saveDirectory, "dump")
-            path = Path(strPath)
-            if not path.exists():
-                if config.verbose:
-                    config.console.print(escape(
-                        f"🆕 Creating directory to save dump data [{escape(strPath)}]")
-                    )
-                path.mkdir(parents=True, exist_ok=True)
+        createSaveDirectory()
 
     config.console.print(
         f':play_button: Enumerating accounts with email "[cyan1]{email}[/cyan1]"'
