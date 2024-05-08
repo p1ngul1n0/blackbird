@@ -278,6 +278,39 @@
             "cat": "music",
             "input_operation": null,
             "metadata": null
+        },
+        {
+            "name": "NetShoes",
+            "uri_check": "https://www.netshoes.com.br/auth/account/exists/{account}",
+            "data": null,
+            "headers": null,
+            "method": "GET",
+            "e_code": 200,
+            "e_string": "\"exists\":true",
+            "m_string": "\"email\"",
+            "m_code": 404,
+            "known": [],
+            "cat": "shopping",
+            "input_operation": null,
+            "metadata": null
+        },
+        {
+            "name": "OLX",
+            "uri_check": "https://apigw.olx.com.br/v0/user/login/check_email",
+            "data": "{\"email\":\"{account}\"}",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "X-Olx-Team-Key": "5XzjuCgmYE7qMlYpsLZbTvm98ik4CS4a"
+            },
+            "e_code": 200,
+            "e_string": "EMAIL",
+            "m_string": "ACCOUNT_NOT_FOUND",
+            "m_code": 401,
+            "known": [],
+            "cat": "shopping",
+            "input_operation": null,
+            "metadata": null
         }
     ]
 }
