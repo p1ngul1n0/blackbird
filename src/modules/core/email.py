@@ -40,12 +40,3 @@ def verifyEmail(email):
         else:
             if config.verbose:
                 config.console.print(f"❌  E-mail not found [[blue]{site['name']}[/blue]]")
-    
-"""     # Verify E-mail on Adobe.com
-        headers = {"X-Ims-Clientid": "homepage_milo", "Content-Type": "application/json"}
-        response, parsedData = do_sync_request("POST", f"https://auth.services.adobe.com/signin/v2/users/accounts", f"{{\"username\":\"{email}\",\"usernameType\":\"EMAIL\"}}", headers)
-        if ("type" in parsedData[0]):
-            config.console.print("✔️  E-mail found on adobe.com")
-            config.console.print(f"      Avatar: {parsedData[0]['images']['230']}")
-        else:
-            config.console.print("❌  E-mail not found on adobe.com") """
