@@ -10,7 +10,7 @@ from rich.markup import escape
 
 from modules.whatsmyname.list_operations import readList
 from modules.utils.filter import filterFoundAccounts, filterAccounts
-from modules.utils.http_client import do_async_request, do_sync_request
+from modules.utils.http_client import do_async_request
 from modules.utils.log import logError
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf

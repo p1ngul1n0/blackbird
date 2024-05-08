@@ -37,8 +37,10 @@ def do_sync_request(method, url, data=None, customHeaders=None):
 
 
 # Perform an Async Request and return response details
-async def do_async_request(method, url, session):
+async def do_async_request(method, url, session, customHeaders=None):
     headers = {"User-Agent": config.userAgent}
+    if (customHeaders):
+        headers.update(customHeaders)
     proxy = config.proxy if config.proxy else None
     try:
         response = await session.request(
@@ -50,13 +52,22 @@ async def do_async_request(method, url, session):
             ssl=False,
             headers=headers
         )
+        try:
+            json = await response.json()
+        except:
+            json = None
+        
+        try:
+            content = await response.text()
+        except:
+            content = None
 
-        content = await response.text()
         responseData = {
             "url": url,
             "status_code": response.status,
             "headers": response.headers,
             "content": content,
+            "json": json
         }
         if config.verbose:
             config.console.print(f"  🆗 Async HTTP Request completed [{method} - {response.status}] {url}")
