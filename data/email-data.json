@@ -39,10 +39,9 @@
             "known": [],
             "cat": "images",
             "input_operation": "hash-sha256",
-            "metadata": {
-                "type": "JSON",
-                "data": [
+            "metadata": [
                     {
+                        "schema": "JSON",
                         "type": "String",
                         "name": "Name",
                         "path": [
@@ -52,6 +51,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "String",
                         "name": "Username",
                         "path": [
@@ -61,6 +61,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "String",
                         "name": "Avatar",
                         "path": [
@@ -70,6 +71,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "String",
                         "name": "About Me",
                         "path": [
@@ -79,6 +81,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "String",
                         "name": "Location",
                         "path": [
@@ -88,6 +91,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "String",
                         "name": "Job",
                         "path": [
@@ -97,6 +101,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "String",
                         "name": "Company",
                         "path": [
@@ -106,6 +111,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "Array",
                         "item-path": [
                             "value"
@@ -118,6 +124,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "Array",
                         "item-path": [
                             "value"
@@ -130,6 +137,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "Array",
                         "item-path": [
                             "url"
@@ -142,6 +150,7 @@
                         ]
                     },
                     {
+                        "schema": "JSON",
                         "type": "Array",
                         "item-path": [
                             "value"
@@ -154,7 +163,6 @@
                         ]
                     }
                 ]
-            }
         },
         {
             "name": "Adobe",
@@ -172,10 +180,9 @@
             "known": [],
             "cat": "misc",
             "input_operation": null,
-            "metadata": {
-                "type": "JSON",
-                "data": [
+            "metadata": [
                     {
+                        "schema": "JSON",
                         "type": "String",
                         "name": "Avatar",
                         "path": [
@@ -185,7 +192,6 @@
                         ]
                     }
                 ]
-            }
         },
         {
             "name": "Duolingo",

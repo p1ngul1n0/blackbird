@@ -8,56 +8,19 @@ import asyncio
 import sys
 
 from modules.utils.filter import filterFoundAccounts, applyFilters
-from modules.utils.http_client import do_async_request, do_sync_request
+from modules.utils.parse import extractMetadata
+from modules.utils.http_client import do_async_request
 from modules.whatsmyname.list_operations import readList
-from src.modules.utils.input import processInput, access_json_property
+from src.modules.utils.input import processInput
 from modules.utils.log import logError
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from src.modules.export.dump import dumpContent
 from modules.export.file_operations import createSaveDirectory
 
-def verifyEmail1(email):
-    config.console.print(
-        f':play_button: Searching e-mail "[cyan1]{email}[/cyan1]"'
-    )
-    data = readList("email")
-    # Verify e-mail in Gravatar
-    for site in data["sites"]:
-        if site["input_operation"]:
-            email = processInput(config.email, site["input_operation"])
-        else:
-            email = config.email
-        url = site["uri_check"].replace("{account}", email)
-        data = site["data"].replace("{account}", email) if site["data"] else None
-        headers = site["headers"] if site["headers"] else None
-        response, parsedData = do_sync_request(site["method"], url, data=data, customHeaders=headers)
-        if (site["e_string"] in response.text) and (
-            site["e_code"] == response.status_code
-        ):
-            if (site["m_string"] not in response.text) and (
-                site["m_code"] != response.status_code
-            ):
-                config.console.print(f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response.url}[/bright_white]")
-                if (site["metadata"]):
-                    if (site["metadata"]["type"] == "JSON"):
-                        for d in site["metadata"]["data"]:
-                            if d["type"] == "String":
-                                string = access_json_property(parsedData, d['path'])
-                                config.console.print(f"         {d['name']}: {string}") if string else None
-                            elif d["type"] == "Array":
-                                array = access_json_property(parsedData, d['path'])
-                                if (array):
-                                    config.console.print(f"         {d['name']}:")
-                                    for i in array:
-                                        config.console.print(f"             {access_json_property(i, d['item-path'])}")
-        else:
-            if config.verbose:
-                config.console.print(f"❌  E-mail not found [[blue]{site['name']}[/blue]]")
-
 # Verify account existence based on list args
 async def checkSite(site, method, url, session, headers=None):
-    returnData = {"name": site["name"], "url": url, "status": "NONE"}
+    returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": []}
     response = await do_async_request(method, url, session, headers)
     if response == None:
         returnData["status"] = "ERROR"
@@ -75,18 +38,8 @@ async def checkSite(site, method, url, session, headers=None):
                         f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                     )
                     if (site["metadata"]):
-                        if (site["metadata"]["type"] == "JSON"):
-                            for d in site["metadata"]["data"]:
-                                if d["type"] == "String":
-                                    string = access_json_property(response["json"], d['path'])
-                                    config.console.print(f"         {d['name']}: {string}") if string else None
-                                elif d["type"] == "Array":
-                                    array = access_json_property(response["json"], d['path'])
-                                    if (array):
-                                        config.console.print(f"         {d['name']}:")
-                                        for i in array:
-                                            config.console.print(f"             {access_json_property(i, d['item-path'])}")
-                    
+                        metadataItem = extractMetadata(site["metadata"], response)
+                        returnData["metadata"].append(metadataItem)
                     # Save response content to a .HTML file
                     if config.dump:
                         path = os.path.join(config.saveDirectory, f"dump_{config.email}")
