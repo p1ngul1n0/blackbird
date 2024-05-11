@@ -57,7 +57,7 @@ async def do_async_request(method, url, session, data=None, customHeaders=None):
         json = None
         content = await response.text()
 
-        if "application/json" in response.headers["Content-Type"]:
+        if response.headers["Content-Type"] and "application/json" in response.headers["Content-Type"]:
             json = await response.json()
 
         responseData = {
