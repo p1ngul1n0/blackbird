@@ -15,7 +15,6 @@ from modules.utils.log import logError
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from src.modules.export.dump import dumpContent
-from modules.export.file_operations import createSaveDirectory
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
@@ -88,8 +87,6 @@ def verifyUsername(username):
     sitesToSearch = data["sites"]
     config.username_sites = applyFilters(sitesToSearch)
 
-    if config.dump or config.csv or config.pdf:
-        createSaveDirectory()
 
     config.console.print(
         f':play_button: Enumerating accounts with username "[cyan1]{username}[/cyan1]"'
