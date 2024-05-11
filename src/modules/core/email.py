@@ -122,7 +122,7 @@ def verifyEmail(email):
     if (len(foundAccounts) > 0):
 
         if config.csv:
-            saveToCsv(results["username"], config.dateRaw, foundAccounts)
+            saveToCsv(results["email"], config.dateRaw, foundAccounts)
 
         if config.pdf:
             saveToPdf(results["username"], config.datePretty, config.dateRaw, foundAccounts)

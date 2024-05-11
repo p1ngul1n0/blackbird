@@ -16,9 +16,10 @@ def createSaveDirectory():
     config.saveDirectory = strPath
     path = Path(strPath)
     if not path.exists():
+        path.mkdir(parents=True, exist_ok=True)
         if config.verbose:
-            config.console.print(escape(f"🆕 Creating directory to save search data [{strPath}]"))
-            path.mkdir(parents=True, exist_ok=True)
+            config.console.print(escape(f"🆕 Created directory to save search data [{strPath}]"))
+        
 
     if config.dump:
         if config.username:
