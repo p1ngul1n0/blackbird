@@ -117,12 +117,13 @@ if __name__ == "__main__":
         verifyUsername(config.username)
         if config.csv and config.usernameFoundAccounts:
             saveToCsv(config.username, config.usernameFoundAccounts)
+        if config.pdf and config.usernameFoundAccounts:
+            saveToPdf(config.usernameFoundAccounts, "username")
         
     if config.email:
         verifyEmail(config.email)
         if config.csv and config.emailFoundAccounts:
             saveToCsv(config.email, config.emailFoundAccounts)
-    
-    if config.pdf:
-        if config.usernameFoundAccounts or config.emailFoundAccounts:
-            saveToPdf(config.usernameFoundAccounts, config.emailFoundAccounts)
+        if config.pdf and config.emailFoundAccounts:
+            saveToPdf(config.emailFoundAccounts, "email")
+

@@ -2,15 +2,16 @@ import csv
 import config
 import sys
 import os
+from modules.export.file_operations import generateName
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', ''))
 
 from utils.log import logError
 
 # Save results to CSV file
-def saveToCsv(username, results):
+def saveToCsv(identifier, results):
     try:
-        fileName = username + "_" + config.dateRaw + "_blackbird.csv"
+        fileName = generateName("csv", identifier)
         path = os.path.join(config.saveDirectory, fileName)
         with open(
             path,

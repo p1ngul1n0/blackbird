@@ -34,13 +34,18 @@ def createDumpDirectory(identifier):
             )
         path.mkdir(parents=True, exist_ok=True)
 
-def generateName(extension=None):
-    if config.username and config.email:
-        folderName = f"{config.username}_{config.email}_{config.dateRaw}_blackbird"
-    elif config.username and not config.email:
-        folderName = f"{config.username}_{config.dateRaw}_blackbird"
-    elif config.email and not config.username:
-        folderName = f"{config.email}_{config.dateRaw}_blackbird"
+def generateName(extension=None, identifier=None):
+
+    if identifier:
+        folderName = f"{identifier}_blackbird"
+    else:
+
+        if config.username and config.email:
+            folderName = f"{config.username}_{config.email}_{config.dateRaw}_blackbird"
+        elif config.username and not config.email:
+            folderName = f"{config.username}_{config.dateRaw}_blackbird"
+        elif config.email and not config.username:
+            folderName = f"{config.email}_{config.dateRaw}_blackbird"
     
     if extension:
         folderName = folderName + "." + extension

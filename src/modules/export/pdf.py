@@ -17,17 +17,21 @@ regularFontFile = os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.FONT
 boldFontFile = os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.FONTS_DIRECTORY, config.FONT_BOLD_FILE)
 
 
-def saveToPdf(foundUsernameAccounts, foundEmailAccounts):
+def saveToPdf(foundAccounts, resultType):
     try:
         pdfmetrics.registerFont(TTFont(config.FONT_NAME_REGULAR, regularFontFile))
         pdfmetrics.registerFont(TTFont(config.FONT_NAME_BOLD, boldFontFile))
 
-        fileName = generateName("pdf")
+        if (resultType == "username"):
+            identifier = config.username
+        elif (resultType == "email"):   
+            identifier = config.email
+        fileName = generateName("pdf", identifier)
         path = os.path.join(config.saveDirectory, fileName)
-        
+
         width, height = letter
         canva = canvas.Canvas(path, pagesize=letter)
-        accountsCount = len(foundUsernameAccounts)
+        accountsCount = len(foundAccounts)
 
         canva.drawImage(os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.IMAGES_DIRECTORY, "blackbird-logo.png"), 35, height - 90, width=60, height=60)
         canva.setFont(config.FONT_NAME_BOLD, 15)
@@ -41,10 +45,10 @@ def saveToPdf(foundUsernameAccounts, foundEmailAccounts):
         canva.setStrokeColor("#BAB8BA");
         canva.rect(40, height - 160, 530, 35, stroke=1, fill=1);
         canva.setFillColor("#000000");
-        usernameWidth = stringWidth(config.username, config.FONT_NAME_BOLD, 11)
-        canva.drawImage(os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.IMAGES_DIRECTORY, "correct.png"), (width / 2) - ((usernameWidth / 2) + 15)  , height - 147, width=10, height=10, mask='auto')
+        identifierWidth = stringWidth(identifier, config.FONT_NAME_BOLD, 11)
+        canva.drawImage(os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.IMAGES_DIRECTORY, "correct.png"), (width / 2) - ((identifierWidth / 2) + 15)  , height - 147, width=10, height=10, mask='auto')
         canva.setFont(config.FONT_NAME_BOLD, 11)
-        canva.drawCentredString(width / 2, height - 145, config.username)    
+        canva.drawCentredString(width / 2, height - 145, identifier)
 
         canva.setFillColor("#FFF8C5");
         canva.setStrokeColor("#D9C884");
@@ -61,17 +65,35 @@ def saveToPdf(foundUsernameAccounts, foundEmailAccounts):
             canva.drawString(55, height - 240, f"Results ({accountsCount})")
             
             y_position = height - 270
-            for result in foundUsernameAccounts:
+            for result in foundAccounts:
                 if y_position < 72:
                     canva.showPage()
                     y_position = height - 130
+                    
                 canva.setFont(config.FONT_NAME_REGULAR, 12)
                 canva.drawString(72, y_position, f"• {result['name']}")
+                
                 siteWidth = stringWidth(f"• {result['name']}", config.FONT_NAME_REGULAR, 12)
                 canva.drawImage(os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.IMAGES_DIRECTORY, "link.png"), 77 + siteWidth, y_position, width=10, height=10, mask='auto')
                 canva.linkURL(result['url'], (77 + siteWidth, y_position, 77 + siteWidth + 10, y_position + 10), relative=1)
-                y_position -= 25 
+                
 
+                if resultType == "email" and result["metadata"]:
+                    y_position -= 25
+                    canva.setFont(config.FONT_NAME_REGULAR, 7)
+                    for data in result["metadata"]:
+                        for d in data:
+                            if d["type"] == "String":
+                                canva.drawString(100, y_position, f"• {d['name']}: {d['value']}")
+                                y_position -= 25 
+                            elif d["type"] == "Array":
+                                canva.drawString(100, y_position, f"• {d['name']}:")
+                                y_position -= 25 
+                                for value in d['value']:
+                                    canva.drawString(150, y_position, f"• {value}:")
+                                    y_position -= 25 
+
+                y_position -= 25 
         canva.save()
         config.console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
         return True
