@@ -104,9 +104,5 @@ def verifyUsername(username):
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))
     config.usernameFoundAccounts = foundAccounts
 
-    if (len(foundAccounts) > 0):
-
-        if config.pdf:
-            saveToPdf(results["username"], config.datePretty, config.dateRaw, foundAccounts)
-    else:
+    if (len(foundAccounts) <= 0):
         config.console.print("⭕ No accounts were found for the given username")

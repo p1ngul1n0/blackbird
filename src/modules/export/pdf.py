@@ -3,6 +3,7 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from modules.export.file_operations import generateName
 import config
 import os
 import sys
@@ -16,22 +17,23 @@ regularFontFile = os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.FONT
 boldFontFile = os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.FONTS_DIRECTORY, config.FONT_BOLD_FILE)
 
 
-def saveToPdf(username, prettyDate, date, results):
+def saveToPdf(foundUsernameAccounts, foundEmailAccounts):
     try:
         pdfmetrics.registerFont(TTFont(config.FONT_NAME_REGULAR, regularFontFile))
         pdfmetrics.registerFont(TTFont(config.FONT_NAME_BOLD, boldFontFile))
 
-        fileName = username + "_" + date + "_blackbird.pdf"
+        fileName = generateName("pdf")
         path = os.path.join(config.saveDirectory, fileName)
+        
         width, height = letter
         canva = canvas.Canvas(path, pagesize=letter)
-        accountsCount = len(results)
+        accountsCount = len(foundUsernameAccounts)
 
         canva.drawImage(os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.IMAGES_DIRECTORY, "blackbird-logo.png"), 35, height - 90, width=60, height=60)
         canva.setFont(config.FONT_NAME_BOLD, 15)
         canva.drawCentredString((width / 2) - 5, height - 70, "Report")
         canva.setFont(config.FONT_NAME_REGULAR, 7)
-        canva.drawString(width - 90, height - 70, prettyDate)
+        canva.drawString(width - 90, height - 70, config.datePretty)
         canva.setFont(config.FONT_NAME_REGULAR, 5)
         canva.drawString(width - 185, height - 25, "This report was generated using the Blackbird OSINT Tool.")
         
@@ -39,10 +41,10 @@ def saveToPdf(username, prettyDate, date, results):
         canva.setStrokeColor("#BAB8BA");
         canva.rect(40, height - 160, 530, 35, stroke=1, fill=1);
         canva.setFillColor("#000000");
-        usernameWidth = stringWidth(username, config.FONT_NAME_BOLD, 11)
+        usernameWidth = stringWidth(config.username, config.FONT_NAME_BOLD, 11)
         canva.drawImage(os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.IMAGES_DIRECTORY, "correct.png"), (width / 2) - ((usernameWidth / 2) + 15)  , height - 147, width=10, height=10, mask='auto')
         canva.setFont(config.FONT_NAME_BOLD, 11)
-        canva.drawCentredString(width / 2, height - 145, username)    
+        canva.drawCentredString(width / 2, height - 145, config.username)    
 
         canva.setFillColor("#FFF8C5");
         canva.setStrokeColor("#D9C884");
@@ -59,7 +61,7 @@ def saveToPdf(username, prettyDate, date, results):
             canva.drawString(55, height - 240, f"Results ({accountsCount})")
             
             y_position = height - 270
-            for result in results:
+            for result in foundUsernameAccounts:
                 if y_position < 72:
                     canva.showPage()
                     y_position = height - 130

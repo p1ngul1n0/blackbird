@@ -14,6 +14,7 @@ from modules.core.email import verifyEmail
 from modules.utils.userAgent import getRandomUserAgent
 from modules.export.file_operations import createSaveDirectory
 from modules.export.csv import saveToCsv
+from modules.export.pdf import saveToPdf
 
 
 def initiate():
@@ -63,6 +64,9 @@ def initiate():
     config.datePretty = datetime.now().strftime("%B %d, %Y")
 
     config.userAgent = getRandomUserAgent()
+
+    config.usernameFoundAccounts = None
+    config.emailFoundAccounts = None
     
 
 if __name__ == "__main__":
@@ -118,3 +122,7 @@ if __name__ == "__main__":
         verifyEmail(config.email)
         if config.csv and config.emailFoundAccounts:
             saveToCsv(config.email, config.emailFoundAccounts)
+    
+    if config.pdf:
+        if config.usernameFoundAccounts or config.emailFoundAccounts:
+            saveToPdf(config.usernameFoundAccounts, config.emailFoundAccounts)
