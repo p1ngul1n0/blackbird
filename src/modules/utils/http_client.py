@@ -51,7 +51,8 @@ async def do_async_request(method, url, session, data=None, customHeaders=None):
             allow_redirects=True,
             ssl=False,
             data=data,
-            headers=headers
+            headers=headers,
+            max_redirects=10
         )
 
         json = None
