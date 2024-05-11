@@ -104,7 +104,6 @@ def verifyUsername(username):
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))
     config.usernameFoundAccounts = foundAccounts
 
-    
     if (len(foundAccounts) > 0):
 
         if config.pdf:
