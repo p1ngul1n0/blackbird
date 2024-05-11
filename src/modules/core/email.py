@@ -16,7 +16,6 @@ from modules.utils.log import logError
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from src.modules.export.dump import dumpContent
-from modules.export.file_operations import createSaveDirectory
 
 # Verify account existence based on list args
 async def checkSite(site, method, url, session, data=None, headers=None):
@@ -98,9 +97,6 @@ def verifyEmail(email):
     data = readList("email")
     sitesToSearch = data["sites"]
     config.email_sites = applyFilters(sitesToSearch)
-
-    if config.dump or config.csv or config.pdf:
-        createSaveDirectory()
 
     config.console.print(
         f':play_button: Enumerating accounts with email "[cyan1]{email}[/cyan1]"'

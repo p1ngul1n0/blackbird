@@ -12,6 +12,7 @@ from modules.whatsmyname.list_operations import checkUpdates
 from modules.core.username import verifyUsername
 from modules.core.email import verifyEmail
 from modules.utils.userAgent import getRandomUserAgent
+from modules.export.file_operations import createSaveDirectory
 
 
 def initiate():
@@ -102,6 +103,10 @@ if __name__ == "__main__":
         config.console.print(":next_track_button:  Skipping update...")
     else:
         checkUpdates()
+
+
+    if config.dump or config.csv or config.pdf:
+        createSaveDirectory()
 
     if config.username:
         verifyUsername(config.username)
