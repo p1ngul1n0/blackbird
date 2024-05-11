@@ -37,7 +37,7 @@ def do_sync_request(method, url, data=None, customHeaders=None):
 
 
 # Perform an Async Request and return response details
-async def do_async_request(method, url, session, customHeaders=None):
+async def do_async_request(method, url, session, data=None, customHeaders=None):
     headers = {"User-Agent": config.userAgent}
     if (customHeaders):
         headers.update(customHeaders)
@@ -50,6 +50,7 @@ async def do_async_request(method, url, session, customHeaders=None):
             timeout=config.timeout,
             allow_redirects=True,
             ssl=False,
+            data=data,
             headers=headers
         )
 

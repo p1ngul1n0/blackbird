@@ -19,9 +19,9 @@ from src.modules.export.dump import dumpContent
 from modules.export.file_operations import createSaveDirectory
 
 # Verify account existence based on list args
-async def checkSite(site, method, url, session, headers=None):
+async def checkSite(site, method, url, session, data=None, headers=None):
     returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": []}
-    response = await do_async_request(method, url, session, headers)
+    response = await do_async_request(method, url, session, data, headers)
     if response == None:
         returnData["status"] = "ERROR"
         return returnData
@@ -81,6 +81,7 @@ async def fetchResults(email):
                     method=site["method"],
                     url=url,
                     session=session,
+                    data=data,
                     headers=headers
                 )
             )
