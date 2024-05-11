@@ -4,8 +4,6 @@ import time
 import aiohttp
 import asyncio
 import config
-from pathlib import Path
-from rich.markup import escape
 
 
 from modules.whatsmyname.list_operations import readList
@@ -104,11 +102,10 @@ def verifyUsername(username):
     
     # Filter results to only found accounts
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))
+    config.usernameFoundAccounts = foundAccounts
+
     
     if (len(foundAccounts) > 0):
-
-        if config.csv:
-            saveToCsv(results["username"], config.dateRaw, foundAccounts)
 
         if config.pdf:
             saveToPdf(results["username"], config.datePretty, config.dateRaw, foundAccounts)

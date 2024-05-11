@@ -8,9 +8,9 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', ''))
 from utils.log import logError
 
 # Save results to CSV file
-def saveToCsv(username, date, results):
+def saveToCsv(username, results):
     try:
-        fileName = username + "_" + date + "_blackbird.csv"
+        fileName = username + "_" + config.dateRaw + "_blackbird.csv"
         path = os.path.join(config.saveDirectory, fileName)
         with open(
             path,

@@ -114,11 +114,9 @@ def verifyEmail(email):
     
     # Filter results to only found accounts
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))
+    config.emailFoundAccounts = foundAccounts
     
     if (len(foundAccounts) > 0):
-
-        if config.csv:
-            saveToCsv(results["email"], config.dateRaw, foundAccounts)
 
         if config.pdf:
             saveToPdf(results["username"], config.datePretty, config.dateRaw, foundAccounts)

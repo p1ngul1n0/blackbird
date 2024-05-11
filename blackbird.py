@@ -13,6 +13,7 @@ from modules.core.username import verifyUsername
 from modules.core.email import verifyEmail
 from modules.utils.userAgent import getRandomUserAgent
 from modules.export.file_operations import createSaveDirectory
+from modules.export.csv import saveToCsv
 
 
 def initiate():
@@ -110,6 +111,10 @@ if __name__ == "__main__":
 
     if config.username:
         verifyUsername(config.username)
-    
+        if config.csv and config.usernameFoundAccounts:
+            saveToCsv(config.username, config.usernameFoundAccounts)
+        
     if config.email:
         verifyEmail(config.email)
+        if config.csv and config.emailFoundAccounts:
+            saveToCsv(config.email, config.emailFoundAccounts)
