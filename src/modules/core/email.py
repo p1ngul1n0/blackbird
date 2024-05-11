@@ -17,6 +17,7 @@ from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from src.modules.export.dump import dumpContent
 
+
 # Verify account existence based on list args
 async def checkSite(site, method, url, session, data=None, headers=None):
     returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": []}
@@ -36,12 +37,14 @@ async def checkSite(site, method, url, session, data=None, headers=None):
                     config.console.print(
                         f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                     )
-                    if (site["metadata"]):
+                    if site["metadata"]:
                         metadataItem = extractMetadata(site["metadata"], response)
                         returnData["metadata"].append(metadataItem)
                     # Save response content to a .HTML file
                     if config.dump:
-                        path = os.path.join(config.saveDirectory, f"dump_{config.email}")
+                        path = os.path.join(
+                            config.saveDirectory, f"dump_{config.email}"
+                        )
 
                         result = dumpContent(path, site, response)
                         if result == True and config.verbose:
@@ -58,6 +61,7 @@ async def checkSite(site, method, url, session, data=None, headers=None):
     except Exception as e:
         logError(e, f"Coudn't check {site['name']} {url}")
         return returnData
+
 
 # Control survey on list sites
 async def fetchResults(email):
@@ -81,19 +85,17 @@ async def fetchResults(email):
                     url=url,
                     session=session,
                     data=data,
-                    headers=headers
+                    headers=headers,
                 )
             )
         tasksResults = await asyncio.gather(*tasks, return_exceptions=True)
-        results = {
-            "results": tasksResults,
-            "email": email
-        }
+        results = {"results": tasksResults, "email": email}
     return results
+
 
 # Start email check and presents results to user
 def verifyEmail(email):
-    
+
     data = readList("email")
     sitesToSearch = data["sites"]
     config.email_sites = applyFilters(sitesToSearch)
@@ -104,17 +106,19 @@ def verifyEmail(email):
     start_time = time.time()
     results = asyncio.run(fetchResults(email))
     end_time = time.time()
-    
+
     config.console.print(
         f":chequered_flag: Check completed in {round(end_time - start_time, 1)} seconds ({len(results['results'])} sites)"
     )
 
     if config.dump:
-        config.console.print(f"💾  Dump content saved to '[cyan1]{config.email}_{config.dateRaw}_blackbird/dump_{config.email}[/cyan1]'")
-    
+        config.console.print(
+            f"💾  Dump content saved to '[cyan1]{config.email}_{config.dateRaw}_blackbird/dump_{config.email}[/cyan1]'"
+        )
+
     # Filter results to only found accounts
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))
     config.emailFoundAccounts = foundAccounts
-    
-    if (len(foundAccounts) <= 0):
+
+    if len(foundAccounts) <= 0:
         config.console.print("⭕ No accounts were found for the given username")

@@ -3,16 +3,17 @@ import config
 import sys
 import os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '.'))
+sys.path.append(os.path.join(os.path.dirname(__file__), "."))
 
 from log import logError
 
 requests.packages.urllib3.disable_warnings()
 
+
 # Perform a Sync Request and return response details
 def do_sync_request(method, url, data=None, customHeaders=None):
     headers = {"User-Agent": config.userAgent}
-    if (customHeaders):
+    if customHeaders:
         headers.update(customHeaders)
     proxies = {"http": config.proxy, "https": config.proxy} if config.proxy else None
     response = requests.request(
@@ -22,7 +23,7 @@ def do_sync_request(method, url, data=None, customHeaders=None):
         timeout=config.timeout,
         verify=False,
         headers=headers,
-        data=data
+        data=data,
     )
     parsedData = None
     try:
@@ -32,14 +33,16 @@ def do_sync_request(method, url, data=None, customHeaders=None):
             config.console.print(f"  ❌ Error in Sync HTTP Request [{method}] {url}")
         logError(e, f"Error in Sync HTTP Request [{method}] {url}")
     if config.verbose:
-        config.console.print(f"  🆗 Sync HTTP Request completed [{method} - {response.status_code}] {url}")
+        config.console.print(
+            f"  🆗 Sync HTTP Request completed [{method} - {response.status_code}] {url}"
+        )
     return response, parsedData
 
 
 # Perform an Async Request and return response details
 async def do_async_request(method, url, session, data=None, customHeaders=None):
     headers = {"User-Agent": config.userAgent}
-    if (customHeaders):
+    if customHeaders:
         headers.update(customHeaders)
     proxy = config.proxy if config.proxy else None
     try:
@@ -52,7 +55,7 @@ async def do_async_request(method, url, session, data=None, customHeaders=None):
             ssl=False,
             data=data,
             headers=headers,
-            max_redirects=10
+            max_redirects=10,
         )
 
         json = None
@@ -67,11 +70,13 @@ async def do_async_request(method, url, session, data=None, customHeaders=None):
             "status_code": response.status,
             "headers": response.headers,
             "content": content,
-            "json": json
+            "json": json,
         }
 
         if config.verbose:
-            config.console.print(f"  🆗 Async HTTP Request completed [{method} - {response.status}] {url}")
+            config.console.print(
+                f"  🆗 Async HTTP Request completed [{method} - {response.status}] {url}"
+            )
         return responseData
     except Exception as e:
         if config.verbose:

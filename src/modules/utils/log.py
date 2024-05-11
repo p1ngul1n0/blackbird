@@ -1,6 +1,7 @@
 import config
 import logging
 
+
 def logError(e, message):
     if str(e) != "":
         error = str(e)

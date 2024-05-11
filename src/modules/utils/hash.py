@@ -1,6 +1,7 @@
 import hashlib
 import json
 
+
 # Return MD5 HASH for given JSON
 def hashJSON(jsonData):
     dumpJson = json.dumps(jsonData, sort_keys=True)

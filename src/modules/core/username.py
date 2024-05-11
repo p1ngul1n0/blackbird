@@ -14,7 +14,8 @@ from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from src.modules.export.dump import dumpContent
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
 
 # Verify account existence based on list args
 async def checkSite(site, method, url, session):
@@ -35,10 +36,12 @@ async def checkSite(site, method, url, session):
                     config.console.print(
                         f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                     )
-                    
+
                     # Save response content to a .HTML file
                     if config.dump:
-                        path = os.path.join(config.saveDirectory, f"dump_{config.username}")
+                        path = os.path.join(
+                            config.saveDirectory, f"dump_{config.username}"
+                        )
 
                         result = dumpContent(path, site, response)
                         if result == True and config.verbose:
@@ -71,20 +74,16 @@ async def fetchResults(username):
                 )
             )
         tasksResults = await asyncio.gather(*tasks, return_exceptions=True)
-        results = {
-            "results": tasksResults,
-            "username": username
-        }
+        results = {"results": tasksResults, "username": username}
     return results
 
 
 # Start username check and presents results to user
 def verifyUsername(username):
-    
+
     data = readList("username")
     sitesToSearch = data["sites"]
     config.username_sites = applyFilters(sitesToSearch)
-
 
     config.console.print(
         f':play_button: Enumerating accounts with username "[cyan1]{username}[/cyan1]"'
@@ -92,17 +91,19 @@ def verifyUsername(username):
     start_time = time.time()
     results = asyncio.run(fetchResults(username))
     end_time = time.time()
-    
+
     config.console.print(
         f":chequered_flag: Check completed in {round(end_time - start_time, 1)} seconds ({len(results['results'])} sites)"
     )
 
     if config.dump:
-        config.console.print(f"💾  Dump content saved to '[cyan1]{config.username}_{config.dateRaw}_blackbird/dump_{config.username}[/cyan1]'")
-    
+        config.console.print(
+            f"💾  Dump content saved to '[cyan1]{config.username}_{config.dateRaw}_blackbird/dump_{config.username}[/cyan1]'"
+        )
+
     # Filter results to only found accounts
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))
     config.usernameFoundAccounts = foundAccounts
 
-    if (len(foundAccounts) <= 0):
+    if len(foundAccounts) <= 0:
         config.console.print("⭕ No accounts were found for the given username")

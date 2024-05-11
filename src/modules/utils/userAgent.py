@@ -2,11 +2,19 @@ import random
 import os
 import config
 
+
 def getRandomUserAgent():
-    path = os.path.join(os.path.join(os.path.dirname(__file__)), "..", "..", "..", "data", "useragents.txt")
+    path = os.path.join(
+        os.path.join(os.path.dirname(__file__)),
+        "..",
+        "..",
+        "..",
+        "data",
+        "useragents.txt",
+    )
     print(path)
     userAgents = open(path).read().splitlines()
-    userAgent =random.choice(userAgents)
-    if (config.verbose):
-        config.console.print(f":id: Selected random User-Agent \"{userAgent}\"")
+    userAgent = random.choice(userAgents)
+    if config.verbose:
+        config.console.print(f':id: Selected random User-Agent "{userAgent}"')
     return userAgent

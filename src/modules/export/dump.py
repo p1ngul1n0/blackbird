@@ -2,9 +2,10 @@ import os
 import sys
 import json
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', ''))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ""))
 
 from utils.log import logError
+
 
 # Dump HTML data to a .html file
 def dumpContent(path, site, response):
@@ -20,9 +21,8 @@ def dumpContent(path, site, response):
         elif "text/html" in response["headers"]["Content-Type"]:
             extension = "html"
             content = response["content"]
-        
 
-    fileName = f'{siteName}.{extension}'
+    fileName = f"{siteName}.{extension}"
     path = os.path.join(path, fileName)
 
     try:

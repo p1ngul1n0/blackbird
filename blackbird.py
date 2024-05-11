@@ -5,7 +5,7 @@ import logging
 import sys
 from datetime import datetime
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
 import config
 from modules.whatsmyname.list_operations import checkUpdates
@@ -19,9 +19,9 @@ from modules.export.pdf import saveToPdf
 
 def initiate():
     logging.basicConfig(
-    filename=config.LOG_PATH,
-    level=logging.DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        filename=config.LOG_PATH,
+        level=logging.DEBUG,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
 
     parser = argparse.ArgumentParser(
@@ -29,19 +29,49 @@ def initiate():
         description="An OSINT tool to search for accounts by username in social networks.",
     )
     parser.add_argument("-u", "--username", help="The given username to search.")
-    parser.add_argument('-e', '--email', help='The given e-mail to search.')
-    parser.add_argument("--csv", default=False, action=argparse.BooleanOptionalAction, help="Generate a CSV with the results.")
-    parser.add_argument("--pdf", default=False, action=argparse.BooleanOptionalAction, help="Generate a PDF with the results.")
+    parser.add_argument("-e", "--email", help="The given e-mail to search.")
     parser.add_argument(
-        "-v", "--verbose", default=False, action=argparse.BooleanOptionalAction, help="Show verbose output."
+        "--csv",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        help="Generate a CSV with the results.",
     )
-    parser.add_argument("--filter", help="Filter sites to be searched by list property value.E.g --filter \"cat=social\"")
-    parser.add_argument("--no-nsfw", action="store_true", help="Removes NSFW sites from the search.")
-    parser.add_argument("--dump", action="store_true", help="Dump HTML content for found accounts.")
+    parser.add_argument(
+        "--pdf",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        help="Generate a PDF with the results.",
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        help="Show verbose output.",
+    )
+    parser.add_argument(
+        "--filter",
+        help='Filter sites to be searched by list property value.E.g --filter "cat=social"',
+    )
+    parser.add_argument(
+        "--no-nsfw", action="store_true", help="Removes NSFW sites from the search."
+    )
+    parser.add_argument(
+        "--dump", action="store_true", help="Dump HTML content for found accounts."
+    )
     parser.add_argument("--proxy", help="Proxy to send HTTP requests though.")
-    parser.add_argument("--timeout", type=int, default=30, help="Timeout in seconds for each HTTP request (Default is 30).")
-    parser.add_argument("--no-update", action="store_true", help="Don't update sites lists.")
-    parser.add_argument("--about", action="store_true", help="Show about information and exit.")
+    parser.add_argument(
+        "--timeout",
+        type=int,
+        default=30,
+        help="Timeout in seconds for each HTTP request (Default is 30).",
+    )
+    parser.add_argument(
+        "--no-update", action="store_true", help="Don't update sites lists."
+    )
+    parser.add_argument(
+        "--about", action="store_true", help="Show about information and exit."
+    )
     args = parser.parse_args()
 
     # Store the necessary arguments to config Object
@@ -67,7 +97,7 @@ def initiate():
 
     config.usernameFoundAccounts = None
     config.emailFoundAccounts = None
-    
+
 
 if __name__ == "__main__":
     initiate()
@@ -91,14 +121,15 @@ if __name__ == "__main__":
     )
 
     if config.about:
-        config.console.print("""
+        config.console.print(
+            """
         Author: Lucas Antoniaci (p1ngul1n0)
         Description: This tool search for accounts using data from the WhatsMyName project, which is an open-source tool developed by WebBreacher.
         WhatsMyName License: The WhatsMyName project is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0).
         WhatsMyName Project: https://github.com/WebBreacher/WhatsMyName
-        """)
+        """
+        )
         sys.exit()
-
 
     if not config.username and not config.email:
         config.console.print("Either --username or --email is required")
@@ -109,7 +140,6 @@ if __name__ == "__main__":
     else:
         checkUpdates()
 
-
     if config.dump or config.csv or config.pdf:
         createSaveDirectory()
 
@@ -119,11 +149,10 @@ if __name__ == "__main__":
             saveToCsv(config.username, config.usernameFoundAccounts)
         if config.pdf and config.usernameFoundAccounts:
             saveToPdf(config.usernameFoundAccounts, "username")
-        
+
     if config.email:
         verifyEmail(config.email)
         if config.csv and config.emailFoundAccounts:
             saveToCsv(config.email, config.emailFoundAccounts)
         if config.pdf and config.emailFoundAccounts:
             saveToPdf(config.emailFoundAccounts, "email")
-
