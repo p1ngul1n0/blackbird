@@ -10,12 +10,13 @@ from utils.log import logError
 def dumpContent(path, site, response):
 
     siteName = site["name"].replace(" ", "_")
-    if "application/json" in response["headers"]["Content-Type"]:
-        extension = "json"
-        content = response["json"]
-    elif "text/html" in response["headers"]["Content-Type"]:
-        extension = "html"
-        content = response["content"]
+    if response["headers"]["Content-Type"]:
+        if "application/json" in response["headers"]["Content-Type"]:
+            extension = "json"
+            content = response["json"]
+        elif "text/html" in response["headers"]["Content-Type"]:
+            extension = "html"
+            content = response["content"]
     else:
         content = response["content"]
         extension = "txt"
