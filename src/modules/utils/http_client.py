@@ -2,6 +2,7 @@ import requests
 import config
 import sys
 import os
+import chardet
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "."))
 
@@ -59,7 +60,12 @@ async def do_async_request(method, url, session, data=None, customHeaders=None):
         )
 
         json = None
-        content = await response.text()
+        try:
+            content = await response.text()
+        except:
+            binaryContent = await response.read()
+            encode = chardet.detect(binaryContent)["encoding"]
+            content = binaryContent.decode(encode)
 
         if "Content-Type" in response.headers:
             if "application/json" in response.headers["Content-Type"]:
