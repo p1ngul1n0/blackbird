@@ -144,11 +144,14 @@ if __name__ == "__main__":
         createSaveDirectory()
 
     if config.username:
-        verifyUsername(config.username)
-        if config.csv and config.usernameFoundAccounts:
-            saveToCsv(config.username, config.usernameFoundAccounts)
-        if config.pdf and config.usernameFoundAccounts:
-            saveToPdf(config.usernameFoundAccounts, "username")
+        usernames = ["john", "maria", "josem"]
+        for user in usernames:
+            config.username = user
+            verifyUsername(config.username)
+            if config.csv and config.usernameFoundAccounts:
+                saveToCsv(config.username, config.usernameFoundAccounts)
+            if config.pdf and config.usernameFoundAccounts:
+                saveToPdf(config.usernameFoundAccounts, "username")
 
     if config.email:
         verifyEmail(config.email)

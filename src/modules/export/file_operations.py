@@ -9,7 +9,7 @@ def createSaveDirectory():
     folderName = generateName()
 
     strPath = os.path.join(
-        os.path.dirname(__file__), "..", "..", "..", Path(folderName)
+        os.path.dirname(__file__), "..", "..", "..", "results", Path(folderName)
     )
     config.saveDirectory = strPath
     path = Path(strPath)
