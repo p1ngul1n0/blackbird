@@ -317,23 +317,6 @@
             "cat": "shopping",
             "input_operation": null,
             "metadata": null
-        },
-        {
-            "name": "GP Guia",
-            "uri_check": "https://www.gp-guia.net/ucp.php?mode=register",
-            "data": "username=crash1337&email={account}&new_password=1&password_confirm=1&lang=pt_br&tz_date=UTC-03%3A00+-+America%2FAraguaina+-+11+Mai+2024%2C+23%3A47&tz=Etc%2FGMT%2B3&tz_copy=Etc%2FGMT%2B3&pf_sexo=2&agreed=true&change_lang=0&qa_answer=Pedro",
-            "method": "POST",
-            "headers": {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            "e_code": 200,
-            "e_string": "Este endereço de e-mail já foi registrado em nosso banco de dados.",
-            "m_string": "muito pequena.</dd></dl>\t\t\t",
-            "m_code": 404,
-            "known": [],
-            "cat": "xx NSFW xx",
-            "input_operation": null,
-            "metadata": null
         }
     ]
 }
