@@ -29,11 +29,7 @@ def saveToPdf(foundAccounts, resultType):
         pdfmetrics.registerFont(TTFont(config.FONT_NAME_REGULAR, regularFontFile))
         pdfmetrics.registerFont(TTFont(config.FONT_NAME_BOLD, boldFontFile))
 
-        if resultType == "username":
-            identifier = config.username
-        elif resultType == "email":
-            identifier = config.email
-        fileName = generateName("pdf", identifier)
+        fileName = generateName("pdf")
         path = os.path.join(config.saveDirectory, fileName)
 
         width, height = letter
@@ -67,6 +63,10 @@ def saveToPdf(foundAccounts, resultType):
         canva.setStrokeColor("#BAB8BA")
         canva.rect(40, height - 160, 530, 35, stroke=1, fill=1)
         canva.setFillColor("#000000")
+        if resultType == "username":
+            identifier = config.currentUser
+        elif resultType == "email":
+            identifier = config.currentEmail
         identifierWidth = stringWidth(identifier, config.FONT_NAME_BOLD, 11)
         canva.drawImage(
             os.path.join(

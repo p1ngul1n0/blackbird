@@ -12,7 +12,7 @@ from utils.log import logError
 # Save results to CSV file
 def saveToCsv(identifier, results):
     try:
-        fileName = generateName("csv", identifier)
+        fileName = generateName("csv")
         path = os.path.join(config.saveDirectory, fileName)
         with open(path, "w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)

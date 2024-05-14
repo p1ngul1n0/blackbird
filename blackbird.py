@@ -28,8 +28,12 @@ def initiate():
         prog="blackbird",
         description="An OSINT tool to search for accounts by username in social networks.",
     )
-    parser.add_argument("-u", "--username", help="The given username to search.")
-    parser.add_argument("-e", "--email", help="The given e-mail to search.")
+    parser.add_argument(
+        "-u", "--username", nargs="*", type=str, help="The given username to search."
+    )
+    parser.add_argument(
+        "-e", "--email", nargs="*", type=str, help="The given e-mail to search."
+    )
     parser.add_argument(
         "--csv",
         default=False,
@@ -98,6 +102,9 @@ def initiate():
     config.usernameFoundAccounts = None
     config.emailFoundAccounts = None
 
+    config.currentUser = None
+    config.currentEmail = None
+
 
 if __name__ == "__main__":
     initiate()
@@ -140,22 +147,28 @@ if __name__ == "__main__":
     else:
         checkUpdates()
 
-    if config.dump or config.csv or config.pdf:
-        createSaveDirectory()
-
     if config.username:
-        usernames = ["john", "maria", "josem"]
-        for user in usernames:
-            config.username = user
-            verifyUsername(config.username)
+        for user in config.username:
+            config.currentUser = user
+            if config.dump or config.csv or config.pdf:
+                createSaveDirectory()
+            verifyUsername(config.currentUser)
             if config.csv and config.usernameFoundAccounts:
-                saveToCsv(config.username, config.usernameFoundAccounts)
+                saveToCsv(config.currentUser, config.usernameFoundAccounts)
             if config.pdf and config.usernameFoundAccounts:
                 saveToPdf(config.usernameFoundAccounts, "username")
+            config.currentUser = None
+            config.usernameFoundAccounts = None
 
     if config.email:
-        verifyEmail(config.email)
-        if config.csv and config.emailFoundAccounts:
-            saveToCsv(config.email, config.emailFoundAccounts)
-        if config.pdf and config.emailFoundAccounts:
-            saveToPdf(config.emailFoundAccounts, "email")
+        for email in config.email:
+            config.currentEmail = email
+            if config.dump or config.csv or config.pdf:
+                createSaveDirectory()
+            verifyEmail(config.currentEmail)
+            if config.csv and config.emailFoundAccounts:
+                saveToCsv(config.currentEmail, config.emailFoundAccounts)
+            if config.pdf and config.emailFoundAccounts:
+                saveToPdf(config.emailFoundAccounts, "email")
+            config.currentEmail = None
+            config.emailFoundAccounts = None

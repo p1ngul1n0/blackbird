@@ -17,15 +17,15 @@ def createSaveDirectory():
         path.mkdir(parents=True, exist_ok=True)
         if config.verbose:
             config.console.print(
-                escape(f"🆕 Created directory to save search data [{strPath}]")
+                escape(f"🆕 Created directory to save search data [{folderName}]")
             )
 
     if config.dump:
-        if config.username:
-            createDumpDirectory(config.username)
+        if config.currentUser:
+            createDumpDirectory(config.currentUser)
 
-        if config.email:
-            createDumpDirectory(config.email)
+        if config.currentEmail:
+            createDumpDirectory(config.currentEmail)
 
 
 def createDumpDirectory(identifier):
@@ -35,23 +35,16 @@ def createDumpDirectory(identifier):
     if not path.exists():
         if config.verbose:
             config.console.print(
-                escape(f"🆕 Creating directory to save dump data [{escape(strPath)}]")
+                escape(f"🆕 Created directory to save dump data [{folderName}]")
             )
         path.mkdir(parents=True, exist_ok=True)
 
 
-def generateName(extension=None, identifier=None):
-
-    if identifier:
-        folderName = f"{identifier}_blackbird"
-    else:
-
-        if config.username and config.email:
-            folderName = f"{config.username}_{config.email}_{config.dateRaw}_blackbird"
-        elif config.username and not config.email:
-            folderName = f"{config.username}_{config.dateRaw}_blackbird"
-        elif config.email and not config.username:
-            folderName = f"{config.email}_{config.dateRaw}_blackbird"
+def generateName(extension=None):
+    if config.currentUser:
+        folderName = f"{config.currentUser}_{config.dateRaw}_blackbird"
+    elif config.currentEmail:
+        folderName = f"{config.currentEmail}_{config.dateRaw}_blackbird"
 
     if extension:
         folderName = folderName + "." + extension

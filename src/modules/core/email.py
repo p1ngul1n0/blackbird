@@ -43,7 +43,7 @@ async def checkSite(site, method, url, session, data=None, headers=None):
                     # Save response content to a .HTML file
                     if config.dump:
                         path = os.path.join(
-                            config.saveDirectory, f"dump_{config.email}"
+                            config.saveDirectory, f"dump_{config.currentEmail}"
                         )
 
                         result = dumpContent(path, site, response)
@@ -72,9 +72,9 @@ async def fetchResults(email):
 
         for site in config.email_sites:
             if site["input_operation"]:
-                email = processInput(config.email, site["input_operation"])
+                email = processInput(config.currentEmail, site["input_operation"])
             else:
-                email = config.email
+                email = config.currentEmail
             url = site["uri_check"].replace("{account}", email)
             data = site["data"].replace("{account}", email) if site["data"] else None
             headers = site["headers"] if site["headers"] else None
@@ -113,7 +113,7 @@ def verifyEmail(email):
 
     if config.dump:
         config.console.print(
-            f"💾  Dump content saved to '[cyan1]{config.email}_{config.dateRaw}_blackbird/dump_{config.email}[/cyan1]'"
+            f"💾  Dump content saved to '[cyan1]{config.currentEmail}_{config.dateRaw}_blackbird/dump_{config.currentEmail}[/cyan1]'"
         )
 
     # Filter results to only found accounts
@@ -121,4 +121,4 @@ def verifyEmail(email):
     config.emailFoundAccounts = foundAccounts
 
     if len(foundAccounts) <= 0:
-        config.console.print("⭕ No accounts were found for the given username")
+        config.console.print("⭕ No accounts were found for the given email")
