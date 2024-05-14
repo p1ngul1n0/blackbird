@@ -27,6 +27,8 @@ def createSaveDirectory():
         if config.currentEmail:
             createDumpDirectory(config.currentEmail)
 
+    return True
+
 
 def createDumpDirectory(identifier):
     folderName = f"dump_{identifier}"

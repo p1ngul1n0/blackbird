@@ -105,3 +105,5 @@ def verifyUsername(username):
 
     if len(foundAccounts) <= 0:
         config.console.print("⭕ No accounts were found for the given username")
+
+    return True

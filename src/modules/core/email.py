@@ -120,3 +120,5 @@ def verifyEmail(email):
 
     if len(foundAccounts) <= 0:
         config.console.print("⭕ No accounts were found for the given email")
+
+    return True

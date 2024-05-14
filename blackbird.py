@@ -133,9 +133,8 @@ if __name__ == "__main__":
         config.console.print(
             """
         Author: Lucas Antoniaci (p1ngul1n0)
-        Description: This tool search for accounts using data from the WhatsMyName project, which is an open-source tool developed by WebBreacher.
-        WhatsMyName License: The WhatsMyName project is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0).
-        WhatsMyName Project: https://github.com/WebBreacher/WhatsMyName
+        Description: Blackbird is an OSINT tool that perform reverse search in username and emails.
+        About WhatsMyName Project: This tool search for accounts using data from the WhatsMyName project, which is an open-source tool developed by WebBreacher. WhatsMyName License: The WhatsMyName project is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0). More details (https://github.com/WebBreacher/WhatsMyName)
         """
         )
         sys.exit()
