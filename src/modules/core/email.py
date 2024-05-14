@@ -13,8 +13,6 @@ from modules.utils.http_client import do_async_request
 from modules.whatsmyname.list_operations import readList
 from src.modules.utils.input import processInput
 from modules.utils.log import logError
-from modules.export.csv import saveToCsv
-from modules.export.pdf import saveToPdf
 from src.modules.export.dump import dumpContent
 
 
