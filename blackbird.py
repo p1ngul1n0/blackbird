@@ -18,6 +18,8 @@ from modules.export.pdf import saveToPdf
 
 
 def initiate():
+    if not os.path.exists("logs/"):
+        os.makedirs("logs/")
     logging.basicConfig(
         filename=config.LOG_PATH,
         level=logging.DEBUG,
