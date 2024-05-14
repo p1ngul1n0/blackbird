@@ -12,7 +12,6 @@ def getRandomUserAgent():
         "data",
         "useragents.txt",
     )
-    print(path)
     userAgents = open(path).read().splitlines()
     userAgent = random.choice(userAgents)
     if config.verbose:
