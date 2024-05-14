@@ -126,7 +126,7 @@ if __name__ == "__main__":
     [/red]"""
     )
     config.console.print(
-        "[white]Made with :beating_heart: by Lucas 'P1ngul1n0' Antoniaci ([red]p1ngul1n0[/red])[/white]"
+        "           [white]Made with :beating_heart: by [red]Lucas 'P1ngul1n0' Antoniaci[/red] [/white]"
     )
 
     if config.about:
