@@ -31,10 +31,10 @@ def initiate():
         description="An OSINT tool to search for accounts by username in social networks.",
     )
     parser.add_argument(
-        "-u", "--username", nargs="*", type=str, help="The given username to search."
+        "-u", "--username", nargs="*", type=str, help="One or more usernames to search."
     )
     parser.add_argument(
-        "-e", "--email", nargs="*", type=str, help="The given e-mail to search."
+        "-e", "--email", nargs="*", type=str, help="One or more email to search."
     )
     parser.add_argument(
         "--csv",
