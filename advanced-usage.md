@@ -47,3 +47,7 @@ python blackbird.py --username username1 --timeout 30
 ## No Update
 
 Use the `--no-update` argument to instruct the tool not to check for updates in the WhatsMyName list.
+
+```bash
+python blackbird.py --username username1 --no-update
+```
