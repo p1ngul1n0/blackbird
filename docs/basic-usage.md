@@ -1,5 +1,9 @@
 # 🔍 Basic Usage
 
+{% hint style="info" %}
+Blackbird can make mistakes. Consider checking the information.
+{% endhint %}
+
 ### 👤 Username Reverse Search
 
 ```bash
