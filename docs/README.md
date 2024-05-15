@@ -1,23 +1,25 @@
 # Blackbird
 
-<figure><img src=".gitbook/assets/blackbird_printscreen.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/blackbird_printscreen.png" alt=""><figcaption></figcaption></figure>
 
 > Blackbird is a robust OSINT tool that facilitates rapid searches for user accounts by username or email across a wide array of platforms, enhancing digital investigations. It features WhatsMyName integration, export options in PDF, CSV, and HTTP response formats, and customizable search filters.
 
-***
+### Project Developer
+
+[Lucas Antoniaci](https://www.linkedin.com/in/lucas-antoniaci/) [![Brazil](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/br.png)](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/br.png)
 
 ### Setup
 
 **Clone the repository**
 
-```
+```bash
 git clone https://github.com/p1ngul1n0/blackbird
 cd blackbird
 ```
 
 **Install requirements**
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
@@ -25,14 +27,14 @@ pip install -r requirements.txt
 
 **Search by username**
 
-```
+```bash
 python blackbird.py --username username1 username2 username3
 ```
 
 **Search by email**
 
-```
-python blackbird.py --email email1@email email2@email email3@email
+```bash
+python blackbird.py --email email1@email.com email2@email.com email3@email.com
 ```
 
 **Other arguments**
@@ -68,9 +70,7 @@ Blackbird is fully integrated with [WhatsMyName](https://github.com/WebBreacher/
 
 ### Sponsors
 
-This project is proudly sponsored by:
-
-[![Cyber Hunter Lab Logo](https://raw.githubusercontent.com/p1ngul1n0/src/master/logo\_chl.jpg)](https://site.cyberhunteracademy.com/)
+<figure><img src="https://raw.githubusercontent.com/p1ngul1n0/src/master/logo_chl.jpg" alt="" width="188"><figcaption></figcaption></figure>
 
 ### Disclaimer
 
