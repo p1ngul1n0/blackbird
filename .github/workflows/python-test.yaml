@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  Test username & email verify:
     runs-on: ubuntu-latest
 
     steps:
