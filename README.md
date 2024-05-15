@@ -87,4 +87,4 @@ programs is not P1ngul1n0's responsibility.
 
 ### Contact
 
-Feel free to contact me at [X](https://x.com/p1ngul1n0)\
+Feel free to contact me at [X](https://x.com/p1ngul1n0)
