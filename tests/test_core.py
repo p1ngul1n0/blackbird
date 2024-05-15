@@ -47,8 +47,6 @@ class TestUsername(unittest.TestCase):
 
     def test_verify_username(self):
         result = verifyUsername(config.currentUser)
-        saveToCsv(config.currentUser, config.usernameFoundAccounts)
-        saveToPdf(config.usernameFoundAccounts, "username")
         self.assertTrue(result)
 
 
