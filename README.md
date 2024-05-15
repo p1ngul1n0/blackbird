@@ -38,6 +38,7 @@ python blackbird.py --email email@email
 
 ## Export Report
 The results can be exported as a PDF Report with ```--pdf``` option.
+
 <img alt="blackbird-pdf-cover" width="300" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_report_pdf_results.png">
 
 ## Sponsors
