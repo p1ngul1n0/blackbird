@@ -25,20 +25,40 @@ pip install -r requirements.txt
 
 #### Search by username
 ```python
-python blackbird.py --username username
+python blackbird.py --username username1 username2 username3
 ```
 
 #### Search by email
 ```python
-python blackbird.py --email email@email
+python blackbird.py --email email1@email email2@email email3@email
 ```
+
+#### Export to PDF
+```python
+python blackbird.py --username username1 --pdf
+```
+<img alt="blackbird-pdf-cover" width="300" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_report_pdf_results.png">
+
+#### Export to CSV
+```python
+python blackbird.py --username username1 --csv
+```
+
+#### DUMP
+Dump all found account HTTP responses.
+```python
+python blackbird.py --username username1 --dump
+```
+
+#### All of the above
+The previous arguments can all be used together in one single command.
+```python
+python blackbird.py --username username1 username2 username3 --email email1@email email2@email email3@email --pdf --csv --dump
+```
+
 
 ## WhatsMyName Integration
 #### Blackbird is fully integrated with <a href="https://github.com/WebBreacher/WhatsMyName">WhatsMyName</a> project,  witch has 600+ sites to perform accurate reverse username search.
-
-## Export Report
-The results can be exported as a PDF Report with ```--pdf``` option.
-<img alt="blackbird-pdf-cover" width="300" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/blackbird_report_pdf_results.png">
 
 ## Sponsors
 This project is proudly sponsored by:
