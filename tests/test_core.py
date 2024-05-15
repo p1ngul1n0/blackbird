@@ -18,9 +18,9 @@ config.no_nsfw = None
 config.proxy = None
 config.verbose = None
 config.timeout = None
-config.dump = True
-config.csv = True
-config.pdf = True
+config.dump = None
+config.csv = None
+config.pdf = None
 config.filter = "name=Gravatar"
 config.console = Console()
 config.userAgent = getRandomUserAgent()
