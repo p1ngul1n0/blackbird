@@ -2,9 +2,9 @@ name: Blackbird Python Tests
 
 on:
   push:
-    branches: [ whatsmyname-integration ]
+    branches: [ main ]
   pull_request:
-    branches: [ whatsmyname-integration ]
+    branches: [ main ]
 
 jobs:
   test:
