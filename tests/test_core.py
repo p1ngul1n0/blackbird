@@ -11,8 +11,8 @@ from modules.core.email import verifyEmail
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from modules.utils.userAgent import getRandomUserAgent
-from modules.export.file_operations import createSaveDirectory
 from datetime import datetime
+from modules.whatsmyname.list_operations import checkUpdates
 
 config.no_nsfw = None
 config.proxy = None
@@ -29,6 +29,8 @@ config.dateRaw = datetime.now().strftime("%m_%d_%Y")
 config.datePretty = datetime.now().strftime("%B %d, %Y")
 config.currentEmail = None
 config.currentUser = None
+
+checkUpdates()
 
 
 class TestEmail(unittest.TestCase):
