@@ -1,20 +1,20 @@
 # 🔍 Basic Usage
 
-## 👤 Username Reverse Search&#x20;
+### 👤 Username Reverse Search
 
 ```bash
 python blackbird.py --username username1 username2 username3
 ```
 
-## 📧 Email Reverse Search&#x20;
+### 📧 Email Reverse Search
 
 ```bash
 python blackbird.py --email email1@email email2@email email3@email
 ```
 
-## 📁 Export
+### 📁 Export
 
-### PDF
+#### PDF
 
 ```bash
 python blackbird.py --username username1 --pdf
@@ -24,17 +24,17 @@ python blackbird.py --username username1 --pdf
 
 <summary>PDF</summary>
 
-<img src=".gitbook/assets/blackbird_report_pdf_results.png" alt="" data-size="original">
+
 
 </details>
 
-### CSV
+#### CSV
 
 ```
 python blackbird.py --username username1 --csv
 ```
 
-### DUMP
+#### DUMP
 
 Dump all found account HTTP responses.
 

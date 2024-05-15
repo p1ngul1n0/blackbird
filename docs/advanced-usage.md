@@ -1,6 +1,6 @@
 # 🕵️ Advanced Usage
 
-## Verbose
+### Verbose
 
 Verbose mode provides more detailed information during the tool's execution.
 
@@ -8,7 +8,7 @@ Verbose mode provides more detailed information during the tool's execution.
 python blackbird.py --username username1 --verbose
 ```
 
-## Filter
+### Filter
 
 {% hint style="info" %}
 This feature is expected to be enhanced soon to support a more dynamic approach.
@@ -20,7 +20,7 @@ You can filter the sites to be searched using the `--filter` argument by specify
 python blackbird.py --username username1 --filter "name=Twitter"
 ```
 
-## No NSFW
+### No NSFW
 
 If you wish to exclude NSFW sites from the search, simply use the `--no-nsfw` argument.
 
@@ -28,7 +28,7 @@ If you wish to exclude NSFW sites from the search, simply use the `--no-nsfw` ar
 python blackbird.py --username username1 --no-nsfw
 ```
 
-## Proxy
+### Proxy
 
 Use the `--proxy` argument to route all HTTP requests through a proxy.
 
@@ -36,7 +36,7 @@ Use the `--proxy` argument to route all HTTP requests through a proxy.
 python blackbird.py --username username1 --proxy "http://myproxy:9090"
 ```
 
-## Timeout
+### Timeout
 
 To modify the server response timeout, use the `--timeout` argument followed by the desired timeout duration in seconds.
 
@@ -44,7 +44,7 @@ To modify the server response timeout, use the `--timeout` argument followed by 
 python blackbird.py --username username1 --timeout 30
 ```
 
-## No Update
+### No Update
 
 Use the `--no-update` argument to instruct the tool not to check for updates in the WhatsMyName list.
 

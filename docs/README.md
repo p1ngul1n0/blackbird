@@ -70,7 +70,7 @@ Blackbird is fully integrated with [WhatsMyName](https://github.com/WebBreacher/
 
 ### Sponsors
 
-[<img alt="Cyber Hunter Lab" width="120" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/logo_chl.jpg" />](https://site.cyberhunteracademy.com/)
+[![Cyber Hunter Lab](https://raw.githubusercontent.com/p1ngul1n0/src/master/logo\_chl.jpg)](https://site.cyberhunteracademy.com/)
 
 ### Disclaimer
 
@@ -86,4 +86,4 @@ programs is not P1ngul1n0's responsibility.
 
 ### Contact
 
-Feel free to contact me at [X](https://x.com/p1ngul1n0)\
+Feel free to contact me at [X](https://x.com/p1ngul1n0)
