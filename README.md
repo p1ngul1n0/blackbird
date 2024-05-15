@@ -56,6 +56,31 @@ The previous arguments can all be used together in one single command.
 python blackbird.py --username username1 username2 username3 --email email1@email email2@email email3@email --pdf --csv --dump
 ```
 
+#### Other
+```
+usage: blackbird [-h] [-u [USERNAME ...]] [-e [EMAIL ...]] [--csv | --no-csv] [--pdf | --no-pdf] [-v | --verbose | --no-verbose] [--filter FILTER] [--no-nsfw] [--dump]
+                 [--proxy PROXY] [--timeout TIMEOUT] [--no-update] [--about]
+
+An OSINT tool to search for accounts by username in social networks.
+
+options:
+  -h, --help            show this help message and exit
+  -u [USERNAME ...], --username [USERNAME ...]
+                        One or more usernames to search.
+  -e [EMAIL ...], --email [EMAIL ...]
+                        One or more email to search.
+  --csv, --no-csv       Generate a CSV with the results.
+  --pdf, --no-pdf       Generate a PDF with the results.
+  -v, --verbose, --no-verbose
+                        Show verbose output.
+  --filter FILTER       Filter sites to be searched by list property value.E.g --filter "cat=social"
+  --no-nsfw             Removes NSFW sites from the search.
+  --dump                Dump HTML content for found accounts.
+  --proxy PROXY         Proxy to send HTTP requests through.
+  --timeout TIMEOUT     Timeout in seconds for each HTTP request (Default is 30).
+  --no-update           Don't update sites lists.
+  --about               Show about information and exit.
+```
 
 ## WhatsMyName Integration
 #### Blackbird is fully integrated with <a href="https://github.com/WebBreacher/WhatsMyName">WhatsMyName</a> project,  witch has 600+ sites to perform accurate reverse username search.
