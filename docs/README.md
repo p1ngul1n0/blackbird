@@ -1,6 +1,6 @@
 # Blackbird
 
-<figure><img src="../.gitbook/assets/blackbird_printscreen.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="./.gitbook/assets/blackbird_printscreen.png" alt=""><figcaption></figcaption></figure>
 
 ## What is it?
 
