@@ -24,13 +24,7 @@ python blackbird.py --email email1@email email2@email email3@email
 python blackbird.py --username username1 --pdf
 ```
 
-<details>
-
-<summary>PDF</summary>
-
-
-
-</details>
+<figure><img src=".gitbook/assets/blackbird_report_pdf_results.png" alt=""><figcaption></figcaption></figure>
 
 #### CSV
 
