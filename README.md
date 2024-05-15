@@ -33,6 +33,15 @@ python blackbird.py --username username1 username2 username3
 python blackbird.py --email email1@email.com email2@email.com email3@email.com
 ```
 
+**Export results to PDF**
+
+```bash
+python blackbird.py --email email1@email.com --pdf
+```
+
+## More
+For more details about the project, visit the <a href="https://p1ngul1n0.gitbook.io/blackbird/">Docs</a>
+
 ### Project Developer
 
 [Lucas Antoniaci](https://www.linkedin.com/in/lucas-antoniaci/) [![Brazil](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/br.png)](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/br.png)
@@ -43,7 +52,11 @@ Blackbird is fully integrated with [WhatsMyName](https://github.com/WebBreacher/
 
 ### Sponsors
 
-[<img alt="Cyber Hunter Lab" width="120" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/logo_chl.jpg" />](https://site.cyberhunteracademy.com/)
+<p align="center">
+  <a href="https://site.cyberhunteracademy.com/">
+    <img alt="Cyber Hunter Lab" width="150" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/logo_chl.jpg" />
+  </a>
+</p>
 
 
 ### Disclaimer
