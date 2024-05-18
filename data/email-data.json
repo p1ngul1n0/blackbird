@@ -317,6 +317,40 @@
             "cat": "shopping",
             "input_operation": null,
             "metadata": null
+        },
+        {
+            "name": "Milanuncios",
+            "uri_check": "https://userprofiles.gw.milanuncios.com/api/v2/users",
+            "data": "{\"name\":\"SAsASA\",\"password\":\"1234561\",\"email\":\"{account}\",\"isConsentApproved\":\"true\",\"sellerType\":\"PRIVATE\",\"role\":\"USER\"}",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "e_code": 409,
+            "e_string": "user-profiles.email-already-exists",
+            "m_string": "user-profiles.invalid-password",
+            "m_code": 400,
+            "known": [],
+            "cat": "shopping",
+            "input_operation": null,
+            "metadata": null
+        },
+        {
+            "name": "El Mundo",
+            "uri_check": "https://seguro.elmundo.es/ueregistro/v2/usuarios/registro",
+            "data": "{\"email\":\"{account}\",\"pass\":\"11\",\"portal\":8,\"aceptaCondicionesLegales\":true,\"aceptaEsMayorDeDieciseis\":true,\"comunicacionesComerciales\":[],\"rid\":null,\"csp\":null,\"urlOrigen\":\"\",\"movil\":\"\",\"aceptaSuscripcionClub\":false,\"pianoTrackingId\":null}",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "e_code": 400,
+            "e_string": "\"codigo\":\"176\"",
+            "m_string": "\"codigo\":\"001\"",
+            "m_code": 404,
+            "known": [],
+            "cat": "shopping",
+            "input_operation": null,
+            "metadata": null
         }
     ]
 }
