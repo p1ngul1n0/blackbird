@@ -46,6 +46,8 @@ def initiate():
     parser.add_argument(
         "-e",
         "--email",
+        nargs="*",
+        type=str,
         help="One or more email to search.",
     )
     parser.add_argument(
