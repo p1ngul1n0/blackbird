@@ -7,13 +7,29 @@ Blackbird can make mistakes. Consider checking the information.
 ### 👤 Username Reverse Search
 
 ```bash
+python blackbird.py --username username1
+```
+
+```bash
 python blackbird.py --username username1 username2 username3
+```
+
+```bash
+python blackbird.py --username-file usernames.txt
 ```
 
 ### 📧 Email Reverse Search
 
 ```bash
+python blackbird.py --email email1@email
+```
+
+```bash
 python blackbird.py --email email1@email email2@email email3@email
+```
+
+```bash
+python blackbird.py --email-file emails.txt
 ```
 
 ### 📁 Export
