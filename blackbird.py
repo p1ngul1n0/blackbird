@@ -206,8 +206,6 @@ if __name__ == "__main__":
             sys.exit()
 
     if config.email:
-        if isFile(config.email[0]):
-            config.email = getLinesFromFile(config.email[0])
         for email in config.email:
             config.currentEmail = email
             if config.dump or config.csv or config.pdf:
