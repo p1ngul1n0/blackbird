@@ -1,5 +1,4 @@
 import config
-from lxml import etree
 import re
 
 
