@@ -7,6 +7,7 @@ import config
 
 
 from modules.whatsmyname.list_operations import readList
+from modules.utils.parse import extractMetadata
 from modules.utils.filter import filterFoundAccounts, applyFilters
 from modules.utils.http_client import do_async_request
 from modules.utils.log import logError
@@ -17,7 +18,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 # Verify account existence based on list args
 async def checkSite(site, method, url, session):
-    returnData = {"name": site["name"], "url": url, "status": "NONE"}
+    returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": []}
     response = await do_async_request(method, url, session)
     if response == None:
         returnData["status"] = "ERROR"
@@ -28,13 +29,19 @@ async def checkSite(site, method, url, session):
                 site["e_code"] == response["status_code"]
             ):
                 if (site["m_string"] not in response["content"]) and (
-                    site["m_code"] != response["status_code"]
+                    (site["m_code"] != response["status_code"])
+                    if site["m_code"] != site["e_code"]
+                    else True
                 ):
                     returnData["status"] = "FOUND"
                     config.console.print(
                         f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                     )
-
+                    if site["name"] in config.metadata_params["sites"]:
+                        metadataItem = extractMetadata(
+                            config.metadata_params["sites"][site["name"]], response
+                        )
+                        returnData["metadata"].append(metadataItem)
                     # Save response content to a .HTML file
                     if config.dump:
                         path = os.path.join(
@@ -80,6 +87,7 @@ async def fetchResults(username):
 def verifyUsername(username):
 
     data = readList("username")
+    config.metadata_params = readList("metadata")
     sitesToSearch = data["sites"]
     config.username_sites = applyFilters(sitesToSearch)
 

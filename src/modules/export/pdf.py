@@ -157,7 +157,7 @@ def saveToPdf(foundAccounts, resultType):
                     relative=1,
                 )
 
-                if resultType == "email" and result["metadata"]:
+                if result["metadata"]:
                     y_position -= 25
                     canva.setFont(config.FONT_NAME_REGULAR, 7)
                     for data in result["metadata"]:
