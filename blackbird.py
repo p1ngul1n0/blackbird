@@ -15,6 +15,7 @@ from modules.utils.userAgent import getRandomUserAgent
 from modules.export.file_operations import createSaveDirectory
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
+from modules.utils.file_operations import isFile, getLinesFromFile
 
 
 def initiate():
@@ -31,10 +32,26 @@ def initiate():
         description="An OSINT tool to search for accounts by username in social networks.",
     )
     parser.add_argument(
-        "-u", "--username", nargs="*", type=str, help="One or more usernames to search."
+        "-u",
+        "--username",
+        nargs="*",
+        type=str,
+        help="One or more usernames to search.",
     )
     parser.add_argument(
-        "-e", "--email", nargs="*", type=str, help="One or more email to search."
+        "-uf",
+        "--username-file",
+        help="The list of usernames to be searched.",
+    )
+    parser.add_argument(
+        "-e",
+        "--email",
+        help="One or more email to search.",
+    )
+    parser.add_argument(
+        "-ef",
+        "--email-file",
+        help="The list of emails to be searched.",
     )
     parser.add_argument(
         "--csv",
@@ -82,6 +99,7 @@ def initiate():
 
     # Store the necessary arguments to config Object
     config.username = args.username
+    config.username_file = args.username_file
     config.csv = args.csv
     config.pdf = args.pdf
     config.filter = args.filter
@@ -91,6 +109,7 @@ def initiate():
     config.verbose = args.verbose
     config.timeout = args.timeout
     config.email = args.email
+    config.email_file = args.email_file
     config.no_update = args.no_update
     config.about = args.about
 
@@ -139,7 +158,12 @@ if __name__ == "__main__":
         )
         sys.exit()
 
-    if not config.username and not config.email:
+    if (
+        not config.username
+        and not config.email
+        and not config.username_file
+        and not config.email_file
+    ):
         config.console.print("Either --username or --email is required")
         sys.exit()
 
@@ -147,6 +171,16 @@ if __name__ == "__main__":
         config.console.print(":next_track_button:  Skipping update...")
     else:
         checkUpdates()
+
+    if config.username_file:
+        if isFile(config.username_file):
+            config.username = getLinesFromFile(config.username_file)
+            config.console.print(
+                f':glasses: Successfully loaded {len(config.username)} usernames from "{config.username_file}"'
+            )
+        else:
+            config.console.print(f'❌ Could not read file "{config.username_file}"')
+            sys.exit()
 
     if config.username:
         for user in config.username:
@@ -161,7 +195,19 @@ if __name__ == "__main__":
             config.currentUser = None
             config.usernameFoundAccounts = None
 
+    if config.email_file:
+        if isFile(config.email_file):
+            config.email = getLinesFromFile(config.email_file)
+            config.console.print(
+                f':glasses: Successfully loaded {len(config.email)} emails from "{config.email_file}"'
+            )
+        else:
+            config.console.print(f'❌ Could not read file "{config.email_file}"')
+            sys.exit()
+
     if config.email:
+        if isFile(config.email[0]):
+            config.email = getLinesFromFile(config.email[0])
         for email in config.email:
             config.currentEmail = email
             if config.dump or config.csv or config.pdf:
