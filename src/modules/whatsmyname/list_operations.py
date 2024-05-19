@@ -4,7 +4,7 @@ import config
 import json
 from rich.console import Console
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 
 from utils.http_client import do_sync_request
@@ -14,27 +14,35 @@ from utils.log import logError
 usernameListURL = config.USERNAME_LIST_URL
 usernameListPath = config.USERNAME_LIST_PATH
 emailListPath = config.EMAIL_LIST_PATH
+usernameMetadataListPath = config.USERNAME_METADATA_LIST_PATH
 
 console = Console()
 
+
 # Read list file and return content
 def readList(option):
-    if (option == "username"):
+    if option == "username":
         with open(usernameListPath, "r", encoding="UTF-8") as f:
             data = json.load(f)
         return data
-    elif (option == "email"):
+    elif option == "email":
         with open(emailListPath, "r", encoding="UTF-8") as f:
+            data = json.load(f)
+        return data
+    elif option == "metadata":
+        with open(usernameMetadataListPath, "r", encoding="UTF-8") as f:
             data = json.load(f)
         return data
     else:
         return False
+
 
 # Download .JSON file list from defined URL
 def downloadList():
     response, parsedData = do_sync_request("GET", usernameListURL)
     with open(usernameListPath, "w", encoding="UTF-8") as f:
         json.dump(parsedData, f, indent=4, ensure_ascii=False)
+
 
 # Check for changes in remote list
 def checkUpdates():

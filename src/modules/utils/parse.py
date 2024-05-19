@@ -1,4 +1,5 @@
 import config
+import re
 
 
 def access_json_property(data, path_config):
@@ -11,6 +12,15 @@ def access_json_property(data, path_config):
         return False
 
 
+def access_html_regex(data, pattern):
+    try:
+        match = re.search(pattern, data)
+        if match:
+            return match.group(1).replace("\n", "")
+    except:
+        return False
+
+
 def extractMetadata(metadata, response):
     metadataItem = []
     for params in metadata:
@@ -18,6 +28,8 @@ def extractMetadata(metadata, response):
 
         if params["schema"] == "JSON":
             returnValue = access_json_property(response["json"], params["path"])
+        elif params["schema"] == "HTML":
+            returnValue = access_html_regex(response["content"], params["path"])
         else:
             return None
 
