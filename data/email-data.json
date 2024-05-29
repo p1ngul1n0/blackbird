@@ -366,6 +366,21 @@
             "cat": "xx NSFW xx",
             "input_operation": null,
             "metadata": null
+        },
+        {
+            "name": "Picsart",
+            "uri_check": "https://api.picsart.com/users/email/existence?email_encoded=0&emails={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "\"response\":[\"",
+            "m_string": "\"registration_flow\"",
+            "m_code": 404,
+            "known": [],
+            "cat": "art",
+            "input_operation": null,
+            "metadata": null
         }
     ]
 }
