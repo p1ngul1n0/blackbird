@@ -23,7 +23,7 @@
             },
             {
                 "schema": "JSON",
-                "type": "String",
+                "type": "Image",
                 "name": "Avatar",
                 "path": [
                     "entry",
@@ -34,7 +34,7 @@
             {
                 "schema": "JSON",
                 "type": "String",
-                "name": "Avatar",
+                "name": "Location",
                 "path": [
                     "entry",
                     0,
@@ -68,7 +68,7 @@
             },
             {
                 "schema": "JSON",
-                "type": "String",
+                "type": "Image",
                 "name": "Avatar",
                 "path": [
                     "users",
@@ -115,7 +115,7 @@
             },
             {
                 "schema": "HTML",
-                "type": "String",
+                "type": "Image",
                 "name": "Avatar",
                 "path": "<img[^>]+src=\"([^\"]+)\""
             }
@@ -135,7 +135,7 @@
             },
             {
                 "schema": "HTML",
-                "type": "String",
+                "type": "Image",
                 "name": "Avatar",
                 "path": "<a[^>]*class=\"profile-card-avatar\"[^>]*><img[^>]+src=\"([^\"]+)\""
             }
@@ -151,7 +151,7 @@
             },
             {
                 "schema": "JSON",
-                "type": "String",
+                "type": "Image",
                 "name": "Avatar",
                 "path": [
                     "avatar"

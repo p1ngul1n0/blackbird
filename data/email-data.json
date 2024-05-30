@@ -62,7 +62,7 @@
                 },
                 {
                     "schema": "JSON",
-                    "type": "String",
+                    "type": "Image",
                     "name": "Avatar",
                     "path": [
                         "entry",
@@ -184,7 +184,7 @@
             "metadata": [
                 {
                     "schema": "JSON",
-                    "type": "String",
+                    "type": "Image",
                     "name": "Avatar",
                     "path": [
                         0,

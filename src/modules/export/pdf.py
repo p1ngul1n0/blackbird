@@ -173,6 +173,20 @@ def saveToPdf(foundAccounts, resultType):
                                 for value in d["value"]:
                                     canva.drawString(150, y_position, f"• {value}:")
                                     y_position -= 25
+                            elif d["type"] == "Image":
+                                y_position -= 25
+                                canva.drawImage(
+                                    os.path.join(
+                                        config.saveDirectory,
+                                        f"images_{identifier}",
+                                        f"{result['name']}_image.jpg",
+                                    ),
+                                    110,
+                                    y_position,
+                                    width=30,
+                                    height=30,
+                                )
+                                y_position -= 25
 
                 y_position -= 25
         canva.save()

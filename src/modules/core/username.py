@@ -39,7 +39,9 @@ async def checkSite(site, method, url, session):
                     )
                     if site["name"] in config.metadata_params["sites"]:
                         metadataItem = extractMetadata(
-                            config.metadata_params["sites"][site["name"]], response
+                            config.metadata_params["sites"][site["name"]],
+                            response,
+                            site["name"],
                         )
                         returnData["metadata"].append(metadataItem)
                     # Save response content to a .HTML file

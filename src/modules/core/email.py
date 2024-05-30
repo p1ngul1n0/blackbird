@@ -41,7 +41,9 @@ async def checkSite(site, method, url, session, data=None, headers=None):
                         f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                     )
                     if site["metadata"]:
-                        metadataItem = extractMetadata(site["metadata"], response)
+                        metadataItem = extractMetadata(
+                            site["metadata"], response, site["name"]
+                        )
                         returnData["metadata"].append(metadataItem)
                     # Save response content to a .HTML file
                     if config.dump:
