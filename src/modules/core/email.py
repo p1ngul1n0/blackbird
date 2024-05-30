@@ -5,7 +5,6 @@ from rich.markup import escape
 import time
 import aiohttp
 import asyncio
-import sys
 
 from modules.utils.filter import filterFoundAccounts, applyFilters
 from modules.utils.parse import extractMetadata
@@ -14,11 +13,17 @@ from modules.whatsmyname.list_operations import readList
 from src.modules.utils.input import processInput
 from modules.utils.log import logError
 from src.modules.export.dump import dumpContent
+from modules.utils.precheck import perform_pre_check
 
 
 # Verify account existence based on list args
 async def checkSite(site, method, url, session, data=None, headers=None):
     returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": []}
+
+    if site["pre_check"]:
+        authenticated_headers = perform_pre_check(site["pre_check"], headers)
+        headers = authenticated_headers
+
     response = await do_async_request(method, url, session, data, headers)
     if response == None:
         returnData["status"] = "ERROR"

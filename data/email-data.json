@@ -162,7 +162,8 @@
                         "urls"
                     ]
                 }
-            ]
+            ],
+            "pre_check": null
         },
         {
             "name": "Adobe",
@@ -191,7 +192,8 @@
                         "230"
                     ]
                 }
-            ]
+            ],
+            "pre_check": null
         },
         {
             "name": "Duolingo",
@@ -206,7 +208,8 @@
             "known": [],
             "cat": "hobby",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "Chess.com",
@@ -221,7 +224,8 @@
             "known": [],
             "cat": "gaming",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "Notion",
@@ -238,7 +242,8 @@
             "known": [],
             "cat": "misc",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "Spotify",
@@ -253,7 +258,8 @@
             "known": [],
             "cat": "music",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "Strava",
@@ -268,7 +274,8 @@
             "known": [],
             "cat": "music",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "Twitter",
@@ -283,7 +290,8 @@
             "known": [],
             "cat": "music",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "NetShoes",
@@ -298,7 +306,8 @@
             "known": [],
             "cat": "shopping",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "OLX",
@@ -316,7 +325,8 @@
             "known": [],
             "cat": "shopping",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "Milanuncios",
@@ -333,7 +343,8 @@
             "known": [],
             "cat": "shopping",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "El Mundo",
@@ -350,7 +361,8 @@
             "known": [],
             "cat": "shopping",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "Xvideos",
@@ -365,7 +377,8 @@
             "known": [],
             "cat": "xx NSFW xx",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
         },
         {
             "name": "Picsart",
@@ -380,7 +393,63 @@
             "known": [],
             "cat": "art",
             "input_operation": null,
-            "metadata": null
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Eventbrite",
+            "uri_check": "https://www.eventbrite.com/api/v3/users/lookup/",
+            "data": "{\"email\":\"{account}\",\"source_user_id\":\"\",\"source_provider\":\"\"}",
+            "method": "POST",
+            "headers": {
+                "Cookie": "csrftoken={csrftoken_value}",
+                "X-Csrftoken": "{csrftoken_value}",
+                "Referer": "https://www.eventbrite.com/",
+                "Content-Type": "application/json"
+            },
+            "e_code": 200,
+            "e_string": "\"exists\":true",
+            "m_string": "\"exists\":false",
+            "m_code": 404,
+            "known": [],
+            "cat": "social",
+            "input_operation": null,
+            "metadata": [
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "User ID",
+                    "path": [
+                        "user_id"
+                    ]
+                }
+            ],
+            "pre_check": {
+                "type": "cookie",
+                "endpoint": "https://www.eventbrite.com/signin/?referrer=%2F",
+                "method": "GET",
+                "headers": null,
+                "data": null,
+                "cookie_name": "csrftoken"
+            }
+        },
+        {
+            "name": "Imageshack",
+            "uri_check": "https://imageshack.com/rest_api/v2/user",
+            "data": "email={account}&username=user&password=1&set_cookies=true",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            "e_code": 400,
+            "e_string": "\"error_code\":30",
+            "m_string": "\"error_code\":29",
+            "m_code": 404,
+            "known": [],
+            "cat": "images",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
         }
     ]
 }
