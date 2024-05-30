@@ -174,7 +174,8 @@ def saveToPdf(foundAccounts, resultType):
                                     canva.drawString(150, y_position, f"• {value}:")
                                     y_position -= 25
                             elif d["type"] == "Image":
-                                y_position -= 25
+                                canva.drawString(100, y_position, f"• {d['name']}:")
+                                y_position -= 35
                                 canva.drawImage(
                                     os.path.join(
                                         config.saveDirectory,
@@ -189,6 +190,7 @@ def saveToPdf(foundAccounts, resultType):
                                 y_position -= 25
 
                 y_position -= 25
+
         canva.save()
         config.console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
         return True
