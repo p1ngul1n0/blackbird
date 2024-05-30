@@ -139,6 +139,24 @@
                 "name": "Avatar",
                 "path": "<a[^>]*class=\"profile-card-avatar\"[^>]*><img[^>]+src=\"([^\"]+)\""
             }
+        ],
+        "StreamElements": [
+            {
+                "schema": "JSON",
+                "type": "String",
+                "name": "Name",
+                "path": [
+                    "displayName"
+                ]
+            },
+            {
+                "schema": "JSON",
+                "type": "String",
+                "name": "Avatar",
+                "path": [
+                    "avatar"
+                ]
+            }
         ]
     }
 }
