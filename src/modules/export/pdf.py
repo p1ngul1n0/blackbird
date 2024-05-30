@@ -174,20 +174,23 @@ def saveToPdf(foundAccounts, resultType):
                                     canva.drawString(150, y_position, f"• {value}:")
                                     y_position -= 25
                             elif d["type"] == "Image":
-                                canva.drawString(100, y_position, f"• {d['name']}:")
-                                y_position -= 35
-                                canva.drawImage(
-                                    os.path.join(
-                                        config.saveDirectory,
-                                        f"images_{identifier}",
-                                        f"{result['name']}_image.jpg",
-                                    ),
-                                    110,
-                                    y_position,
-                                    width=30,
-                                    height=30,
-                                )
-                                y_position -= 25
+                                try:
+                                    canva.drawString(100, y_position, f"• {d['name']}:")
+                                    y_position -= 35
+                                    canva.drawImage(
+                                        os.path.join(
+                                            config.saveDirectory,
+                                            f"images_{identifier}",
+                                            f"{result['name']}_image.jpg",
+                                        ),
+                                        110,
+                                        y_position,
+                                        width=30,
+                                        height=30,
+                                    )
+                                    y_position -= 25
+                                except:
+                                    pass
 
                 y_position -= 25
 

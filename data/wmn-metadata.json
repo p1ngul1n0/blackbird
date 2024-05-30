@@ -70,6 +70,7 @@
                 "schema": "JSON",
                 "type": "Image",
                 "name": "Avatar",
+                "prefix": "https:",
                 "path": [
                     "users",
                     0,
@@ -137,6 +138,7 @@
                 "schema": "HTML",
                 "type": "Image",
                 "name": "Avatar",
+                "prefix": "https://nitter.privacydev.net",
                 "path": "<a[^>]*class=\"profile-card-avatar\"[^>]*><img[^>]+src=\"([^\"]+)\""
             }
         ],

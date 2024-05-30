@@ -46,6 +46,7 @@ def extractMetadata(metadata, response, site):
     metadataItem = []
     for params in metadata:
         metadataReturn = params
+        prefix = params["prefix"] if "prefix" in params else False
 
         if params["schema"] == "JSON":
             returnValue = access_json_property(response["json"], params["path"])
@@ -56,7 +57,10 @@ def extractMetadata(metadata, response, site):
 
         if returnValue:
             if params["type"] == "String" and returnValue:
-                metadataReturn["value"] = returnValue
+                if prefix:
+                    metadataReturn["value"] = prefix + returnValue
+                else:
+                    metadataReturn["value"] = returnValue
                 config.console.print(
                     f"      :right_arrow: {metadataReturn['name']}: {metadataReturn['value']}"
                 )
@@ -68,7 +72,10 @@ def extractMetadata(metadata, response, site):
                     metadataReturn["value"].append(itemValue)
                     config.console.print(f"         :blue_circle: {itemValue}")
             elif params["type"] == "Image" and returnValue:
-                metadataReturn["value"] = returnValue
+                if prefix:
+                    metadataReturn["value"] = prefix + returnValue
+                else:
+                    metadataReturn["value"] = returnValue
                 config.console.print(
                     f"      :right_arrow: {metadataReturn['name']}: {metadataReturn['value']}"
                 )
