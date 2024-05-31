@@ -1,7 +1,7 @@
 # ▶️ Getting Started
 
 {% hint style="info" %}
-Python3 is required
+Python3 or above is required
 {% endhint %}
 
 ### Setup
@@ -18,3 +18,5 @@ cd blackbird
 ```bash
 pip install -r requirements.txt
 ```
+
+#### **✨ You're good to go!**
