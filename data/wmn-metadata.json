@@ -13,6 +13,16 @@
         "Gravatar": [
             {
                 "schema": "JSON",
+                "type": "Image",
+                "name": "Avatar",
+                "path": [
+                    "entry",
+                    0,
+                    "thumbnailUrl"
+                ]
+            },
+            {
+                "schema": "JSON",
                 "type": "String",
                 "name": "Name",
                 "path": [
@@ -24,17 +34,7 @@
             {
                 "schema": "JSON",
                 "type": "String",
-                "name": "Avatar",
-                "path": [
-                    "entry",
-                    0,
-                    "thumbnailUrl"
-                ]
-            },
-            {
-                "schema": "JSON",
-                "type": "String",
-                "name": "Avatar",
+                "name": "Location",
                 "path": [
                     "entry",
                     0,
@@ -58,22 +58,23 @@
         "Duolingo": [
             {
                 "schema": "JSON",
+                "type": "Image",
+                "name": "Avatar",
+                "prefix": "https:",
+                "path": [
+                    "users",
+                    0,
+                    "picture"
+                ]
+            },
+            {
+                "schema": "JSON",
                 "type": "String",
                 "name": "Name",
                 "path": [
                     "users",
                     0,
                     "name"
-                ]
-            },
-            {
-                "schema": "JSON",
-                "type": "String",
-                "name": "Avatar",
-                "path": [
-                    "users",
-                    0,
-                    "picture"
                 ]
             },
             {
@@ -103,6 +104,12 @@
         "Instagram": [
             {
                 "schema": "HTML",
+                "type": "Image",
+                "name": "Avatar",
+                "path": "<img[^>]+src=\"([^\"]+)\""
+            },
+            {
+                "schema": "HTML",
                 "type": "String",
                 "name": "Name",
                 "path": "<h2 class=\"profile-name-bottom\">([^<]+)</h2>"
@@ -112,15 +119,16 @@
                 "type": "String",
                 "name": "Bio",
                 "path": "<div class=\"profile-description\">([^<]+)</div>"
-            },
-            {
-                "schema": "HTML",
-                "type": "String",
-                "name": "Avatar",
-                "path": "<img[^>]+src=\"([^\"]+)\""
             }
         ],
         "Twitter": [
+            {
+                "schema": "HTML",
+                "type": "Image",
+                "name": "Avatar",
+                "prefix": "https://nitter.privacydev.net",
+                "path": "<a[^>]*class=\"profile-card-avatar\"[^>]*><img[^>]+src=\"([^\"]+)\""
+            },
             {
                 "schema": "HTML",
                 "type": "String",
@@ -132,29 +140,23 @@
                 "type": "String",
                 "name": "Bio",
                 "path": "<div class=\"profile-bio\">([^<]+)</div>"
-            },
-            {
-                "schema": "HTML",
-                "type": "String",
-                "name": "Avatar",
-                "path": "<a[^>]*class=\"profile-card-avatar\"[^>]*><img[^>]+src=\"([^\"]+)\""
             }
         ],
         "StreamElements": [
+            {
+                "schema": "JSON",
+                "type": "Image",
+                "name": "Avatar",
+                "path": [
+                    "avatar"
+                ]
+            },
             {
                 "schema": "JSON",
                 "type": "String",
                 "name": "Name",
                 "path": [
                     "displayName"
-                ]
-            },
-            {
-                "schema": "JSON",
-                "type": "String",
-                "name": "Avatar",
-                "path": [
-                    "avatar"
                 ]
             }
         ]

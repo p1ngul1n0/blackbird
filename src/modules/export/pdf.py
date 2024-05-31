@@ -132,12 +132,10 @@ def saveToPdf(foundAccounts, resultType):
                     canva.showPage()
                     y_position = height - 130
 
-                canva.setFont(config.FONT_NAME_REGULAR, 12)
-                canva.drawString(72, y_position, f"• {result['name']}")
+                canva.setFont(config.FONT_NAME_BOLD, 12)
+                canva.drawString(72, y_position, f"{result['name']}")
 
-                siteWidth = stringWidth(
-                    f"• {result['name']}", config.FONT_NAME_REGULAR, 12
-                )
+                siteWidth = stringWidth(f"{result['name']}", config.FONT_NAME_BOLD, 12)
                 canva.drawImage(
                     os.path.join(
                         os.getcwd(),
@@ -156,25 +154,106 @@ def saveToPdf(foundAccounts, resultType):
                     (77 + siteWidth, y_position, 77 + siteWidth + 10, y_position + 10),
                     relative=1,
                 )
-
-                if result["metadata"]:
+                try:
+                    if result["metadata"]:
+                        initialWidth = y_position - 10
+                        y_position -= 25
+                        canva.setFont(config.FONT_NAME_REGULAR, 7)
+                        for data in result["metadata"]:
+                            for d in data:
+                                if d["type"] == "String":
+                                    metadataWidth = stringWidth(
+                                        f"{d['name']}: {d['value']}",
+                                        config.FONT_NAME_REGULAR,
+                                        7,
+                                    )
+                                    canva.setFillColor("#EDEBED")
+                                    canva.roundRect(
+                                        90,
+                                        y_position - 4,
+                                        metadataWidth + 5,
+                                        13,
+                                        6,
+                                        fill=1,
+                                        stroke=0,
+                                    )
+                                    canva.setFillColor("#000000")
+                                    canva.setFont(config.FONT_NAME_BOLD, 7)
+                                    canva.drawString(93, y_position, f"{d['name']}:")
+                                    metadataWidth = stringWidth(
+                                        f"{d['name']}:",
+                                        config.FONT_NAME_BOLD,
+                                        7,
+                                    )
+                                    canva.setFont(config.FONT_NAME_REGULAR, 7)
+                                    canva.drawString(
+                                        93 + metadataWidth, y_position, f"{d['value']}"
+                                    )
+                                    y_position -= 15
+                                elif d["type"] == "Array":
+                                    metadataWidth = stringWidth(
+                                        f"{d['name']}:",
+                                        config.FONT_NAME_BOLD,
+                                        7,
+                                    )
+                                    canva.setFillColor("#EDEBED")
+                                    canva.roundRect(
+                                        90,
+                                        y_position - 4,
+                                        metadataWidth + 5,
+                                        13,
+                                        6,
+                                        fill=1,
+                                        stroke=0,
+                                    )
+                                    canva.setFillColor("#000000")
+                                    canva.setFont(config.FONT_NAME_BOLD, 7)
+                                    canva.drawString(93, y_position, f"{d['name']}:")
+                                    y_position -= 15
+                                    for value in d["value"]:
+                                        metadataWidth = stringWidth(
+                                            value,
+                                            config.FONT_NAME_BOLD,
+                                            7,
+                                        )
+                                        canva.setFillColor("#EDEBED")
+                                        canva.roundRect(
+                                            100,
+                                            y_position - 4,
+                                            metadataWidth + 5,
+                                            13,
+                                            6,
+                                            fill=1,
+                                            stroke=0,
+                                        )
+                                        canva.setFillColor("#000000")
+                                        canva.setFont(config.FONT_NAME_REGULAR, 7)
+                                        canva.drawString(103, y_position, value)
+                                        y_position -= 15
+                                elif d["type"] == "Image":
+                                    if d["downloaded"]:
+                                        try:
+                                            y_position -= 25
+                                            canva.drawImage(
+                                                os.path.join(
+                                                    config.saveDirectory,
+                                                    f"images_{identifier}",
+                                                    f"{result['name']}_image.jpg",
+                                                ),
+                                                90,
+                                                y_position,
+                                                width=35,
+                                                height=35,
+                                            )
+                                            y_position -= 15
+                                        except:
+                                            pass
+                        endWidth = y_position
+                        canva.setStrokeColor("#CE0000")
+                        canva.line(85, initialWidth, 85, endWidth)
                     y_position -= 25
-                    canva.setFont(config.FONT_NAME_REGULAR, 7)
-                    for data in result["metadata"]:
-                        for d in data:
-                            if d["type"] == "String":
-                                canva.drawString(
-                                    100, y_position, f"• {d['name']}: {d['value']}"
-                                )
-                                y_position -= 25
-                            elif d["type"] == "Array":
-                                canva.drawString(100, y_position, f"• {d['name']}:")
-                                y_position -= 25
-                                for value in d["value"]:
-                                    canva.drawString(150, y_position, f"• {value}:")
-                                    y_position -= 25
-
-                y_position -= 25
+                except Exception as e:
+                    print(e)
         canva.save()
         config.console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
         return True

@@ -27,6 +27,13 @@ def createSaveDirectory():
         if config.currentEmail:
             createDumpDirectory(config.currentEmail)
 
+    if config.pdf:
+        if config.currentUser:
+            createImagesDirectory(config.currentUser)
+
+        if config.currentEmail:
+            createImagesDirectory(config.currentEmail)
+
     return True
 
 
@@ -38,6 +45,18 @@ def createDumpDirectory(identifier):
         if config.verbose:
             config.console.print(
                 escape(f"🆕 Created directory to save dump data [{folderName}]")
+            )
+        path.mkdir(parents=True, exist_ok=True)
+
+
+def createImagesDirectory(identifier):
+    folderName = f"images_{identifier}"
+    strPath = os.path.join(config.saveDirectory, folderName)
+    path = Path(strPath)
+    if not path.exists():
+        if config.verbose:
+            config.console.print(
+                escape(f"🆕 Created directory to save images [{folderName}]")
             )
         path.mkdir(parents=True, exist_ok=True)
 
