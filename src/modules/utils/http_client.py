@@ -17,27 +17,26 @@ def do_sync_request(method, url, data=None, customHeaders=None):
     if customHeaders:
         headers.update(customHeaders)
     proxies = {"http": config.proxy, "https": config.proxy} if config.proxy else None
-    response = requests.request(
-        method=method,
-        url=url,
-        proxies=proxies,
-        timeout=config.timeout,
-        verify=False,
-        headers=headers,
-        data=data,
-    )
-    parsedData = None
     try:
-        parsedData = response.json()
+        response = requests.request(
+            method=method,
+            url=url,
+            proxies=proxies,
+            timeout=config.timeout,
+            verify=False,
+            headers=headers,
+            data=data,
+        )
+        if config.verbose:
+            config.console.print(
+                f"  🆗 Sync HTTP Request completed [{method} - {response.status_code}] {url}"
+            )
+        return response
     except Exception as e:
         if config.verbose:
             config.console.print(f"  ❌ Error in Sync HTTP Request [{method}] {url}")
         logError(e, f"Error in Sync HTTP Request [{method}] {url}")
-    if config.verbose:
-        config.console.print(
-            f"  🆗 Sync HTTP Request completed [{method} - {response.status_code}] {url}"
-        )
-    return response, parsedData
+        return None
 
 
 # Perform an Async Request and return response details

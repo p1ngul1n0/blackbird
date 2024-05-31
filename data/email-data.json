@@ -426,7 +426,7 @@
             ],
             "pre_check": {
                 "type": "cookie",
-                "endpoint": "https://www.eventbrite.com/signin/?referrer=%2F",
+                "endpoint": "https://www.eventbrite.com/",
                 "method": "GET",
                 "headers": null,
                 "data": null,

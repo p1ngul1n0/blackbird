@@ -39,9 +39,9 @@ def readList(option):
 
 # Download .JSON file list from defined URL
 def downloadList():
-    response, parsedData = do_sync_request("GET", usernameListURL)
+    response = do_sync_request("GET", usernameListURL)
     with open(usernameListPath, "w", encoding="UTF-8") as f:
-        json.dump(parsedData, f, indent=4, ensure_ascii=False)
+        json.dump(response.json(), f, indent=4, ensure_ascii=False)
 
 
 # Check for changes in remote list
@@ -51,8 +51,8 @@ def checkUpdates():
         try:
             data = readList("username")
             currentListHash = hashJSON(data)
-            response, data = do_sync_request("GET", usernameListURL)
-            remoteListHash = hashJSON(data)
+            response = do_sync_request("GET", usernameListURL)
+            remoteListHash = hashJSON(response.json())
             if currentListHash != remoteListHash:
                 console.print(":counterclockwise_arrows_button: Updating...")
                 downloadList()
