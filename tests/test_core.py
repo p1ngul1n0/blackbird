@@ -18,7 +18,7 @@ config.no_nsfw = None
 config.proxy = None
 config.verbose = None
 config.timeout = None
-config.dump = None
+config.dump = True
 config.csv = None
 config.pdf = None
 config.filter = "name=Gravatar"
@@ -27,8 +27,6 @@ config.userAgent = getRandomUserAgent()
 
 config.dateRaw = datetime.now().strftime("%m_%d_%Y")
 config.datePretty = datetime.now().strftime("%B %d, %Y")
-config.currentEmail = None
-config.currentUser = None
 
 checkUpdates()
 
