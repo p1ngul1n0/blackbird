@@ -24,7 +24,7 @@ def access_html_regex(data, pattern):
 
 
 def download_image(metadataReturn, site):
-    response, parsedData = do_sync_request("GET", metadataReturn["value"])
+    response = do_sync_request("GET", metadataReturn["value"])
     if config.currentUser:
         path = os.path.join(
             config.saveDirectory,

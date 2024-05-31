@@ -27,15 +27,11 @@ def do_sync_request(method, url, data=None, customHeaders=None):
             headers=headers,
             data=data,
         )
-        parsedData = None
-        if "Content-Type" in response.headers:
-            if "application/json" in response.headers["Content-Type"]:
-                parsedData = response.json()
         if config.verbose:
             config.console.print(
                 f"  🆗 Sync HTTP Request completed [{method} - {response.status_code}] {url}"
             )
-        return response, parsedData
+        return response
     except Exception as e:
         if config.verbose:
             config.console.print(f"  ❌ Error in Sync HTTP Request [{method}] {url}")

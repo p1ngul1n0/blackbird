@@ -7,7 +7,7 @@ def perform_pre_check(precheck_params, headers):
     url = precheck_params["endpoint"]
     data = precheck_params["data"]
     precheck_headers = precheck_params["headers"]
-    response, parsedData = do_sync_request(method, url, data, precheck_headers)
+    response = do_sync_request(method, url, data, precheck_headers)
     if precheck_params["type"] == "cookie":
         cookie_name = precheck_params["cookie_name"]
         cookie_value = response.cookies.get(precheck_params["cookie_name"])
