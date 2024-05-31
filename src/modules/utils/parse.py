@@ -38,8 +38,12 @@ def download_image(metadataReturn, site):
             f"{site}_image.jpg",
         )
 
-    with open(path, "wb") as file:
-        file.write(response.content)
+    if "image" in response.headers["Content-Type"]:
+        with open(path, "wb") as file:
+            file.write(response.content)
+            metadataReturn["downloaded"] = True
+
+    return metadataReturn
 
 
 def extractMetadata(metadata, response, site):
@@ -72,6 +76,7 @@ def extractMetadata(metadata, response, site):
                     metadataReturn["value"].append(itemValue)
                     config.console.print(f"         :blue_circle: {itemValue}")
             elif params["type"] == "Image" and returnValue:
+                metadataReturn["downloaded"] = False
                 if prefix:
                     metadataReturn["value"] = prefix + returnValue
                 else:
@@ -80,7 +85,7 @@ def extractMetadata(metadata, response, site):
                     f"      :right_arrow: {metadataReturn['name']}: {metadataReturn['value']}"
                 )
                 if config.pdf:
-                    download_image(metadataReturn, site)
+                    metadataReturn = download_image(metadataReturn, site)
 
             metadataItem.append(metadataReturn)
 

@@ -42,6 +42,16 @@
             "metadata": [
                 {
                     "schema": "JSON",
+                    "type": "Image",
+                    "name": "Avatar",
+                    "path": [
+                        "entry",
+                        0,
+                        "thumbnailUrl"
+                    ]
+                },
+                {
+                    "schema": "JSON",
                     "type": "String",
                     "name": "Name",
                     "path": [
@@ -58,16 +68,6 @@
                         "entry",
                         0,
                         "preferredUsername"
-                    ]
-                },
-                {
-                    "schema": "JSON",
-                    "type": "Image",
-                    "name": "Avatar",
-                    "path": [
-                        "entry",
-                        0,
-                        "thumbnailUrl"
                     ]
                 },
                 {
