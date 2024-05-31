@@ -18,7 +18,7 @@ config.no_nsfw = None
 config.proxy = None
 config.verbose = None
 config.timeout = None
-config.dump = None
+config.dump = True
 config.csv = None
 config.pdf = None
 config.filter = "name=Gravatar"
