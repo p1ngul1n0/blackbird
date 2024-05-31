@@ -27,8 +27,6 @@ config.userAgent = getRandomUserAgent()
 
 config.dateRaw = datetime.now().strftime("%m_%d_%Y")
 config.datePretty = datetime.now().strftime("%B %d, %Y")
-config.currentEmail = None
-config.currentUser = None
 
 checkUpdates()
 
