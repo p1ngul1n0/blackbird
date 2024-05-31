@@ -37,7 +37,7 @@ python blackbird.py --email-file emails.txt
 #### PDF
 
 ```bash
-python blackbird.py --username username1 --pdf
+python blackbird.py --username p1ngul1n0 --pdf
 ```
 
 <figure><img src=".gitbook/assets/blackbird_report_pdf_results.png" alt=""><figcaption></figcaption></figure>
