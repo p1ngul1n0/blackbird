@@ -1,0 +1,143 @@
+[
+    {
+        "name": "Gravatar",
+        "url": "https://gravatar.com/142d78e466cacab37c3751a6ba0d288ce40db609ce9c49617ea6b24665f1aa9c.json",
+        "status": "FOUND",
+        "metadata": [
+            [
+                {
+                    "schema": "JSON",
+                    "type": "Image",
+                    "name": "Avatar",
+                    "path": [
+                        "entry",
+                        0,
+                        "thumbnailUrl"
+                    ],
+                    "downloaded": false,
+                    "value": "https://2.gravatar.com/avatar/142d78e466cacab37c3751a6ba0d288ce40db609ce9c49617ea6b24665f1aa9c"
+                },
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "Name",
+                    "path": [
+                        "entry",
+                        0,
+                        "displayName"
+                    ],
+                    "value": "g2-1f9d9a9efc2f523b2f09629444632b5c"
+                },
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "Username",
+                    "path": [
+                        "entry",
+                        0,
+                        "preferredUsername"
+                    ],
+                    "value": "g2-1f9d9a9efc2f523b2f09629444632b5c"
+                }
+            ]
+        ]
+    },
+    {
+        "name": "Adobe",
+        "url": "https://auth.services.adobe.com/signin/v2/users/accounts",
+        "status": "FOUND",
+        "metadata": [
+            []
+        ]
+    },
+    {
+        "name": "Duolingo",
+        "url": "https://www.duolingo.com/2017-06-30/users?email=john@gmail.com",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "Chess.com",
+        "url": "https://www.chess.com/callback/email/available?email=john@gmail.com",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "Notion",
+        "url": "https://www.notion.so/api/v3/getLoginOptions",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "Spotify",
+        "url": "https://spclient.wg.spotify.com/signup/public/v1/account?validate=1&email=john@gmail.com",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "Strava",
+        "url": "https://www.strava.com/athletes/email_unique?email=john@gmail.com",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "Twitter",
+        "url": "https://api.twitter.com/i/users/email_available.json?email=john@gmail.com",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "NetShoes",
+        "url": "https://www.netshoes.com.br/auth/account/exists/john@gmail.com",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "Milanuncios",
+        "url": "https://userprofiles.gw.milanuncios.com/api/v2/users",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "El Mundo",
+        "url": "https://seguro.elmundo.es/ueregistro/v2/usuarios/registro",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "Xvideos",
+        "url": "https://www.xvideos.com/account/checkemail?email=john@gmail.com",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "Picsart",
+        "url": "https://api.picsart.com/users/email/existence?email_encoded=0&emails=john@gmail.com",
+        "status": "FOUND",
+        "metadata": []
+    },
+    {
+        "name": "Eventbrite",
+        "url": "https://www.eventbrite.com/api/v3/users/lookup/",
+        "status": "FOUND",
+        "metadata": [
+            [
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "User ID",
+                    "path": [
+                        "user_id"
+                    ],
+                    "value": "941247935"
+                }
+            ]
+        ]
+    },
+    {
+        "name": "Imageshack",
+        "url": "https://imageshack.com/rest_api/v2/user",
+        "status": "FOUND",
+        "metadata": []
+    }
+]
