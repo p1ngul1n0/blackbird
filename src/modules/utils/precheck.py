@@ -11,7 +11,6 @@ def perform_pre_check(precheck_params, headers):
     if precheck_params["type"] == "cookie":
         cookie_name = precheck_params["cookie_name"]
         cookie_value = response.cookies.get(precheck_params["cookie_name"])
-        print(cookie_name)
         if cookie_value:
             if config.verbose:
                 config.console.print(
