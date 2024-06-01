@@ -19,7 +19,6 @@ config.proxy = None
 config.verbose = None
 config.timeout = None
 config.dump = None
-config.pdf
 config.dateRaw = datetime.now().strftime("%m_%d_%Y")
 config.datePretty = datetime.now().strftime("%B %d, %Y")
 
