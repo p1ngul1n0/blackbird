@@ -19,13 +19,14 @@ config.proxy = None
 config.verbose = None
 config.timeout = None
 config.dump = None
+config.currentUser = None
+config.currentEmail = None
 config.dateRaw = datetime.now().strftime("%m_%d_%Y")
 config.datePretty = datetime.now().strftime("%B %d, %Y")
 
 
 class TestExportToPDF(unittest.TestCase):
     config.currentEmail = "john@gmail.com"
-    config.currentUser = None
     config.pdf = True
     config.csv = False
     createSaveDirectory()
@@ -43,7 +44,6 @@ class TestExportToPDF(unittest.TestCase):
 
 class TestExportToCSV(unittest.TestCase):
     config.currentUser = "p1ngul1n0"
-    config.currentEmail = None
     config.pdf = False
     config.csv = True
     createSaveDirectory()
