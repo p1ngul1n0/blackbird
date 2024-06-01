@@ -22,7 +22,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Core functions
       run: |
-        python -m unittest tests\test_core.py
+        python -m unittest tests/test_core.py
 
   test-data-export:
     runs-on: ubuntu-latest
@@ -39,4 +39,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run Export functions
       run: |
-        python -m unittest tests\test_export.py
+        python -m unittest tests/test_export.py
