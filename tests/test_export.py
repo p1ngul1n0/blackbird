@@ -22,6 +22,7 @@ createSaveDirectory()
 
 class TestExportToPDF(unittest.TestCase):
     config.currentEmail = "john@gmail.com"
+    config.currentUser = None
 
     def test_export_pdf(self):
         with open(
@@ -36,6 +37,7 @@ class TestExportToPDF(unittest.TestCase):
 
 class TestExportToCSV(unittest.TestCase):
     config.currentUser = "p1ngul1n0"
+    config.currentEmail = None
 
     def test_export_csv(self):
         with open(
