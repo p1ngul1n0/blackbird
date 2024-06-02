@@ -1,0 +1,21 @@
+name: Close inactive issues & PRs
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Close stale issues
+      uses: actions/stale@v7
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        days-before-stale: 30
+        days-before-close: 7
+        stale-issue-message: 'This issue has been marked as stale because it has not had recent activity. It will be closed if no further activity occurs.'
+        close-issue-message: 'Closing this issue due to inactivity. Please reopen if you still need help.'
+        stale-pr-message: 'This pull request has been marked as stale because it has not had recent activity. It will be closed if no further activity occurs.'
+        close-pr-message: 'Closing this pull request due to inactivity. Please reopen if you still need help.'
