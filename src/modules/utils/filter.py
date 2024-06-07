@@ -27,7 +27,6 @@ def parseFilter(filter):
 
 def evaluate_condition(prop, operator, value, site):
     prop = prop.lower()
-    value = value.lower()
     if prop not in site:
         return False
 
