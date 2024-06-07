@@ -10,21 +10,66 @@ def filterFoundAccounts(site):
         return False
 
 
-def filterAccounts(filter, site):
-    match = re.match(r"^([^=]+)=(.+)", filter)
+def parseFilter(filter):
+    pattern = r"(\w+)([=~><!]+)([^ ]+)\s*(and|or)?\s*"
+    matches = re.findall(pattern, filter)
 
-    if match:
-        prop = match.group(1)
-        value = match.group(2)
-        if str(site[prop]) == value:
-            return True
-        else:
-            return False
+    conditions = []
+    logical_ops = []
+
+    for match in matches:
+        conditions.append((match[0], match[1], match[2]))
+        if match[3]:
+            logical_ops.append(match[3])
+
+    return conditions, logical_ops
+
+
+def evaluate_condition(prop, operator, value, site):
+    prop = prop.lower()
+    value = value.lower()
+    if prop not in site:
+        return False
+
+    site_value = str(site[prop])
+
+    if operator == "=":
+        return site_value == value
+    elif operator == "~":
+        return value in site_value
+    elif operator == ">":
+        return float(site_value) > float(value)
+    elif operator == "<":
+        return float(site_value) < float(value)
+    elif operator == ">=":
+        return float(site_value) >= float(value)
+    elif operator == "<=":
+        return float(site_value) <= float(value)
+    elif operator == "!=":
+        return site_value != value
     else:
-        config.console.print(
+        return False
+
+
+def filterAccounts(filter, site):
+    conditions, logical_ops = parseFilter(filter)
+    result = evaluate_condition(*conditions[0], site)
+
+    if not conditions:
+        print(
             '⭕ Filter is not in correct format. Format should be --filter "property=value"'
         )
         sys.exit()
+    # Evaluate remaining conditions and combine using logical operators
+    for i in range(1, len(conditions)):
+        next_result = evaluate_condition(*conditions[i], site)
+
+        if logical_ops[i - 1] == "and":
+            result = result and next_result
+        elif logical_ops[i - 1] == "or":
+            result = result or next_result
+
+    return result
 
 
 def filterNSFW(site):
