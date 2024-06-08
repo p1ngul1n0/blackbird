@@ -16,6 +16,7 @@ from modules.export.file_operations import createSaveDirectory
 from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from modules.utils.file_operations import isFile, getLinesFromFile
+from modules.utils.permute import Permute
 
 
 def initiate():
@@ -42,6 +43,12 @@ def initiate():
         "-uf",
         "--username-file",
         help="The list of usernames to be searched.",
+    )
+    parser.add_argument(
+        "--permute", action="store_true", help="Permute usernames, ignoring single elements."
+    )
+    parser.add_argument(
+        "--permuteall", action="store_true", help="Permute usernames, all elements."
     )
     parser.add_argument(
         "-e",
@@ -102,6 +109,8 @@ def initiate():
     # Store the necessary arguments to config Object
     config.username = args.username
     config.username_file = args.username_file
+    config.permute = args.permute
+    config.permuteall = args.permuteall
     config.csv = args.csv
     config.pdf = args.pdf
     config.filter = args.filter
@@ -168,6 +177,12 @@ if __name__ == "__main__":
     ):
         config.console.print("Either --username or --email is required")
         sys.exit()
+    if (
+        not config.username
+        and (config.permute or config.permuteall)
+    ):
+        config.console.print("Permutations requires --username")
+        sys.exit()
 
     if config.no_update:
         config.console.print(":next_track_button:  Skipping update...")
@@ -185,6 +200,14 @@ if __name__ == "__main__":
             sys.exit()
 
     if config.username:
+        if (config.permute or config.permuteall) and len(config.username) > 1:
+            elements = " ".join(config.username)
+            way = "all" if config.permuteall else "strict"
+            permute = Permute(config.username)
+            config.username = permute.gather(way)
+            config.console.print(
+                f':glasses: Successfully loaded {len(config.username)} usernames from permuting {elements}'
+            )
         for user in config.username:
             config.currentUser = user
             if config.dump or config.csv or config.pdf:
