@@ -10,14 +10,98 @@ python blackbird.py --username username1 --verbose
 
 ### Filter
 
-{% hint style="info" %}
-This feature is expected to be enhanced soon to support a more dynamic approach.
-{% endhint %}
-
-You can filter the sites to be searched using the `--filter` argument by specifying a property name and the desired filter value. The available properties for filtering can be found in the JSON files used during the search.
+The `filter` command allows you to filter the sites to be searched based on various conditions. You can use a variety of operators and logical connectors to create complex filter expressions.
 
 ```bash
-python blackbird.py --username username1 --filter "name=Twitter"
+python blackbird.py --filter "name~Mastodon and cat=social or e_code<=200" --username crash 
+```
+
+#### Supported Operators
+
+* `=` Equal to
+* `~` Contains (substring match)
+* `>` Greater than
+* `<` Less than
+* `>=` Greater than or equal to
+* `<=` Less than or equal to
+* `!=` Not equal to
+
+<details>
+
+<summary>More Examples</summary>
+
+**Filter by Name Contains "Mastodon"**
+
+```bash
+python blackbird.py --filter "name~Mastodon" --username crash 
+```
+
+**Filter by Existent Code Greater Than 200**
+
+```bash
+python blackbird.py --filter "e_code>200" --username crash 
+```
+
+**Filter by Category Equals "social" and URI Contains "101010"**
+
+```bash
+python blackbird.py --filter "cat=social and uri_check~101010" --username crash 
+```
+
+**Filter by Error String Equals "@101010.pl" or Innexistent Code Less Than or Equal to 404**
+
+```bash
+python blackbird.py --filter "e_string=@101010.pl or m_code<=404" --username crash 
+```
+
+</details>
+
+### Permute
+
+If you\`re stuck in your investigation, you can use `--permute` to generate variations of a given username.&#x20;
+
+```bash
+python blackbird.py --username balestek 86 --permute
+```
+
+This will generate a list of 12 combinations:
+
+```
+balestek86
+_balestek86
+balestek86_
+balestek_86
+balestek-86
+balestek.86
+86balestek
+_86balestek
+86balestek_
+86_balestek
+86-balestek
+86.balestek
+```
+
+You can go even further and use `--permuteall` to generate more variations
+
+```
+balestek
+_balestek
+balestek_ 
+86
+_86
+86_
+balestek86
+_balestek86
+balestek86_
+balestek_86
+balestek-86
+balestek.86
+86balestek
+_86balestek
+86balestek_
+86_balestek
+86-balestek
+86.balestek
 ```
 
 ### No NSFW

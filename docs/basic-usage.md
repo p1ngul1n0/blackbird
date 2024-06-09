@@ -1,6 +1,6 @@
 # 🔍 Basic Usage
 
-{% hint style="info" %}
+{% hint style="warning" %}
 Blackbird can make mistakes. Consider checking the information.
 {% endhint %}
 
