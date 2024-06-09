@@ -14,16 +14,16 @@ python blackbird.py --username username1 username2 username3 --email email@email
 python blackbird.py --pdf --csv --username username1 username2 username3 --email email@email.com email1@email.com email2@email.com
 ```
 
-### Reverse search email and save HTTP response data for later analisys
+### Reverse search email and save HTTP response data for later analysis
 
 ```bash
 python blackbird.py --email john@gmail.com --dump
 ```
 
-### Reverse search username in tech sites
+### Reverse search username in social anime sites
 
 ```bash
-python blackbird.py --username username1 --filter "cat=tech"
+python blackbird.py --username username1 --filter "uri_check~anime and cat=social"
 ```
 
 ### Reverse search list of usernames in TikTok
