@@ -45,7 +45,9 @@ def initiate():
         help="The list of usernames to be searched.",
     )
     parser.add_argument(
-        "--permute", action="store_true", help="Permute usernames, ignoring single elements."
+        "--permute",
+        action="store_true",
+        help="Permute usernames, ignoring single elements.",
     )
     parser.add_argument(
         "--permuteall", action="store_true", help="Permute usernames, all elements."
@@ -99,6 +101,12 @@ def initiate():
         help="Timeout in seconds for each HTTP request (Default is 30).",
     )
     parser.add_argument(
+        "--max-concurrent-requests",
+        type=int,
+        default=50,
+        help="Specify the maximum number of concurrent requests allowed. Default is 10.",
+    )
+    parser.add_argument(
         "--no-update", action="store_true", help="Don't update sites lists."
     )
     parser.add_argument(
@@ -119,6 +127,7 @@ def initiate():
     config.proxy = args.proxy
     config.verbose = args.verbose
     config.timeout = args.timeout
+    config.max_concurrent_requests = args.max_concurrent_requests
     config.email = args.email
     config.email_file = args.email_file
     config.no_update = args.no_update
@@ -177,10 +186,7 @@ if __name__ == "__main__":
     ):
         config.console.print("Either --username or --email is required")
         sys.exit()
-    if (
-        not config.username
-        and (config.permute or config.permuteall)
-    ):
+    if not config.username and (config.permute or config.permuteall):
         config.console.print("Permutations requires --username")
         sys.exit()
 
@@ -206,7 +212,7 @@ if __name__ == "__main__":
             permute = Permute(config.username)
             config.username = permute.gather(way)
             config.console.print(
-                f':glasses: Successfully loaded {len(config.username)} usernames from permuting {elements}'
+                f":glasses: Successfully loaded {len(config.username)} usernames from permuting {elements}"
             )
         for user in config.username:
             config.currentUser = user
