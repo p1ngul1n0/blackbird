@@ -24,6 +24,7 @@ config.pdf = None
 config.filter = "name=Gravatar"
 config.console = Console()
 config.userAgent = getRandomUserAgent()
+config.max_concurrent_requests = 30
 
 config.dateRaw = datetime.now().strftime("%m_%d_%Y")
 config.datePretty = datetime.now().strftime("%B %d, %Y")
