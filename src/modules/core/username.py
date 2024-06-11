@@ -17,60 +17,62 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 
 # Verify account existence based on list args
-async def checkSite(site, method, url, session):
+async def checkSite(site, method, url, session, semaphore):
     returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": []}
-    response = await do_async_request(method, url, session)
-    if response == None:
-        returnData["status"] = "ERROR"
-        return returnData
-    try:
-        if response:
-            if (site["e_string"] in response["content"]) and (
-                site["e_code"] == response["status_code"]
-            ):
-                if (site["m_string"] not in response["content"]) and (
-                    (site["m_code"] != response["status_code"])
-                    if site["m_code"] != site["e_code"]
-                    else True
-                ):
-                    returnData["status"] = "FOUND"
-                    config.console.print(
-                        f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
-                    )
-                    if site["name"] in config.metadata_params["sites"]:
-                        metadataItem = extractMetadata(
-                            config.metadata_params["sites"][site["name"]],
-                            response,
-                            site["name"],
-                        )
-                        returnData["metadata"].append(metadataItem)
-                    # Save response content to a .HTML file
-                    if config.dump:
-                        path = os.path.join(
-                            config.saveDirectory, f"dump_{config.currentUser}"
-                        )
-
-                        result = dumpContent(path, site, response)
-                        if result == True and config.verbose:
-                            config.console.print(
-                                f"      💾  Saved HTML data from found account"
-                            )
-            else:
-                returnData["status"] = "NOT-FOUND"
-                if config.verbose:
-                    config.console.print(
-                        f"  ❌ [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]"
-                    )
+    async with semaphore:
+        response = await do_async_request(method, url, session)
+        if response == None:
+            returnData["status"] = "ERROR"
             return returnData
-    except Exception as e:
-        logError(e, f"Coudn't check {site['name']} {url}")
-        return returnData
+        try:
+            if response:
+                if (site["e_string"] in response["content"]) and (
+                    site["e_code"] == response["status_code"]
+                ):
+                    if (site["m_string"] not in response["content"]) and (
+                        (site["m_code"] != response["status_code"])
+                        if site["m_code"] != site["e_code"]
+                        else True
+                    ):
+                        returnData["status"] = "FOUND"
+                        config.console.print(
+                            f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
+                        )
+                        if site["name"] in config.metadata_params["sites"]:
+                            metadataItem = extractMetadata(
+                                config.metadata_params["sites"][site["name"]],
+                                response,
+                                site["name"],
+                            )
+                            returnData["metadata"].append(metadataItem)
+                        # Save response content to a .HTML file
+                        if config.dump:
+                            path = os.path.join(
+                                config.saveDirectory, f"dump_{config.currentUser}"
+                            )
+
+                            result = dumpContent(path, site, response)
+                            if result == True and config.verbose:
+                                config.console.print(
+                                    f"      💾  Saved HTML data from found account"
+                                )
+                else:
+                    returnData["status"] = "NOT-FOUND"
+                    if config.verbose:
+                        config.console.print(
+                            f"  ❌ [[blue]{site['name']}[/blue]] [bright_white]{response['url']}[/bright_white]"
+                        )
+                return returnData
+        except Exception as e:
+            logError(e, f"Coudn't check {site['name']} {url}")
+            return returnData
 
 
 # Control survey on list sites
 async def fetchResults(username):
     async with aiohttp.ClientSession() as session:
         tasks = []
+        semaphore = asyncio.Semaphore(config.max_concurrent_requests)
         for site in config.username_sites:
             tasks.append(
                 checkSite(
@@ -78,6 +80,7 @@ async def fetchResults(username):
                     method="GET",
                     url=site["uri_check"].replace("{account}", username),
                     session=session,
+                    semaphore=semaphore,
                 )
             )
         tasksResults = await asyncio.gather(*tasks, return_exceptions=True)
