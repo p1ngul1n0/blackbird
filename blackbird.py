@@ -103,8 +103,8 @@ def initiate():
     parser.add_argument(
         "--max-concurrent-requests",
         type=int,
-        default=50,
-        help="Specify the maximum number of concurrent requests allowed. Default is 10.",
+        default=30,
+        help="Specify the maximum number of concurrent requests allowed. Default is 30.",
     )
     parser.add_argument(
         "--no-update", action="store_true", help="Don't update sites lists."
