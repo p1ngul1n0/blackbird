@@ -27,10 +27,12 @@ def parseFilter(filter):
 
 def evaluate_condition(prop, operator, value, site):
     prop = prop.lower()
+    value = value.lower()
     if prop not in site:
         return False
 
     site_value = str(site[prop])
+    site_value = site_value.lower()
 
     if operator == "=":
         return site_value == value
