@@ -47,7 +47,7 @@ def download_image(metadataReturn, site):
 
 
 def extractMetadata(metadata, response, site):
-    metadataItem = []
+    extractedMetadata = []
     for params in metadata:
         metadataReturn = params
         prefix = params["prefix"] if "prefix" in params else False
@@ -87,6 +87,6 @@ def extractMetadata(metadata, response, site):
                 if config.pdf:
                     metadataReturn = download_image(metadataReturn, site)
 
-            metadataItem.append(metadataReturn)
+            extractedMetadata.append(metadataReturn)
 
-    return metadataItem
+    return extractedMetadata
