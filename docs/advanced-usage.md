@@ -16,19 +16,39 @@ The `filter` command allows you to filter the sites to be searched based on vari
 python blackbird.py --filter "name~Mastodon and cat=social or e_code<=200" --username crash 
 ```
 
-#### Supported Operators
+Check below for details to create your own filter search.
+
+<details>
+
+<summary>Properties</summary>
+
+* `name` Name of the site being checked.
+* `cat` Category of the site.
+* `uri_check` The URL used to check for the existence of an account.
+* `e_code` Expected HTTP status code when an account exists.
+* `e_string` A string expected in the response when an account exists.
+* `m_string` A string expected in the response when an account does not exist.
+* `m_code` Expected HTTP status code when an account does not exist.
+
+</details>
+
+<details>
+
+<summary>Operators</summary>
 
 * `=` Equal to
-* `~` Contains (substring match)
+* `~` Contains
 * `>` Greater than
 * `<` Less than
 * `>=` Greater than or equal to
 * `<=` Less than or equal to
 * `!=` Not equal to
 
+</details>
+
 <details>
 
-<summary>More Examples</summary>
+<summary>Examples</summary>
 
 **Filter by Name Contains "Mastodon"**
 
@@ -66,6 +86,10 @@ python blackbird.py --username balestek 86 --permute
 
 This will generate a list of 12 combinations:
 
+<details>
+
+<summary><code>--permute</code> Combinations</summary>
+
 ```
 balestek86
 _balestek86
@@ -81,7 +105,15 @@ _86balestek
 86.balestek
 ```
 
-You can go even further and use `--permuteall` to generate more variations
+
+
+</details>
+
+You can go even further and use `--permuteall` to generate more variations.
+
+<details>
+
+<summary><code>--permuteall</code> Combinations</summary>
 
 ```
 balestek
@@ -103,6 +135,10 @@ _86balestek
 86-balestek
 86.balestek
 ```
+
+
+
+</details>
 
 ### No NSFW
 
