@@ -16,7 +16,17 @@ The `filter` command allows you to filter the sites to be searched based on vari
 python blackbird.py --filter "name~Mastodon and cat=social or e_code<=200" --username crash 
 ```
 
-#### Supported Operators
+#### Properties
+
+* `name` The name of the site being checked.
+* `cat` Category of the site.
+* `uri_check` The URL used to check for the existence of an account.
+* `e_code` Expected HTTP status code when an account exists.
+* `e_string` A string expected in the response when an account exists.
+* `m_string` A string expected in the response when an account does not exist.
+* `m_code` Expected HTTP status code when an account does not exist.
+
+#### Operators
 
 * `=` Equal to
 * `~` Contains (substring match)
