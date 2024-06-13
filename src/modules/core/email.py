@@ -26,7 +26,7 @@ async def checkSite(
     data=None,
     headers=None,
 ):
-    returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": []}
+    returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": None}
     async with semaphore:
         if site["pre_check"]:
             authenticated_headers = perform_pre_check(site["pre_check"], headers)
@@ -49,10 +49,10 @@ async def checkSite(
                             f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                         )
                         if site["metadata"]:
-                            metadataItem = extractMetadata(
+                            extractedMetadata = extractMetadata(
                                 site["metadata"], response, site["name"]
                             )
-                            returnData["metadata"].append(metadataItem)
+                            returnData["metadata"] = extractedMetadata
                         # Save response content to a .HTML file
                         if config.dump:
                             path = os.path.join(

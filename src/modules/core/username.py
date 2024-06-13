@@ -18,7 +18,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 # Verify account existence based on list args
 async def checkSite(site, method, url, session, semaphore):
-    returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": []}
+    returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": None}
     async with semaphore:
         response = await do_async_request(method, url, session)
         if response == None:
@@ -39,12 +39,12 @@ async def checkSite(site, method, url, session, semaphore):
                             f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                         )
                         if site["name"] in config.metadata_params["sites"]:
-                            metadataItem = extractMetadata(
+                            extractedMetadata = extractMetadata(
                                 config.metadata_params["sites"][site["name"]],
                                 response,
                                 site["name"],
                             )
-                            returnData["metadata"].append(metadataItem)
+                            returnData["metadata"] = extractedMetadata
                         # Save response content to a .HTML file
                         if config.dump:
                             path = os.path.join(
@@ -115,7 +115,6 @@ def verifyUsername(username):
     # Filter results to only found accounts
     foundAccounts = list(filter(filterFoundAccounts, results["results"]))
     config.usernameFoundAccounts = foundAccounts
-
     if len(foundAccounts) <= 0:
         config.console.print("⭕ No accounts were found for the given username")
 
