@@ -26,7 +26,13 @@ async def checkSite(
     data=None,
     headers=None,
 ):
-    returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": None}
+    returnData = {
+        "name": site["name"],
+        "url": url,
+        "category": site["cat"],
+        "status": "NONE",
+        "metadata": None,
+    }
     async with semaphore:
         if site["pre_check"]:
             authenticated_headers = perform_pre_check(site["pre_check"], headers)
