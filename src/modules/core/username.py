@@ -18,7 +18,13 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 # Verify account existence based on list args
 async def checkSite(site, method, url, session, semaphore):
-    returnData = {"name": site["name"], "url": url, "status": "NONE", "metadata": None}
+    returnData = {
+        "name": site["name"],
+        "url": url,
+        "category": site["cat"],
+        "status": "NONE",
+        "metadata": None,
+    }
     async with semaphore:
         response = await do_async_request(method, url, session)
         if response == None:
