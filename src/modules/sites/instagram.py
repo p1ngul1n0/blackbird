@@ -2,7 +2,7 @@ from modules.utils.http_client import do_sync_request
 from modules.utils.log import logError
 from modules.utils.parse import extractMetadata
 from json import dumps
-from urllib.parse import quote_plus, urlencode
+from urllib.parse import urlencode
 import config
 
 metadataParams = [
