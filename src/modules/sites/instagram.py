@@ -64,18 +64,6 @@ metadataParams2 = [
     {
         "schema": "JSON",
         "type": "String",
-        "name": "Lookup Source",
-        "path": ["lookup_source"],
-    },
-    {
-        "schema": "JSON",
-        "type": "String",
-        "name": "Corrected Input",
-        "path": ["corrected_input"],
-    },
-    {
-        "schema": "JSON",
-        "type": "String",
         "name": "Obfuscated Email",
         "path": ["obfuscated_email"],
     },

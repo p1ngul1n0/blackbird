@@ -61,6 +61,8 @@ def extractMetadata(metadata, response, site):
 
         if returnValue:
             if params["type"] == "String" and returnValue:
+                if isinstance(returnValue, str):
+                    returnValue = str(returnValue.replace("\n", ""))
                 if prefix:
                     metadataReturn["value"] = prefix + returnValue
                 else:
