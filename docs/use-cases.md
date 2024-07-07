@@ -14,6 +14,12 @@ python blackbird.py --username username1 username2 username3 --email email@email
 python blackbird.py --pdf --csv --username username1 username2 username3 --email email@email.com email1@email.com email2@email.com
 ```
 
+### Reverse search a username on Instagram to obtain obfuscated email and phone number
+
+```bash
+python blackbird.py --username username1 --filter "name=Instagram"
+```
+
 ### Reverse search email and save HTTP response data for later analysis
 
 ```bash

@@ -76,6 +76,36 @@ python blackbird.py --filter "e_string=@101010.pl or m_code<=404" --username cra
 
 </details>
 
+### Enhanced Instagram Account Metadata Extraction
+
+The tool is able to extract additional, valuable metadata from Instagram profiles, such as **obfuscated email and phone number information**. This richer data set provides deeper insights and is particularly useful for analytical and investigative purposes. To take advantage of the enhanced Instagram account metadata extraction functionality, you need to set the `INSTAGRAM_SESSION_ID` in your `.env` file.
+
+<details>
+
+<summary>Steps to Acquire <code>INSTAGRAM_SESSION_ID</code>:</summary>
+
+* **Log in to Instagram:**
+  * Use your preferred web browser to log in to your Instagram account.
+* **Open Developer Tools:**
+  * Open the browser's developer tools. This is usually accessible by pressing `F12` or right-clicking on the page and selecting "Inspect".
+* **Navigate to Cookies:**
+  * In the developer tools, navigate to the "Application" tab.
+  * Under "Storage," click on "Cookies" and then select the Instagram domain (e.g., `instagram.com`).
+* **Find the `sessionid` Cookie:**
+  * Locate the cookie named `sessionid` in the list of cookies.
+* **Copy the `sessionid` Value:**
+  * Copy the value of the `sessionid` cookie. This value is your `INSTAGRAM_SESSION_ID`.
+*   **Set the `INSTAGRAM_SESSION_ID` in `.env`:**
+
+    * Open your `.env` file (create one if it doesn't exist) in the root directory of your project.
+    * Add the following line, replacing `your_session_id_here` with the value you copied:
+
+    ```env
+    INSTAGRAM_SESSION_ID=your_session_id_here
+    ```
+
+</details>
+
 ### Permute
 
 If you\`re stuck in your investigation, you can use `--permute` to generate variations of a given username.&#x20;
