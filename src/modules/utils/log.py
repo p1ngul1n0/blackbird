@@ -1,8 +1,7 @@
-import config
 import logging
 
 
-def logError(e, message):
+def logError(e, message, config):
     if str(e) != "":
         error = str(e)
     else:

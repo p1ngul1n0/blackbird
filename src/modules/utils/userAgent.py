@@ -1,9 +1,8 @@
 import random
 import os
-import config
 
 
-def getRandomUserAgent():
+def getRandomUserAgent(config):
     path = os.path.join(
         os.path.join(os.path.dirname(__file__)),
         "..",

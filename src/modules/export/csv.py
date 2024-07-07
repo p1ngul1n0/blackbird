@@ -1,18 +1,20 @@
 import csv
-import config
 import sys
 import os
-from modules.export.file_operations import generateName
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", ""))
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+)
 
-from utils.log import logError
+from src.modules.export.file_operations import generateName
+
+from src.modules.utils.log import logError
 
 
 # Save results to CSV file
-def saveToCsv(identifier, results):
+def saveToCsv(results, config):
     try:
-        fileName = generateName("csv")
+        fileName = generateName(config, "csv")
         path = os.path.join(config.saveDirectory, fileName)
         with open(path, "w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
@@ -22,5 +24,5 @@ def saveToCsv(identifier, results):
         config.console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
         return True
     except Exception as e:
-        logError(e, "Coudn't saved results to CSV file!")
+        logError(e, "Coudn't saved results to CSV file!", config)
         return False

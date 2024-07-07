@@ -8,7 +8,7 @@ from utils.log import logError
 
 
 # Dump HTML data to a .html file
-def dumpContent(path, site, response):
+def dumpContent(path, site, response, config):
 
     siteName = site["name"].replace(" ", "_")
     content = response["content"]
@@ -33,5 +33,5 @@ def dumpContent(path, site, response):
                 file.write(content)
         return True
     except Exception as e:
-        logError(e, f"Coudn't DUMP data to HTML file!")
+        logError(e, f"Coudn't DUMP data to HTML file!", config)
         return False

@@ -3,33 +3,40 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from modules.export.file_operations import generateName
-import config
-import os
 import sys
+import os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", ""))
 
-from utils.log import logError
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+)
+
+from src.modules.export.file_operations import generateName
+
+
+from src.modules.utils.log import logError
 
 # Save results to PDF file
-regularFontFile = os.path.join(
-    os.getcwd(),
-    config.ASSETS_DIRECTORY,
-    config.FONTS_DIRECTORY,
-    config.FONT_REGULAR_FILE,
-)
-boldFontFile = os.path.join(
-    os.getcwd(), config.ASSETS_DIRECTORY, config.FONTS_DIRECTORY, config.FONT_BOLD_FILE
-)
 
 
-def saveToPdf(foundAccounts, resultType):
+def saveToPdf(foundAccounts, resultType, config):
+    regularFontFile = os.path.join(
+        os.getcwd(),
+        config.ASSETS_DIRECTORY,
+        config.FONTS_DIRECTORY,
+        config.FONT_REGULAR_FILE,
+    )
+    boldFontFile = os.path.join(
+        os.getcwd(),
+        config.ASSETS_DIRECTORY,
+        config.FONTS_DIRECTORY,
+        config.FONT_BOLD_FILE,
+    )
     try:
         pdfmetrics.registerFont(TTFont(config.FONT_NAME_REGULAR, regularFontFile))
         pdfmetrics.registerFont(TTFont(config.FONT_NAME_BOLD, boldFontFile))
 
-        fileName = generateName("pdf")
+        fileName = generateName(config, "pdf")
         path = os.path.join(config.saveDirectory, fileName)
 
         width, height = letter
@@ -257,5 +264,5 @@ def saveToPdf(foundAccounts, resultType):
         config.console.print(f"💾  Saved results to '[cyan1]{fileName}[/cyan1]'")
         return True
     except Exception as e:
-        logError(e, "Coudn't saved results to PDF file!")
+        logError(e, "Coudn't saved results to PDF file!", config)
         return False

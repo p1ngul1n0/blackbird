@@ -1,19 +1,23 @@
-import config
 import os
 from pathlib import Path
 from rich.markup import escape
 import time
 import aiohttp
 import asyncio
+import sys
 
-from modules.utils.filter import filterFoundAccounts, applyFilters
-from modules.utils.parse import extractMetadata
-from modules.utils.http_client import do_async_request
-from modules.whatsmyname.list_operations import readList
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+)
+
+from src.modules.utils.filter import filterFoundAccounts, applyFilters
+from src.modules.utils.parse import extractMetadata
+from src.modules.utils.http_client import do_async_request
+from src.modules.whatsmyname.list_operations import readList
 from src.modules.utils.input import processInput
-from modules.utils.log import logError
+from src.modules.utils.log import logError
 from src.modules.export.dump import dumpContent
-from modules.utils.precheck import perform_pre_check
+from src.modules.utils.precheck import perform_pre_check
 
 
 # Verify account existence based on list args
@@ -23,6 +27,7 @@ async def checkSite(
     url,
     session,
     semaphore,
+    config,
     data=None,
     headers=None,
 ):
@@ -35,10 +40,12 @@ async def checkSite(
     }
     async with semaphore:
         if site["pre_check"]:
-            authenticated_headers = perform_pre_check(site["pre_check"], headers)
+            authenticated_headers = perform_pre_check(
+                site["pre_check"], headers, config
+            )
             headers = authenticated_headers
 
-        response = await do_async_request(method, url, session, data, headers)
+        response = await do_async_request(method, url, session, config, data, headers)
         if response == None:
             returnData["status"] = "ERROR"
             return returnData
@@ -56,7 +63,7 @@ async def checkSite(
                         )
                         if site["metadata"]:
                             extractedMetadata = extractMetadata(
-                                site["metadata"], response, site["name"]
+                                site["metadata"], response, site["name"], config
                             )
                             returnData["metadata"] = extractedMetadata
                         # Save response content to a .HTML file
@@ -65,7 +72,7 @@ async def checkSite(
                                 config.saveDirectory, f"dump_{config.currentEmail}"
                             )
 
-                            result = dumpContent(path, site, response)
+                            result = dumpContent(path, site, response, config)
                             if result == True and config.verbose:
                                 config.console.print(
                                     f"      💾  Saved HTML data from found account"
@@ -78,22 +85,20 @@ async def checkSite(
                         )
                 return returnData
         except Exception as e:
-            logError(e, f"Coudn't check {site['name']} {url}")
+            logError(e, f"Coudn't check {site['name']} {url}", config)
             return returnData
 
 
 # Control survey on list sites
-async def fetchResults(email):
-    data = readList("email")
+async def fetchResults(email, config):
+    data = readList("email", config)
 
     async with aiohttp.ClientSession() as session:
         tasks = []
         semaphore = asyncio.Semaphore(config.max_concurrent_requests)
         for site in config.email_sites:
             if site["input_operation"]:
-                email = processInput(config.currentEmail, site["input_operation"])
-            else:
-                email = config.currentEmail
+                email = processInput(email, site["input_operation"], config)
             url = site["uri_check"].replace("{account}", email)
             data = site["data"].replace("{account}", email) if site["data"] else None
             headers = site["headers"] if site["headers"] else None
@@ -104,6 +109,7 @@ async def fetchResults(email):
                     url=url,
                     session=session,
                     semaphore=semaphore,
+                    config=config,
                     data=data,
                     headers=headers,
                 )
@@ -114,17 +120,17 @@ async def fetchResults(email):
 
 
 # Start email check and presents results to user
-def verifyEmail(email):
+def verifyEmail(email, config):
 
-    data = readList("email")
+    data = readList("email", config)
     sitesToSearch = data["sites"]
-    config.email_sites = applyFilters(sitesToSearch)
+    config.email_sites = applyFilters(sitesToSearch, config)
 
     config.console.print(
         f':play_button: Enumerating accounts with email "[cyan1]{email}[/cyan1]"'
     )
     start_time = time.time()
-    results = asyncio.run(fetchResults(email))
+    results = asyncio.run(fetchResults(email, config))
     end_time = time.time()
 
     config.console.print(
@@ -143,4 +149,4 @@ def verifyEmail(email):
     if len(foundAccounts) <= 0:
         config.console.print("⭕ No accounts were found for the given email")
 
-    return True
+    return foundAccounts
