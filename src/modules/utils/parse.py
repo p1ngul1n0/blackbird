@@ -64,7 +64,7 @@ def extractMetadata(metadata, response, site):
                 if prefix:
                     metadataReturn["value"] = prefix + returnValue
                 else:
-                    metadataReturn["value"] = returnValue
+                    metadataReturn["value"] = returnValue.replace("\n", "")
                 config.console.print(
                     f"      :right_arrow: {metadataReturn['name']}: {metadataReturn['value']}"
                 )
