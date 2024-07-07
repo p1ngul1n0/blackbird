@@ -269,5 +269,3 @@ logs/blackbird.log
 *.log
 logs/blackbird.log
 /logs
-.env
-.env
