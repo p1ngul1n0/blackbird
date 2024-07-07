@@ -12,7 +12,7 @@ requests.packages.urllib3.disable_warnings()
 
 
 # Perform a Sync Request and return response details
-def do_sync_request(method, url, data=None, customHeaders=None):
+def do_sync_request(method, url, data=None, customHeaders=None, cookies=None):
     headers = {"User-Agent": config.userAgent}
     if customHeaders:
         headers.update(customHeaders)
@@ -26,6 +26,7 @@ def do_sync_request(method, url, data=None, customHeaders=None):
             verify=False,
             headers=headers,
             data=data,
+            cookies=cookies,
         )
         if config.verbose:
             config.console.print(
