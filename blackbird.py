@@ -17,6 +17,9 @@ from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from modules.utils.file_operations import isFile, getLinesFromFile
 from modules.utils.permute import Permute
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def initiate():
@@ -132,6 +135,7 @@ def initiate():
     config.email_file = args.email_file
     config.no_update = args.no_update
     config.about = args.about
+    config.instagram_session_id = os.getenv("INSTAGRAM_SESSION_ID")
 
     config.console = Console()
 
