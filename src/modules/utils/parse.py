@@ -90,3 +90,14 @@ def extractMetadata(metadata, response, site):
             extractedMetadata.append(metadataReturn)
 
     return extractedMetadata
+
+
+def remove_duplicates(items):
+    seen = set()
+    unique_items = []
+    for item in items:
+        identifier = (item["schema"], item["type"], item["name"], tuple(item["path"]))
+        if identifier not in seen:
+            seen.add(identifier)
+            unique_items.append(item)
+    return unique_items
