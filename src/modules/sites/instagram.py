@@ -153,7 +153,7 @@ def get_instagram_account_info(username, session_id):
 
         if user_id:
 
-            headers = {"User-Agent": "Instagram 64.0.0.14.96"}
+            headers = {"User-Agent": "Instagram 55.0.0.00.0"}
             cookies = {"sessionid": session_id}
             url = f"https://i.instagram.com/api/v1/users/{user_id}/info/"
             response = do_sync_request(
@@ -176,14 +176,9 @@ def get_instagram_account_info(username, session_id):
                     dumps({"q": username, "skip_recovery": "1"}, separators=(",", ":"))
                 )
                 headers = {
-                    "Accept-Language": "en-US",
-                    "User-Agent": "Instagram 101.0.0.15.120",
+                    "User-Agent": "Instagram 103.0.0.0.1",
                     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
                     "X-IG-App-ID": "124024574287414",
-                    "Accept-Encoding": "gzip, deflate",
-                    "Host": "i.instagram.com",
-                    "Connection": "keep-alive",
-                    "Content-Length": str(len(data)),
                 }
 
                 response = do_sync_request(
