@@ -7,11 +7,12 @@ import config
 
 
 from modules.whatsmyname.list_operations import readList
-from modules.utils.parse import extractMetadata
+from modules.utils.parse import extractMetadata, remove_duplicates
 from modules.utils.filter import filterFoundAccounts, applyFilters
 from modules.utils.http_client import do_async_request
 from modules.utils.log import logError
 from src.modules.export.dump import dumpContent
+from src.modules.sites.instagram import get_instagram_account_info
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -25,6 +26,8 @@ async def checkSite(site, method, url, session, semaphore):
         "status": "NONE",
         "metadata": None,
     }
+    extractedMetadata = []
+
     async with semaphore:
         response = await do_async_request(method, url, session)
         if response == None:
@@ -44,13 +47,26 @@ async def checkSite(site, method, url, session, semaphore):
                         config.console.print(
                             f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                         )
+
                         if site["name"] in config.metadata_params["sites"]:
-                            extractedMetadata = extractMetadata(
+                            metadata = extractMetadata(
                                 config.metadata_params["sites"][site["name"]],
                                 response,
                                 site["name"],
                             )
+                            extractedMetadata.extend(metadata)
+
+                        if site["name"] == "Instagram":
+                            if config.instagram_session_id:
+                                metadata = get_instagram_account_info(
+                                    config.currentUser, config.instagram_session_id
+                                )
+                                extractedMetadata.extend(metadata)
+
+                        if extractedMetadata and len(extractedMetadata) > 0:
+                            extractedMetadata = remove_duplicates(extractedMetadata)
                             returnData["metadata"] = extractedMetadata
+
                         # Save response content to a .HTML file
                         if config.dump:
                             path = os.path.join(
