@@ -2,7 +2,7 @@ from modules.utils.http_client import do_sync_request
 from modules.utils.log import logError
 from modules.utils.parse import extractMetadata
 from json import dumps
-from urllib.parse import quote_plus
+from urllib.parse import quote_plus, urlencode
 import config
 
 metadataParams = [
@@ -169,9 +169,11 @@ def get_instagram_account_info(username, session_id):
                 )
                 extractedMetadata.extend(metadata)
 
-                data = "signed_body=SIGNATURE." + quote_plus(
-                    dumps({"q": username, "skip_recovery": "1"}, separators=(",", ":"))
+                json_data = dumps(
+                    {"q": username, "skip_recovery": "1"}, separators=(",", ":")
                 )
+                data = urlencode({"signed_body": f"SIGNATURE.{json_data}"})
+
                 headers = {
                     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
                     "X-IG-App-ID": "124024574287414",
