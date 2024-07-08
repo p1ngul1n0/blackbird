@@ -73,10 +73,12 @@ async def checkSite(
                                     config.instagram_session_id,
                                     config,
                                 )
+                                extractedMetadata.sort(key=lambda x: x["name"])
                                 extractedMetadata.extend(metadata)
 
                         if extractedMetadata and len(extractedMetadata) > 0:
                             extractedMetadata = remove_duplicates(extractedMetadata)
+                            extractedMetadata.sort(key=lambda x: x["name"])
                             returnData["metadata"] = extractedMetadata
 
                         # Save response content to a .HTML file
