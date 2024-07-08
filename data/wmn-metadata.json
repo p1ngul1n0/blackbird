@@ -111,13 +111,13 @@
             {
                 "schema": "HTML",
                 "type": "String",
-                "name": "Name",
+                "name": "Full Name",
                 "path": "<h2 class=\"profile-name-bottom\">([^<]+)</h2>"
             },
             {
                 "schema": "HTML",
                 "type": "String",
-                "name": "Bio",
+                "name": "Biography",
                 "path": "<div class=\"profile-description\">([^<]+)</div>"
             }
         ],

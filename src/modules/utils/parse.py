@@ -102,7 +102,7 @@ def remove_duplicates(items):
     seen = set()
     unique_items = []
     for item in items:
-        identifier = (item["schema"], item["type"], item["name"], tuple(item["path"]))
+        identifier = item["name"]
         if identifier not in seen:
             seen.add(identifier)
             unique_items.append(item)
