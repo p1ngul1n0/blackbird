@@ -65,6 +65,7 @@ async def checkSite(
                             extractedMetadata = extractMetadata(
                                 site["metadata"], response, site["name"], config
                             )
+                            extractedMetadata.sort(key=lambda x: x["name"])
                             returnData["metadata"] = extractedMetadata
                         # Save response content to a .HTML file
                         if config.dump:

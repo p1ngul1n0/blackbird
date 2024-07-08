@@ -12,12 +12,6 @@ from json import dumps
 from urllib.parse import urlencode
 
 metadataParams = [
-    {
-        "schema": "JSON",
-        "type": "Image",
-        "name": "Profile Picture URL",
-        "path": ["user", "profile_pic_url"],
-    },
     {"schema": "JSON", "type": "String", "name": "User ID", "path": ["user", "pk_id"]},
     {
         "schema": "JSON",
