@@ -1,9 +1,15 @@
-from modules.utils.http_client import do_sync_request
-from modules.utils.log import logError
-from modules.utils.parse import extractMetadata
+import sys
+import os
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+)
+
+from src.modules.utils.http_client import do_sync_request
+from src.modules.utils.log import logError
+from src.modules.utils.parse import extractMetadata
 from json import dumps
 from urllib.parse import urlencode
-import config
 
 metadataParams = [
     {
@@ -113,13 +119,14 @@ metadataParams2 = [
 ]
 
 
-def get_user_id(username, session_id):
+def get_user_id(username, session_id, config):
     try:
         headers = {"User-Agent": "iphone_ua", "x-ig-app-id": "936619743392459"}
         cookies = {"sessionid": session_id}
         response = do_sync_request(
             method="GET",
             url=f"https://i.instagram.com/api/v1/users/web_profile_info/?username={username}",
+            config=config,
             data=None,
             customHeaders=headers,
             cookies=cookies,
@@ -130,20 +137,21 @@ def get_user_id(username, session_id):
         return user_id
 
     except Exception as e:
-        logError(e, f"[Instagram] Coudn't acquire {username} user ID")
+        logError(e, f"[Instagram] Coudn't acquire {username} user ID", config)
         return False
 
 
-def get_instagram_account_info(username, session_id):
+def get_instagram_account_info(username, session_id, config):
     extractedMetadata = []
     try:
-        user_id = get_user_id(username, session_id)
+        user_id = get_user_id(username, session_id, config)
 
         if user_id:
             url = f"https://i.instagram.com/api/v1/users/{user_id}/info/"
             response = do_sync_request(
                 method="GET",
                 url=url,
+                config=config,
                 data=None,
                 customHeaders={"User-Agent": "Instagram 55.0.0.00.0"},
                 cookies={"sessionid": session_id},
@@ -153,7 +161,7 @@ def get_instagram_account_info(username, session_id):
 
             if data:
                 metadata = extractMetadata(
-                    metadata=metadataParams, response=response, site="Instagram"
+                    metadataParams, response, "Instagram", config
                 )
                 extractedMetadata.extend(metadata)
 
@@ -171,6 +179,7 @@ def get_instagram_account_info(username, session_id):
                 response = do_sync_request(
                     method="POST",
                     url="https://i.instagram.com/api/v1/users/lookup/",
+                    config=config,
                     data=data,
                     customHeaders=headers,
                 )
@@ -179,11 +188,11 @@ def get_instagram_account_info(username, session_id):
 
                 if data:
                     metadata = extractMetadata(
-                        metadata=metadataParams2, response=response, site="Instagram"
+                        metadataParams2, response, "Instagram", config
                     )
                     extractedMetadata.extend(metadata)
 
                 return extractedMetadata
     except Exception as e:
-        logError(e, f"[Instagram] Coudn't acquire more metadata")
+        logError(e, f"[Instagram] Coudn't acquire more metadata", config)
         return False

@@ -7,9 +7,9 @@ from rich.console import Console
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import config
-from modules.export.csv import saveToCsv
-from modules.export.pdf import saveToPdf
-from modules.export.file_operations import createSaveDirectory
+from src.modules.export.csv import saveToCsv
+from src.modules.export.pdf import saveToPdf
+from src.modules.export.file_operations import createSaveDirectory
 from datetime import datetime
 
 config.console = Console()
@@ -29,7 +29,7 @@ class TestExportToPDF(unittest.TestCase):
     config.currentEmail = "john@gmail.com"
     config.pdf = True
     config.csv = False
-    createSaveDirectory()
+    createSaveDirectory(config)
 
     def test_export_pdf(self):
         with open(
@@ -38,7 +38,7 @@ class TestExportToPDF(unittest.TestCase):
             encoding="UTF-8",
         ) as f:
             foundAccounts = json.load(f)
-        result = saveToPdf(foundAccounts, "email")
+        result = saveToPdf(foundAccounts, "email", config)
         self.assertTrue(result)
 
 
@@ -46,7 +46,7 @@ class TestExportToCSV(unittest.TestCase):
     config.currentUser = "p1ngul1n0"
     config.pdf = False
     config.csv = True
-    createSaveDirectory()
+    createSaveDirectory(config)
 
     def test_export_csv(self):
         with open(
@@ -55,7 +55,7 @@ class TestExportToCSV(unittest.TestCase):
             encoding="UTF-8",
         ) as f:
             foundAccounts = json.load(f)
-        result = saveToCsv(config.currentUser, foundAccounts)
+        result = saveToCsv(foundAccounts, config)
         self.assertTrue(result)
 
 

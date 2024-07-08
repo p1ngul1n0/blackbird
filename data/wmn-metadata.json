@@ -101,6 +101,26 @@
                 ]
             }
         ],
+        "Instagram": [
+            {
+                "schema": "HTML",
+                "type": "Image",
+                "name": "Avatar",
+                "path": "<img[^>]+src=\"([^\"]+)\""
+            },
+            {
+                "schema": "HTML",
+                "type": "String",
+                "name": "Name",
+                "path": "<h2 class=\"profile-name-bottom\">([^<]+)</h2>"
+            },
+            {
+                "schema": "HTML",
+                "type": "String",
+                "name": "Bio",
+                "path": "<div class=\"profile-description\">([^<]+)</div>"
+            }
+        ],
         "Twitter": [
             {
                 "schema": "HTML",

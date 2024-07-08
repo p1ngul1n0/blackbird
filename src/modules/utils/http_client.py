@@ -1,5 +1,4 @@
 import requests
-import config
 import sys
 import os
 import chardet
@@ -12,7 +11,7 @@ requests.packages.urllib3.disable_warnings()
 
 
 # Perform a Sync Request and return response details
-def do_sync_request(method, url, data=None, customHeaders=None, cookies=None):
+def do_sync_request(method, url, config, data=None, customHeaders=None, cookies=None):
     headers = {"User-Agent": config.userAgent}
     if customHeaders:
         headers.update(customHeaders)
@@ -36,12 +35,12 @@ def do_sync_request(method, url, data=None, customHeaders=None, cookies=None):
     except Exception as e:
         if config.verbose:
             config.console.print(f"  ❌ Error in Sync HTTP Request [{method}] {url}")
-        logError(e, f"Error in Sync HTTP Request [{method}] {url}")
+        logError(e, f"Error in Sync HTTP Request [{method}] {url}", config)
         return None
 
 
 # Perform an Async Request and return response details
-async def do_async_request(method, url, session, data=None, customHeaders=None):
+async def do_async_request(method, url, session, config, data=None, customHeaders=None):
     headers = {"User-Agent": config.userAgent}
     if customHeaders:
         headers.update(customHeaders)
@@ -87,5 +86,5 @@ async def do_async_request(method, url, session, data=None, customHeaders=None):
     except Exception as e:
         if config.verbose:
             config.console.print(f"  ❌ Error in Async HTTP Request [{method}] {url}")
-        logError(e, f"Error in Async HTTP Request [{method}] {url}")
+        logError(e, f"Error in Async HTTP Request [{method}] {url}", config)
         return None

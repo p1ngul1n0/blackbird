@@ -1,5 +1,4 @@
 import re
-import config
 import sys
 
 
@@ -80,7 +79,7 @@ def filterNSFW(site):
         return True
 
 
-def applyFilters(sitesToSearch):
+def applyFilters(sitesToSearch, config):
     if config.filter:
         sitesToSearch = list(
             filter(lambda x: filterAccounts(config.filter, x), sitesToSearch)

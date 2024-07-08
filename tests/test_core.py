@@ -6,13 +6,13 @@ from rich.console import Console
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import config
-from modules.core.username import verifyUsername
-from modules.core.email import verifyEmail
-from modules.export.csv import saveToCsv
-from modules.export.pdf import saveToPdf
-from modules.utils.userAgent import getRandomUserAgent
+from src.modules.core.username import verifyUsername
+from src.modules.core.email import verifyEmail
+from src.modules.export.csv import saveToCsv
+from src.modules.export.pdf import saveToPdf
+from src.modules.utils.userAgent import getRandomUserAgent
 from datetime import datetime
-from modules.whatsmyname.list_operations import checkUpdates
+from src.modules.whatsmyname.list_operations import checkUpdates
 
 config.no_nsfw = None
 config.proxy = None
@@ -23,13 +23,13 @@ config.csv = None
 config.pdf = None
 config.filter = "name=Gravatar"
 config.console = Console()
-config.userAgent = getRandomUserAgent()
+config.userAgent = getRandomUserAgent(config)
 config.max_concurrent_requests = 30
 
 config.dateRaw = datetime.now().strftime("%m_%d_%Y")
 config.datePretty = datetime.now().strftime("%B %d, %Y")
 
-checkUpdates()
+checkUpdates(config)
 
 
 class TestEmail(unittest.TestCase):
@@ -37,7 +37,7 @@ class TestEmail(unittest.TestCase):
 
     def test_verify_email(self):
 
-        result = verifyEmail(config.currentEmail)
+        result = verifyEmail(config.currentEmail, config)
         self.assertTrue(result)
 
 
@@ -45,7 +45,7 @@ class TestUsername(unittest.TestCase):
     config.currentUser = "p1ngul1n0"
 
     def test_verify_username(self):
-        result = verifyUsername(config.currentUser)
+        result = verifyUsername(config.currentUser, config)
         self.assertTrue(result)
 
 

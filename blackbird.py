@@ -142,7 +142,7 @@ def initiate():
     config.dateRaw = datetime.now().strftime("%m_%d_%Y")
     config.datePretty = datetime.now().strftime("%B %d, %Y")
 
-    config.userAgent = getRandomUserAgent()
+    config.userAgent = getRandomUserAgent(config)
 
     config.usernameFoundAccounts = None
     config.emailFoundAccounts = None
@@ -197,7 +197,7 @@ if __name__ == "__main__":
     if config.no_update:
         config.console.print(":next_track_button:  Skipping update...")
     else:
-        checkUpdates()
+        checkUpdates(config)
 
     if config.username_file:
         if isFile(config.username_file):
@@ -221,12 +221,12 @@ if __name__ == "__main__":
         for user in config.username:
             config.currentUser = user
             if config.dump or config.csv or config.pdf:
-                createSaveDirectory()
-            verifyUsername(config.currentUser)
+                createSaveDirectory(config)
+            verifyUsername(config.currentUser, config)
             if config.csv and config.usernameFoundAccounts:
-                saveToCsv(config.currentUser, config.usernameFoundAccounts)
+                saveToCsv(config.usernameFoundAccounts, config)
             if config.pdf and config.usernameFoundAccounts:
-                saveToPdf(config.usernameFoundAccounts, "username")
+                saveToPdf(config.usernameFoundAccounts, "username", config)
             config.currentUser = None
             config.usernameFoundAccounts = None
 
@@ -244,11 +244,11 @@ if __name__ == "__main__":
         for email in config.email:
             config.currentEmail = email
             if config.dump or config.csv or config.pdf:
-                createSaveDirectory()
-            verifyEmail(config.currentEmail)
+                createSaveDirectory(config)
+            verifyEmail(email, config)
             if config.csv and config.emailFoundAccounts:
-                saveToCsv(config.currentEmail, config.emailFoundAccounts)
+                saveToCsv(config.emailFoundAccounts, config)
             if config.pdf and config.emailFoundAccounts:
-                saveToPdf(config.emailFoundAccounts, "email")
+                saveToPdf(config.emailFoundAccounts, "email", config)
             config.currentEmail = None
             config.emailFoundAccounts = None

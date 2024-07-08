@@ -3,14 +3,16 @@ import os
 import time
 import aiohttp
 import asyncio
-import config
 
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+)
 
-from modules.whatsmyname.list_operations import readList
-from modules.utils.parse import extractMetadata, remove_duplicates
-from modules.utils.filter import filterFoundAccounts, applyFilters
-from modules.utils.http_client import do_async_request
-from modules.utils.log import logError
+from src.modules.whatsmyname.list_operations import readList
+from src.modules.utils.parse import extractMetadata, remove_duplicates
+from src.modules.utils.filter import filterFoundAccounts, applyFilters
+from src.modules.utils.http_client import do_async_request
+from src.modules.utils.log import logError
 from src.modules.export.dump import dumpContent
 from src.modules.sites.instagram import get_instagram_account_info
 
@@ -18,7 +20,14 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 
 # Verify account existence based on list args
-async def checkSite(site, method, url, session, semaphore):
+async def checkSite(
+    site,
+    method,
+    url,
+    session,
+    semaphore,
+    config,
+):
     returnData = {
         "name": site["name"],
         "url": url,
@@ -29,7 +38,7 @@ async def checkSite(site, method, url, session, semaphore):
     extractedMetadata = []
 
     async with semaphore:
-        response = await do_async_request(method, url, session)
+        response = await do_async_request(method, url, session, config)
         if response == None:
             returnData["status"] = "ERROR"
             return returnData
@@ -53,13 +62,16 @@ async def checkSite(site, method, url, session, semaphore):
                                 config.metadata_params["sites"][site["name"]],
                                 response,
                                 site["name"],
+                                config,
                             )
                             extractedMetadata.extend(metadata)
 
                         if site["name"] == "Instagram":
                             if config.instagram_session_id:
                                 metadata = get_instagram_account_info(
-                                    config.currentUser, config.instagram_session_id
+                                    config.currentUser,
+                                    config.instagram_session_id,
+                                    config,
                                 )
                                 extractedMetadata.extend(metadata)
 
@@ -73,7 +85,7 @@ async def checkSite(site, method, url, session, semaphore):
                                 config.saveDirectory, f"dump_{config.currentUser}"
                             )
 
-                            result = dumpContent(path, site, response)
+                            result = dumpContent(path, site, response, config)
                             if result == True and config.verbose:
                                 config.console.print(
                                     f"      💾  Saved HTML data from found account"
@@ -86,12 +98,12 @@ async def checkSite(site, method, url, session, semaphore):
                         )
                 return returnData
         except Exception as e:
-            logError(e, f"Coudn't check {site['name']} {url}")
+            logError(e, f"Coudn't check {site['name']} {url}", config)
             return returnData
 
 
 # Control survey on list sites
-async def fetchResults(username):
+async def fetchResults(username, config):
     async with aiohttp.ClientSession() as session:
         tasks = []
         semaphore = asyncio.Semaphore(config.max_concurrent_requests)
@@ -103,6 +115,7 @@ async def fetchResults(username):
                     url=site["uri_check"].replace("{account}", username),
                     session=session,
                     semaphore=semaphore,
+                    config=config,
                 )
             )
         tasksResults = await asyncio.gather(*tasks, return_exceptions=True)
@@ -111,18 +124,18 @@ async def fetchResults(username):
 
 
 # Start username check and presents results to user
-def verifyUsername(username):
+def verifyUsername(username, config):
 
-    data = readList("username")
-    config.metadata_params = readList("metadata")
+    data = readList("username", config)
+    config.metadata_params = readList("metadata", config)
     sitesToSearch = data["sites"]
-    config.username_sites = applyFilters(sitesToSearch)
+    config.username_sites = applyFilters(sitesToSearch, config)
 
     config.console.print(
         f':play_button: Enumerating accounts with username "[cyan1]{username}[/cyan1]"'
     )
     start_time = time.time()
-    results = asyncio.run(fetchResults(username))
+    results = asyncio.run(fetchResults(username, config))
     end_time = time.time()
 
     config.console.print(
@@ -140,4 +153,4 @@ def verifyUsername(username):
     if len(foundAccounts) <= 0:
         config.console.print("⭕ No accounts were found for the given username")
 
-    return True
+    return foundAccounts

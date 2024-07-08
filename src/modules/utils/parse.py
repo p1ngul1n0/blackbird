@@ -1,5 +1,11 @@
-from modules.utils.http_client import do_sync_request
-import config
+import sys
+import os
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+)
+
+from src.modules.utils.http_client import do_sync_request
 import re
 import os
 
@@ -23,8 +29,8 @@ def access_html_regex(data, pattern):
         return False
 
 
-def download_image(metadataReturn, site):
-    response = do_sync_request("GET", metadataReturn["value"])
+def download_image(metadataReturn, site, config):
+    response = do_sync_request("GET", metadataReturn["value"], config)
     if config.currentUser:
         path = os.path.join(
             config.saveDirectory,
@@ -46,7 +52,7 @@ def download_image(metadataReturn, site):
     return metadataReturn
 
 
-def extractMetadata(metadata, response, site):
+def extractMetadata(metadata, response, site, config):
     extractedMetadata = []
     for params in metadata:
         metadataReturn = params
@@ -87,7 +93,7 @@ def extractMetadata(metadata, response, site):
                     f"      :right_arrow: {metadataReturn['name']}: {metadataReturn['value']}"
                 )
                 if config.pdf:
-                    metadataReturn = download_image(metadataReturn, site)
+                    metadataReturn = download_image(metadataReturn, site, config)
 
             extractedMetadata.append(metadataReturn)
 
