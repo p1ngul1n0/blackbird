@@ -38,7 +38,7 @@ class TestExportToPDF(unittest.TestCase):
             encoding="UTF-8",
         ) as f:
             foundAccounts = json.load(f)
-        result = saveToPdf(foundAccounts, "email")
+        result = saveToPdf(foundAccounts, "email", config)
         self.assertTrue(result)
 
 
@@ -46,7 +46,7 @@ class TestExportToCSV(unittest.TestCase):
     config.currentUser = "p1ngul1n0"
     config.pdf = False
     config.csv = True
-    createSaveDirectory()
+    createSaveDirectory(config)
 
     def test_export_csv(self):
         with open(
@@ -55,7 +55,7 @@ class TestExportToCSV(unittest.TestCase):
             encoding="UTF-8",
         ) as f:
             foundAccounts = json.load(f)
-        result = saveToCsv(config.currentUser, foundAccounts)
+        result = saveToCsv(foundAccounts, config)
         self.assertTrue(result)
 
 
