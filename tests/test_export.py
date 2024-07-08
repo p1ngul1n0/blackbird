@@ -29,7 +29,7 @@ class TestExportToPDF(unittest.TestCase):
     config.currentEmail = "john@gmail.com"
     config.pdf = True
     config.csv = False
-    createSaveDirectory()
+    createSaveDirectory(config)
 
     def test_export_pdf(self):
         with open(
