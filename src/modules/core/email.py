@@ -93,13 +93,15 @@ async def checkSite(
 # Control survey on list sites
 async def fetchResults(email, config):
     data = readList("email", config)
-
+    originalEmail = email
     async with aiohttp.ClientSession() as session:
         tasks = []
         semaphore = asyncio.Semaphore(config.max_concurrent_requests)
         for site in config.email_sites:
-            if site["input_operation"]:
-                email = processInput(email, site["input_operation"], config)
+            if site["input_operation"] != None:
+                email = processInput(originalEmail, site["input_operation"], config)
+            else:
+                email = originalEmail
             url = site["uri_check"].replace("{account}", email)
             data = site["data"].replace("{account}", email) if site["data"] else None
             headers = site["headers"] if site["headers"] else None
