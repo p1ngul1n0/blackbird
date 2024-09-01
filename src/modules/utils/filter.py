@@ -3,7 +3,7 @@ import sys
 
 
 def filterFoundAccounts(site):
-    if site["status"] == "FOUND":
+    if "status" in site and site["status"] == "FOUND":
         return True
     else:
         return False

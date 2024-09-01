@@ -44,6 +44,9 @@ async def checkSite(
                 site["pre_check"], headers, config
             )
             headers = authenticated_headers
+            if headers == False:
+                returnData["status"] = "ERROR"
+                return returnData
 
         response = await do_async_request(method, url, session, config, data, headers)
         if response == None:
