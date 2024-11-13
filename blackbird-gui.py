@@ -29,7 +29,7 @@ class BlackbirdGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Blackbird OSINT Tool")
-        self.setGeometry(100, 100, 800, 800)
+        self.setGeometry(100, 100, 1000, 800)
         self.worker = None
 
         central_widget = QWidget()
@@ -43,7 +43,7 @@ class BlackbirdGUI(QMainWindow):
         input_layout = QFormLayout()
         
         self.username_input = QLineEdit()
-        input_layout.addRow("Username(s) (use multiple usernames unless if permuted):", self.username_input)
+        input_layout.addRow("Username(s) (can use multiple usernames unless if permuted):", self.username_input)
         
         self.email_input = QLineEdit()
         input_layout.addRow("Email(s) (comma-separated):", self.email_input)
