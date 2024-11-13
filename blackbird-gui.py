@@ -58,14 +58,23 @@ class BlackbirdGUI(QMainWindow):
         self.email_input = QLineEdit()
         input_layout.addRow("Email(s):", self.email_input)
         
-        # self.file_input = QLineEdit()
-        # file_button = QPushButton("Select File")
-        # file_button.clicked.connect(self.select_file)  # Open file dialog on click
-        # file_layout = QHBoxLayout()
-        # file_layout.addWidget(self.file_input)
-        # file_layout.addWidget(file_button)
-        # input_layout.addRow("File:", file_layout)
+        # File inputs for usernames and emails
+        self.username_file_input = QLineEdit()
+        username_file_button = QPushButton("Select Username File")
+        username_file_button.clicked.connect(self.select_username_file)
+        username_file_layout = QHBoxLayout()
+        username_file_layout.addWidget(self.username_file_input)
+        username_file_layout.addWidget(username_file_button)
+        input_layout.addRow("Username File:", username_file_layout)
         
+        self.email_file_input = QLineEdit()
+        email_file_button = QPushButton("Select Email File")
+        email_file_button.clicked.connect(self.select_email_file)
+        email_file_layout = QHBoxLayout()
+        email_file_layout.addWidget(self.email_file_input)
+        email_file_layout.addWidget(email_file_button)
+        input_layout.addRow("Email File:", email_file_layout)
+
         input_group.setLayout(input_layout)
         layout.addWidget(input_group)
 
@@ -189,11 +198,17 @@ class BlackbirdGUI(QMainWindow):
         self.output_area.setReadOnly(True)
         layout.addWidget(self.output_area)
 
-    # def select_file(self):
-    #     # Open a file dialog to select a file and set its path in the input field
-    #     file_name, _ = QFileDialog.getOpenFileName(self, "Select File")
-    #     if file_name:
-    #         self.file_input.setText(file_name)
+    def select_username_file(self):
+        # Open a file dialog to select a username file and set its path in the input field
+        file_name, _ = QFileDialog.getOpenFileName(self, "Select Username File")
+        if file_name:
+            self.username_file_input.setText(file_name)
+
+    def select_email_file(self):
+        # Open a file dialog to select an email file and set its path in the input field
+        file_name, _ = QFileDialog.getOpenFileName(self, "Select Email File")
+        if file_name:
+            self.email_file_input.setText(file_name)
 
     def save_settings(self):
         # Open a file dialog to select where to save the JSON file
@@ -346,7 +361,7 @@ class BlackbirdGUI(QMainWindow):
         # Initialize the Blackbird command with the basic parameters
         command = ["python", "blackbird.py"]
         
-        # Add username parameters if entered
+        # Add username parameters if entered directly
         if self.username_input.text():
             usernames = [u.strip() for u in self.username_input.text().split(',')]
             for username in usernames:
@@ -358,19 +373,20 @@ class BlackbirdGUI(QMainWindow):
                     command.append("--permute")
                 elif self.permuteall_checkbox.isChecked():
                     command.append("--permuteall")
-        
-        # Add email parameters if entered
+
+        # Add username file parameter if selected
+        if self.username_file_input.text():
+            command.extend(["--username-file", self.username_file_input.text()])
+
+        # Add email parameters if entered directly
         if self.email_input.text():
             emails = [e.strip() for e in self.email_input.text().split(',')]
             for email in emails:
                 command.extend(["-e", email])
-        
-        # # If a file was selected, append it to the command
-        # if self.file_input.text():
-        #     if self.username_input.text():
-        #         command.extend(["--username-file", self.file_input.text()])
-        #     elif self.email_input.text():
-        #         command.extend(["--email-file", self.file_input.text()])
+
+        # Add email file parameter if selected
+        if self.email_file_input.text():
+            command.extend(["--email-file", self.email_file_input.text()])
         
         # Add other options like excluding NSFW, proxy, timeout, etc.
         if self.no_nsfw_checkbox.isChecked():
@@ -414,6 +430,7 @@ class BlackbirdGUI(QMainWindow):
         # Disable Run button and enable Stop button during execution
         self.run_button.setEnabled(False)
         self.stop_button.setEnabled(True)
+
 
     def stop_blackbird(self):
         # Stop the Blackbird process if running
