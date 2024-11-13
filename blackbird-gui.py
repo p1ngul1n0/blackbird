@@ -101,10 +101,10 @@ class BlackbirdGUI(QMainWindow):
         # Output Options
         output_group = QGroupBox("Output Options")
         output_layout = QHBoxLayout()
-        self.csv_checkbox = QCheckBox("CSV")
-        self.pdf_checkbox = QCheckBox("PDF")
-        self.verbose_checkbox = QCheckBox("Verbose")
-        self.dump_checkbox = QCheckBox("Dump HTML")
+        self.csv_checkbox = QCheckBox("CSV (Results)")
+        self.pdf_checkbox = QCheckBox("PDF (Results)")
+        self.verbose_checkbox = QCheckBox("Verbose (LOGS)")
+        self.dump_checkbox = QCheckBox("Dump HTML (Results)")
         output_layout.addWidget(self.csv_checkbox)
         output_layout.addWidget(self.pdf_checkbox)
         output_layout.addWidget(self.verbose_checkbox)
@@ -230,8 +230,13 @@ class BlackbirdGUI(QMainWindow):
         self.stop_button.setEnabled(False)
 
     def update_output(self, text):
+        scrollbar = self.output_area.verticalScrollBar()
+        was_at_bottom = scrollbar.value() == scrollbar.maximum()
+
         self.output_area.append(text)
-        self.output_area.verticalScrollBar().setValue(self.output_area.verticalScrollBar().maximum())
+
+        if was_at_bottom:
+            scrollbar.setValue(scrollbar.maximum())
 
     def on_worker_finished(self):
         self.run_button.setEnabled(True)
