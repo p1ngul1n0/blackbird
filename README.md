@@ -61,7 +61,8 @@ and run
 python blackbird-gui.py
 ```
 
-![image](https://github.com/user-attachments/assets/8dc39a5f-0430-4872-b913-022dde781211)
+![image](https://github.com/user-attachments/assets/65e6cd52-cd00-49b5-b96f-2ca782973a87)
+
 
 
 
