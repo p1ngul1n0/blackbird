@@ -61,7 +61,8 @@ and run
 python blackbird-gui.py
 ```
 
-![image](https://github.com/user-attachments/assets/4fd582a9-37dc-4a49-9d75-4b6784781658)
+![image](https://github.com/user-attachments/assets/0c0a7fe9-6e12-4794-a059-628959af520f)
+
 
 Mind the ASCII; it's using the cli as the backend but it will work with most of the functions to be more GUI friendly (or attempt to be).
 
