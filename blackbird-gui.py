@@ -1,6 +1,7 @@
 import sys
 import subprocess
 import os
+import json
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                              QLabel, QLineEdit, QPushButton, QTextEdit, QFileDialog, 
                              QCheckBox, QGroupBox, QFormLayout, QSpinBox, QMessageBox)
@@ -157,6 +158,19 @@ class BlackbirdGUI(QMainWindow):
         instagram_group.setLayout(instagram_layout)
         layout.addWidget(instagram_group)
 
+        # Now you can initialize the button_layout here
+        button_layout = QHBoxLayout()  # Initialize button_layout first
+        save_button = QPushButton("Save Settings")
+        save_button.clicked.connect(self.save_settings)
+        button_layout.addWidget(save_button)
+
+        load_button = QPushButton("Load Settings")
+        load_button.clicked.connect(self.load_settings)
+        button_layout.addWidget(load_button)
+
+        # Add the button layout to the main layout
+        layout.addLayout(button_layout)
+
         # Run and Stop buttons
         button_layout = QHBoxLayout()
         self.run_button = QPushButton("Run Blackbird")
@@ -180,6 +194,54 @@ class BlackbirdGUI(QMainWindow):
     #     file_name, _ = QFileDialog.getOpenFileName(self, "Select File")
     #     if file_name:
     #         self.file_input.setText(file_name)
+
+    def save_settings(self):
+    # Open a file dialog to select where to save the JSON file
+        file_name, _ = QFileDialog.getSaveFileName(self, "Save Settings", "", "JSON Files (*.json);;All Files (*)")
+        if file_name:
+        # Collect the current settings into a dictionary
+            settings = {
+        "username": self.username_input.text(),
+        "email": self.email_input.text(),
+        "permute": self.permute_checkbox.isChecked(),
+        "permuteall": self.permuteall_checkbox.isChecked(),
+        "no_nsfw": self.no_nsfw_checkbox.isChecked(),
+        "proxy": self.proxy_input.text(),
+        "timeout": self.timeout_spinbox.value(),
+        "no_update": self.no_update_checkbox.isChecked(),
+        "csv": self.csv_checkbox.isChecked(),
+        "pdf": self.pdf_checkbox.isChecked(),
+        "verbose": self.verbose_checkbox.isChecked(),
+        "dump": self.dump_checkbox.isChecked(),
+        "instagram_session_id": self.instagram_session_id.text(),
+        }
+        with open(file_name, 'w') as f:
+            json.dump(settings, f, indent=4)
+
+
+    def load_settings(self):
+        # Open a file dialog to select a JSON file to load
+        file_name, _ = QFileDialog.getOpenFileName(self, "Open Settings", "", "JSON Files (*.json);;All Files (*)")
+        if file_name:
+        # Load the settings from the JSON file
+            with open(file_name, 'r') as f:
+                settings = json.load(f)
+            
+            # Apply the loaded settings
+            self.username_input.setText(settings.get("username", ""))
+            self.email_input.setText(settings.get("email", ""))
+            self.permute_checkbox.setChecked(settings.get("permute", False))
+            self.permuteall_checkbox.setChecked(settings.get("permuteall", False))
+            self.no_nsfw_checkbox.setChecked(settings.get("no_nsfw", False))
+            self.proxy_input.setText(settings.get("proxy", ""))
+            self.timeout_spinbox.setValue(settings.get("timeout", 30))
+            self.no_update_checkbox.setChecked(settings.get("no_update", False))
+            self.csv_checkbox.setChecked(settings.get("csv", False))
+            self.pdf_checkbox.setChecked(settings.get("pdf", False))
+            self.verbose_checkbox.setChecked(settings.get("verbose", False))
+            self.dump_checkbox.setChecked(settings.get("dump", False))
+            self.instagram_session_id.setText(settings.get("instagram_session_id", ""))
+
 
     def show_instagram_help(self):
         # Display instructions for obtaining the Instagram session ID
