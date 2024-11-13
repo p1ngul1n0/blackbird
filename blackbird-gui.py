@@ -303,7 +303,9 @@ class BlackbirdGUI(QMainWindow):
                                 "3. Filter by Category Equals 'social' and URI Contains '101010':\n"
                                 "   python blackbird.py --filter \"cat=social and uri_check~101010\" --username crash\n\n"
                                 "4. Filter by Error String Equals '@101010.pl' or Inexistent Code Less Than or Equal to 404:\n"
-                                "   python blackbird.py --filter \"e_string=@101010.pl or m_code<=404\" --username crash")
+                                "   python blackbird.py --filter \"e_string=@101010.pl or m_code<=404\" --username crash\n\n"
+                                "   you'll need to concatenate the commands for a filter if you want to use a combination\n\n"
+                                "   example: \"cat=social and name~instagram\"")
 
 
     def show_permute_help(self):
