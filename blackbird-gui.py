@@ -52,10 +52,10 @@ class BlackbirdGUI(QMainWindow):
         input_layout = QFormLayout()
         
         self.username_input = QLineEdit()
-        input_layout.addRow("Username(s) (can use multiple usernames unless if permuted):", self.username_input)
+        input_layout.addRow("Username(s):", self.username_input)
         
         self.email_input = QLineEdit()
-        input_layout.addRow("Email(s) (comma-separated):", self.email_input)
+        input_layout.addRow("Email(s):", self.email_input)
         
         # self.file_input = QLineEdit()
         # file_button = QPushButton("Select File")
