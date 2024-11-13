@@ -2,7 +2,7 @@ import sys
 import subprocess
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                              QLabel, QLineEdit, QPushButton, QTextEdit, QFileDialog, 
-                             QCheckBox, QGroupBox, QFormLayout, QSpinBox)
+                             QCheckBox, QGroupBox, QFormLayout, QSpinBox, QMessageBox)
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 
 class BlackbirdWorker(QThread):
@@ -22,7 +22,7 @@ class BlackbirdGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Blackbird OSINT Tool")
-        self.setGeometry(100, 100, 800, 700)
+        self.setGeometry(100, 100, 800, 800)
 
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
@@ -35,10 +35,10 @@ class BlackbirdGUI(QMainWindow):
         input_layout = QFormLayout()
         
         self.username_input = QLineEdit()
-        input_layout.addRow("Username:", self.username_input)
+        input_layout.addRow("Username(s) (comma-separated unless if permuted):", self.username_input)
         
         self.email_input = QLineEdit()
-        input_layout.addRow("Email:", self.email_input)
+        input_layout.addRow("Email(s) (comma-separated):", self.email_input)
         
         self.file_input = QLineEdit()
         file_button = QPushButton("Select File")
@@ -55,8 +55,11 @@ class BlackbirdGUI(QMainWindow):
         options_group = QGroupBox("Options")
         options_layout = QVBoxLayout()
         
-        self.permute_checkbox = QCheckBox("Permute usernames")
+        self.permute_checkbox = QCheckBox("Permute username (works with single username only)")
         options_layout.addWidget(self.permute_checkbox)
+        
+        self.permuteall_checkbox = QCheckBox("Permute all elements (works with single username only)")
+        options_layout.addWidget(self.permuteall_checkbox)
         
         self.no_nsfw_checkbox = QCheckBox("Exclude NSFW sites")
         options_layout.addWidget(self.no_nsfw_checkbox)
@@ -93,11 +96,25 @@ class BlackbirdGUI(QMainWindow):
         self.csv_checkbox = QCheckBox("CSV")
         self.pdf_checkbox = QCheckBox("PDF")
         self.verbose_checkbox = QCheckBox("Verbose")
+        self.dump_checkbox = QCheckBox("Dump HTML")
         output_layout.addWidget(self.csv_checkbox)
         output_layout.addWidget(self.pdf_checkbox)
         output_layout.addWidget(self.verbose_checkbox)
+        output_layout.addWidget(self.dump_checkbox)
         output_group.setLayout(output_layout)
         layout.addWidget(output_group)
+
+        # Instagram Session ID
+        instagram_group = QGroupBox("Instagram Enhanced Metadata")
+        instagram_layout = QHBoxLayout()
+        self.instagram_session_id = QLineEdit()
+        instagram_layout.addWidget(QLabel("Instagram Session ID:"))
+        instagram_layout.addWidget(self.instagram_session_id)
+        instagram_help_button = QPushButton("?")
+        instagram_help_button.clicked.connect(self.show_instagram_help)
+        instagram_layout.addWidget(instagram_help_button)
+        instagram_group.setLayout(instagram_layout)
+        layout.addWidget(instagram_group)
 
         # Run button
         run_button = QPushButton("Run Blackbird")
@@ -114,23 +131,39 @@ class BlackbirdGUI(QMainWindow):
         if file_name:
             self.file_input.setText(file_name)
 
+    def show_instagram_help(self):
+        QMessageBox.information(self, "Instagram Session ID Help",
+                                "To use enhanced Instagram metadata extraction:\n\n"
+                                "1. Log in to Instagram in your browser\n"
+                                "2. Open developer tools (F12)\n"
+                                "3. Go to Application > Cookies\n"
+                                "4. Find the 'sessionid' cookie\n"
+                                "5. Copy its value and paste it here")
+
     def run_blackbird(self):
         command = ["python", "blackbird.py"]
         
         if self.username_input.text():
-            command.extend(["-u", self.username_input.text()])
+            usernames = [u.strip() for u in self.username_input.text().split(',')]
+            for username in usernames:
+                command.extend(["-u", username])
+            
+            if len(usernames) == 1:
+                if self.permute_checkbox.isChecked():
+                    command.append("--permute")
+                elif self.permuteall_checkbox.isChecked():
+                    command.append("--permuteall")
         
         if self.email_input.text():
-            command.extend(["-e", self.email_input.text()])
+            emails = [e.strip() for e in self.email_input.text().split(',')]
+            for email in emails:
+                command.extend(["-e", email])
         
         if self.file_input.text():
             if self.username_input.text():
                 command.extend(["--username-file", self.file_input.text()])
             elif self.email_input.text():
                 command.extend(["--email-file", self.file_input.text()])
-        
-        if self.permute_checkbox.isChecked():
-            command.append("--permute")
         
         if self.no_nsfw_checkbox.isChecked():
             command.append("--no-nsfw")
@@ -154,6 +187,12 @@ class BlackbirdGUI(QMainWindow):
         
         if self.verbose_checkbox.isChecked():
             command.append("--verbose")
+        
+        if self.dump_checkbox.isChecked():
+            command.append("--dump")
+
+        if self.instagram_session_id.text():
+            os.environ["INSTAGRAM_SESSION_ID"] = self.instagram_session_id.text()
 
         self.output_area.clear()
         self.worker = BlackbirdWorker(" ".join(command))
