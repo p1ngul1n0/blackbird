@@ -196,27 +196,34 @@ class BlackbirdGUI(QMainWindow):
     #         self.file_input.setText(file_name)
 
     def save_settings(self):
-    # Open a file dialog to select where to save the JSON file
+        # Open a file dialog to select where to save the JSON file
         file_name, _ = QFileDialog.getSaveFileName(self, "Save Settings", "", "JSON Files (*.json);;All Files (*)")
         if file_name:
-        # Collect the current settings into a dictionary
+            # Ensure the file name ends with .json if not already
+            if not file_name.endswith('.json'):
+                file_name += '.json'
+            
+            # Collect the current settings into a dictionary
             settings = {
-        "username": self.username_input.text(),
-        "email": self.email_input.text(),
-        "permute": self.permute_checkbox.isChecked(),
-        "permuteall": self.permuteall_checkbox.isChecked(),
-        "no_nsfw": self.no_nsfw_checkbox.isChecked(),
-        "proxy": self.proxy_input.text(),
-        "timeout": self.timeout_spinbox.value(),
-        "no_update": self.no_update_checkbox.isChecked(),
-        "csv": self.csv_checkbox.isChecked(),
-        "pdf": self.pdf_checkbox.isChecked(),
-        "verbose": self.verbose_checkbox.isChecked(),
-        "dump": self.dump_checkbox.isChecked(),
-        "instagram_session_id": self.instagram_session_id.text(),
-        }
-        with open(file_name, 'w') as f:
-            json.dump(settings, f, indent=4)
+                "username": self.username_input.text(),
+                "email": self.email_input.text(),
+                "permute": self.permute_checkbox.isChecked(),
+                "permuteall": self.permuteall_checkbox.isChecked(),
+                "no_nsfw": self.no_nsfw_checkbox.isChecked(),
+                "proxy": self.proxy_input.text(),
+                "timeout": self.timeout_spinbox.value(),
+                "no_update": self.no_update_checkbox.isChecked(),
+                "csv": self.csv_checkbox.isChecked(),
+                "pdf": self.pdf_checkbox.isChecked(),
+                "verbose": self.verbose_checkbox.isChecked(),
+                "dump": self.dump_checkbox.isChecked(),
+                "instagram_session_id": self.instagram_session_id.text(),
+            }
+            
+            # Save the settings to the file with proper JSON format
+            with open(file_name, 'w') as f:
+                json.dump(settings, f, indent=4)
+
 
 
     def load_settings(self):
