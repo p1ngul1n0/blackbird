@@ -1,5 +1,6 @@
 import sys
 import subprocess
+import os
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                              QLabel, QLineEdit, QPushButton, QTextEdit, QFileDialog, 
                              QCheckBox, QGroupBox, QFormLayout, QSpinBox, QMessageBox)
@@ -11,18 +12,25 @@ class BlackbirdWorker(QThread):
     def __init__(self, command):
         super().__init__()
         self.command = command
+        self.process = None
 
     def run(self):
-        process = subprocess.Popen(self.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, shell=True)
-        for line in process.stdout:
+        self.process = subprocess.Popen(self.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, shell=True)
+        for line in self.process.stdout:
             self.output_signal.emit(line.strip())
-        process.wait()
+        self.process.wait()
+
+    def terminate(self):
+        if self.process:
+            self.process.terminate()
+            self.process.wait()
 
 class BlackbirdGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Blackbird OSINT Tool")
         self.setGeometry(100, 100, 800, 800)
+        self.worker = None
 
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
@@ -35,7 +43,7 @@ class BlackbirdGUI(QMainWindow):
         input_layout = QFormLayout()
         
         self.username_input = QLineEdit()
-        input_layout.addRow("Username(s) (comma-separated unless if permuted):", self.username_input)
+        input_layout.addRow("Username(s) (comma-separated):", self.username_input)
         
         self.email_input = QLineEdit()
         input_layout.addRow("Email(s) (comma-separated):", self.email_input)
@@ -116,10 +124,18 @@ class BlackbirdGUI(QMainWindow):
         instagram_group.setLayout(instagram_layout)
         layout.addWidget(instagram_group)
 
-        # Run button
-        run_button = QPushButton("Run Blackbird")
-        run_button.clicked.connect(self.run_blackbird)
-        layout.addWidget(run_button)
+        # Run and Stop buttons
+        button_layout = QHBoxLayout()
+        self.run_button = QPushButton("Run Blackbird")
+        self.run_button.clicked.connect(self.run_blackbird)
+        button_layout.addWidget(self.run_button)
+        
+        self.stop_button = QPushButton("Stop Blackbird")
+        self.stop_button.clicked.connect(self.stop_blackbird)
+        self.stop_button.setEnabled(False)
+        button_layout.addWidget(self.stop_button)
+        
+        layout.addLayout(button_layout)
 
         # Output area
         self.output_area = QTextEdit()
@@ -141,6 +157,10 @@ class BlackbirdGUI(QMainWindow):
                                 "5. Copy its value and paste it here")
 
     def run_blackbird(self):
+        if self.worker and self.worker.isRunning():
+            self.worker.terminate()
+            self.worker.wait()
+
         command = ["python", "blackbird.py"]
         
         if self.username_input.text():
@@ -197,11 +217,25 @@ class BlackbirdGUI(QMainWindow):
         self.output_area.clear()
         self.worker = BlackbirdWorker(" ".join(command))
         self.worker.output_signal.connect(self.update_output)
+        self.worker.finished.connect(self.on_worker_finished)
         self.worker.start()
+        self.run_button.setEnabled(False)
+        self.stop_button.setEnabled(True)
+
+    def stop_blackbird(self):
+        if self.worker and self.worker.isRunning():
+            self.worker.terminate()
+            self.worker.wait()
+        self.run_button.setEnabled(True)
+        self.stop_button.setEnabled(False)
 
     def update_output(self, text):
         self.output_area.append(text)
         self.output_area.verticalScrollBar().setValue(self.output_area.verticalScrollBar().maximum())
+
+    def on_worker_finished(self):
+        self.run_button.setEnabled(True)
+        self.stop_button.setEnabled(False)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
