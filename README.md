@@ -58,7 +58,7 @@ pip install -r requirements.txt
 and run 
 
 ```bash
-python blackbird-gui.py
+python crow.py
 ```
 
 ![image](https://github.com/user-attachments/assets/65e6cd52-cd00-49b5-b96f-2ca782973a87)
