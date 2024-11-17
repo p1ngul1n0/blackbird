@@ -37,7 +37,7 @@ class BlackbirdGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         # Set window properties
-        self.setWindowTitle("Blackbird OSINT Tool")
+        self.setWindowTitle("Crow")
         self.setGeometry(100, 100, 1000, 800)
         self.worker = None
 
