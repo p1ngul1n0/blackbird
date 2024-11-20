@@ -61,8 +61,7 @@ and run
 python crow.py
 ```
 
-![image](https://github.com/user-attachments/assets/f60c763e-280a-490b-a4bc-55922adf2c7f)
-
+![image](https://github.com/user-attachments/assets/7ac3cf4c-fc23-4aab-91e9-dd56877f028e)
 
 
 Mind the ASCII; it's using the cli as the backend but it will work with most of the functions to be more GUI friendly (or attempt to be).
