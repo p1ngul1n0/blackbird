@@ -227,6 +227,7 @@ class BlackbirdGUI(QMainWindow):
             self.email_file_input.setText(file_name)
 
     def search_hudson_rock(self):
+        self.output_area.clear()
         query = self.hudson_email_input.text().strip()
         if not query:
             self.update_output("Please enter an email or username to search.\n")
