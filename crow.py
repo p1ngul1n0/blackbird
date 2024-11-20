@@ -54,7 +54,7 @@ class BlackbirdGUI(QMainWindow):
         hudson_layout = QVBoxLayout()
         
         self.hudson_email_input = QLineEdit()
-        hudson_layout.addWidget(QLabel("Email or Username to Search:"))
+        hudson_layout.addWidget(QLabel("Email to Search:"))
         hudson_layout.addWidget(self.hudson_email_input)
 
         self.hudson_search_button = QPushButton("Search Hudson Rock")
