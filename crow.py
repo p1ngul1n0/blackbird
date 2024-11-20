@@ -2,6 +2,7 @@ import sys
 import subprocess
 import os
 import json
+import requests
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                              QLabel, QLineEdit, QPushButton, QTextEdit, QFileDialog, 
                              QCheckBox, QGroupBox, QFormLayout, QSpinBox, QMessageBox)
@@ -48,8 +49,23 @@ class BlackbirdGUI(QMainWindow):
         layout = QVBoxLayout()
         central_widget.setLayout(layout)
 
+        # Adding Hudson Rock section for email/username search
+        hudson_group = QGroupBox("Hudson Rock Search")
+        hudson_layout = QVBoxLayout()
+        
+        self.hudson_email_input = QLineEdit()
+        hudson_layout.addWidget(QLabel("Email or Username to Search:"))
+        hudson_layout.addWidget(self.hudson_email_input)
+
+        self.hudson_search_button = QPushButton("Search Hudson Rock")
+        self.hudson_search_button.clicked.connect(self.search_hudson_rock)
+        hudson_layout.addWidget(self.hudson_search_button)
+
+        hudson_group.setLayout(hudson_layout)
+        layout.addWidget(hudson_group)
+
         # Input Group: For entering usernames, emails, and file selection
-        input_group = QGroupBox("Input")
+        input_group = QGroupBox("Blackbird Search")
         input_layout = QFormLayout()
         
         self.username_input = QLineEdit()
@@ -209,6 +225,35 @@ class BlackbirdGUI(QMainWindow):
         file_name, _ = QFileDialog.getOpenFileName(self, "Select Email File")
         if file_name:
             self.email_file_input.setText(file_name)
+
+    def search_hudson_rock(self):
+        query = self.hudson_email_input.text().strip()
+        if not query:
+            self.update_output("Please enter an email or username to search.\n")
+            return
+
+        # We assume the query could be either an email or username, so we check it
+        if "@" in query:
+            query_type = "email"
+        else:
+            query_type = "username"
+
+        base_url = "https://cavalier.hudsonrock.com/api/json/v2/osint-tools/"
+        
+        if query_type == "email":
+            endpoint = f"search-by-email?email={query}"
+        elif query_type == "username":
+            endpoint = f"search-by-username?username={query}"
+
+        url = base_url + endpoint
+
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            data = response.json()
+            self.update_output(json.dumps(data, indent=2))
+        except requests.exceptions.RequestException as e:
+            self.update_output(f"An error occurred: {e}")
 
     def save_settings(self):
         # Open a file dialog to select where to save the JSON file
