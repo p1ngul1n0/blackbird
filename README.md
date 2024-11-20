@@ -61,8 +61,7 @@ and run
 python crow.py
 ```
 
-![image](https://github.com/user-attachments/assets/65e6cd52-cd00-49b5-b96f-2ca782973a87)
-
+![image](https://github.com/user-attachments/assets/f60c763e-280a-490b-a4bc-55922adf2c7f)
 
 
 
