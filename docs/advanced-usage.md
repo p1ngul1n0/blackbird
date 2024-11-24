@@ -78,7 +78,7 @@ python blackbird.py --filter "e_string=@101010.pl or m_code<=404" --username cra
 
 ### Enhanced Instagram Account Metadata Extraction
 
-The tool is able to extract additional, valuable metadata from Instagram profiles, such as **obfuscated email and phone number information**. This richer data set provides deeper insights and is particularly useful for analytical and investigative purposes. To take advantage of the enhanced Instagram account metadata extraction functionality, you need to set the `INSTAGRAM_SESSION_ID` in your `.env` file.
+The tool is able to extract additional, such as **obfuscated email and phone number information**. To take advantage of the enhanced Instagram account metadata extraction functionality, you need to set the `INSTAGRAM_SESSION_ID` in your `.env` file.
 
 <details>
 
