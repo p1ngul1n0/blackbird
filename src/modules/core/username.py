@@ -15,6 +15,7 @@ from src.modules.utils.http_client import do_async_request
 from src.modules.utils.log import logError
 from src.modules.export.dump import dumpContent
 from src.modules.sites.instagram import get_instagram_account_info
+from src.modules.ner.entity_extraction import extract_data_with_ai
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -63,6 +64,12 @@ async def checkSite(
                                 response,
                                 site["name"],
                                 config,
+                            )
+                            extractedMetadata.extend(metadata)
+
+                        if config.ai and config.aiModel:
+                            metadata = extract_data_with_ai(
+                                config, site, response["content"], response["json"]
                             )
                             extractedMetadata.extend(metadata)
 

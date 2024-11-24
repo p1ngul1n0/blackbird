@@ -74,11 +74,11 @@ def extractMetadata(metadata, response, site, config):
                 else:
                     metadataReturn["value"] = returnValue
                 config.console.print(
-                    f"      :right_arrow: {metadataReturn['name']}: {metadataReturn['value']}"
+                    f"      :right_arrow:  {metadataReturn['name']}: {metadataReturn['value']}"
                 )
             elif params["type"] == "Array" and returnValue:
                 metadataReturn["value"] = []
-                config.console.print(f"      :right_arrow: {metadataReturn['name']}:")
+                config.console.print(f"      :right_arrow:  {metadataReturn['name']}:")
                 for value in returnValue:
                     itemValue = access_json_property(value, metadataReturn["item-path"])
                     metadataReturn["value"].append(itemValue)
@@ -90,11 +90,10 @@ def extractMetadata(metadata, response, site, config):
                 else:
                     metadataReturn["value"] = returnValue
                 config.console.print(
-                    f"      :right_arrow: {metadataReturn['name']}: {metadataReturn['value']}"
+                    f"      :right_arrow:  {metadataReturn['name']}: {metadataReturn['value']}"
                 )
                 if config.pdf:
                     metadataReturn = download_image(metadataReturn, site, config)
-
             extractedMetadata.append(metadataReturn)
 
     return extractedMetadata
@@ -104,7 +103,8 @@ def remove_duplicates(items):
     seen = set()
     unique_items = []
     for item in items:
-        identifier = (item["schema"], item["type"], item["name"], tuple(item["path"]))
+        path_tuple = tuple(item["path"]) if item["path"] is not None else ()
+        identifier = (item["schema"], item["type"], item["name"], path_tuple)
         if identifier not in seen:
             seen.add(identifier)
             unique_items.append(item)
