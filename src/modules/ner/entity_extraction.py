@@ -16,7 +16,9 @@ def inialize_nlp_model(config):
         config.console.print("✔️  Successfully loaded AI model (en_blackbird_osint_ner)")
     except Exception as e:
         config.console.print(f"❌ Could not load AI model (en_blackbird_osint_ner)")
-        config.console.print(e)
+        config.console.print(
+            "Please install the model with `pip install en_blackbird_osint_ner`"
+        )
         sys.exit()
 
 
