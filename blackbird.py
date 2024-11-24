@@ -17,6 +17,7 @@ from modules.export.csv import saveToCsv
 from modules.export.pdf import saveToPdf
 from modules.utils.file_operations import isFile, getLinesFromFile
 from modules.utils.permute import Permute
+from modules.ner.entity_extraction import inialize_nlp_model
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -87,6 +88,13 @@ def initiate():
         help="Show verbose output.",
     )
     parser.add_argument(
+        "-ai",
+        "--ai",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        help="Extract Metadata with AI.",
+    )
+    parser.add_argument(
         "--filter",
         help='Filter sites to be searched by list property value.E.g --filter "cat=social"',
     )
@@ -129,6 +137,7 @@ def initiate():
     config.dump = args.dump
     config.proxy = args.proxy
     config.verbose = args.verbose
+    config.ai = args.ai
     config.timeout = args.timeout
     config.max_concurrent_requests = args.max_concurrent_requests
     config.email = args.email
@@ -198,6 +207,10 @@ if __name__ == "__main__":
         config.console.print(":next_track_button:  Skipping update...")
     else:
         checkUpdates(config)
+
+    if config.ai:
+        inialize_nlp_model(config)
+        config.aiModel = True
 
     if config.username_file:
         if isFile(config.username_file):
