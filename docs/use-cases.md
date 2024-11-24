@@ -1,4 +1,4 @@
-# 👷‍♀️ Use Cases
+# 🧐 Use Cases
 
 Here you can find several use cases for Blackbird, demonstrating how it can be applied in real-world scenarios.
 
