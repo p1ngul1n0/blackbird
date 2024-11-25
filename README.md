@@ -4,6 +4,8 @@
 
 > Blackbird is a robust OSINT tool that facilitates rapid searches for user accounts by username or email across a wide array of platforms, enhancing digital investigations. It features WhatsMyName integration, export options in PDF, CSV, and HTTP response formats, and customizable search filters.
 
+[![SherlockEyeCover](./docs/.gitbook/assets/sherlockeye_cover.jpg)](https://sherlockeye.io/)
+
 ### Setup
 
 **Clone the repository**
