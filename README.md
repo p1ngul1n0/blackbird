@@ -47,11 +47,10 @@ Blackbird uses AI-powered NER models to improve metadata extraction, identifying
 python blackbird.py --username username1 --ai
 ```
 
-=======
 Can also use a GUI frontend that uses the CLI tool; just install
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements_gui.txt
 ```
 
 and run 
