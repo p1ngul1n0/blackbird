@@ -41,7 +41,6 @@ python blackbird.py --email email1@email.com email2@email.com email3@email.com
 python blackbird.py --email email1@email.com --pdf
 ```
 
-<<<<<<< HEAD
 ##  ✨ AI
 Blackbird uses AI-powered NER models to improve metadata extraction, identifying key entities for faster and more accurate insights.
 ```bash
@@ -66,7 +65,6 @@ python crow.py
 
 Mind the ASCII; it's using the cli as the backend but it will work with most of the functions to be more GUI friendly (or attempt to be).
 
->>>>>>> 4957f8d (Update README.md)
 ## More
 For more details about the project, visit the <a href="https://p1ngul1n0.gitbook.io/blackbird/">Docs</a>
 
