@@ -97,10 +97,16 @@ class BlackbirdGUI(QMainWindow):
         # Options Group: Various checkboxes for additional configuration
         options_group = QGroupBox("Options")
         options_layout = QVBoxLayout()
-        
-        self.AI_checkbox = QCheckBox("Extract metadata AI")
-        options_layout.addWidget(self.AI_checkbox)
 
+        AI_layout = QHBoxLayout()
+        self.AI_checkbox = QCheckBox("Extract metadata AI")
+        AI_layout.addWidget(self.AI_checkbox)
+        AI_help_button = QPushButton("?")
+        AI_help_button.setFixedSize(30, 30)
+        AI_help_button.clicked.connect(self.show_AI_help)
+        AI_layout.addWidget(AI_help_button)
+        options_layout.addLayout(AI_layout)
+        
         # Permute username checkbox with help button on the right
         permute_layout = QHBoxLayout()
         self.permute_checkbox = QCheckBox("Permute username")
@@ -402,6 +408,14 @@ class BlackbirdGUI(QMainWindow):
                                 "86-balestek\n"
                                 "86.balestek\n\n"
                                 "You can use '--permuteall' to create these variations and search them.")
+
+
+    def show_AI_help(self):
+        # Display a message box with details about permuting all elements
+        QMessageBox.information(self, "AI matadata help",
+                                "The '--ai' extracts metadata from a given username.\n\n"
+                                "For example, for the username 'balestek86', would have metadata in the search:\n"
+                                "Blackbird will automatically extract relevant metadata using AI. Results will be marked with a robot emoji (🤖) next to it for easy identification.\n")
 
 
 
