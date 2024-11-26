@@ -98,23 +98,28 @@ class BlackbirdGUI(QMainWindow):
         options_group = QGroupBox("Options")
         options_layout = QVBoxLayout()
         
-        # Permute username checkbox with help button
+        self.AI_checkbox = QCheckBox("Extract metadata AI")
+        options_layout.addWidget(self.AI_checkbox)
+
+        # Permute username checkbox with help button on the right
+        permute_layout = QHBoxLayout()
         self.permute_checkbox = QCheckBox("Permute username")
-        options_layout.addWidget(self.permute_checkbox)
-
+        permute_layout.addWidget(self.permute_checkbox)
         permute_help_button = QPushButton("?")
-        permute_help_button.setFixedSize(30, 30)  # Set a fixed size for the button (width, height)
-        permute_help_button.clicked.connect(self.show_permute_help)  # Connect to the help function
-        options_layout.addWidget(permute_help_button)
+        permute_help_button.setFixedSize(30, 30)
+        permute_help_button.clicked.connect(self.show_permute_help)
+        permute_layout.addWidget(permute_help_button)
+        options_layout.addLayout(permute_layout)
 
-        # Permute all elements checkbox with help button
+        # Permute all elements checkbox with help button on the right
+        permuteall_layout = QHBoxLayout()
         self.permuteall_checkbox = QCheckBox("Permute all")
-        options_layout.addWidget(self.permuteall_checkbox)
-
+        permuteall_layout.addWidget(self.permuteall_checkbox)
         permuteall_help_button = QPushButton("?")
-        permuteall_help_button.setFixedSize(30, 30)  # Set a fixed size for the button (width, height)
-        permuteall_help_button.clicked.connect(self.show_permuteall_help)  # Connect to the help function
-        options_layout.addWidget(permuteall_help_button)
+        permuteall_help_button.setFixedSize(30, 30)
+        permuteall_help_button.clicked.connect(self.show_permuteall_help)
+        permuteall_layout.addWidget(permuteall_help_button)
+        options_layout.addLayout(permuteall_layout)
 
         
         self.no_nsfw_checkbox = QCheckBox("Exclude NSFW sites")
@@ -436,6 +441,10 @@ class BlackbirdGUI(QMainWindow):
         if self.email_file_input.text():
             command.extend(["--email-file", self.email_file_input.text()])
         
+        # Add other options like excluding NSFW, proxy, timeout, etc.
+        if self.AI_checkbox.isChecked():
+            command.append("--ai")
+
         # Add other options like excluding NSFW, proxy, timeout, etc.
         if self.no_nsfw_checkbox.isChecked():
             command.append("--no-nsfw")
