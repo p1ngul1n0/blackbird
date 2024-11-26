@@ -1,1 +1,2 @@
 en_blackbird_osint_ner
+PyQt6
