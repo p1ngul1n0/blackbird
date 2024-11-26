@@ -50,7 +50,7 @@ python blackbird.py --username username1 --ai
 Can also use a GUI frontend that uses the CLI tool; just install
 
 ```bash
-pip install -r requirements_gui.txt
+pip install -r requirements_AI.txt
 ```
 
 and run 
