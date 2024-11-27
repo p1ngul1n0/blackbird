@@ -5,8 +5,8 @@ sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 )
 
-from src.modules.utils.http_client import do_sync_request
-from src.modules.utils.log import logError
+from ..utils.http_client import do_sync_request
+from ..utils.log import logError
 
 
 def perform_pre_check(precheck_params, headers, config):

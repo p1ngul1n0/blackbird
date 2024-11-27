@@ -6,9 +6,9 @@ sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 )
 
-from src.modules.export.file_operations import generateName
+from ..export.file_operations import generateName
 
-from src.modules.utils.log import logError
+from ..utils.log import logError
 
 
 # Save results to CSV file
