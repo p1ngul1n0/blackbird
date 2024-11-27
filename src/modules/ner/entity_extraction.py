@@ -5,7 +5,7 @@ import warnings
 import sys
 import traceback
 import re
-from src.modules.utils.parse import download_image
+from ..utils.parse import download_image
 
 warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
 

@@ -10,14 +10,14 @@ sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 )
 
-from src.modules.utils.filter import filterFoundAccounts, applyFilters
-from src.modules.utils.parse import extractMetadata
-from src.modules.utils.http_client import do_async_request
-from src.modules.whatsmyname.list_operations import readList
-from src.modules.utils.input import processInput
-from src.modules.utils.log import logError
-from src.modules.export.dump import dumpContent
-from src.modules.utils.precheck import perform_pre_check
+from ..utils.filter import filterFoundAccounts, applyFilters
+from ..utils.parse import extractMetadata
+from ..utils.http_client import do_async_request
+from ..whatsmyname.list_operations import readList
+from ..utils.input import processInput
+from ..utils.log import logError
+from ..export.dump import dumpContent
+from ..utils.precheck import perform_pre_check
 
 
 # Verify account existence based on list args
