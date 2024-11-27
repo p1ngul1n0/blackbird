@@ -6,13 +6,13 @@ from rich.console import Console
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import config
-from ..core.username import verifyUsername
-from ..core.email import verifyEmail
-from ..export.csv import saveToCsv
-from ..export.pdf import saveToPdf
-from ..utils.userAgent import getRandomUserAgent
+from src.modules.core.username import verifyUsername
+from src.modules.core.email import verifyEmail
+from src.modules.export.csv import saveToCsv
+from src.modules.export.pdf import saveToPdf
+from src.modules.utils.userAgent import getRandomUserAgent
 from datetime import datetime
-from ..whatsmyname.list_operations import checkUpdates
+from src.modules.whatsmyname.list_operations import checkUpdates
 
 config.no_nsfw = None
 config.proxy = None
