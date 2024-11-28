@@ -134,13 +134,13 @@ async def fetchResults(username, config):
 
 # Start username check and presents results to user
 def verifyUsername(username, config, sitesToSearch=None, metadata_params=None):
-
     if sitesToSearch is None or metadata_params is None:
         data = readList("username", config)
         sitesToSearch = data["sites"]
         config.metadata_params = readList("metadata", config)
+    else:
+        config.metadata_params = metadata_params
 
-    config.metadata_params = metadata_params
     config.username_sites = applyFilters(sitesToSearch, config)
 
     config.console.print(
