@@ -1,6 +1,6 @@
 # Blackbird
 
-<figure><img src="./.gitbook/assets/blackbird_printscreen.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/blackbird_printscreen.png" alt=""><figcaption></figcaption></figure>
 
 ## What is it?
 
@@ -27,4 +27,7 @@ Blackbird is an advanced Open Source Intelligence (OSINT) tool designed for rapi
 
 ### Sponsors
 
+<figure><img src=".gitbook/assets/digitalocean.svg" alt=""><figcaption></figcaption></figure>
+
 <figure><img src="https://raw.githubusercontent.com/p1ngul1n0/src/master/logo_chl.jpg" alt="" width="188"><figcaption></figcaption></figure>
+
