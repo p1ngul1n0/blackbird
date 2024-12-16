@@ -60,12 +60,16 @@ Blackbird is fully integrated with [WhatsMyName](https://github.com/WebBreacher/
 
 ### Sponsors
 
+
+
 <p align="center">
+  
+  [![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=eae02be1dd10&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+  
   <a href="https://site.cyberhunteracademy.com/">
     <img alt="Cyber Hunter Lab" width="150" src="https://raw.githubusercontent.com/p1ngul1n0/src/master/logo_chl.jpg" />
   </a>
 </p>
-
 
 ### Disclaimer
 
