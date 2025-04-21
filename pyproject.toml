@@ -1,0 +1,27 @@
+[project]
+name = "blackbird"
+description = "An OSINT tool to search for accounts by username and email in social networks."
+authors = [ { name = "p1ngul1n0" } ]
+version = "1.0.0"
+dynamic = ["dependencies"]
+readme = "README.md"
+license-files = [ ".gitub/LICENSE", "docs/LICENSE" ]
+
+[project.urls]
+"Homepage" = "p1ngul1n0.gitbook.io/blackbird/"
+
+[project.scripts]
+blackbird = "blackbird.blackbird:main"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+[tool.setuptools.package-dir]
+"blackbird" = "."
+"blackbird.src" = "src"
+[tool.setuptools.package-data]
+"blackbird.data" = ["*.txt", "*.json"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"	
+
