@@ -160,7 +160,7 @@ def initiate():
     config.currentEmail = None
 
 
-if __name__ == "__main__":
+def main():
     initiate()
     config.console.print(
         """[red]
@@ -265,3 +265,6 @@ if __name__ == "__main__":
                 saveToPdf(config.emailFoundAccounts, "email", config)
             config.currentEmail = None
             config.emailFoundAccounts = None
+
+if __name__ == "__main__":
+    main()

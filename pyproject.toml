@@ -1,0 +1,31 @@
+[project]
+name = "blackbird"
+description = "An OSINT tool to search for accounts by username and email in social networks."
+authors = [ { name = "p1ngul1n0" } ]
+version = "1.0.0"
+dynamic = ["dependencies"]
+readme = "README.md"
+license-files = [ ".gitub/LICENSE", "docs/LICENSE" ]
+# No current spacy release supports Python 3.13
+# A bit idiosyncratically, since this version restriction is only applied for 3.8.3+,
+# pip will resolve to 3.8.2 which fails even worse.
+requires-python = "< 3.13"
+
+[project.urls]
+"Homepage" = "p1ngul1n0.gitbook.io/blackbird/"
+
+[project.scripts]
+blackbird = "blackbird.blackbird:main"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+[tool.setuptools.package-dir]
+"blackbird" = "."
+"blackbird.src" = "src"
+[tool.setuptools.package-data]
+"blackbird.data" = ["*.txt", "*.json"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"	
+
