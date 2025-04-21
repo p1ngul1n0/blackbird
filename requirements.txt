@@ -42,7 +42,10 @@ rich==13.7.1
 shellingham==1.5.4
 smart-open==7.0.5
 soupsieve==2.6
-spacy>=3.8.2,<3.9.0
+# Spacy 3.8+ want Python <3.13
+spacy>=3.8.2,<3.9.0;python_version<"3.13"
+# There's no Spacy version that supports 3.13 at time of writing
+spacy>4,<4;python_version>="3.13"
 spacy-legacy==3.0.12
 spacy-loggers==1.0.5
 srsly==2.4.8
