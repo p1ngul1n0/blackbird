@@ -1,10 +1,10 @@
-aiohttp==3.9.3
+aiohttp>=3.9.3,<3.12.0
 aiosignal==1.3.1
 annotated-types==0.7.0
 asyncio==3.4.3
 attrs==23.2.0
 beautifulsoup4==4.12.3
-blis==1.0.1
+blis>=1.0.1,<1.4.0
 catalogue==2.0.10
 certifi==2024.2.2
 chardet==5.2.0
@@ -13,9 +13,9 @@ click==8.1.7
 cloudpathlib==0.20.0
 colorama==0.4.6
 confection==0.1.5
-cymem==2.0.10
+cymem>=2.0.10,<2.1.0
 frozenlist==1.4.1
-greenlet==3.0.3
+greenlet>=3.0.3,<3.3.0
 idna==3.6
 Jinja2==3.1.4
 langcodes==3.5.0
@@ -25,10 +25,10 @@ markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 mdurl==0.1.2
 multidict==6.0.5
-murmurhash==1.0.11
-numpy==2.0.2
+murmurhash>=1.0.11,<1.1.0
+numpy>=2.0.2, < 2.5.0
 packaging==24.2
-pillow==10.2.0
+pillow>=10.2.0,<11.3.0
 playwright==1.43.0
 preshed==3.0.9
 pydantic==2.10.1
@@ -42,12 +42,12 @@ rich==13.7.1
 shellingham==1.5.4
 smart-open==7.0.5
 soupsieve==2.6
-spacy==3.8.2
+spacy>=3.8.2,<3.9.0
 spacy-legacy==3.0.12
 spacy-loggers==1.0.5
 srsly==2.4.8
 tdqm==0.0.1
-thinc==8.3.2
+thinc>=8.3.2,<9.1.0
 tqdm==4.67.0
 typer==0.13.1
 typing_extensions==4.12.2
