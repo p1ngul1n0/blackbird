@@ -70,29 +70,26 @@ def initiate():
     )
     parser.add_argument(
         "--csv",
-        default=False,
-        action=argparse.BooleanOptionalAction,
-        help="Generate a CSV with the results.",
+        action="store_true",
+        help="Generate a CSV with the results."
     )
+
     parser.add_argument(
         "--pdf",
-        default=False,
-        action=argparse.BooleanOptionalAction,
-        help="Generate a PDF with the results.",
+        action="store_true",
+        help="Generate a PDF with the results."
     )
+
     parser.add_argument(
-        "-v",
-        "--verbose",
-        default=False,
-        action=argparse.BooleanOptionalAction,
-        help="Show verbose output.",
+        "-v", "--verbose",
+        action="store_true",
+        help="Show verbose output."
     )
+
     parser.add_argument(
-        "-ai",
-        "--ai",
-        default=False,
-        action=argparse.BooleanOptionalAction,
-        help="Extract Metadata with AI.",
+        "-ai", "--ai",
+        action="store_true",
+        help="Extract Metadata with AI."
     )
     parser.add_argument(
         "--filter",
