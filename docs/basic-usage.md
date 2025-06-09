@@ -48,6 +48,12 @@ python blackbird.py --username p1ngul1n0 --pdf
 python blackbird.py --username username1 --csv
 ```
 
+#### JSON
+
+```
+python blackbird.py --username username1 --json
+```
+
 #### DUMP
 
 Dump all found account HTTP responses.
