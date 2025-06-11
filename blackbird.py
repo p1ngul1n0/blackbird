@@ -98,6 +98,7 @@ def initiate():
         action="store_true",
         help="Extract Metadata with AI."
     )
+    parser.add_argument("--setup-ai", action="store_true", help="Configure the API key required for AI features.")
     parser.add_argument(
         "--filter",
         help='Filter sites to be searched by list property value.E.g --filter "cat=social"',
@@ -143,6 +144,7 @@ def initiate():
     config.proxy = args.proxy
     config.verbose = args.verbose
     config.ai = args.ai
+    config.setup_ai = args.setup_ai
     config.timeout = args.timeout
     config.max_concurrent_requests = args.max_concurrent_requests
     config.email = args.email
@@ -150,6 +152,7 @@ def initiate():
     config.no_update = args.no_update
     config.about = args.about
     config.instagram_session_id = os.getenv("INSTAGRAM_SESSION_ID")
+    config.api_url = os.getenv("API_URL")
 
     config.console = Console()
 
@@ -201,6 +204,7 @@ if __name__ == "__main__":
         and not config.email
         and not config.username_file
         and not config.email_file
+        and not config.setup_ai
     ):
         config.console.print("Either --username or --email is required")
         sys.exit()
@@ -214,8 +218,23 @@ if __name__ == "__main__":
         checkUpdates(config)
 
     if config.ai:
-        inialize_nlp_model(config)
-        config.aiModel = True
+        from modules.ai.key_manager import load_api_key_from_file
+        #inialize_nlp_model(config)
+        apikey = load_api_key_from_file(config)
+        if not apikey:
+            config.console.print(
+                ":x: No API Key found. Please run with --setup-ai to configure the API Key."
+            )
+            sys.exit()
+
+    if config.setup_ai:
+        from modules.ai.key_manager import fetch_api_key_from_server
+        result = fetch_api_key_from_server(config)
+        if not result:
+            config.console.print(
+                ":x: Failed to fetch API Key. Please check your internet connection or try again later."
+            )
+            sys.exit()
 
     if config.username_file:
         if isFile(config.username_file):
@@ -247,6 +266,20 @@ if __name__ == "__main__":
                 saveToPdf(config.usernameFoundAccounts, "username", config)
             if config.json and config.usernameFoundAccounts:
                 saveToJson(config.usernameFoundAccounts, config)
+            if config.ai and len(config.usernameFoundAccounts) > 2:
+                from modules.ai.client import send_prompt
+                site_names = [account.get("name", "") for account in config.usernameFoundAccounts]
+                if (site_names):
+                    prompt = ", ".join(site_names)
+                    data = send_prompt(prompt, config)
+                    if "summary" in data:
+                        summary = data["summary"]
+                        remaining_quota = data["remaining_quota"]
+
+                        config.console.print("\n[bold magenta]:sparkles: AI Summary:[/]")
+                        config.console.print(f"[white]{summary}[/]\n")
+                        config.console.print(f"[cyan]:battery: Remaining AI credits: [bold]{remaining_quota}[/]")
+
             config.currentUser = None
             config.usernameFoundAccounts = None
 
@@ -272,5 +305,18 @@ if __name__ == "__main__":
                 saveToPdf(config.emailFoundAccounts, "email", config)
             if config.json and config.emailFoundAccounts:
                 saveToJson(config.emailFoundAccounts, config)
+            if config.ai and len(config.emailFoundAccounts) > 2:
+                from modules.ai.client import send_prompt
+                site_names = [account.get("name", "") for account in config.emailFoundAccounts]
+                if (site_names):
+                    prompt = ", ".join(site_names)
+                    data = send_prompt(prompt, config)
+                    if "summary" in data:
+                        summary = data["summary"]
+                        remaining_quota = data["remaining_quota"]
+
+                        config.console.print("\n[bold magenta]:sparkles: AI Summary:[/]")
+                        config.console.print(f"[white]{summary}[/]\n")
+                        config.console.print(f"[cyan]:battery: {remaining_quota} credits left[/]")
             config.currentEmail = None
             config.emailFoundAccounts = None

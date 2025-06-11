@@ -269,3 +269,4 @@ logs/blackbird.log
 *.log
 logs/blackbird.log
 /logs
+.ai_key.json
