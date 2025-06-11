@@ -94,9 +94,15 @@ def initiate():
     )
 
     parser.add_argument(
+        "-ner", "--ner",
+        action="store_true",
+        help="Extract additional metadata using NER (Named Entity Recognition)."
+    )
+
+    parser.add_argument(
         "-ai", "--ai",
         action="store_true",
-        help="Extract Metadata with AI."
+        help="Use AI features."
     )
     parser.add_argument("--setup-ai", action="store_true", help="Configure the API key required for AI features.")
     parser.add_argument(
@@ -143,6 +149,7 @@ def initiate():
     config.dump = args.dump
     config.proxy = args.proxy
     config.verbose = args.verbose
+    config.ner = args.ner
     config.ai = args.ai
     config.setup_ai = args.setup_ai
     config.timeout = args.timeout
@@ -217,9 +224,12 @@ if __name__ == "__main__":
     else:
         checkUpdates(config)
 
+    if config.ner:
+        inialize_nlp_model(config)
+        config.aiModel = True
+
     if config.ai:
         from modules.ai.key_manager import load_api_key_from_file
-        #inialize_nlp_model(config)
         apikey = load_api_key_from_file(config)
         if not apikey:
             config.console.print(
