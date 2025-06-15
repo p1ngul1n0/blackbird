@@ -23,20 +23,20 @@ def fetch_api_key_from_server(config):
         data = response.json()
         if (data["success"]) and data["status"] == 200:
             apikey =  data["data"]["api_key"]
-            config.console.print(f":white_check_mark: {data['message']} (API)")
+            config.console.print(f":white_check_mark: {data['message']}")
             save_api_key_to_file(apikey, config)
             return True
             
 
         if (data["status"] == 200 and not data["success"]):
-            config.console.print(f":closed_lock_with_key: {data['message']} (API)")
+            config.console.print(f":closed_lock_with_key: {data['message']}")
             if (data["data"] and "api_key" in data["data"]):
                 apikey = data["data"]["api_key"]
                 save_api_key_to_file(apikey, config)
                 return True
         
         if (data["status"] == 500):
-            config.console.print(f":x: {data['message']} (API)")
+            config.console.print(f":x: {data['message']}")
             return None
             
         return None

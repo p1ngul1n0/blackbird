@@ -39,15 +39,19 @@ def send_prompt(prompt, config):
                 data = None        
 
         if response.status_code != 200 and data:
-            data = response.json()
             config.console.print(f":x: {data['message']}")
             return {}
         
         if response.status_code == 200 and data:
-            return {
-                "summary": data["data"]["result"],
-                "remaining_quota": data["data"]["remaining_quota"]
-            }
+            if data["success"]:
+                summary = data["data"]["result"]
+                remaining_quota = data["data"]["remaining_quota"]
+
+                config.console.print(f":sparkles: [white]{summary}[/]")
+                config.console.print(f"[cyan]:battery: {remaining_quota} AI queries left for today[/]")
+                return {
+                    "summary": data["data"]["result"],
+                }
 
         return {}
 

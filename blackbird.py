@@ -229,6 +229,13 @@ if __name__ == "__main__":
         config.aiModel = True
 
     if config.ai:
+        config.console.print(":warning:  By continuing, you agree that your IP and the site names found will be sent to the AI for analysis.")
+        confirm = input("[Enter/y to continue] > ").strip().lower()
+
+        if confirm not in ["", "y"]:
+            config.console.print(":stop_sign:  Cancelled by user.")
+            sys.exit()
+
         from modules.ai.key_manager import load_api_key_from_file
         apikey = load_api_key_from_file(config)
         if not apikey:
@@ -238,6 +245,13 @@ if __name__ == "__main__":
             sys.exit()
 
     if config.setup_ai:
+        if not config.ai:
+            config.console.print(":warning:  By continuing, you agree that your IP and the site names found will be sent to the AI for analysis.")
+            confirm = input("[Enter/y to continue] > ").strip().lower()
+
+            if confirm not in ["", "y"]:
+                config.console.print(":stop_sign:  Cancelled by user.")
+                sys.exit()
         from modules.ai.key_manager import fetch_api_key_from_server
         result = fetch_api_key_from_server(config)
         if not result:
@@ -270,24 +284,19 @@ if __name__ == "__main__":
             if config.dump or config.csv or config.pdf or config.json:
                 createSaveDirectory(config)
             verifyUsername(config.currentUser, config)
+            if config.ai and len(config.usernameFoundAccounts) > 2:
+                from modules.ai.client import send_prompt
+                site_names = [account.get("name", "") for account in config.usernameFoundAccounts]
+                if (site_names):
+                    prompt = ", ".join(site_names)
+
+                    data = send_prompt(prompt, config)
             if config.csv and config.usernameFoundAccounts:
                 saveToCsv(config.usernameFoundAccounts, config)
             if config.pdf and config.usernameFoundAccounts:
                 saveToPdf(config.usernameFoundAccounts, "username", config)
             if config.json and config.usernameFoundAccounts:
                 saveToJson(config.usernameFoundAccounts, config)
-            if config.ai and len(config.usernameFoundAccounts) > 2:
-                from modules.ai.client import send_prompt
-                site_names = [account.get("name", "") for account in config.usernameFoundAccounts]
-                if (site_names):
-                    prompt = ", ".join(site_names)
-                    data = send_prompt(prompt, config)
-                    if "summary" in data:
-                        summary = data["summary"]
-                        remaining_quota = data["remaining_quota"]
-
-                        config.console.print(f":sparkles: [white]{summary}[/]")
-                        config.console.print(f"[cyan]:battery: {remaining_quota} AI queries left for today[/]")
 
             config.currentUser = None
             config.usernameFoundAccounts = None
