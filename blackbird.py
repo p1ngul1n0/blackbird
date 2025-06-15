@@ -291,8 +291,10 @@ if __name__ == "__main__":
                     prompt = ", ".join(site_names)
 
                     data = send_prompt(prompt, config)
+
                     if (data):
-                        config.summary = data
+                        config.ai_analysis = data
+
             if config.csv and config.usernameFoundAccounts:
                 saveToCsv(config.usernameFoundAccounts, config)
             if config.pdf and config.usernameFoundAccounts:
@@ -326,8 +328,9 @@ if __name__ == "__main__":
                     prompt = ", ".join(site_names)
                     
                     data = send_prompt(prompt, config)
+
                     if (data):
-                        config.summary = data
+                        config.ai_analysis = data
 
             if config.csv and config.emailFoundAccounts:
                 saveToCsv(config.emailFoundAccounts, config)

@@ -116,7 +116,7 @@ def saveToPdf(foundAccounts, resultType, config):
             "Blackbird can make mistakes. Consider checking the information.",
         )
 
-        if (config.summary):
+        if (config.ai_analysis["summary"]):
             canva.setFillColor("#F4F6F8")
             canva.setStrokeColor("#D0D5DA")
             canva.rect(40, height - 310, 530, 90, stroke=1, fill=1)
@@ -139,7 +139,7 @@ def saveToPdf(foundAccounts, resultType, config):
             canva.setFont(config.FONT_NAME_BOLD, 10)
             canva.drawString(70, height - 242, f"Summary")
 
-            lines = simpleSplit(config.summary, config.FONT_NAME_REGULAR, 8, 510)
+            lines = simpleSplit(config.ai_analysis["summary"], config.FONT_NAME_REGULAR, 8, 510)
             text = canva.beginText()
             text.setTextOrigin(55, height - 255)
             text.setFont(config.FONT_NAME_REGULAR, 8)
@@ -149,7 +149,7 @@ def saveToPdf(foundAccounts, resultType, config):
 
 
         if accountsCount >= 1:
-            if config.summary:
+            if config.ai_analysis["summary"]:
                 height -= 100
             canva.setFillColor("#000000")
             canva.setFont(config.FONT_NAME_REGULAR, 15)
@@ -172,7 +172,7 @@ def saveToPdf(foundAccounts, resultType, config):
             for result in foundAccounts:
                 if y_position < 72:
                     canva.showPage()
-                    if (config.summary):
+                    if (config.ai_analysis["summary"]):
                         y_position = height + 50
                     else:
                         y_position = height - 50

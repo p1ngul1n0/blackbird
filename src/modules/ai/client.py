@@ -6,6 +6,7 @@ from .key_manager import load_api_key_from_file
 from utils.log import logError
 
 def send_prompt(prompt, config):
+    config.console.print(f":sparkles: Analyzing with AI...")
     apikey = load_api_key_from_file(config)
     if not apikey:
         config.console.print(":x: No API key found. Please obtain an API key first with --setup-ai")
@@ -25,7 +26,7 @@ def send_prompt(prompt, config):
     try:
         response = do_sync_request(
             method="POST",
-            url=config.api_url + "/summarize",
+            url=config.api_url + "/analyze",
             config=config,
             customHeaders=headers,
             data=payload
@@ -43,10 +44,31 @@ def send_prompt(prompt, config):
         
         if response.status_code == 200 and data:
             if data["success"]:
-                summary = data["data"]["result"]
+                ai_summary = data["data"]["result"]["summary"]
+                ai_categorization = data["data"]["result"]["categorization"]
+                ai_tags = data["data"]["result"]["tags"]
+                ai_risk_flags = data["data"]["result"]["risk_flags"]
+                ai_insights = data["data"]["result"]["insights"]
+
                 remaining_quota = data["data"]["remaining_quota"]
 
-                config.console.print(f":sparkles: [white]{summary}[/]")
+                if ai_summary:
+                    config.console.print(f":sparkles: [white]Summary:[/][cyan] \n   {ai_summary}[/]")
+                if ai_categorization:
+                    config.console.print(f":sparkles: [white]Categorization:[/][cyan] {ai_categorization}[/]")
+                if ai_insights:
+                    config.console.print(f":sparkles: [white]Insights:[/]")
+                    for insight in ai_insights:
+                        config.console.print(f"   [cyan] - {insight}[/]")
+                if ai_risk_flags:
+                    config.console.print(f":sparkles: [white]Risk Flags:[/]")
+                    for risk_flag in ai_risk_flags:
+                        config.console.print(f"   [cyan] - {risk_flag}[/]")
+                if ai_tags:
+                    config.console.print(f":sparkles: [white]Tags:[/]")
+                    for tag in ai_tags:
+                        config.console.print(f"   [cyan] - {tag}[/]")
+
                 config.console.print(f"[cyan]:battery: {remaining_quota} AI queries left for today[/]")
                 return data["data"]["result"]
 
