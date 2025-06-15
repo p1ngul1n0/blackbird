@@ -116,41 +116,127 @@ def saveToPdf(foundAccounts, resultType, config):
             "Blackbird can make mistakes. Consider checking the information.",
         )
 
-        if (config.ai_analysis["summary"]):
-            canva.setFillColor("#F4F6F8")
-            canva.setStrokeColor("#D0D5DA")
-            canva.rect(40, height - 310, 530, 90, stroke=1, fill=1)
+        if (config.ai_analysis):
 
-            canva.setFillColor("#000000")
-            canva.drawImage(
-                os.path.join(
-                    os.getcwd(),
-                    config.ASSETS_DIRECTORY,
-                    config.IMAGES_DIRECTORY,
-                    "ai-stars.png",
-                ),
-                55,
-                height - 245,
-                width=12,
-                height=12,
-                mask="auto",
-            )
+            if (config.ai_analysis["summary"]):
+                canva.setFillColor("#F4F6F8")
+                canva.setStrokeColor("#D0D5DA")
+                canva.rect(40, height - 520, 530, 300, stroke=1, fill=1)
 
-            canva.setFont(config.FONT_NAME_BOLD, 10)
-            canva.drawString(70, height - 242, f"Summary")
+                canva.setFillColor("#000000")
+                canva.drawImage(
+                    os.path.join(
+                        os.getcwd(),
+                        config.ASSETS_DIRECTORY,
+                        config.IMAGES_DIRECTORY,
+                        "ai-stars.png",
+                    ),
+                    55,
+                    height - 245,
+                    width=12,
+                    height=12,
+                    mask="auto",
+                )
 
-            lines = simpleSplit(config.ai_analysis["summary"], config.FONT_NAME_REGULAR, 8, 510)
-            text = canva.beginText()
-            text.setTextOrigin(55, height - 255)
-            text.setFont(config.FONT_NAME_REGULAR, 8)
-            for line in lines:
-                text.textLine(line)
-            canva.drawText(text)
+                canva.setFont(config.FONT_NAME_BOLD, 10)
+                canva.drawString(70, height - 242, f"Summary")
 
+                lines = simpleSplit(config.ai_analysis["summary"], config.FONT_NAME_REGULAR, 8, 510)
+                text = canva.beginText()
+                text.setTextOrigin(55, height - 255)
+                text.setFont(config.FONT_NAME_REGULAR, 8)
+                for line in lines:
+                    text.textLine(line)
+                canva.drawText(text)
+
+                if config.ai_analysis["categorization"]:
+                    canva.drawImage(
+                        os.path.join(
+                            os.getcwd(),
+                            config.ASSETS_DIRECTORY,
+                            config.IMAGES_DIRECTORY,
+                            "ai-stars.png",
+                        ),
+                        55,
+                        height - 300,
+                        width=12,
+                        height=12,
+                        mask="auto",
+                    )
+                    canva.setFont(config.FONT_NAME_BOLD, 10)
+                    canva.drawString(70, height - 297, f"Categorization")
+                    canva.setFont(config.FONT_NAME_REGULAR, 8)
+                    canva.drawString(55, height - 310, config.ai_analysis["categorization"])
+
+                if config.ai_analysis["risk_flags"]:
+                    canva.drawImage(
+                        os.path.join(
+                            os.getcwd(),
+                            config.ASSETS_DIRECTORY,
+                            config.IMAGES_DIRECTORY,
+                            "ai-stars.png",
+                        ),
+                        55,
+                        height - 330,
+                        width=12,
+                        height=12,
+                        mask="auto",
+                    )
+                    canva.setFont(config.FONT_NAME_BOLD, 10)
+                    canva.drawString(70, height - 328, f"Insights")
+                    canva.setFont(config.FONT_NAME_REGULAR, 8)
+                    y_position = height - 342
+                    for risk in config.ai_analysis["insights"]:
+                        canva.drawString(55, y_position, "- " + risk)
+                        y_position -= 10
+
+                if config.ai_analysis["risk_flags"]:
+                    canva.drawImage(
+                        os.path.join(
+                            os.getcwd(),
+                            config.ASSETS_DIRECTORY,
+                            config.IMAGES_DIRECTORY,
+                            "ai-stars.png",
+                        ),
+                        55,
+                        height - 400,
+                        width=12,
+                        height=12,
+                        mask="auto",
+                    )
+                    canva.setFont(config.FONT_NAME_BOLD, 10)
+                    canva.drawString(70, height - 398, f"Risk Flags")
+                    canva.setFont(config.FONT_NAME_REGULAR, 8)
+                    y_position = height - 412
+                    for risk in config.ai_analysis["risk_flags"]:
+                        canva.drawString(55, y_position, "- " + risk)
+                        y_position -= 10
+
+                if config.ai_analysis["tags"]:
+                    canva.drawImage(
+                        os.path.join(
+                            os.getcwd(),
+                            config.ASSETS_DIRECTORY,
+                            config.IMAGES_DIRECTORY,
+                            "ai-stars.png",
+                        ),
+                        55,
+                        height - 450,
+                        width=12,
+                        height=12,
+                        mask="auto",
+                    )
+                    canva.setFont(config.FONT_NAME_BOLD, 10)
+                    canva.drawString(70, height - 448, f"Tags")
+                    canva.setFont(config.FONT_NAME_REGULAR, 8)
+                    y_position = height - 460
+                    for risk in config.ai_analysis["tags"]:
+                        canva.drawString(55, y_position, "- " + risk)
+                        y_position -= 10
 
         if accountsCount >= 1:
-            if config.ai_analysis["summary"]:
-                height -= 100
+            if config.ai_analysis:
+                height -= 310
             canva.setFillColor("#000000")
             canva.setFont(config.FONT_NAME_REGULAR, 15)
             canva.drawImage(
@@ -172,8 +258,9 @@ def saveToPdf(foundAccounts, resultType, config):
             for result in foundAccounts:
                 if y_position < 72:
                     canva.showPage()
-                    if (config.ai_analysis["summary"]):
-                        y_position = height + 50
+                    if (config.ai_analysis):
+                        if config.ai_analysis["summary"]:
+                            y_position = height + 240
                     else:
                         y_position = height - 50
 
