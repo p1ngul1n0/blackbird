@@ -229,8 +229,8 @@ if __name__ == "__main__":
         config.aiModel = True
 
     if config.ai:
-        config.console.print(":warning:  By continuing, you agree that your IP and the site names found will be sent to the AI for analysis.")
-        confirm = input("[Enter/y to continue] > ").strip().lower()
+        config.console.print(":warning:  Proceeding will send the site names found to the AI for analysis.")
+        confirm = input("[Y/n] > ").strip().lower()
 
         if confirm not in ["", "y"]:
             config.console.print(":stop_sign:  Cancelled by user.")
@@ -245,20 +245,20 @@ if __name__ == "__main__":
             sys.exit()
 
     if config.setup_ai:
-        if not config.ai:
-            config.console.print(":warning:  By continuing, you agree that your IP and the site names found will be sent to the AI for analysis.")
-            confirm = input("[Enter/y to continue] > ").strip().lower()
+        config.console.print(":warning:  By continuing, you acknowledge that your IP is registered for API key management and abuse prevention.")
+        confirm = input("[Y/n] > ").strip().lower()
 
-            if confirm not in ["", "y"]:
-                config.console.print(":stop_sign:  Cancelled by user.")
-                sys.exit()
+        if confirm not in ["", "y"]:
+            config.console.print(":stop_sign:  Cancelled by user.")
+            sys.exit()
+
         from modules.ai.key_manager import fetch_api_key_from_server
         result = fetch_api_key_from_server(config)
         if not result:
             config.console.print(
                 ":x: Failed to fetch API Key. Please check your internet connection or try again later."
             )
-            sys.exit()
+        sys.exit()
 
     if config.username_file:
         if isFile(config.username_file):
@@ -291,6 +291,8 @@ if __name__ == "__main__":
                     prompt = ", ".join(site_names)
 
                     data = send_prompt(prompt, config)
+                    if (data):
+                        config.summary = data
             if config.csv and config.usernameFoundAccounts:
                 saveToCsv(config.usernameFoundAccounts, config)
             if config.pdf and config.usernameFoundAccounts:
@@ -322,7 +324,11 @@ if __name__ == "__main__":
                 site_names = [account.get("name", "") for account in config.emailFoundAccounts]
                 if (site_names):
                     prompt = ", ".join(site_names)
+                    
                     data = send_prompt(prompt, config)
+                    if (data):
+                        config.summary = data
+
             if config.csv and config.emailFoundAccounts:
                 saveToCsv(config.emailFoundAccounts, config)
             if config.pdf and config.emailFoundAccounts:

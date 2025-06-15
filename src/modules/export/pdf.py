@@ -3,6 +3,7 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.utils import simpleSplit
 import sys
 import os
 
@@ -115,7 +116,41 @@ def saveToPdf(foundAccounts, resultType, config):
             "Blackbird can make mistakes. Consider checking the information.",
         )
 
+        if (config.summary):
+            canva.setFillColor("#F4F6F8")
+            canva.setStrokeColor("#D0D5DA")
+            canva.rect(40, height - 310, 530, 90, stroke=1, fill=1)
+
+            canva.setFillColor("#000000")
+            canva.drawImage(
+                os.path.join(
+                    os.getcwd(),
+                    config.ASSETS_DIRECTORY,
+                    config.IMAGES_DIRECTORY,
+                    "ai-stars.png",
+                ),
+                55,
+                height - 245,
+                width=12,
+                height=12,
+                mask="auto",
+            )
+
+            canva.setFont(config.FONT_NAME_BOLD, 10)
+            canva.drawString(70, height - 242, f"Summary")
+
+            lines = simpleSplit(config.summary, config.FONT_NAME_REGULAR, 8, 510)
+            text = canva.beginText()
+            text.setTextOrigin(55, height - 255)
+            text.setFont(config.FONT_NAME_REGULAR, 8)
+            for line in lines:
+                text.textLine(line)
+            canva.drawText(text)
+
+
         if accountsCount >= 1:
+            if config.summary:
+                height -= 100
             canva.setFillColor("#000000")
             canva.setFont(config.FONT_NAME_REGULAR, 15)
             canva.drawImage(
@@ -137,7 +172,10 @@ def saveToPdf(foundAccounts, resultType, config):
             for result in foundAccounts:
                 if y_position < 72:
                     canva.showPage()
-                    y_position = height - 130
+                    if (config.summary):
+                        y_position = height + 50
+                    else:
+                        y_position = height - 50
 
                 canva.setFont(config.FONT_NAME_BOLD, 12)
                 canva.drawString(72, y_position, f"{result['name']}")

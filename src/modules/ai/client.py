@@ -6,11 +6,10 @@ from .key_manager import load_api_key_from_file
 from utils.log import logError
 
 def send_prompt(prompt, config):
-    config.console.print(":robot: Summarizing with AI…")
     apikey = load_api_key_from_file(config)
     if not apikey:
         config.console.print(":x: No API key found. Please obtain an API key first with --setup-ai")
-        return {}
+        return None
     headers = {
         "Content-Type": "application/json",
         "User-Agent": "blackbird-cli",
@@ -40,7 +39,7 @@ def send_prompt(prompt, config):
 
         if response.status_code != 200 and data:
             config.console.print(f":x: {data['message']}")
-            return {}
+            return None
         
         if response.status_code == 200 and data:
             if data["success"]:
@@ -49,13 +48,11 @@ def send_prompt(prompt, config):
 
                 config.console.print(f":sparkles: [white]{summary}[/]")
                 config.console.print(f"[cyan]:battery: {remaining_quota} AI queries left for today[/]")
-                return {
-                    "summary": data["data"]["result"],
-                }
+                return data["data"]["result"]
 
-        return {}
+        return None
 
     except Exception as e:
         config.console.print(f":x: Error sending prompt to API!")
         logError(e, "Error sending prompt to API!", config)
-        return {}
+        return None
