@@ -34,3 +34,5 @@ FONT_REGULAR_FILE = "Montserrat-Regular.ttf"
 FONT_BOLD_FILE = "Montserrat-Bold.ttf"
 FONT_NAME_REGULAR = "Montserrat"
 FONT_NAME_BOLD = "Montserrat-Bold"
+
+aiModel = None
