@@ -6,6 +6,7 @@ from .key_manager import load_api_key_from_file
 from utils.log import logError
 
 def send_prompt(prompt, config):
+    config.console.print(":robot: Summarizing with AI…")
     apikey = load_api_key_from_file(config)
     if not apikey:
         config.console.print(":x: No API key found. Please obtain an API key first with --setup-ai")
@@ -30,18 +31,27 @@ def send_prompt(prompt, config):
             customHeaders=headers,
             data=payload
         )
-        data = response.json()
 
-        if not data["success"]:
-            config.console.print(f":x: {data['message']} (API)")
+        if response is not None:
+            try:
+                data = response.json()
+            except json.JSONDecodeError:
+                data = None        
+
+        if response.status_code != 200 and data:
+            data = response.json()
+            config.console.print(f":x: {data['message']}")
             return {}
+        
+        if response.status_code == 200 and data:
+            return {
+                "summary": data["data"]["result"],
+                "remaining_quota": data["data"]["remaining_quota"]
+            }
 
-        return {
-            "summary": data["data"]["result"],
-            "remaining_quota": data["data"]["remaining_quota"]
-        }
+        return {}
 
-    except requests.RequestException as e:
-        config.console.print(f":x: Error sending prompt to AI API!")
-        logError(e, "Error sending prompt to AI API!", None)
+    except Exception as e:
+        config.console.print(f":x: Error sending prompt to API!")
+        logError(e, "Error sending prompt to API!", config)
         return {}

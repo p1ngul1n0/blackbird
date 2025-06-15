@@ -10,9 +10,13 @@ KEY_PATH = PROJECT_ROOT / ".ai_key.json"
 
 def fetch_api_key_from_server(config):
     try:
+        headers = {
+            "User-Agent": "blackbird-cli",
+        }
         response = do_sync_request(
             method="GET",
             url=config.api_url + "/generate-key",
+            customHeaders=headers,
             config=config,
             data=None
         )

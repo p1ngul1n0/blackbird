@@ -286,9 +286,8 @@ if __name__ == "__main__":
                         summary = data["summary"]
                         remaining_quota = data["remaining_quota"]
 
-                        config.console.print("\n[bold magenta]:sparkles: AI Summary:[/]")
-                        config.console.print(f"[white]{summary}[/]\n")
-                        config.console.print(f"[cyan]:battery: Remaining AI credits: [bold]{remaining_quota}[/]")
+                        config.console.print(f":sparkles: [white]{summary}[/]")
+                        config.console.print(f"[cyan]:battery: {remaining_quota} AI queries left for today[/]")
 
             config.currentUser = None
             config.usernameFoundAccounts = None
@@ -325,8 +324,8 @@ if __name__ == "__main__":
                         summary = data["summary"]
                         remaining_quota = data["remaining_quota"]
 
-                        config.console.print("\n[bold magenta]:sparkles: AI Summary:[/]")
-                        config.console.print(f"[white]{summary}[/]\n")
-                        config.console.print(f"[cyan]:battery: {remaining_quota} credits left[/]")
+                        config.console.print(f":sparkles: [white]{summary}[/]")
+                        config.console.print(f"[cyan]:battery: {remaining_quota} AI queries left for today[/]")
+
             config.currentEmail = None
             config.emailFoundAccounts = None
