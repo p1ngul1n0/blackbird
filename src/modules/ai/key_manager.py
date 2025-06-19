@@ -4,6 +4,7 @@ import requests
 from pathlib import Path
 from utils.log import logError
 from utils.http_client import do_sync_request
+import sys
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 KEY_PATH = PROJECT_ROOT / ".ai_key.json"
@@ -20,7 +21,9 @@ def fetch_api_key_from_server(config):
             config=config,
             data=None
         )
+        
         data = response.json()
+
         if (data["success"]) and data["status"] == 200:
             apikey =  data["data"]["api_key"]
             config.console.print(f":white_check_mark: {data['message']}")
@@ -40,8 +43,7 @@ def fetch_api_key_from_server(config):
             return None
             
         return None
-    except requests.RequestException as e:
-        config.console.print(":counterclockwise_arrows_button: Error obtaining API Key!")
+    except Exception as e:
         logError(e, "Error obtaining API Key", config)
         return None
 
