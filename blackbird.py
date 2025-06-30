@@ -217,8 +217,8 @@ if __name__ == "__main__":
         checkUpdates(config)
 
     if config.ai:
-        config.console.print(":warning:  Proceeding will send the site names found to the AI for analysis.")
-        confirm = input("[Y/n] > ").strip().lower()
+        config.console.print("[yellow1]:exclamation: By proceeding, you agree to share the site names with Blackbird AI for analysis.[/yellow] [Y/n]")
+        confirm = input(" > ").strip().lower()
 
         if confirm not in ["", "y"]:
             config.console.print(":stop_sign:  Cancelled by user.")

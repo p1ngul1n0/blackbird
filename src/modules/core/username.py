@@ -54,7 +54,7 @@ async def checkSite(
                     ):
                         returnData["status"] = "FOUND"
                         config.console.print(
-                            f"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
+                            rf"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
                         )
 
                         if site["name"] in config.metadata_params["sites"]:
