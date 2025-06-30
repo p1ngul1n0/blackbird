@@ -18,7 +18,6 @@ from modules.export.pdf import saveToPdf
 from modules.export.json import saveToJson
 from modules.utils.file_operations import isFile, getLinesFromFile
 from modules.utils.permute import Permute
-from modules.ner.entity_extraction import inialize_nlp_model
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -94,12 +93,6 @@ def initiate():
     )
 
     parser.add_argument(
-        "-ner", "--ner",
-        action="store_true",
-        help="Extract additional metadata using NER (Named Entity Recognition)."
-    )
-
-    parser.add_argument(
         "-ai", "--ai",
         action="store_true",
         help="Use AI features."
@@ -149,7 +142,6 @@ def initiate():
     config.dump = args.dump
     config.proxy = args.proxy
     config.verbose = args.verbose
-    config.ner = args.ner
     config.ai = args.ai
     config.setup_ai = args.setup_ai
     config.timeout = args.timeout
@@ -223,10 +215,6 @@ if __name__ == "__main__":
         config.console.print(":next_track_button:  Skipping update...")
     else:
         checkUpdates(config)
-
-    if config.ner:
-        inialize_nlp_model(config)
-        config.aiModel = True
 
     if config.ai:
         config.console.print(":warning:  Proceeding will send the site names found to the AI for analysis.")
