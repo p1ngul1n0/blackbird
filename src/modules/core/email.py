@@ -94,35 +94,59 @@ async def checkSite(
 
 
 # Control survey on list sites
+from rich.text import Text
+from rich.live import Live
+
 async def fetchResults(email, config):
     data = readList("email", config)
     originalEmail = email
     async with aiohttp.ClientSession() as session:
         tasks = []
         semaphore = asyncio.Semaphore(config.max_concurrent_requests)
-        for site in config.email_sites:
-            if site["input_operation"] != None:
-                email = processInput(originalEmail, site["input_operation"], config)
-            else:
-                email = originalEmail
-            url = site["uri_check"].replace("{account}", email)
-            data = site["data"].replace("{account}", email) if site["data"] else None
-            headers = site["headers"] if site["headers"] else None
-            tasks.append(
-                checkSite(
-                    site=site,
-                    method=site["method"],
-                    url=url,
-                    session=session,
-                    semaphore=semaphore,
-                    config=config,
-                    data=data,
-                    headers=headers,
-                )
+        total_sites = len(config.email_sites)
+        completed = 0
+        results = []
+
+        def render():
+            percent = int((completed / total_sites) * 100)
+            return Text.from_markup(
+                f":sattelite:  Enumerating accounts with email [cyan1]\"{originalEmail}\"[/cyan1] — [green1]{percent}%[/green1] ({completed}/{total_sites})"
             )
-        tasksResults = await asyncio.gather(*tasks, return_exceptions=True)
-        results = {"results": tasksResults, "email": email}
-    return results
+
+        async def wrappedCheck(site):
+            nonlocal completed
+            if site["input_operation"] is not None:
+                email_processed = processInput(originalEmail, site["input_operation"], config)
+            else:
+                email_processed = originalEmail
+
+            url = site["uri_check"].replace("{account}", email_processed)
+            data = site["data"].replace("{account}", email_processed) if site["data"] else None
+            headers = site["headers"] if site["headers"] else None
+
+            result = await checkSite(
+                site=site,
+                method=site["method"],
+                url=url,
+                session=session,
+                semaphore=semaphore,
+                config=config,
+                data=data,
+                headers=headers,
+            )
+            completed += 1
+            return result
+
+        tasks = [wrappedCheck(site) for site in config.email_sites]
+
+        with Live(render(), refresh_per_second=10, console=config.console) as live:
+            for coro in asyncio.as_completed(tasks):
+                result = await coro
+                results.append(result)
+                live.update(render())
+
+        return {"results": results, "email": originalEmail}
+
 
 
 # Start email check and presents results to user
@@ -132,9 +156,6 @@ def verifyEmail(email, config):
     sitesToSearch = data["sites"]
     config.email_sites = applyFilters(sitesToSearch, config)
 
-    config.console.print(
-        f':play_button: Enumerating accounts with email "[cyan1]{email}[/cyan1]"'
-    )
     start_time = time.time()
     results = asyncio.run(fetchResults(email, config))
     end_time = time.time()

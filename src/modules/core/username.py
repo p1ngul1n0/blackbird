@@ -4,6 +4,11 @@ import time
 import aiohttp
 import asyncio
 
+from rich.live import Live
+from rich.console import Console
+from rich.text import Text
+from rich.panel import Panel
+
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 )
@@ -110,25 +115,47 @@ async def checkSite(
             return returnData
 
 
-# Control survey on list sites
+from rich.live import Live
+from rich.console import Group
+from rich.text import Text
+
 async def fetchResults(username, config):
     async with aiohttp.ClientSession() as session:
-        tasks = []
         semaphore = asyncio.Semaphore(config.max_concurrent_requests)
-        for site in config.username_sites:
-            tasks.append(
-                checkSite(
-                    site=site,
-                    method="GET",
-                    url=site["uri_check"].replace("{account}", username),
-                    session=session,
-                    semaphore=semaphore,
-                    config=config,
-                )
+        total_sites = len(config.username_sites)
+        completed = 0
+        results = []
+
+        def render():
+            percent = int((completed / total_sites) * 100)
+            return Text.from_markup(
+                f"🛰️  Enumerating accounts with username [cyan1]\"{username}\"[/cyan1] — [green1]{percent}%[/green1] ({completed}/{total_sites})"
             )
-        tasksResults = await asyncio.gather(*tasks, return_exceptions=True)
-        results = {"results": tasksResults, "username": username}
-    return results
+
+        async def wrappedCheck(site):
+            nonlocal completed
+            result = await checkSite(
+                site=site,
+                method="GET",
+                url=site["uri_check"].replace("{account}", username),
+                session=session,
+                semaphore=semaphore,
+                config=config,
+            )
+            completed += 1
+            return result
+
+        tasks = [wrappedCheck(site) for site in config.username_sites]
+
+        with Live(render(), refresh_per_second=10, console=config.console) as live:
+            for coro in asyncio.as_completed(tasks):
+                result = await coro
+                results.append(result)
+                live.update(render())
+
+        return {"results": results, "username": username}
+
+
 
 
 # Start username check and presents results to user
@@ -142,15 +169,12 @@ def verifyUsername(username, config, sitesToSearch=None, metadata_params=None):
 
     config.username_sites = applyFilters(sitesToSearch, config)
 
-    config.console.print(
-        f':play_button: Enumerating accounts with username "[cyan1]{username}[/cyan1]"'
-    )
     start_time = time.time()
     results = asyncio.run(fetchResults(username, config))
     end_time = time.time()
 
     config.console.print(
-        f":chequered_flag: Check completed in {round(end_time - start_time, 1)} seconds ({len(results['results'])} sites)"
+        f":chequered_flag: Check completed in {round(end_time - start_time, 1)} seconds"
     )
 
     if config.dump:

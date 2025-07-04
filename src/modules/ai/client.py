@@ -69,10 +69,8 @@ def send_prompt(prompt, config):
                     for risk_flag in ai_risk_flags:
                         config.console.print(f"   [cyan1] - {risk_flag}[/]")
                 if ai_tags:
-                    tags = ""
-                    for tag in ai_tags:
-                        tags += f"{tag}, "
-                    config.console.print(f"\n:bookmark: [white]Tags:[/] {tags}")
+                    tags = ", ".join(ai_tags)
+                    config.console.print(f"\n:bookmark: [white]Tags:[/] [cyan1]{tags}[/cyan1]")
 
                 config.console.print(f"\n[cyan1]:bar_chart: {remaining_quota} AI queries left for today[/]")
                 return data["data"]["result"]

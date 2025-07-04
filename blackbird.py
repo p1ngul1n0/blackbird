@@ -4,6 +4,10 @@ from rich.console import Console
 import logging
 import sys
 from datetime import datetime
+import random
+import time
+from rich.live import Live
+from rich.text import Text
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
@@ -166,6 +170,9 @@ def initiate():
     config.currentUser = None
     config.currentEmail = None
 
+    lines = getLinesFromFile("assets/text/splash.txt")
+    config.splash_line = random.choice(lines) if lines else ""
+
 
 if __name__ == "__main__":
     initiate()
@@ -185,7 +192,7 @@ if __name__ == "__main__":
     [/red]"""
     )
     config.console.print(
-        "           [white]Made with :beating_heart: by [red]Lucas 'P1ngul1n0' Antoniaci[/red] [/white]"
+        f"             [white]{config.splash_line}[/white] | by [red]Lucas Antoniaci[/red]"
     )
 
     if config.about:
@@ -217,7 +224,7 @@ if __name__ == "__main__":
         checkUpdates(config)
 
     if config.ai:
-        config.console.print("[yellow1]:exclamation: By proceeding, you agree to share the site names with Blackbird AI for analysis.[/yellow] [Y/n]")
+        config.console.print("[yellow1]:exclamation: By proceeding, you agree to share the site names with Blackbird AI for analysis.[/yellow1] [Y/n]")
         confirm = input(" > ").strip().lower()
 
         if confirm not in ["", "y"]:
