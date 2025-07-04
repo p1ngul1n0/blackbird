@@ -110,7 +110,7 @@ async def fetchResults(email, config):
         def render():
             percent = int((completed / total_sites) * 100)
             return Text.from_markup(
-                f":sattelite:  Enumerating accounts with email [cyan1]\"{originalEmail}\"[/cyan1] — [green1]{percent}%[/green1] ({completed}/{total_sites})"
+                f"🛰️  Enumerating accounts with email [cyan1]\"{originalEmail}\"[/cyan1] — [green1]{percent}%[/green1] ({completed}/{total_sites})"
             )
 
         async def wrappedCheck(site):
