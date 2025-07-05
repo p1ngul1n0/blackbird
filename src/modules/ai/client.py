@@ -46,47 +46,7 @@ def send_prompt(prompt, config):
         if response.status_code == 200 and data:
 
             if data["success"]:
-                ai_summary = data["data"]["result"]["summary"]
-                ai_categorization = data["data"]["result"]["categorization"]
-                ai_tags = data["data"]["result"]["tags"]
-                ai_risk_flags = data["data"]["result"]["risk_flags"]
-                ai_insights = data["data"]["result"]["insights"]
-                remaining_quota = data["data"]["remaining_quota"]
-
-                def type_line(line, delay=0.01):
-                    text = Text.assemble(("> ", "cyan1"), (line, "default"))
-                    for char in text.plain:
-                        sys.stdout.write(char)
-                        sys.stdout.flush()
-                        time.sleep(delay)
-                    sys.stdout.write("\n")
-                    sys.stdout.flush()
-                    time.sleep(0.05)
-
-                def type_block(title, content_lines):
-                    config.console.print(f"[[cyan1]{title}[/cyan1]]")
-                    for line in content_lines:
-                        type_line(f" {line}")
-                    print()
-
-                if ai_summary:
-                    summary_lines = ai_summary.strip().split("\n")
-                    type_block("Summary", summary_lines)
-
-                if ai_categorization:
-                    type_block("Profile Type", [ai_categorization])
-
-                if ai_insights:
-                    type_block("Insights", [f"- {insight}" for insight in ai_insights])
-
-                if ai_risk_flags:
-                    type_block("Risk Flags", [f"- {flag}" for flag in ai_risk_flags])
-
-                if ai_tags:
-                    tags_line = ", ".join(ai_tags)
-                    type_block("Tags", [tags_line])
-
-                config.console.print(f"[cyan1]:bar_chart: {remaining_quota} AI queries left for today[/]")
+                show_results(data, config)
                 return data["data"]["result"]
         return None
 
@@ -94,3 +54,46 @@ def send_prompt(prompt, config):
         config.console.print(f":x: Error sending prompt to API!")
         logError(e, "Error sending prompt to API!", config)
         return None
+
+def show_results(results, config):
+    ai_summary = results["data"]["result"]["summary"]
+    ai_categorization = results["data"]["result"]["categorization"]
+    ai_tags = results["data"]["result"]["tags"]
+    ai_risk_flags = results["data"]["result"]["risk_flags"]
+    ai_insights = results["data"]["result"]["insights"]
+    remaining_quota = results["data"]["remaining_quota"]
+
+    if ai_summary:
+        summary_lines = ai_summary.strip().split("\n")
+        type_block("Summary", summary_lines, config)
+
+    if ai_categorization:
+        type_block("Profile Type", [ai_categorization], config)
+
+    if ai_insights:
+        type_block("Insights", [f"- {insight}" for insight in ai_insights], config)
+
+    if ai_risk_flags:
+        type_block("Risk Flags", [f"- {flag}" for flag in ai_risk_flags], config)
+
+    if ai_tags:
+        tags_line = ", ".join(ai_tags)
+        type_block("Tags", [tags_line], config)
+
+    config.console.print(f"[cyan1]:bar_chart: {remaining_quota} AI queries left for today[/]")
+
+def type_line(line, delay=0.01):
+    text = Text.assemble(("> ", "cyan1"), (line, "default"))
+    for char in text.plain:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+    time.sleep(0.05)
+
+def type_block(title, content_lines, config):
+    config.console.print(f"[[cyan1]{title}[/cyan1]]")
+    for line in content_lines:
+        type_line(f" {line}")
+    print()
