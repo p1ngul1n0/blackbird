@@ -279,16 +279,21 @@ if __name__ == "__main__":
             if config.dump or config.csv or config.pdf or config.json:
                 createSaveDirectory(config)
             verifyUsername(config.currentUser, config)
-            if config.ai and len(config.usernameFoundAccounts) > 2:
-                from modules.ai.client import send_prompt
-                site_names = [account.get("name", "") for account in config.usernameFoundAccounts]
-                if (site_names):
-                    prompt = ", ".join(site_names)
+            if config.ai:
+                if len(config.usernameFoundAccounts) > 2:
+                    from modules.ai.client import send_prompt
+                    site_names = [account.get("name", "") for account in config.usernameFoundAccounts]
+                    if (site_names):
+                        prompt = ", ".join(site_names)
 
-                    data = send_prompt(prompt, config)
+                        data = send_prompt(prompt, config)
 
-                    if (data):
-                        config.ai_analysis = data
+                        if (data):
+                            config.ai_analysis = data
+                else:
+                    config.console.print(
+                        ":warning: Not enough accounts found for AI analysis. Skipping AI features."
+                    )
 
             if config.csv and config.usernameFoundAccounts:
                 saveToCsv(config.usernameFoundAccounts, config)
@@ -316,16 +321,21 @@ if __name__ == "__main__":
             if config.dump or config.csv or config.pdf or config.json:
                 createSaveDirectory(config)
             verifyEmail(email, config)
-            if config.ai and len(config.emailFoundAccounts) > 2:
-                from modules.ai.client import send_prompt
-                site_names = [account.get("name", "") for account in config.emailFoundAccounts]
-                if (site_names):
-                    prompt = ", ".join(site_names)
-                    
-                    data = send_prompt(prompt, config)
+            if config.ai:
+                if len(config.emailFoundAccounts) > 2:
+                    from modules.ai.client import send_prompt
+                    site_names = [account.get("name", "") for account in config.emailFoundAccounts]
+                    if (site_names):
+                        prompt = ", ".join(site_names)
+                        
+                        data = send_prompt(prompt, config)
 
-                    if (data):
-                        config.ai_analysis = data
+                        if (data):
+                            config.ai_analysis = data
+                else:
+                    config.console.print(
+                        ":warning: Not enough accounts found for AI analysis. Skipping AI features."
+                    )
 
             if config.csv and config.emailFoundAccounts:
                 saveToCsv(config.emailFoundAccounts, config)
