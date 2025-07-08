@@ -240,8 +240,8 @@ if __name__ == "__main__":
             sys.exit()
 
     if config.setup_ai:
-        config.console.print(":warning:  By continuing, you acknowledge that your IP is registered for API key management and abuse prevention.")
-        confirm = input("[Y/n] > ").strip().lower()
+        config.console.print("[yellow1]:exclamation: By continuing, you acknowledge that your IP is registered for API key management and abuse prevention.[/yellow1] [Y/n]", end="")
+        confirm = input(" > ").strip().lower()
 
         if confirm not in ["", "y"]:
             config.console.print(":stop_sign:  Cancelled by user.")
