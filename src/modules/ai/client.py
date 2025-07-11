@@ -80,7 +80,7 @@ def show_results(results, config):
         tags_line = ", ".join(ai_tags)
         type_block("Tags", [tags_line], config)
 
-    config.console.print(f"[cyan1]:bar_chart: {remaining_quota} AI queries left for today[/]")
+    config.console.print(f"{remaining_quota} AI queries left for today")
 
 def type_line(line, delay=0.01):
     text = Text.assemble(("> ", "cyan1"), (line, "default"))

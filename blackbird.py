@@ -224,7 +224,7 @@ if __name__ == "__main__":
         checkUpdates(config)
 
     if config.ai:
-        config.console.print("[yellow1]:exclamation: By proceeding, you agree to share the site names with Blackbird AI for analysis.[/yellow1] [Y/n]", end="")
+        config.console.print("[yellow1]:exclamation: By proceeding, you consent to share the found site names with Blackbird AI for analysis.[/yellow1] [Y/n]", end="")
         confirm = input(" > ").strip().lower()
 
         if confirm not in ["", "y"]:
