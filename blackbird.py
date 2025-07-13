@@ -4,6 +4,10 @@ from rich.console import Console
 import logging
 import sys
 from datetime import datetime
+import random
+import time
+from rich.live import Live
+from rich.text import Text
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
@@ -18,7 +22,6 @@ from modules.export.pdf import saveToPdf
 from modules.export.json import saveToJson
 from modules.utils.file_operations import isFile, getLinesFromFile
 from modules.utils.permute import Permute
-from modules.ner.entity_extraction import inialize_nlp_model
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -96,8 +99,9 @@ def initiate():
     parser.add_argument(
         "-ai", "--ai",
         action="store_true",
-        help="Extract Metadata with AI."
+        help="Use AI features."
     )
+    parser.add_argument("--setup-ai", action="store_true", help="Configure the API key required for AI features.")
     parser.add_argument(
         "--filter",
         help='Filter sites to be searched by list property value.E.g --filter "cat=social"',
@@ -143,6 +147,7 @@ def initiate():
     config.proxy = args.proxy
     config.verbose = args.verbose
     config.ai = args.ai
+    config.setup_ai = args.setup_ai
     config.timeout = args.timeout
     config.max_concurrent_requests = args.max_concurrent_requests
     config.email = args.email
@@ -150,6 +155,7 @@ def initiate():
     config.no_update = args.no_update
     config.about = args.about
     config.instagram_session_id = os.getenv("INSTAGRAM_SESSION_ID")
+    config.api_url = os.getenv("API_URL")
 
     config.console = Console()
 
@@ -163,6 +169,9 @@ def initiate():
 
     config.currentUser = None
     config.currentEmail = None
+
+    lines = getLinesFromFile("assets/text/splash.txt")
+    config.splash_line = random.choice(lines) if lines else ""
 
 
 if __name__ == "__main__":
@@ -183,7 +192,7 @@ if __name__ == "__main__":
     [/red]"""
     )
     config.console.print(
-        "           [white]Made with :beating_heart: by [red]Lucas 'P1ngul1n0' Antoniaci[/red] [/white]"
+        f"             [white]{config.splash_line}[/white] | by [red]Lucas Antoniaci[/red]"
     )
 
     if config.about:
@@ -201,6 +210,7 @@ if __name__ == "__main__":
         and not config.email
         and not config.username_file
         and not config.email_file
+        and not config.setup_ai
     ):
         config.console.print("Either --username or --email is required")
         sys.exit()
@@ -214,8 +224,36 @@ if __name__ == "__main__":
         checkUpdates(config)
 
     if config.ai:
-        inialize_nlp_model(config)
-        config.aiModel = True
+        config.console.print("[yellow1]:exclamation: By proceeding, you consent to share the found site names with Blackbird AI for analysis.[/yellow1] [Y/n]", end="")
+        confirm = input(" > ").strip().lower()
+
+        if confirm not in ["", "y"]:
+            config.console.print(":stop_sign:  Cancelled by user.")
+            sys.exit()
+
+        from modules.ai.key_manager import load_api_key_from_file
+        apikey = load_api_key_from_file(config)
+        if not apikey:
+            config.console.print(
+                ":x: No API Key found. Please run with --setup-ai to configure the API Key."
+            )
+            sys.exit()
+
+    if config.setup_ai:
+        config.console.print("[yellow1]:exclamation: By continuing, you acknowledge that your IP is registered for API key management and abuse prevention.[/yellow1] [Y/n]", end="")
+        confirm = input(" > ").strip().lower()
+
+        if confirm not in ["", "y"]:
+            config.console.print(":stop_sign:  Cancelled by user.")
+            sys.exit()
+
+        from modules.ai.key_manager import fetch_api_key_from_server
+        result = fetch_api_key_from_server(config)
+        if not result:
+            config.console.print(
+                ":x: Failed to fetch API Key. Please check your internet connection or try again later."
+            )
+        sys.exit()
 
     if config.username_file:
         if isFile(config.username_file):
@@ -241,12 +279,29 @@ if __name__ == "__main__":
             if config.dump or config.csv or config.pdf or config.json:
                 createSaveDirectory(config)
             verifyUsername(config.currentUser, config)
+            if config.ai:
+                if len(config.usernameFoundAccounts) > 2:
+                    from modules.ai.client import send_prompt
+                    site_names = [account.get("name", "") for account in config.usernameFoundAccounts]
+                    if (site_names):
+                        prompt = ", ".join(site_names)
+
+                        data = send_prompt(prompt, config)
+
+                        if (data):
+                            config.ai_analysis = data
+                else:
+                    config.console.print(
+                        ":warning: Not enough accounts found for AI analysis. Skipping AI features."
+                    )
+
             if config.csv and config.usernameFoundAccounts:
                 saveToCsv(config.usernameFoundAccounts, config)
             if config.pdf and config.usernameFoundAccounts:
                 saveToPdf(config.usernameFoundAccounts, "username", config)
             if config.json and config.usernameFoundAccounts:
                 saveToJson(config.usernameFoundAccounts, config)
+
             config.currentUser = None
             config.usernameFoundAccounts = None
 
@@ -266,6 +321,22 @@ if __name__ == "__main__":
             if config.dump or config.csv or config.pdf or config.json:
                 createSaveDirectory(config)
             verifyEmail(email, config)
+            if config.ai:
+                if len(config.emailFoundAccounts) > 2:
+                    from modules.ai.client import send_prompt
+                    site_names = [account.get("name", "") for account in config.emailFoundAccounts]
+                    if (site_names):
+                        prompt = ", ".join(site_names)
+                        
+                        data = send_prompt(prompt, config)
+
+                        if (data):
+                            config.ai_analysis = data
+                else:
+                    config.console.print(
+                        ":warning: Not enough accounts found for AI analysis. Skipping AI features."
+                    )
+
             if config.csv and config.emailFoundAccounts:
                 saveToCsv(config.emailFoundAccounts, config)
             if config.pdf and config.emailFoundAccounts:

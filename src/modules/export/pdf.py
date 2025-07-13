@@ -3,6 +3,7 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.utils import simpleSplit
 import sys
 import os
 
@@ -115,7 +116,86 @@ def saveToPdf(foundAccounts, resultType, config):
             "Blackbird can make mistakes. Consider checking the information.",
         )
 
+        if config.ai_analysis:
+            # Background do quadro
+            canva.setFillColor("#F4F6F8")
+            canva.setStrokeColor("#D0D5DA")
+            canva.rect(40, height - 545, 530, 320, stroke=1, fill=1)
+
+            # Cabeçalho
+            canva.setFillColor("#000000")
+            canva.drawImage(
+                os.path.join(os.getcwd(), config.ASSETS_DIRECTORY, config.IMAGES_DIRECTORY, "ai-stars.png"),
+                55, height - 245, width=12, height=12, mask="auto"
+            )
+            canva.setFont(config.FONT_NAME_BOLD, 10)
+            canva.drawString(70, height - 242, "AI Analysis - Behavioral Summary")
+            canva.setFont(config.FONT_NAME_REGULAR, 8)
+            canva.drawString(55, height - 255, "This behavioral summary was generated using AI based on the detected online presence.")
+
+            y_position = height - 270
+
+            if config.ai_analysis.get("summary"):
+                canva.setFont(config.FONT_NAME_BOLD, 10)
+                canva.drawString(55, y_position, "Summary")
+                y_position -= 12
+
+                lines = simpleSplit(config.ai_analysis["summary"], config.FONT_NAME_REGULAR, 8, 510)
+                text = canva.beginText()
+                text.setTextOrigin(55, y_position)
+                text.setFont(config.FONT_NAME_REGULAR, 8)
+                for line in lines:
+                    text.textLine(line)
+                    y_position -= 10
+                canva.drawText(text)
+
+                y_position -= 10
+
+            if config.ai_analysis.get("categorization"):
+                canva.setFont(config.FONT_NAME_BOLD, 10)
+                canva.drawString(55, y_position + 3, "Categorization")
+                y_position -= 10
+                canva.setFont(config.FONT_NAME_REGULAR, 8)
+                canva.drawString(55, y_position, config.ai_analysis["categorization"])
+                y_position -= 15
+
+            if config.ai_analysis.get("insights"):
+                canva.setFont(config.FONT_NAME_BOLD, 10)
+                canva.drawString(55, y_position + 3, "Insights")
+                y_position -= 10
+
+                canva.setFont(config.FONT_NAME_REGULAR, 8)
+                for insight in config.ai_analysis["insights"]:
+                    canva.drawString(55, y_position, "- " + insight)
+                    y_position -= 10
+                y_position -= 5
+
+            if config.ai_analysis.get("risk_flags"):
+                canva.setFont(config.FONT_NAME_BOLD, 10)
+                canva.drawString(55, y_position + 3, "Risk Flags")
+                y_position -= 10
+
+                canva.setFont(config.FONT_NAME_REGULAR, 8)
+                for risk in config.ai_analysis["risk_flags"]:
+                    canva.drawString(55, y_position, "- " + risk)
+                    y_position -= 10
+                y_position -= 5
+
+            if config.ai_analysis.get("tags"):
+                canva.setFont(config.FONT_NAME_BOLD, 10)
+                canva.drawString(55, y_position + 3, "Tags")
+                y_position -= 10
+
+                canva.setFont(config.FONT_NAME_REGULAR, 8)
+                for tag in config.ai_analysis["tags"]:
+                    canva.drawString(55, y_position, "- " + tag)
+                    y_position -= 10
+                y_position -= 5
+
+
         if accountsCount >= 1:
+            if config.ai_analysis:
+                height -= 325
             canva.setFillColor("#000000")
             canva.setFont(config.FONT_NAME_REGULAR, 15)
             canva.drawImage(
@@ -126,18 +206,22 @@ def saveToPdf(foundAccounts, resultType, config):
                     "arrow.png",
                 ),
                 40,
-                height - 240,
+                height - 245,
                 width=12,
                 height=12,
                 mask="auto",
             )
-            canva.drawString(55, height - 240, f"Results ({accountsCount})")
+            canva.drawString(55, height - 245, f"Results ({accountsCount})")
 
             y_position = height - 270
             for result in foundAccounts:
                 if y_position < 72:
                     canva.showPage()
-                    y_position = height - 130
+                    if (config.ai_analysis):
+                        if config.ai_analysis["summary"]:
+                            y_position = height + 250
+                    else:
+                        y_position = height - 50
 
                 canva.setFont(config.FONT_NAME_BOLD, 12)
                 canva.drawString(72, y_position, f"{result['name']}")

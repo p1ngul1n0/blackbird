@@ -91,7 +91,7 @@ def applyFilters(sitesToSearch, config):
             sys.exit()
         else:
             config.console.print(
-                f':page_with_curl: Applied "{config.filter}" filter to sites [{len(sitesToSearch)}]'
+                f':page_with_curl: Applied [green1]"{config.filter}"[/green1] filter to sites [{len(sitesToSearch)}]'
             )
 
     if config.no_nsfw:
