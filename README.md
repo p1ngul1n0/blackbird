@@ -3,6 +3,7 @@
 <figure><img src="./docs/.gitbook/assets/ai-demo.png" alt=""><figcaption></figcaption></figure>
 
 > Blackbird is a powerful OSINT tool that combines fast username and email searches across more than 600 platforms with free AI-powered profiling. By leveraging community-driven projects like WhatsMyName, it ensures low false positive rates and high-quality results. Features include smart filters, polished PDF/CSV exports, and fully automated analysis — all from a single CLI.
+<br>
 
 [![SherlockEyeCover](./docs/.gitbook/assets/sherlockeye_cover.jpg)](https://cutt.ly/frtVNzQQ)
 
