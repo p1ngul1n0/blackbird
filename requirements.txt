@@ -10,7 +10,7 @@ idna==3.10
 markdown-it-py==3.0.0
 mdurl==0.1.2
 multidict==6.6.2
-pillow==11.2.1
+pillow==11.3.0
 propcache==0.3.2
 Pygments==2.19.2
 python-dotenv==1.1.1
