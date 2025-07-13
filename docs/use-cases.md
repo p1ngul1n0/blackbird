@@ -35,5 +35,5 @@ python blackbird.py --username username1 --filter "uri_check~anime and cat=socia
 ### Reverse search list of usernames in TikTok
 
 ```bash
-python blackbird.py --username username1 --filter "name=TikTok"
+python blackbird.py --uf usernames.txt --filter "name=TikTok"
 ```
