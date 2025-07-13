@@ -1,16 +1,19 @@
 # Blackbird
 
-<figure><img src=".gitbook/assets/blackbird_printscreen.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/ai-demo.png" alt=""><figcaption></figcaption></figure>
 
 ## What is it?
 
-Blackbird is an advanced Open Source Intelligence (OSINT) tool designed for rapid and thorough searches of user accounts by username or email across a vast array of platforms.
+**Blackbird** is a powerful Open Source Intelligence (OSINT) tool designed for fast and thorough searches of user accounts by **username or email** across a wide range of online platforms.
+
+While built with OSINT in mind, Blackbird goes beyond simple account discovery — offering flexibility, customization, and **free AI-driven analysis** to support modern digital investigations and profiling.
 
 #### Key Features:
 
-* **Username and Email Search**: Efficiently searches for user accounts by username or email on numerous websites.
-* **Metadata Extraction**: Effortlessly gather essential details from discovered accounts, including names, locations, pictures, and more. This feature ensures you have comprehensive information readily available, enhancing your ability to analyze and utilize account data effectively.
-* **WhatsMyName Integration**: Seamlessly integrates with WhatsMyName for enhanced search capabilities.
+* **Free AI-Powered Insights**\
+  Includes built-in access to an **AI analysis API**, free to use with daily limits. The AI interprets the discovered platforms to generate behavioral and technical summaries — no personal data is shared.
+* **Metadata Extraction**: Automatically extracts key details from discovered profiles, such as names, locations, images, and other public information.
+* **WhatsMyName Integration**: Seamlessly integrates with [WhatsMyName](https://github.com/WebBreacher/WhatsMyName) for enhanced search capabilities.
 * **Export Options**: Found accounts can be exported in PDF, CSV, or HTTP response formats, providing flexibility in data handling.
 * **Customizable Filters**: Use the `--filter` argument to tailor searches by specifying property names and desired values.
 
@@ -28,6 +31,4 @@ Blackbird is an advanced Open Source Intelligence (OSINT) tool designed for rapi
 ### Sponsors
 
 <figure><img src=".gitbook/assets/digitalocean.svg" alt=""><figcaption></figcaption></figure>
-
-<figure><img src="https://raw.githubusercontent.com/p1ngul1n0/src/master/logo_chl.jpg" alt="" width="188"><figcaption></figcaption></figure>
 

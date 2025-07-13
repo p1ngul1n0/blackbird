@@ -40,7 +40,7 @@ python blackbird.py --email-file emails.txt
 python blackbird.py --username p1ngul1n0 --pdf
 ```
 
-<figure><img src=".gitbook/assets/blackbird_report_pdf_results.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/pdf-full.png" alt=""><figcaption></figcaption></figure>
 
 #### CSV
 

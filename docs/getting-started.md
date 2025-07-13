@@ -19,4 +19,4 @@ cd blackbird
 pip install -r requirements.txt
 ```
 
-#### **✨ You're good to go!**
+#### ✅ **You're good to go!**
