@@ -280,7 +280,7 @@ if __name__ == "__main__":
                 createSaveDirectory(config)
             verifyUsername(config.currentUser, config)
             if config.ai:
-                if len(config.usernameFoundAccounts) > 2:
+                if config.usernameFoundAccounts and len(config.usernameFoundAccounts) > 2:
                     from modules.ai.client import send_prompt
                     site_names = [account.get("name", "") for account in config.usernameFoundAccounts]
                     if (site_names):
@@ -322,7 +322,7 @@ if __name__ == "__main__":
                 createSaveDirectory(config)
             verifyEmail(email, config)
             if config.ai:
-                if len(config.emailFoundAccounts) > 2:
+                if config.emailFoundAccounts and len(config.emailFoundAccounts) > 2:
                     from modules.ai.client import send_prompt
                     site_names = [account.get("name", "") for account in config.emailFoundAccounts]
                     if (site_names):
