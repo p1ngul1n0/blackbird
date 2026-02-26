@@ -434,6 +434,51 @@
             }
         },
         {
+            "name": "Facebook",
+            "uri_check": "https://b-api.facebook.com/method/auth.login",
+            "data": "email={account}&password=blackbird_check&access_token=350685531728|62f8ce9f74b12f84c123cc23437a4a32&format=json&generate_session_cookies=1&locale=en_US",
+            "method": "POST",
+            "headers": {
+                "User-Agent": "[FBAN/FB4A;FBAV/222.0.0.48.113;FBBV/156260137;FBDM/{density=1.5,width=540,height=960};FBLC/en_US;FBRV/0;FBCR/;FBMF/samsung;FBBD/samsung;FBPN/com.facebook.katana;FBDV/GT-S7580L;FBSV/4.4.2;FBOP/1;FBCA/armeabi-v7a:armeabi;]",
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "e_code": 200,
+            "e_string": "Wrong Credentials",
+            "m_string": "Incorrect Email",
+            "m_code": 404,
+            "known": [],
+            "cat": "social",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Instagram",
+            "uri_check": "https://www.instagram.com/api/v1/web/accounts/check_email/",
+            "data": "email={account}",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Csrftoken": "{csrftoken_value}"
+            },
+            "e_code": 200,
+            "e_string": "email_is_taken",
+            "m_string": "\"available\":true",
+            "m_code": 404,
+            "known": [],
+            "cat": "social",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": {
+                "type": "cookie",
+                "endpoint": "https://www.instagram.com/accounts/emailsignup/",
+                "method": "GET",
+                "headers": null,
+                "data": null,
+                "cookie_name": "csrftoken"
+            }
+        },
+        {
             "name": "Imageshack",
             "uri_check": "https://imageshack.com/rest_api/v2/user",
             "data": "email={account}&username=user&password=1&set_cookies=true",
