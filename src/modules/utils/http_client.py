@@ -65,7 +65,7 @@ async def do_async_request(method, url, session, config, data=None, customHeader
         json = None
         try:
             content = await response.text()
-        except:
+        except Exception:
             binaryContent = await response.read()
             encode = chardet.detect(binaryContent)["encoding"]
             content = binaryContent.decode(encode)
