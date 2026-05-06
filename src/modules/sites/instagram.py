@@ -5,9 +5,9 @@ sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 )
 
-from src.modules.utils.http_client import do_sync_request
-from src.modules.utils.log import logError
-from src.modules.utils.parse import extractMetadata
+from ..utils.http_client import do_sync_request
+from ..utils.log import logError
+from ..utils.parse import extractMetadata
 from json import dumps
 from urllib.parse import urlencode
 

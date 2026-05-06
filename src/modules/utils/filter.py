@@ -3,7 +3,7 @@ import sys
 
 
 def filterFoundAccounts(site):
-    if site["status"] == "FOUND":
+    if "status" in site and site["status"] == "FOUND":
         return True
     else:
         return False
@@ -91,7 +91,7 @@ def applyFilters(sitesToSearch, config):
             sys.exit()
         else:
             config.console.print(
-                f':page_with_curl: Applied "{config.filter}" filter to sites [{len(sitesToSearch)}]'
+                f':page_with_curl: Applied [green1]"{config.filter}"[/green1] filter to sites [{len(sitesToSearch)}]'
             )
 
     if config.no_nsfw:

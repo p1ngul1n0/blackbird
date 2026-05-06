@@ -1,4 +1,4 @@
-# 👷‍♀️ Use Cases
+# 🧐 Use Cases
 
 Here you can find several use cases for Blackbird, demonstrating how it can be applied in real-world scenarios.
 
@@ -35,5 +35,5 @@ python blackbird.py --username username1 --filter "uri_check~anime and cat=socia
 ### Reverse search list of usernames in TikTok
 
 ```bash
-python blackbird.py --username username1 --filter "name=TikTok"
+python blackbird.py --uf usernames.txt --filter "name=TikTok"
 ```
