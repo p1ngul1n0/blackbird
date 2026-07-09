@@ -5,9 +5,6 @@ import logging
 import sys
 from datetime import datetime
 import random
-import time
-from rich.live import Live
-from rich.text import Text
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 

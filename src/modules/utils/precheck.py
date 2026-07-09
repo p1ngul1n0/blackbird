@@ -1,9 +1,6 @@
-import sys
-import os
 
 
 from ..utils.http_client import do_sync_request
-from ..utils.log import logError
 
 
 def perform_pre_check(precheck_params, headers, config):
@@ -29,5 +26,5 @@ def perform_pre_check(precheck_params, headers, config):
                     )
 
         return headers
-    except Exception as e:
+    except Exception:
         return None

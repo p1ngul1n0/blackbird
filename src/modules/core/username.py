@@ -1,13 +1,10 @@
-import sys
 import os
 import time
 import aiohttp
 import asyncio
 
 from rich.live import Live
-from rich.console import Console
 from rich.text import Text
-from rich.panel import Panel
 
 
 from ..whatsmyname.list_operations import readList
@@ -112,7 +109,6 @@ async def checkSite(
 
 
 from rich.live import Live
-from rich.console import Group
 from rich.text import Text
 
 async def fetchResults(username, config):

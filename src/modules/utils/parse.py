@@ -1,10 +1,8 @@
-import sys
 import os
 
 
 from ..utils.http_client import do_sync_request
 import re
-import os
 
 
 def access_json_property(data, path_config):

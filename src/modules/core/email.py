@@ -1,10 +1,7 @@
 import os
-from pathlib import Path
-from rich.markup import escape
 import time
 import aiohttp
 import asyncio
-import sys
 
 
 from ..utils.filter import filterFoundAccounts, applyFilters

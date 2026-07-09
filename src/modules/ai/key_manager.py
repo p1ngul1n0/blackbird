@@ -1,10 +1,8 @@
 import os
 import json
-import requests
 from pathlib import Path
 from ..utils.log import logError
 from ..utils.http_client import do_sync_request
-import sys
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 KEY_PATH = PROJECT_ROOT / ".ai_key.json"
