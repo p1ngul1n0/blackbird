@@ -3,9 +3,8 @@ import sys
 import os
 import chardet
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "."))
 
-from log import logError
+from .log import logError
 
 requests.packages.urllib3.disable_warnings()
 
@@ -20,7 +19,7 @@ def do_sync_request(method, url, config, data=None, customHeaders=None, cookies=
         "method": method,
         "url": url,
         "timeout": config.timeout,
-        "verify": False,
+        "verify": not getattr(config, "insecure", False),
         "headers": headers,
         "data": data,
         "cookies": cookies,
@@ -49,6 +48,8 @@ async def do_async_request(method, url, session, config, data=None, customHeader
     if customHeaders:
         headers.update(customHeaders)
     proxy = config.proxy if config.proxy else None
+    # ssl=None uses the default verifying context; ssl=False disables verification
+    ssl = False if getattr(config, "insecure", False) else None
     try:
         response = await session.request(
             method,
@@ -56,7 +57,7 @@ async def do_async_request(method, url, session, config, data=None, customHeader
             proxy=proxy,
             timeout=config.timeout,
             allow_redirects=True,
-            ssl=False,
+            ssl=ssl,
             data=data,
             headers=headers,
             max_redirects=10,
@@ -65,10 +66,10 @@ async def do_async_request(method, url, session, config, data=None, customHeader
         json = None
         try:
             content = await response.text()
-        except:
+        except (UnicodeDecodeError, LookupError):
             binaryContent = await response.read()
-            encode = chardet.detect(binaryContent)["encoding"]
-            content = binaryContent.decode(encode)
+            encode = chardet.detect(binaryContent)["encoding"] or "utf-8"
+            content = binaryContent.decode(encode, errors="replace")
 
         if "Content-Type" in response.headers:
             if "application/json" in response.headers["Content-Type"]:

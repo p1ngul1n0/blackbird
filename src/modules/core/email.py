@@ -6,9 +6,6 @@ import aiohttp
 import asyncio
 import sys
 
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
-)
 
 from ..utils.filter import filterFoundAccounts, applyFilters
 from ..utils.parse import extractMetadata

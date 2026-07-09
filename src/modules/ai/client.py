@@ -1,10 +1,10 @@
-from utils.http_client import do_sync_request
+from ..utils.http_client import do_sync_request
 import time
 import sys
 from rich.text import Text
 import json
 from .key_manager import load_api_key_from_file
-from utils.log import logError
+from ..utils.log import logError
 
 def send_prompt(prompt, config):
     config.console.print(f":sparkles: Analyzing with AI...")
@@ -33,21 +33,22 @@ def send_prompt(prompt, config):
             data=payload
         )
 
-        if response is not None:
-            try:
-                data = response.json()
-            except json.JSONDecodeError:
-                data = None        
+        if response is None:
+            return None
+
+        try:
+            data = response.json()
+        except json.JSONDecodeError:
+            data = None
 
         if response.status_code != 200 and data:
-            config.console.print(f":x: {data['message']}")
+            config.console.print(f":x: {data.get('message', 'Unknown error')}")
             return None
-        
-        if response.status_code == 200 and data:
 
-            if data["success"]:
+        if response.status_code == 200 and data:
+            if data.get("success"):
                 show_results(data, config)
-                return data["data"]["result"]
+                return data.get("data", {}).get("result")
         return None
 
     except Exception as e:
@@ -56,12 +57,14 @@ def send_prompt(prompt, config):
         return None
 
 def show_results(results, config):
-    ai_summary = results["data"]["result"]["summary"]
-    ai_categorization = results["data"]["result"]["categorization"]
-    ai_tags = results["data"]["result"]["tags"]
-    ai_risk_flags = results["data"]["result"]["risk_flags"]
-    ai_insights = results["data"]["result"]["insights"]
-    remaining_quota = results["data"]["remaining_quota"]
+    data = results.get("data", {})
+    result = data.get("result", {})
+    ai_summary = result.get("summary")
+    ai_categorization = result.get("categorization")
+    ai_tags = result.get("tags")
+    ai_risk_flags = result.get("risk_flags")
+    ai_insights = result.get("insights")
+    remaining_quota = data.get("remaining_quota", 0)
 
     if ai_summary:
         summary_lines = ai_summary.strip().split("\n")
