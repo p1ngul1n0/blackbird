@@ -64,12 +64,6 @@ async def checkSite(
                             )
                             extractedMetadata.extend(metadata)
 
-                        if config.ai and config.aiModel:
-                            metadata = extract_data_with_ai(
-                                config, site, response["content"], response["json"]
-                            )
-                            extractedMetadata.extend(metadata)
-
                         if site["name"] == "Instagram":
                             if config.instagram_session_id:
                                 metadata = get_instagram_account_info(
@@ -107,9 +101,6 @@ async def checkSite(
             logError(e, f"Coudn't check {site['name']} {url}", config)
             return returnData
 
-
-from rich.live import Live
-from rich.text import Text
 
 async def fetchResults(username, config):
     async with aiohttp.ClientSession() as session:

@@ -92,7 +92,6 @@ from rich.text import Text
 from rich.live import Live
 
 async def fetchResults(email, config):
-    data = readList("email", config)
     originalEmail = email
     async with aiohttp.ClientSession() as session:
         tasks = []
