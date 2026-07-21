@@ -5,6 +5,7 @@ from ..utils.log import logError
 
 
 def perform_pre_check(precheck_params, headers, config):
+    """Return authenticated headers, or None when the pre-check fails."""
     try:
         method = precheck_params["method"]
         url = precheck_params["endpoint"]

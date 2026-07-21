@@ -37,10 +37,10 @@ async def checkSite(
             authenticated_headers = perform_pre_check(
                 site["pre_check"], headers, config
             )
-            headers = authenticated_headers
-            if headers == False:
+            if authenticated_headers is None:
                 returnData["status"] = "ERROR"
                 return returnData
+            headers = authenticated_headers
 
         response = await do_async_request(method, url, session, config, data, headers)
         if response == None:
