@@ -5,9 +5,6 @@ import logging
 import sys
 from datetime import datetime
 import random
-import time
-from rich.live import Live
-from rich.text import Text
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
@@ -28,8 +25,7 @@ load_dotenv()
 
 
 def initiate():
-    if not os.path.exists("logs/"):
-        os.makedirs("logs/")
+    os.makedirs(os.path.dirname(config.LOG_PATH), exist_ok=True)
     logging.basicConfig(
         filename=config.LOG_PATH,
         level=logging.DEBUG,
@@ -129,6 +125,11 @@ def initiate():
         "--no-update", action="store_true", help="Don't update sites lists."
     )
     parser.add_argument(
+        "--insecure",
+        action="store_true",
+        help="Disable TLS certificate verification (not recommended).",
+    )
+    parser.add_argument(
         "--about", action="store_true", help="Show about information and exit."
     )
     args = parser.parse_args()
@@ -153,6 +154,7 @@ def initiate():
     config.email = args.email
     config.email_file = args.email_file
     config.no_update = args.no_update
+    config.insecure = args.insecure
     config.about = args.about
     config.instagram_session_id = os.getenv("INSTAGRAM_SESSION_ID")
     config.api_url = os.getenv("API_URL")
@@ -170,7 +172,7 @@ def initiate():
     config.currentUser = None
     config.currentEmail = None
 
-    lines = getLinesFromFile("assets/text/splash.txt")
+    lines = getLinesFromFile(config.SPLASH_PATH)
     config.splash_line = random.choice(lines) if lines else ""
 
 

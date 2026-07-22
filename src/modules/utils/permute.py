@@ -20,7 +20,6 @@ class Permute:
                         permutations_list.append(subset[0])
                         permutations_list.append("_" + subset[0])
                         permutations_list.append(subset[0] + "_")
-                    pass
                 else:
                     for separator in self.separators:
                         perm = separator.join(subset)

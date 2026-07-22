@@ -4,13 +4,9 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.utils import simpleSplit
-import sys
 import os
 
 
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
-)
 
 from ..export.file_operations import generateName
 
@@ -336,7 +332,7 @@ def saveToPdf(foundAccounts, resultType, config):
                                             height=35,
                                         )
                                         y_position -= 15
-                                    except:
+                                    except (OSError, KeyError):
                                         pass
                         endWidth = y_position
                         canva.setStrokeColor("#CE0000")

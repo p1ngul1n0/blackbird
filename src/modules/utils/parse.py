@@ -1,13 +1,8 @@
-import sys
 import os
 
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
-)
 
 from ..utils.http_client import do_sync_request
 import re
-import os
 
 
 def access_json_property(data, path_config):
@@ -16,7 +11,7 @@ def access_json_property(data, path_config):
         for key in path_config:
             property_value = property_value[key]
         return property_value
-    except:
+    except (KeyError, IndexError, TypeError):
         return False
 
 
@@ -25,7 +20,7 @@ def access_html_regex(data, pattern):
         match = re.search(pattern, data)
         if match:
             return match.group(1).replace("\n", "")
-    except:
+    except (re.error, IndexError, TypeError):
         return False
 
 

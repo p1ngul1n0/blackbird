@@ -1,17 +1,11 @@
-import sys
 import os
 import time
 import aiohttp
 import asyncio
 
 from rich.live import Live
-from rich.console import Console
 from rich.text import Text
-from rich.panel import Panel
 
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
-)
 
 from ..whatsmyname.list_operations import readList
 from ..utils.parse import extractMetadata, remove_duplicates
@@ -21,7 +15,6 @@ from ..utils.log import logError
 from ..export.dump import dumpContent
 from ..sites.instagram import get_instagram_account_info
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 
 # Verify account existence based on list args
@@ -71,12 +64,6 @@ async def checkSite(
                             )
                             extractedMetadata.extend(metadata)
 
-                        if config.ai and config.aiModel:
-                            metadata = extract_data_with_ai(
-                                config, site, response["content"], response["json"]
-                            )
-                            extractedMetadata.extend(metadata)
-
                         if site["name"] == "Instagram":
                             if config.instagram_session_id:
                                 metadata = get_instagram_account_info(
@@ -114,10 +101,6 @@ async def checkSite(
             logError(e, f"Coudn't check {site['name']} {url}", config)
             return returnData
 
-
-from rich.live import Live
-from rich.console import Group
-from rich.text import Text
 
 async def fetchResults(username, config):
     async with aiohttp.ClientSession() as session:

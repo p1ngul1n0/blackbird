@@ -8,7 +8,6 @@ def isFile(fileName):
 def getLinesFromFile(fileName):
     try:
         with open(fileName) as f:
-            lines = f.read().splitlines()
-            return lines
-    except:
-        return False
+            return f.read().splitlines()
+    except OSError:
+        return []

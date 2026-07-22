@@ -1,10 +1,6 @@
-import sys
 import os
 import json
 
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
-)
 
 from ..export.file_operations import generateName
 from ..utils.log import logError

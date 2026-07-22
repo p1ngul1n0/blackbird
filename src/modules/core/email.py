@@ -1,14 +1,8 @@
 import os
-from pathlib import Path
-from rich.markup import escape
 import time
 import aiohttp
 import asyncio
-import sys
 
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
-)
 
 from ..utils.filter import filterFoundAccounts, applyFilters
 from ..utils.parse import extractMetadata
@@ -43,10 +37,10 @@ async def checkSite(
             authenticated_headers = perform_pre_check(
                 site["pre_check"], headers, config
             )
-            headers = authenticated_headers
-            if headers == False:
+            if authenticated_headers is None:
                 returnData["status"] = "ERROR"
                 return returnData
+            headers = authenticated_headers
 
         response = await do_async_request(method, url, session, config, data, headers)
         if response == None:
@@ -98,7 +92,6 @@ from rich.text import Text
 from rich.live import Live
 
 async def fetchResults(email, config):
-    data = readList("email", config)
     originalEmail = email
     async with aiohttp.ClientSession() as session:
         tasks = []
