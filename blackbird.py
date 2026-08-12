@@ -25,6 +25,53 @@ from modules.utils.file_operations import isFile, getLinesFromFile
 from modules.utils.permute import Permute
 from dotenv import load_dotenv
 
+
+def sanitize_report_identifier(value: str) -> str:
+    identifier = re.sub(r"[^A-Za-z0-9_-]", "_", value)
+    identifier = re.sub(r"_+", "_", identifier).strip("_")
+    return identifier or "report"
+
+
+def generate_similar_usernames(usernames):
+    variants = []
+    seen = set()
+    for username in usernames:
+        username = username.strip()
+        if not username or username in seen:
+            continue
+        seen.add(username)
+        variants.append(username)
+
+        if len(username) >= 3:
+            prefix2 = username[:2]
+            suffix2 = username[-2:]
+            prefix3 = username[:3]
+            suffix3 = username[-3:]
+
+            candidates = [
+                username + prefix2,
+                username + suffix2,
+                username + prefix3,
+                username + suffix3,
+                prefix2 + username,
+                suffix2 + username,
+                prefix3 + username,
+                suffix3 + username,
+                username[::-1],
+                username[1:] if len(username) > 1 else username,
+                username[:-1] if len(username) > 1 else username,
+                username + "1",
+                username + "_",
+                "_" + username,
+            ]
+            for candidate in candidates:
+                candidate = candidate.strip()
+                if candidate and candidate not in seen:
+                    seen.add(candidate)
+                    variants.append(candidate)
+
+    return variants
+
 load_dotenv()
 
 
@@ -89,6 +136,12 @@ def initiate():
         "--json",
         action="store_true",
         help="Generate a JSON with the results."
+    )
+
+    parser.add_argument(
+        "--similar",
+        action="store_true",
+        help="Also search close username variants automatically."
     )
 
     parser.add_argument(
@@ -161,6 +214,7 @@ def initiate():
     config.email_file = args.email_file
     config.no_update = args.no_update
     config.about = args.about
+    config.similar = args.similar
     config.instagram_session_id = os.getenv("INSTAGRAM_SESSION_ID")
     config.api_url = os.getenv("API_URL")
 
@@ -258,6 +312,15 @@ def run_interactive_menu(config):
             config.pdf = True
         if Confirm.ask("[cyan]Also save as CSV?[/cyan]", default=False):
             config.csv = True
+        if Confirm.ask(
+            "[cyan]Include close username variants (like izumi, izumime, meizumi) in this search?[/cyan]",
+            default=False,
+        ):
+            config.similar = True
+        if len(config.username) > 1:
+            config.currentUser = sanitize_report_identifier(
+                ",".join([u.strip() for u in config.username if u.strip()])
+            )
     else:
         raw = Prompt.ask("[cyan]Enter email(s)[/cyan] (comma-separated for multiple)")
         config.email = [e.strip() for e in raw.split(",") if e.strip()]
@@ -476,35 +539,66 @@ if __name__ == "__main__":
             config.console.print(
                 f":glasses: Successfully loaded {len(config.username)} usernames from permuting {elements}"
             )
+
+        original_usernames = list(config.username)
+        if config.similar:
+            config.username = generate_similar_usernames(config.username)
+            if len(config.username) > len(original_usernames):
+                config.console.print(
+                    f":mag: Searching {len(config.username)} close username variants for {', '.join(original_usernames)}"
+                )
+
+        combined_accounts = []
+        combined_label = ", ".join(original_usernames)
+        combined_report = len(config.username) > 1 and (config.csv or config.pdf or config.json)
+
+        if combined_report:
+            config.currentUser = sanitize_report_identifier(combined_label)
+            createSaveDirectory(config)
+
         for user in config.username:
             config.currentUser = user
-            if config.dump or config.csv or config.pdf or config.json:
+            if not combined_report and (config.dump or config.csv or config.pdf or config.json):
                 createSaveDirectory(config)
             verifyUsername(config.currentUser, config)
-            display_categorized_results(config.usernameFoundAccounts, config, config.currentUser)
-            if config.ai:
-                if len(config.usernameFoundAccounts) > 2:
-                    from modules.ai.client import send_prompt
-                    site_names = [account.get("name", "") for account in config.usernameFoundAccounts]
-                    if (site_names):
-                        prompt = ", ".join(site_names)
+            if combined_report:
+                combined_accounts.extend(config.usernameFoundAccounts or [])
+            else:
+                display_categorized_results(config.usernameFoundAccounts, config, config.currentUser)
+                if config.ai:
+                    if len(config.usernameFoundAccounts) > 2:
+                        from modules.ai.client import send_prompt
+                        site_names = [account.get("name", "") for account in config.usernameFoundAccounts]
+                        if site_names:
+                            prompt = ", ".join(site_names)
 
-                        data = send_prompt(prompt, config)
+                            data = send_prompt(prompt, config)
 
-                        if (data):
-                            config.ai_analysis = data
-                else:
-                    config.console.print(
-                        ":warning: Not enough accounts found for AI analysis. Skipping AI features."
-                    )
+                            if data:
+                                config.ai_analysis = data
+                    else:
+                        config.console.print(
+                            ":warning: Not enough accounts found for AI analysis. Skipping AI features."
+                        )
 
-            if config.csv and config.usernameFoundAccounts:
-                saveToCsv(config.usernameFoundAccounts, config)
-            if config.pdf and config.usernameFoundAccounts:
-                saveToPdf(config.usernameFoundAccounts, "username", config)
-            if config.json and config.usernameFoundAccounts:
-                saveToJson(config.usernameFoundAccounts, config)
+                if config.csv and config.usernameFoundAccounts:
+                    saveToCsv(config.usernameFoundAccounts, config)
+                if config.pdf and config.usernameFoundAccounts:
+                    saveToPdf(config.usernameFoundAccounts, "username", config)
+                if config.json and config.usernameFoundAccounts:
+                    saveToJson(config.usernameFoundAccounts, config)
 
+            config.currentUser = None
+            config.usernameFoundAccounts = None
+
+        if combined_report:
+            display_categorized_results(combined_accounts, config, combined_label)
+            if config.csv and combined_accounts:
+                saveToCsv(combined_accounts, config)
+            if config.pdf and combined_accounts:
+                saveToPdf(combined_accounts, "username", config)
+            if config.json and combined_accounts:
+                saveToJson(combined_accounts, config)
             config.currentUser = None
             config.usernameFoundAccounts = None
 
@@ -519,33 +613,55 @@ if __name__ == "__main__":
             sys.exit()
 
     if config.email:
+        combined_accounts = []
+        combined_label = ", ".join(config.email)
+        combined_report = len(config.email) > 1 and (config.csv or config.pdf or config.json)
+
+        if combined_report:
+            config.currentEmail = sanitize_report_identifier(combined_label)
+            createSaveDirectory(config)
+
         for email in config.email:
             config.currentEmail = email
-            if config.dump or config.csv or config.pdf or config.json:
+            if not combined_report and (config.dump or config.csv or config.pdf or config.json):
                 createSaveDirectory(config)
             verifyEmail(email, config)
-            display_categorized_results(config.emailFoundAccounts, config, email)
-            if config.ai:
-                if len(config.emailFoundAccounts) > 2:
-                    from modules.ai.client import send_prompt
-                    site_names = [account.get("name", "") for account in config.emailFoundAccounts]
-                    if (site_names):
-                        prompt = ", ".join(site_names)
+            if combined_report:
+                combined_accounts.extend(config.emailFoundAccounts or [])
+            else:
+                display_categorized_results(config.emailFoundAccounts, config, email)
+                if config.ai:
+                    if len(config.emailFoundAccounts) > 2:
+                        from modules.ai.client import send_prompt
+                        site_names = [account.get("name", "") for account in config.emailFoundAccounts]
+                        if site_names:
+                            prompt = ", ".join(site_names)
                         
-                        data = send_prompt(prompt, config)
+                            data = send_prompt(prompt, config)
 
-                        if (data):
-                            config.ai_analysis = data
-                else:
-                    config.console.print(
-                        ":warning: Not enough accounts found for AI analysis. Skipping AI features."
-                    )
+                            if data:
+                                config.ai_analysis = data
+                    else:
+                        config.console.print(
+                            ":warning: Not enough accounts found for AI analysis. Skipping AI features."
+                        )
 
-            if config.csv and config.emailFoundAccounts:
-                saveToCsv(config.emailFoundAccounts, config)
-            if config.pdf and config.emailFoundAccounts:
-                saveToPdf(config.emailFoundAccounts, "email", config)
-            if config.json and config.emailFoundAccounts:
-                saveToJson(config.emailFoundAccounts, config)
+                if config.csv and config.emailFoundAccounts:
+                    saveToCsv(config.emailFoundAccounts, config)
+                if config.pdf and config.emailFoundAccounts:
+                    saveToPdf(config.emailFoundAccounts, "email", config)
+                if config.json and config.emailFoundAccounts:
+                    saveToJson(config.emailFoundAccounts, config)
+            config.currentEmail = None
+            config.emailFoundAccounts = None
+
+        if combined_report:
+            display_categorized_results(combined_accounts, config, combined_label)
+            if config.csv and combined_accounts:
+                saveToCsv(combined_accounts, config)
+            if config.pdf and combined_accounts:
+                saveToPdf(combined_accounts, "email", config)
+            if config.json and combined_accounts:
+                saveToJson(combined_accounts, config)
             config.currentEmail = None
             config.emailFoundAccounts = None
