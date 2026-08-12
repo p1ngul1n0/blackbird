@@ -232,7 +232,7 @@ repo root.
 
 ---
 
-## Changes in This Copy
+## Changes in This Copy.
 
 Fixes and additions made on top of the upstream project:
 
