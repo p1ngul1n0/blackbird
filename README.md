@@ -87,7 +87,7 @@ programs is not P1ngul1n0's responsibility.
 ```
 
 
-# Blackbird — OSINT Username & Email Reconnaissance Tool --updated
+# Blackbird — OSINT Username & Email Reconnaissance Tool (Updated)
 
 Blackbird checks a given username or email address against hundreds of sites
 (social, gaming, coding, dating, finance, and more) to find where an account
