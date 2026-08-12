@@ -1,3 +1,8 @@
+# Blackbird
+
+<figure><img src="./docs/.gitbook/assets/ai-demo.png" alt=""><figcaption></figcaption></figure>
+
+
 # Blackbird — OSINT Username & Email Reconnaissance Tool
 
 Blackbird checks a given username or email address against hundreds of sites
