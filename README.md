@@ -202,7 +202,7 @@ one.
 | `INSTAGRAM_SESSION_ID is not set` | No session ID configured | Provide one when prompted, or add it to `.env` |
 | `Session rejected (HTTP 401/403)` | Session expired or invalid | Log in again, grab a fresh `sessionid` |
 | `Enhanced metadata lookup failed` | Ran but returned nothing | Re-run with `--verbose`; refresh session ID |
-| `Unexpected response... no user data returned` | Account private/nonexistent, or Instagram changed its API | Verify manually |
+| `Unexpected response... no user data returned` | Account private/nonexistent, or Instagram changed its API | Verify manually  |
 
 ---
 
