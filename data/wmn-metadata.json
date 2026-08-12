@@ -1,0 +1,164 @@
+{
+    "sites": {
+        "TikTok": [
+            {
+                "schema": "JSON",
+                "type": "String",
+                "name": "Name",
+                "path": [
+                    "author_name"
+                ]
+            }
+        ],
+        "Gravatar": [
+            {
+                "schema": "JSON",
+                "type": "Image",
+                "name": "Avatar",
+                "path": [
+                    "entry",
+                    0,
+                    "thumbnailUrl"
+                ]
+            },
+            {
+                "schema": "JSON",
+                "type": "String",
+                "name": "Name",
+                "path": [
+                    "entry",
+                    0,
+                    "displayName"
+                ]
+            },
+            {
+                "schema": "JSON",
+                "type": "String",
+                "name": "Location",
+                "path": [
+                    "entry",
+                    0,
+                    "currentLocation"
+                ]
+            },
+            {
+                "schema": "JSON",
+                "type": "Array",
+                "item-path": [
+                    "value"
+                ],
+                "name": "Contact",
+                "path": [
+                    "entry",
+                    0,
+                    "emails"
+                ]
+            }
+        ],
+        "Duolingo": [
+            {
+                "schema": "JSON",
+                "type": "Image",
+                "name": "Avatar",
+                "prefix": "https:",
+                "path": [
+                    "users",
+                    0,
+                    "picture"
+                ]
+            },
+            {
+                "schema": "JSON",
+                "type": "String",
+                "name": "Name",
+                "path": [
+                    "users",
+                    0,
+                    "name"
+                ]
+            },
+            {
+                "schema": "JSON",
+                "type": "String",
+                "name": "Bio",
+                "path": [
+                    "users",
+                    0,
+                    "bio"
+                ]
+            },
+            {
+                "schema": "JSON",
+                "type": "Array",
+                "item-path": [
+                    "title"
+                ],
+                "name": "Courses",
+                "path": [
+                    "users",
+                    0,
+                    "courses"
+                ]
+            }
+        ],
+        "Instagram": [
+            {
+                "schema": "HTML",
+                "type": "Image",
+                "name": "Avatar",
+                "path": "<img[^>]+src=\"([^\"]+)\""
+            },
+            {
+                "schema": "HTML",
+                "type": "String",
+                "name": "Name",
+                "path": "<h2 class=\"profile-name-bottom\">([^<]+)</h2>"
+            },
+            {
+                "schema": "HTML",
+                "type": "String",
+                "name": "Bio",
+                "path": "<div class=\"profile-description\">([^<]+)</div>"
+            }
+        ],
+        "Twitter": [
+            {
+                "schema": "HTML",
+                "type": "Image",
+                "name": "Avatar",
+                "prefix": "https://nitter.privacydev.net",
+                "path": "<a[^>]*class=\"profile-card-avatar\"[^>]*><img[^>]+src=\"([^\"]+)\""
+            },
+            {
+                "schema": "HTML",
+                "type": "String",
+                "name": "Name",
+                "path": "<a[^>]*class=\"profile-card-fullname\"[^>]*>([^<]+)"
+            },
+            {
+                "schema": "HTML",
+                "type": "String",
+                "name": "Bio",
+                "path": "<div class=\"profile-bio\">([^<]+)</div>"
+            }
+        ],
+        "StreamElements": [
+            {
+                "schema": "JSON",
+                "type": "Image",
+                "name": "Avatar",
+                "path": [
+                    "avatar"
+                ]
+            },
+            {
+                "schema": "JSON",
+                "type": "String",
+                "name": "Name",
+                "path": [
+                    "displayName"
+                ]
+            }
+        ]
+    }
+}

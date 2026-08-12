@@ -1,0 +1,455 @@
+{
+    "authors": [
+        "Lucas 'p1ngul1n0' Antoniaci"
+    ],
+    "categories": [
+        "archived",
+        "art",
+        "blog",
+        "business",
+        "coding",
+        "dating",
+        "finance",
+        "gaming",
+        "health",
+        "hobby",
+        "images",
+        "misc",
+        "music",
+        "news",
+        "political",
+        "search",
+        "shopping",
+        "social",
+        "tech",
+        "video",
+        "xx NSFW xx"
+    ],
+    "sites": [
+        {
+            "name": "Gravatar",
+            "uri_check": "https://gravatar.com/{account}.json",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "displayName",
+            "m_string": "User not found",
+            "m_code": 404,
+            "known": [],
+            "cat": "images",
+            "input_operation": "hash-sha256",
+            "metadata": [
+                {
+                    "schema": "JSON",
+                    "type": "Image",
+                    "name": "Avatar",
+                    "path": [
+                        "entry",
+                        0,
+                        "thumbnailUrl"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "Name",
+                    "path": [
+                        "entry",
+                        0,
+                        "displayName"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "Username",
+                    "path": [
+                        "entry",
+                        0,
+                        "preferredUsername"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "About Me",
+                    "path": [
+                        "entry",
+                        0,
+                        "aboutMe"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "Location",
+                    "path": [
+                        "entry",
+                        0,
+                        "currentLocation"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "Job",
+                    "path": [
+                        "entry",
+                        0,
+                        "job_title"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "Company",
+                    "path": [
+                        "entry",
+                        0,
+                        "company"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "Array",
+                    "item-path": [
+                        "value"
+                    ],
+                    "name": "Contact",
+                    "path": [
+                        "entry",
+                        0,
+                        "contactInfo"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "Array",
+                    "item-path": [
+                        "value"
+                    ],
+                    "name": "Emails",
+                    "path": [
+                        "entry",
+                        0,
+                        "emails"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "Array",
+                    "item-path": [
+                        "url"
+                    ],
+                    "name": "Accounts",
+                    "path": [
+                        "entry",
+                        0,
+                        "accounts"
+                    ]
+                },
+                {
+                    "schema": "JSON",
+                    "type": "Array",
+                    "item-path": [
+                        "value"
+                    ],
+                    "name": "URLs",
+                    "path": [
+                        "entry",
+                        0,
+                        "urls"
+                    ]
+                }
+            ],
+            "pre_check": null
+        },
+        {
+            "name": "Adobe",
+            "uri_check": "https://auth.services.adobe.com/signin/v2/users/accounts",
+            "data": "{\"username\":\"{account}\",\"usernameType\":\"EMAIL\"}",
+            "method": "POST",
+            "headers": {
+                "X-Ims-Clientid": "homepage_milo",
+                "Content-Type": "application/json"
+            },
+            "e_code": 200,
+            "e_string": "authenticationMethods",
+            "m_string": "[]",
+            "m_code": 404,
+            "known": [],
+            "cat": "misc",
+            "input_operation": null,
+            "metadata": [
+                {
+                    "schema": "JSON",
+                    "type": "Image",
+                    "name": "Avatar",
+                    "path": [
+                        0,
+                        "images",
+                        "230"
+                    ]
+                }
+            ],
+            "pre_check": null
+        },
+        {
+            "name": "Duolingo",
+            "uri_check": "https://www.duolingo.com/2017-06-30/users?email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "username",
+            "m_string": "{\"users\":[]}",
+            "m_code": 404,
+            "known": [],
+            "cat": "hobby",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Chess.com",
+            "uri_check": "https://www.chess.com/callback/email/available?email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 226,
+            "e_string": "Email In Use",
+            "m_string": "Email Available",
+            "m_code": 404,
+            "known": [],
+            "cat": "gaming",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Notion",
+            "uri_check": "https://www.notion.so/api/v3/getLoginOptions",
+            "data": "{\"email\":\"{account}\"}",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "e_code": 200,
+            "e_string": "\"hasAccount\":true",
+            "m_string": "\"hasAccount\":false",
+            "m_code": 404,
+            "known": [],
+            "cat": "misc",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Spotify",
+            "uri_check": "https://spclient.wg.spotify.com/signup/public/v1/account?validate=1&email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "\"status\":20",
+            "m_string": "\"status\":1",
+            "m_code": 404,
+            "known": [],
+            "cat": "music",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Strava",
+            "uri_check": "https://www.strava.com/athletes/email_unique?email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "false",
+            "m_string": "true",
+            "m_code": 404,
+            "known": [],
+            "cat": "music",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Twitter",
+            "uri_check": "https://api.twitter.com/i/users/email_available.json?email={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "\"taken\":true",
+            "m_string": "\"taken\":false",
+            "m_code": 404,
+            "known": [],
+            "cat": "music",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "NetShoes",
+            "uri_check": "https://www.netshoes.com.br/auth/account/exists/{account}",
+            "data": null,
+            "headers": null,
+            "method": "GET",
+            "e_code": 200,
+            "e_string": "\"exists\":true",
+            "m_string": "\"email\"",
+            "m_code": 404,
+            "known": [],
+            "cat": "shopping",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "OLX",
+            "uri_check": "https://apigw.olx.com.br/v0/user/login/check_email",
+            "data": "{\"email\":\"{account}\"}",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "X-Olx-Team-Key": "5XzjuCgmYE7qMlYpsLZbTvm98ik4CS4a"
+            },
+            "e_code": 200,
+            "e_string": "EMAIL",
+            "m_string": "ACCOUNT_NOT_FOUND",
+            "m_code": 401,
+            "known": [],
+            "cat": "shopping",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Milanuncios",
+            "uri_check": "https://userprofiles.gw.milanuncios.com/api/v2/users",
+            "data": "{\"name\":\"SAsASA\",\"password\":\"1234561\",\"email\":\"{account}\",\"isConsentApproved\":\"true\",\"sellerType\":\"PRIVATE\",\"role\":\"USER\"}",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "e_code": 409,
+            "e_string": "user-profiles.email-already-exists",
+            "m_string": "user-profiles.invalid-password",
+            "m_code": 400,
+            "known": [],
+            "cat": "shopping",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "El Mundo",
+            "uri_check": "https://seguro.elmundo.es/ueregistro/v2/usuarios/registro",
+            "data": "{\"email\":\"{account}\",\"pass\":\"11\",\"portal\":8,\"aceptaCondicionesLegales\":true,\"aceptaEsMayorDeDieciseis\":true,\"comunicacionesComerciales\":[],\"rid\":null,\"csp\":null,\"urlOrigen\":\"\",\"movil\":\"\",\"aceptaSuscripcionClub\":false,\"pianoTrackingId\":null}",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "e_code": 400,
+            "e_string": "\"codigo\":\"176\"",
+            "m_string": "\"codigo\":\"001\"",
+            "m_code": 404,
+            "known": [],
+            "cat": "shopping",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Xvideos",
+            "uri_check": "https://www.xvideos.com/account/checkemail?email={account}",
+            "data": "email={account}",
+            "method": "POST",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "\"result\":false",
+            "m_string": "\"result\":true",
+            "m_code": 404,
+            "known": [],
+            "cat": "xx NSFW xx",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Picsart",
+            "uri_check": "https://api.picsart.com/users/email/existence?email_encoded=0&emails={account}",
+            "data": null,
+            "method": "GET",
+            "headers": null,
+            "e_code": 200,
+            "e_string": "\"response\":[\"",
+            "m_string": "\"registration_flow\"",
+            "m_code": 404,
+            "known": [],
+            "cat": "art",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        },
+        {
+            "name": "Eventbrite",
+            "uri_check": "https://www.eventbrite.com/api/v3/users/lookup/",
+            "data": "{\"email\":\"{account}\",\"source_user_id\":\"\",\"source_provider\":\"\"}",
+            "method": "POST",
+            "headers": {
+                "Cookie": "csrftoken={csrftoken_value}",
+                "X-Csrftoken": "{csrftoken_value}",
+                "Referer": "https://www.eventbrite.com/",
+                "Content-Type": "application/json"
+            },
+            "e_code": 200,
+            "e_string": "\"exists\":true",
+            "m_string": "\"exists\":false",
+            "m_code": 404,
+            "known": [],
+            "cat": "social",
+            "input_operation": null,
+            "metadata": [
+                {
+                    "schema": "JSON",
+                    "type": "String",
+                    "name": "User ID",
+                    "path": [
+                        "user_id"
+                    ]
+                }
+            ],
+            "pre_check": {
+                "type": "cookie",
+                "endpoint": "https://www.eventbrite.com/",
+                "method": "GET",
+                "headers": null,
+                "data": null,
+                "cookie_name": "csrftoken"
+            }
+        },
+        {
+            "name": "Imageshack",
+            "uri_check": "https://imageshack.com/rest_api/v2/user",
+            "data": "email={account}&username=user&password=1&set_cookies=true",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            "e_code": 400,
+            "e_string": "\"error_code\":30",
+            "m_string": "\"error_code\":29",
+            "m_code": 404,
+            "known": [],
+            "cat": "images",
+            "input_operation": null,
+            "metadata": null,
+            "pre_check": null
+        }
+    ]
+}
