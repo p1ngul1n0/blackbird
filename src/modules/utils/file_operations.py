@@ -10,5 +10,5 @@ def getLinesFromFile(fileName):
         with open(fileName) as f:
             lines = f.read().splitlines()
             return lines
-    except:
+    except Exception:
         return False

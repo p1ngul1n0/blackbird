@@ -336,7 +336,7 @@ def saveToPdf(foundAccounts, resultType, config):
                                             height=35,
                                         )
                                         y_position -= 15
-                                    except:
+                                    except Exception:
                                         pass
                         endWidth = y_position
                         canva.setStrokeColor("#CE0000")
