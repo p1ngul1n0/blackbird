@@ -18,8 +18,16 @@ cd blackbird
 
 **Install requirements**
 
+> Blackbird requires **Python 3.11 – 3.13**.
+
 ```bash
 pip install -r requirements.txt
+```
+
+**Run with Python 3.11 – 3.13**
+
+```bash
+python blackbird.py --username johndoe
 ```
 
 ### Usage
