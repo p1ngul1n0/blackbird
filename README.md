@@ -22,6 +22,16 @@ cd blackbird
 pip install -r requirements.txt
 ```
 
+**Or install with OTinstaller (Linux)**
+
+[OTinstaller](https://github.com/OSINTVerseHQ/OTinstaller) is a third-party tool manager that installs Blackbird from this repository into its own virtualenv and runs it from that checkout, so the `data/` files are found. It isn't maintained here, so please report problems with it [on the OTinstaller tracker](https://github.com/OSINTVerseHQ/OTinstaller/issues).
+
+```bash
+pipx install otinstaller
+otinstaller install blackbird
+otinstaller run blackbird -- u:johndoe   # same as python blackbird.py --username johndoe
+```
+
 ### Usage
 
 **Search by username**
