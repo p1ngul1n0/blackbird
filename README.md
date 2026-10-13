@@ -28,6 +28,7 @@ pip install -r requirements.txt
 
 ```bash
 pipx install otinstaller
+otinstaller init
 otinstaller install blackbird
 otinstaller run blackbird -- u:johndoe   # same as python blackbird.py --username johndoe
 ```
