@@ -24,18 +24,25 @@ from ..sites.instagram import get_instagram_account_info
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 
+def get_display_url(site, account):
+    if site.get("uri_pretty"):
+        return site["uri_pretty"].replace("{account}", account)
+    return site["uri_check"].replace("{account}", account)
+
+
 # Verify account existence based on list args
 async def checkSite(
     site,
     method,
-    url,
+    request_url,
+    display_url,
     session,
     semaphore,
     config,
 ):
     returnData = {
         "name": site["name"],
-        "url": url,
+        "url": display_url,
         "category": site["cat"],
         "status": "NONE",
         "metadata": None,
@@ -43,7 +50,7 @@ async def checkSite(
     extractedMetadata = []
 
     async with semaphore:
-        response = await do_async_request(method, url, session, config)
+        response = await do_async_request(method, request_url, session, config)
         if response == None:
             returnData["status"] = "ERROR"
             return returnData
@@ -59,7 +66,7 @@ async def checkSite(
                     ):
                         returnData["status"] = "FOUND"
                         config.console.print(
-                            rf"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
+                            rf"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{display_url}[/bright_white]"
                         )
 
                         if site["name"] in config.metadata_params["sites"]:
@@ -84,8 +91,21 @@ async def checkSite(
                                     config.instagram_session_id,
                                     config,
                                 )
-                                extractedMetadata.sort(key=lambda x: x["name"])
-                                extractedMetadata.extend(metadata)
+                                if metadata:
+                                    extractedMetadata.sort(key=lambda x: x["name"])
+                                    extractedMetadata.extend(metadata)
+                                else:
+                                    config.console.print(
+                                        r"  ⚠️  [Instagram] Enhanced metadata (email/phone) lookup failed"
+                                        " — your INSTAGRAM_SESSION_ID may be expired or invalid."
+                                        " Re-run with --verbose for details."
+                                    )
+                            else:
+                                config.console.print(
+                                    r"  ⚠️  [Instagram] Skipping enhanced metadata (email/phone) lookup"
+                                    " — INSTAGRAM_SESSION_ID is not set in your .env file."
+                                    " See docs/advanced-usage.md."
+                                )
 
                         if extractedMetadata and len(extractedMetadata) > 0:
                             extractedMetadata = remove_duplicates(extractedMetadata)
@@ -134,10 +154,13 @@ async def fetchResults(username, config):
 
         async def wrappedCheck(site):
             nonlocal completed
+            request_url = site["uri_check"].replace("{account}", username)
+            display_url = get_display_url(site, username)
             result = await checkSite(
                 site=site,
                 method="GET",
-                url=site["uri_check"].replace("{account}", username),
+                request_url=request_url,
+                display_url=display_url,
                 session=session,
                 semaphore=semaphore,
                 config=config,

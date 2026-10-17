@@ -125,7 +125,30 @@ def get_user_id(username, session_id, config):
             customHeaders=headers,
             cookies=cookies,
         )
-        user_id = response.json()["data"]["user"]["id"]
+
+        # A bad/expired sessionid typically comes back as HTTP 401/403,
+        # or a 200 with no "data" key. Surface that distinctly instead of
+        # letting it fall through to a generic KeyError below.
+        if response.status_code in (401, 403):
+            config.console.print(
+                "  ⚠️  [Instagram] Session rejected (HTTP "
+                f"{response.status_code}) — your INSTAGRAM_SESSION_ID is"
+                " likely expired or invalid. Grab a fresh sessionid cookie"
+                " and update your .env file."
+            )
+            return False
+
+        body = response.json()
+        if "data" not in body or "user" not in body.get("data", {}):
+            config.console.print(
+                "  ⚠️  [Instagram] Unexpected response while acquiring user"
+                f" ID for {username} (no user data returned). The account"
+                " may be private/nonexistent, or Instagram's response"
+                " format has changed."
+            )
+            return False
+
+        user_id = body["data"]["user"]["id"]
         if config.verbose:
             config.console.print(f"[Instagram] Acquired {username} user ID")
         return user_id

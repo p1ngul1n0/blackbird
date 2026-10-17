@@ -20,11 +20,18 @@ from ..export.dump import dumpContent
 from ..utils.precheck import perform_pre_check
 
 
+def get_display_url(site, account):
+    if site.get("uri_pretty"):
+        return site["uri_pretty"].replace("{account}", account)
+    return site["uri_check"].replace("{account}", account)
+
+
 # Verify account existence based on list args
 async def checkSite(
     site,
     method,
-    url,
+    request_url,
+    display_url,
     session,
     semaphore,
     config,
@@ -33,7 +40,7 @@ async def checkSite(
 ):
     returnData = {
         "name": site["name"],
-        "url": url,
+        "url": display_url,
         "category": site["cat"],
         "status": "NONE",
         "metadata": None,
@@ -48,7 +55,7 @@ async def checkSite(
                 returnData["status"] = "ERROR"
                 return returnData
 
-        response = await do_async_request(method, url, session, config, data, headers)
+        response = await do_async_request(method, request_url, session, config, data, headers)
         if response == None:
             returnData["status"] = "ERROR"
             return returnData
@@ -62,7 +69,7 @@ async def checkSite(
                     ):
                         returnData["status"] = "FOUND"
                         config.console.print(
-                            rf"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{response['url']}[/bright_white]"
+                            rf"  ✔️  \[[cyan1]{site['name']}[/cyan1]] [bright_white]{display_url}[/bright_white]"
                         )
                         if site["metadata"]:
                             extractedMetadata = extractMetadata(
@@ -124,10 +131,12 @@ async def fetchResults(email, config):
             data = site["data"].replace("{account}", email_processed) if site["data"] else None
             headers = site["headers"] if site["headers"] else None
 
+            display_url = get_display_url(site, email_processed)
             result = await checkSite(
                 site=site,
                 method=site["method"],
-                url=url,
+                request_url=url,
+                display_url=display_url,
                 session=session,
                 semaphore=semaphore,
                 config=config,

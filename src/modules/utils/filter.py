@@ -53,13 +53,15 @@ def evaluate_condition(prop, operator, value, site):
 
 def filterAccounts(filter, site):
     conditions, logical_ops = parseFilter(filter)
-    result = evaluate_condition(*conditions[0], site)
 
     if not conditions:
         print(
-            '⭕ Filter is not in correct format. Format should be --filter "property=value"'
+            '⭕ Filter is not in correct format. Format should be --filter "property=value" (e.g. name=Instagram or cat=social)'
         )
         sys.exit()
+
+    result = evaluate_condition(*conditions[0], site)
+
     # Evaluate remaining conditions and combine using logical operators
     for i in range(1, len(conditions)):
         next_result = evaluate_condition(*conditions[i], site)
