@@ -22,6 +22,19 @@ cd blackbird
 pip install -r requirements.txt
 ```
 
+### OTinstaller (Linux)
+
+You can also install Blackbird with [OTinstaller](https://github.com/OSINTVerseHQ/OTinstaller), a third-party installer. Report install problems on [its issue tracker](https://github.com/OSINTVerseHQ/OTinstaller/issues).
+
+```
+pipx install otinstaller
+otinstaller init
+otinstaller install blackbird
+otinstaller run blackbird -- --username johndoe
+```
+
+With OTinstaller, use `otinstaller run blackbird -- <options>` in place of `python blackbird.py <options>` in the examples below.
+
 ### Usage
 
 **Search by username**
