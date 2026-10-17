@@ -16,7 +16,7 @@ def access_json_property(data, path_config):
         for key in path_config:
             property_value = property_value[key]
         return property_value
-    except:
+    except Exception:
         return False
 
 
@@ -25,7 +25,7 @@ def access_html_regex(data, pattern):
         match = re.search(pattern, data)
         if match:
             return match.group(1).replace("\n", "")
-    except:
+    except Exception:
         return False
 
 
